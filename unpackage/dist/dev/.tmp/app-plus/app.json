@@ -1,0 +1,73 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/exchange/index",
+    "pages/news/news",
+    "pages/wallet/wallet",
+    "pages/wallet/detail",
+    "pages/product/product",
+    "pages/set/set",
+    "pages/userinfo/userinfo",
+    "pages/cart/cart",
+    "pages/public/login",
+    "pages/user/user",
+    "pages/detail/detail",
+    "pages/order/order",
+    "pages/money/money",
+    "pages/order/createOrder",
+    "pages/address/address",
+    "pages/address/addressManage",
+    "pages/money/pay",
+    "pages/money/paySuccess",
+    "pages/notice/notice",
+    "pages/category/category",
+    "pages/product/list"
+  ],
+  "window": {
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "",
+    "navigationBarBackgroundColor": "#FFFFFF",
+    "backgroundColor": "#f8f8f8"
+  },
+  "tabBar": {
+    "color": "#C0C4CC",
+    "selectedColor": "#1890ff",
+    "borderStyle": "black",
+    "backgroundColor": "#ffffff",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "iconPath": "static/tabbar/tab-coin.svg",
+        "selectedIconPath": "static/tabbar/tab-coin-active.svg",
+        "text": "行情"
+      },
+      {
+        "pagePath": "pages/news/news",
+        "iconPath": "static/tabbar/tab-news.svg",
+        "selectedIconPath": "static/tabbar/tab-news-active.svg",
+        "text": "资讯"
+      },
+      {
+        "pagePath": "pages/wallet/wallet",
+        "iconPath": "static/tabbar/tab-wallet.svg",
+        "selectedIconPath": "static/tabbar/tab-wallet-active.svg",
+        "text": "钱包"
+      },
+      {
+        "pagePath": "pages/user/user",
+        "iconPath": "static/tabbar/tab-my.svg",
+        "selectedIconPath": "static/tabbar/tab-my-active.svg",
+        "text": "我的"
+      }
+    ]
+  },
+  "nvueCompiler": "uni-app",
+  "renderer": "auto",
+  "splashscreen": {
+    "alwaysShowBeforeRender": true,
+    "autoclose": false
+  },
+  "appname": "电商",
+  "compilerVersion": "2.4.6",
+  "usingComponents": {}
+}

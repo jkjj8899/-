@@ -1,0 +1,241 @@
+{
+	"pages": [
+
+		{
+			"path": "pages/index/index",
+			"style": {
+				// #ifdef MP 
+				"navigationBarTitleText": "钱包",
+				// #endif 
+				"navigationStyle": "custom"
+				/* "app-plus": {
+					"titleView":false,
+					"titleNView": {
+						"type": "transparent"
+					}
+				} */
+			}
+		},{
+			"path": "pages/exchange/index",
+			"style": {
+				"navigationBarTitleText": "闪兑"
+				//"navigationStyle": "custom",
+			}
+		},
+		{
+			"path": "pages/news/news",
+			"style": {
+				"navigationBarTitleText": "快讯"
+				//"navigationStyle": "custom",
+			}
+		},
+		{
+			"path": "pages/wallet/wallet",
+			"style": {
+				"navigationBarTitleText": "我的资产",
+				"navigationBarBackgroundColor": "#0952C3",
+				"navigationBarTextStyle": "white",
+				"app-plus": {
+					"titleView":false,
+					"titleNView": {
+						"type": "transparent"
+					}
+				}
+			}
+		},{
+			"path": "pages/wallet/detail",
+			"style": {
+				"navigationBarTitleText": "币种明细",
+				"app-plus": {
+					"bounce": "none",
+					"titleNView": {
+						"buttons": [{
+								"fontSrc": "/static/yticon.ttf",
+								"text": "\ue60f",
+								"fontSize": "24",
+								"color": "#303133",
+								"width": "36px",
+								"background": "rgba(0,0,0,0)"
+							}
+						]
+					}
+				}
+			}
+		},
+		{
+			"path": "pages/product/product",
+			"style": {
+				"navigationBarTitleText": "详情展示",
+				"app-plus": {
+					"titleNView": {
+						"type": "transparent"
+					}
+				}
+			}
+		}, {
+			"path": "pages/set/set",
+			"style": {
+				"navigationBarTitleText": "设置"
+			}
+		},
+
+		{
+			"path": "pages/userinfo/userinfo",
+			"style": {
+				"navigationBarTitleText": "修改资料"
+			}
+		}, {
+			"path": "pages/cart/cart",
+			"style": {
+				"navigationBarTitleText": "购物车"
+			}
+		}, {
+			"path": "pages/public/login",
+			"style": {
+				"navigationBarTitleText": "",
+				"navigationStyle": "custom",
+				"app-plus": {
+					"titleNView": false,
+					"animationType": "slide-in-bottom"
+				}
+			}
+		}, {
+			"path": "pages/user/user",
+			"style": {
+				"navigationBarTitleText": "我的",
+				// #ifdef MP
+				"navigationStyle": "custom",
+				// #endif
+				"app-plus": {
+					"bounce": "none",
+					"titleNView": {
+						"type": "transparent",
+						"buttons": [{
+								"fontSrc": "/static/yticon.ttf",
+								"text": "\ue60f",
+								"fontSize": "24",
+								"color": "#303133",
+								"width": "46px",
+								"background": "rgba(0,0,0,0)"
+							},
+							{
+								"fontSrc": "/static/yticon.ttf",
+								"text": "\ue744",
+								"fontSize": "28",
+								"color": "#303133",
+								"background": "rgba(0,0,0,0)",
+								"redDot": true
+							}
+						]
+					}
+				}
+			}
+		}, {
+			"path": "pages/detail/detail",
+			"style": {
+				"navigationBarTitleText": "",
+				"app-plus": {
+					"titleNView": {
+						"type": "transparent"
+					}
+				}
+			}
+		}, {
+			"path": "pages/order/order",
+			"style": {
+				"navigationBarTitleText": "我的订单",
+				"app-plus": {
+					"bounce": "none"
+				}
+			}
+		}, {
+			"path": "pages/money/money",
+			"style": {}
+		}, {
+			"path": "pages/order/createOrder",
+			"style": {
+				"navigationBarTitleText": "创建订单"
+			}
+		}, {
+			"path": "pages/address/address",
+			"style": {
+				"navigationBarTitleText": "收货地址"
+			}
+		}, {
+			"path": "pages/address/addressManage",
+			"style": {
+				"navigationBarTitleText": ""
+			}
+		}, {
+			"path": "pages/money/pay",
+			"style": {
+				"navigationBarTitleText": "支付"
+			}
+		},
+		{
+			"path": "pages/money/paySuccess",
+			"style": {
+				"navigationBarTitleText": "支付成功"
+			}
+		}
+	    ,{
+            "path" : "pages/notice/notice",
+            "style" : {
+				"navigationBarTitleText": "通知"
+			}
+        }
+        ,{
+            "path" : "pages/category/category",
+            "style" : {
+				"navigationBarTitleText": "分类",
+				"app-plus": {
+					"bounce": "none"
+				}
+			}
+        }
+        ,{
+            "path" : "pages/product/list",
+            "style" : {
+				"enablePullDownRefresh": true,
+				"navigationBarTitleText": "商品列表"
+			}
+        }
+    ],
+	"globalStyle": {
+		"navigationBarTextStyle": "black",
+		"navigationBarTitleText": "",
+		"navigationBarBackgroundColor": "#FFFFFF",
+		"backgroundColor": "#f8f8f8"
+	},
+	"tabBar": {
+		"color": "#C0C4CC",
+		"selectedColor": "#1890ff",
+		"borderStyle": "black",
+		"backgroundColor": "#ffffff",
+		"list": [{
+				"pagePath": "pages/index/index",
+				"iconPath": "static/tabbar/tab-coin.svg",
+				"selectedIconPath": "static/tabbar/tab-coin-active.svg",
+				"text": "行情"
+			},
+			{
+				"pagePath": "pages/news/news",
+				"iconPath": "static/tabbar/tab-news.svg",
+				"selectedIconPath": "static/tabbar/tab-news-active.svg",
+				"text": "资讯"
+			},
+			{
+				"pagePath": "pages/wallet/wallet",
+				"iconPath": "static/tabbar/tab-wallet.svg",
+				"selectedIconPath": "static/tabbar/tab-wallet-active.svg",
+				"text": "钱包"
+			},
+			{
+				"pagePath": "pages/user/user",
+				"iconPath": "static/tabbar/tab-my.svg",
+				"selectedIconPath": "static/tabbar/tab-my-active.svg",
+				"text": "我的"
+			}
+		]
+	}
+}

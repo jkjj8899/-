@@ -1,0 +1,44 @@
+@charset "UTF-8";
+/* 页面左右间距 */
+/* 文字尺寸 */
+/*文字颜色*/
+/* 边框颜色 */
+/* 图片加载中颜色 */
+/* 行为相关颜色 */
+.container {
+  padding: 0rpx 0rpx;
+}
+.news-section .block {
+  position: relative;
+  word-wrap: break-word;
+  margin: 0rpx 40rpx;
+  border-left: 1px dashed #8B9FAA;
+  padding-left: 40rpx;
+}
+.news-section .block .circle {
+    position: absolute;
+    width: 20rpx;
+    height: 20rpx;
+    border-radius: 100px;
+    background-color: #999;
+    top: 12rpx;
+    left: -12rpx;
+}
+.news-section .block .time {
+    font-size: 28rpx;
+}
+.news-section .block .time .source {
+      margin-left: 10rpx;
+      color: #8B9FAA;
+}
+.news-section .block .title {
+    display: block;
+    font-size: 32rpx;
+    font-weight: bold;
+    padding: 16rpx 0rpx;
+}
+.news-section .block .content {
+    font-size: 28rpx;
+    padding-bottom: 40rpx;
+}
+

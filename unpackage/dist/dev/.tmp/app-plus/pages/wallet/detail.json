@@ -1,0 +1,20 @@
+{
+  "navigationBarTitleText": "币种明细",
+  "bounce": "none",
+  "titleNView": {
+    "buttons": [
+      {
+        "fontSrc": "/static/yticon.ttf",
+        "text": "",
+        "fontSize": "24",
+        "color": "#303133",
+        "width": "36px",
+        "background": "rgba(0,0,0,0)"
+      }
+    ]
+  },
+  "usingComponents": {
+    "uni-icons": "/node-modules/@dcloudio/uni-ui/lib/uni-icons/uni-icons",
+    "empty": "/components/empty"
+  }
+}
