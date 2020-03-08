@@ -27,13 +27,13 @@
 				<image src="../../static/exchange.png"></image>
 				<text>快捷闪兑</text>
 			</view>
-			<view class="item">
+			<view class="item" @click="navTo('/pages/otc/otc')">
 				<image class="miner" src="../../static/miner.png"></image>
-				<text>Fex矿机</text>
+				<text>法币交易</text>
 			</view>
 		</view>
 		<view class="advert">
-			<image class="img" mode="widthFix" src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1578837095&di=53e22347938ed155094fd1e9edd9d71b&imgtype=jpg&er=1&src=http%3A%2F%2Fhbimg.b0.upaiyun.com%2F19b3c8a188745e89ea134efc4c1aebf5e429440333662-4hMu7Q_fw658"></image>
+			<image class="img" mode="widthFix" src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1582372405579&di=b193a859db3a7cc913a139412456100d&imgtype=0&src=http%3A%2F%2Fhbimg.b0.upaiyun.com%2F4df6596a536f191f0d0ccf715ad44d61912892257553b-XV0WLE_fw658"></image>
 		</view>
 		<!-- 市值排行 -->
 		<view class="coin-section m-t">
@@ -310,7 +310,8 @@
 			display:flex;
 			align-items:center;
 			height: 30upx;
-			line-height: 1;
+			line-height: 30upx;
+			padding-top: 20upx;
 			padding-bottom: 20upx;
 			.col{
 				font-size: $font-base;

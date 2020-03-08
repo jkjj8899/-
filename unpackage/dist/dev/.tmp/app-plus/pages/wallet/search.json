@@ -1,0 +1,15 @@
+{
+  "titleNView": {
+    "searchInput": {
+      "align": "left",
+      "backgroundColor": "rgba(231, 231, 231,.7)",
+      "borderRadius": "16px",
+      "placeholder": "搜索币种",
+      "placeholderColor": "#606266"
+    }
+  },
+  "usingComponents": {
+    "uni-list": "/node-modules/@dcloudio/uni-ui/lib/uni-list/uni-list",
+    "uni-list-item": "/node-modules/@dcloudio/uni-ui/lib/uni-list-item/uni-list-item"
+  }
+}

@@ -64,7 +64,7 @@ page {
   width: 690rpx;
   height: 80rpx;
   margin: 60rpx auto;
-  font-size: 32rpx;
+  font-size: 34rpx;
   color: #fff;
   background-color: #fa436a;
   border-radius: 10rpx;

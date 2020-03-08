@@ -7,7 +7,7 @@
 		<view class="wrapper">
 			<view class="left-top-sign">LOGIN</view>
 			<view class="welcome">
-				欢迎回来！
+				欢迎登录！
 			</view>
 			<view class="input-content">
 				<view class="input-item">
@@ -74,7 +74,9 @@
 				uni.navigateBack();
 			},
 			toRegist(){
-				this.$api.msg('去注册');
+				uni.navigateTo({
+					url: '/pages/public/register'
+				})
 			},
 			async toLogin(){
 				this.logining = true;

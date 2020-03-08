@@ -5,39 +5,47 @@
 /* 边框颜色 */
 /* 图片加载中颜色 */
 /* 行为相关颜色 */
-.container {
+.container.data-v-17521186 {
   padding: 0rpx 0rpx;
 }
-.coin-section {
+.coin-section.data-v-17521186 {
   background: #fff;
 }
-.coin-section .block {
+.coin-section .block.data-v-17521186 {
     padding: 20rpx 0;
 }
-.coin-section .block .s-row {
+.coin-section .block .s-list.data-v-17521186 {
+      position: absolute;
+      width: 100%;
+      top: 480rpx;
+      bottom: 0rpx;
+}
+.coin-section .block .s-row.data-v-17521186 {
       display: -webkit-box;
       display: -webkit-flex;
       display: flex;
       -webkit-box-align: center;
       -webkit-align-items: center;
               align-items: center;
-      padding: 10rpx 30rpx 0rpx 30rpx;
+      padding-top: 20rpx;
+      padding-bottom: 20rpx;
+      margin: 0rpx 30rpx;
 }
-.coin-section .block .s-row .subtitle {
+.coin-section .block .s-row .subtitle.data-v-17521186 {
         padding: 4rpx 0 10rpx 0;
 }
-.coin-section .block .s-row .col {
+.coin-section .block .s-row .col.data-v-17521186 {
         font-size: 28rpx;
         color: #14191F;
         -webkit-box-flex: 1;
         -webkit-flex: 1;
                 flex: 1;
 }
-.coin-section .block .s-row .col .coin {
+.coin-section .block .s-row .col .coin.data-v-17521186 {
           font-weight: bold;
           font-size: 30rpx;
 }
-.coin-section .block .s-row .coinLogo {
+.coin-section .block .s-row .coinLogo.data-v-17521186 {
         width: 36rpx;
         height: 36rpx;
         margin-right: 8px;
@@ -45,20 +53,20 @@
         vertical-align: middle;
         float: left;
 }
-.coin-section .block .s-row .light {
+.coin-section .block .s-row .light.data-v-17521186 {
         font-weight: bold;
-        font-size: 32rpx;
+        font-size: 34rpx;
         color: #14191F;
 }
-.coin-section .block .s-row .r {
+.coin-section .block .s-row .r.data-v-17521186 {
         text-align: right;
 }
-.coin-section .block .s-row .row-title {
+.coin-section .block .s-row .row-title.data-v-17521186 {
         font-size: 28rpx;
         font-weight: normal;
         color: #8B9FAA;
 }
-.coin-section .block .s-row .row-amount {
+.coin-section .block .s-row .row-amount.data-v-17521186 {
         font-size: 28rpx;
         font-weight: normal;
         color: #14191F;

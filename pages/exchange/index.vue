@@ -29,10 +29,18 @@
 		
 		<view class="record">
 			<view class="tip">兑换记录</view>
-			<view class="list">
-				
-				<empty></empty>
+			<view class="title">
+				<view class="col">数量</view>
+				<view class="col">状态</view>
+				<view class="col r">时间</view>
 			</view>
+			<scroll-view class="uni-list" :enableBackToTop="enableBackToTop" :scroll-y="scrollY" @scrolltolower="loadMore">
+				<view class="uni-row little-line" v-for="item in records" :key="item">
+					<view class="col">100</view>
+					<view class="col">已完成</view>
+					<view class="col r">16:52 01/04</view>
+				</view>
+			</scroll-view>
 		</view>
 		<uni-popup ref="popup" type="top">
 			<view class="coin-box">
@@ -76,15 +84,21 @@
 		mapState
 	} from 'vuex';
 	import {uniIcons, uniPopup, uniSearchBar} from '@dcloudio/uni-ui'
+	import uniList from '@/components/uni-list.vue';
+	import uniCell from '@/components/uni-cell.vue';
+	import uniRefresh from '@/components/uni-refresh.vue';
+	import uniLoadMore from '@/components/uni-load-more.vue';
 	import empty from '../../components/empty.vue'
 	export default {
-		components: {uniIcons, uniPopup, uniSearchBar, empty},
+		components: {uniIcons, uniPopup, uniSearchBar, empty, uniList, uniCell, uniRefresh, uniLoadMore},
 		data() {
 			return {
 				total: 0, //总价格
 				allChecked: false, //全选状态  true|false
 				empty: false, //空白页现实  true|false
-				cartList: [],
+				scrollY: true,
+				enableBackToTop: true,
+				records: [1,2,3,4,5,6,7,8,9,0,10,11,12,13,14,15,16,17,18,19],
 				indicatorStyle: 'height:90upx; line-height:90upx;'
 			};
 		},
@@ -96,6 +110,9 @@
 		},
 		methods: {
 			changeCoin(){
+				this.$refs.popup.open()
+			},
+			loadMore(){
 				this.$refs.popup.open()
 			},
 			//请求数据
@@ -116,6 +133,9 @@
 </script>
 
 <style lang='scss' scoped>
+	page{
+		overflow: hidden;
+	}
 	.container{
 		width: 100%;
 		display: flex;
@@ -146,19 +166,43 @@
 	}
 	.record{
 		background: #ffffff;
-		border-radius: 10upx;
 		flex: 1;
-		height: 100%;
-		padding: 20upx 20upx;
-		overflow: hidden;
 		.tip{
 			font-weight: bold;
 			font-size:  $font-md;
+			padding-left: 20upx;
 		}
-		.list{
+		.r{
+			text-align: right;
+		}
+		.title{
+			display: flex;
+			flex-direction: row;
+			padding: 6upx 20upx;
+			.col{
+				flex: 1;
+				font-size: $font-base;
+				color: $font-color-light;
+			}
+		}
+		.uni-list{
 			flex: 1;
-			overflow: hidden;
-			background: red;
+			display: flex;
+			position: absolute;
+			top: 580upx;
+			bottom: 0upx;
+			flex-direction: column;
+			.uni-row{
+				display: flex;
+				flex-direction: row;
+				margin: 0upx 20upx;
+				height: 80upx;
+				line-height: 80upx;
+				.col{
+					flex: 1;
+					font-size: $font-base;
+				}
+			}
 		}
 	}
 	.btn{

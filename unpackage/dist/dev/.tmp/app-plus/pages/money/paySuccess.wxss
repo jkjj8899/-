@@ -45,7 +45,7 @@
           justify-content: center;
   width: 600rpx;
   height: 80rpx;
-  font-size: 32rpx;
+  font-size: 34rpx;
   color: #fff;
   background-color: #fa436a;
   border-radius: 10rpx;

@@ -137,7 +137,8 @@ page {
     -webkit-align-items: center;
             align-items: center;
     height: 30rpx;
-    line-height: 1;
+    line-height: 30rpx;
+    padding-top: 20rpx;
     padding-bottom: 20rpx;
 }
 .coin-section .s-header .col {
@@ -200,7 +201,7 @@ page {
 }
 .coin-section .s-row .light {
       font-weight: bold;
-      font-size: 32rpx;
+      font-size: 34rpx;
       color: #14191F;
 }
 .coin-section .s-row .r {
@@ -237,7 +238,7 @@ page {
             flex-direction: column;
 }
 .f-header .tit {
-    font-size: 34rpx;
+    font-size: 36rpx;
     color: #font-color-dark;
     line-height: 1.3;
 }
@@ -246,7 +247,7 @@ page {
     color: #8B9FAA;
 }
 .f-header .icon-you {
-    font-size: 34rpx;
+    font-size: 36rpx;
     color: #8B9FAA;
 }
 /* 猜你喜欢 */
@@ -285,12 +286,12 @@ page {
       opacity: 1;
 }
 .guess-section .title {
-    font-size: 32rpx;
+    font-size: 34rpx;
     color: #14191F;
     line-height: 80rpx;
 }
 .guess-section .price {
-    font-size: 32rpx;
+    font-size: 34rpx;
     color: #fa436a;
     line-height: 1;
 }

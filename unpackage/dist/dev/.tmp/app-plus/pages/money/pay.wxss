@@ -71,7 +71,7 @@
     color: #01aaef;
 }
 .pay-type-list .tit {
-    font-size: 32rpx;
+    font-size: 34rpx;
     color: #14191F;
     margin-bottom: 4rpx;
 }
@@ -102,7 +102,7 @@
   width: 630rpx;
   height: 80rpx;
   margin: 80rpx auto 30rpx;
-  font-size: 32rpx;
+  font-size: 34rpx;
   color: #fff;
   background-color: #fa436a;
   border-radius: 10rpx;

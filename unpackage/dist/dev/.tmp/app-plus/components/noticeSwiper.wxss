@@ -5,7 +5,7 @@
 /* 边框颜色 */
 /* 图片加载中颜色 */
 /* 行为相关颜色 */
-.uni-swiper-msg.data-v-329744d2 {
+.uni-swiper-msg.data-v-c1e3649a {
   padding: 0rpx 10rpx;
   -webkit-flex-wrap: nowrap;
           flex-wrap: nowrap;
@@ -16,25 +16,25 @@
   font-size: 28rpx;
   font-weight: bold;
 }
-.uni-swiper-msg-icon.data-v-329744d2 {
+.uni-swiper-msg-icon.data-v-c1e3649a {
   width: 50rpx;
   margin-right: 20rpx;
 }
-.uni-swiper-msg-icon image.data-v-329744d2 {
+.uni-swiper-msg-icon image.data-v-c1e3649a {
   width: 100%;
   -webkit-flex-shrink: 0;
           flex-shrink: 0;
 }
-.uni-swiper-msg swiper.data-v-329744d2 {
+.uni-swiper-msg swiper.data-v-c1e3649a {
   width: 100%;
   height: 50rpx;
   line-height: 50rpx;
   text-align: left;
 }
-.uni-swiper-msg swiper-item.data-v-329744d2 {
+.uni-swiper-msg swiper-item.data-v-c1e3649a {
   line-height: 50rpx;
 }
-.notice.data-v-329744d2 {
+.notice.data-v-c1e3649a {
   margin-top: 4rpx;
   margin-right: 10rpx;
 }

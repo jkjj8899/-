@@ -179,7 +179,7 @@
     padding-right: 40rpx;
 }
 .action-section .total-box .price {
-      font-size: 32rpx;
+      font-size: 34rpx;
       color: #14191F;
 }
 .action-section .total-box .coupon {

@@ -36,11 +36,13 @@
 						<view class="col subtitle row-title">状态</view>
 						<view class="col r subtitle row-title">时间</view>
 					</view>
-					<view class="s-row">
-						<view class="col subtitle row-amount">0.025334</view>
-						<view class="col subtitle row-amount">已完成</view>
-						<view class="col r subtitle row-amount">16:52 01/04</view>
-					</view>
+					<scroll-view class="s-list" :enableBackToTop="enableBackToTop" :scroll-y="scrollY" @scrolltolower="loadMore">
+						<view class="s-row little-line" v-for="item in records" :key="item">
+							<view class="col subtitle row-amount">0.025334</view>
+							<view class="col subtitle row-amount">已完成</view>
+							<view class="col r subtitle row-amount">16:52 01/04</view>
+						</view>
+					</scroll-view>
 				</view>
 			</view>
 		</view>
@@ -60,11 +62,34 @@
 			return {
 				total: 0, //总价格
 				empty: false, //空白页现实  true|false
-				list: [],
+				scrollY: true,
+				enableBackToTop: true,
+				records: [1,2,3,4,5,6,7,8,9,0,10,11,12,13,14,15,16,17,18,19]
 			};
 		},
 		onLoad(){
+			console.log("====================================")
+			uni.showToast({
+			    title: '标题',
+			    duration: 2000
+			});
 			this.loadData();
+		},
+		onHide() {
+			
+		},
+		onNavigationBarButtonTap(e) {
+			console.log("-------------------------------------")
+			uni.showActionSheet({
+				title:'全部',
+			    itemList: ['充值', '提现', '兑换'],
+			    success: function (res) {
+			        console.log('选中了第' + (res.tapIndex + 1) + '个按钮');
+			    },
+			    fail: function (res) {
+			        console.log(res.errMsg);
+			    }
+			});
 		},
 		watch:{
 			//显示空白页
@@ -79,6 +104,9 @@
 			...mapState(['hasLogin'])
 		},
 		methods: {
+			showAction(){
+				
+			},
 			//请求数据
 			async loadData(){
 				/* let list = await this.$api.json('cartList'); 
@@ -96,7 +124,7 @@
 	}
 </script>
 
-<style lang='scss'>
+<style lang='scss' scoped>
 	.container{
 		padding: 0upx 0upx;
 	}
@@ -104,10 +132,18 @@
 		background: #fff;
 		.block{
 			padding: 20upx 0;
+			.s-list{
+				position: absolute;
+				width: 100%;
+				top: 480upx;
+				bottom: 0upx;
+			}
 			.s-row{
 				display:flex;
 				align-items:center;
-				padding: 10upx 30upx 0upx 30upx;
+				padding-top: 20upx;
+				padding-bottom: 20upx;
+				margin: 0upx 30upx;
 				.subtitle{
 					padding: 4upx 0 10upx 0;
 				}

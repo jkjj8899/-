@@ -126,7 +126,7 @@ page {
   margin-top: 70rpx;
   background: #fa436a;
   color: #fff;
-  font-size: 32rpx;
+  font-size: 34rpx;
 }
 .confirm-btn:after {
     border-radius: 100px;

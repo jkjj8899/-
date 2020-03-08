@@ -98,7 +98,7 @@ page, .content {
 }
 .order-item .i-top .del-btn {
       padding: 10rpx 0 10rpx 36rpx;
-      font-size: 32rpx;
+      font-size: 34rpx;
       color: #8B9FAA;
       position: relative;
 }
@@ -192,7 +192,7 @@ page, .content {
       color: #14191F;
 }
 .order-item .price-box .price {
-      font-size: 32rpx;
+      font-size: 34rpx;
       color: #14191F;
 }
 .order-item .price-box .price:before {

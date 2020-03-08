@@ -64,7 +64,7 @@ page {
     color: #fa436a;
 }
 .introduce-section .price {
-    font-size: 34rpx;
+    font-size: 36rpx;
 }
 .introduce-section .m-price {
     margin: 0 12rpx;
@@ -373,7 +373,7 @@ page {
       line-height: 42rpx;
 }
 .attr-content .a-t .right .price {
-        font-size: 32rpx;
+        font-size: 34rpx;
         color: #fa436a;
         margin-bottom: 10rpx;
 }

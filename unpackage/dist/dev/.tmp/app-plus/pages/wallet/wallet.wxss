@@ -11,7 +11,7 @@
 .total-box {
   background: #0952C3;
   font-size: 28rpx;
-  padding: 100rpx 30rpx 60rpx 30rpx;
+  padding: 100rpx 30rpx 40rpx 30rpx;
   color: #8B9FAA;
 }
 .total-box .title {
@@ -24,6 +24,32 @@
 }
 .total-box .cny {
     padding-left: 20rpx;
+}
+.total-box .operat {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: row;
+            flex-direction: row;
+    -webkit-box-pack: justify;
+    -webkit-justify-content: space-between;
+            justify-content: space-between;
+    -webkit-box-align: middle;
+    -webkit-align-items: middle;
+            align-items: middle;
+    padding-top: 20rpx;
+}
+.total-box .operat .btn {
+      text-align: center;
+      -webkit-box-flex: 0;
+      -webkit-flex: 0 0 32%;
+              flex: 0 0 32%;
+      height: 60rpx;
+      line-height: 60rpx;
+      color: #ffffff;
+      background-color: rgba(255, 255, 255, 0.08);
 }
 .coin-section {
   background: #fff;
@@ -63,7 +89,7 @@
 }
 .coin-section .block .s-row .light {
         font-weight: bold;
-        font-size: 32rpx;
+        font-size: 34rpx;
         color: #14191F;
 }
 .coin-section .block .s-row .r {

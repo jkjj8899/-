@@ -215,7 +215,7 @@ page, .content {
       opacity: 1;
 }
 .goods-list .title {
-    font-size: 32rpx;
+    font-size: 34rpx;
     color: #14191F;
     line-height: 80rpx;
 }
@@ -234,7 +234,7 @@ page, .content {
     color: #8B9FAA;
 }
 .goods-list .price {
-    font-size: 32rpx;
+    font-size: 34rpx;
     color: #fa436a;
     line-height: 1;
 }

@@ -64,7 +64,7 @@
     border-radius: 50%;
 }
 .user-info-box .username {
-    font-size: 38rpx;
+    font-size: 40rpx;
     color: #14191F;
     margin-left: 20rpx;
 }
@@ -146,7 +146,7 @@
   color: #75787d;
 }
 .tj-sction .num {
-  font-size: 32rpx;
+  font-size: 34rpx;
   color: #14191F;
   margin-bottom: 8rpx;
 }

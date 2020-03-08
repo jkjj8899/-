@@ -43,7 +43,7 @@ page {
 .list-cell .cell-more {
     -webkit-align-self: baseline;
             align-self: baseline;
-    font-size: 32rpx;
+    font-size: 34rpx;
     color: #8B9FAA;
     margin-left: 10rpx;
 }

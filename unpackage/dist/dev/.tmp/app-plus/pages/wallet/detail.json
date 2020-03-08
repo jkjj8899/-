@@ -2,14 +2,23 @@
   "navigationBarTitleText": "币种明细",
   "bounce": "none",
   "titleNView": {
+    "tags": [
+      {
+        "tag": "img",
+        "src": "/static/filter.png",
+        "position": {
+          "right": "15px",
+          "top": "14px",
+          "width": "20px",
+          "height": "20px"
+        }
+      }
+    ],
     "buttons": [
       {
-        "fontSrc": "/static/yticon.ttf",
-        "text": "",
-        "fontSize": "24",
-        "color": "#303133",
-        "width": "36px",
-        "background": "rgba(0,0,0,0)"
+        "text": "",
+        "fontSize": "15px",
+        "float": "right"
       }
     ]
   },

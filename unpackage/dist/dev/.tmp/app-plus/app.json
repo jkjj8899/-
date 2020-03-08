@@ -2,14 +2,19 @@
   "pages": [
     "pages/index/index",
     "pages/exchange/index",
+    "pages/otc/otc",
     "pages/news/news",
     "pages/wallet/wallet",
     "pages/wallet/detail",
+    "pages/wallet/deposit",
+    "pages/wallet/withdraw",
+    "pages/wallet/search",
     "pages/product/product",
     "pages/set/set",
     "pages/userinfo/userinfo",
     "pages/cart/cart",
     "pages/public/login",
+    "pages/public/register",
     "pages/user/user",
     "pages/detail/detail",
     "pages/order/order",
@@ -69,5 +74,8 @@
   },
   "appname": "电商",
   "compilerVersion": "2.4.6",
-  "usingComponents": {}
+  "usingComponents": {
+    "mescroll-body": "/components/mescroll-uni/mescroll-body",
+    "mescroll-uni": "/components/mescroll-uni/mescroll-uni"
+  }
 }

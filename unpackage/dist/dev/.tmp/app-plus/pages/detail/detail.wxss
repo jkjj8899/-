@@ -47,7 +47,7 @@ page {
     display: inline-block;
     margin-right: 30rpx;
     width: 56rpx;
-    font-size: 32rpx;
+    font-size: 34rpx;
     color: #606266;
 }
 .episode-panel view.current {
@@ -74,7 +74,7 @@ page {
     -webkit-box-direction: normal;
     -webkit-flex-direction: column;
             flex-direction: column;
-    font-size: 36rpx;
+    font-size: 38rpx;
     color: #14191F;
 }
 .info .title text:last-child {

@@ -23,6 +23,17 @@
 			}
 		},
 		{
+			"path": "pages/otc/otc",
+			"style": {
+				"navigationBarTitleText": "法币交易",
+				"disableScroll": true, // 禁止滚动, 解决scroll-view在Android小程序卡顿的问题
+				// "enablePullDownRefresh" : false, // 不开启下拉刷新, 默认就是false
+				"app-plus" : {
+					"bounce" : "none" // 取消iOS回弹,避免和下拉刷新冲突 (小程序无法取消)
+				}
+			}
+		},
+		{
 			"path": "pages/news/news",
 			"style": {
 				"navigationBarTitleText": "快讯"
@@ -49,19 +60,59 @@
 				"app-plus": {
 					"bounce": "none",
 					"titleNView": {
+						"tags": [{
+						        "tag" : "img",  
+								"src" : "/static/filter.png",  
+								"position" : {  
+									"right" : "15px",  
+									"top" : "14px",  
+									"width" : "20px",  
+									"height" : "20px"  
+								}  
+						    }
+						],
 						"buttons": [{
-								"fontSrc": "/static/yticon.ttf",
-								"text": "\ue60f",
-								"fontSize": "24",
-								"color": "#303133",
-								"width": "36px",
-								"background": "rgba(0,0,0,0)"
-							}
+						        "text": "",
+						        "fontSize": "15px",
+						        "float": "right"
+						    }
 						]
 					}
 				}
 			}
-		},
+		},{
+			"path": "pages/wallet/deposit",
+			"style": {
+				"navigationBarTitleText": "充币",
+				"app-plus": {
+					"bounce": "none"
+				}
+			}
+		},{
+			"path": "pages/wallet/withdraw",
+			"style": {
+				"navigationBarTitleText": "提币",
+				"app-plus": {
+					"bounce": "none"
+				}
+			}
+		}, {
+            "path": "pages/wallet/search", //搜索页面
+            "style": {
+                "app-plus": {
+                    "titleNView": {
+                        //"type": "transparent",//透明渐变导航栏 App-nvue 2.4.4+ 支持
+                        "searchInput": {
+							"align": "left",
+							"backgroundColor": "rgba(231, 231, 231,.7)",
+							"borderRadius": "16px",
+							"placeholder": "搜索币种",
+							"placeholderColor": "#606266"
+						}
+                    }
+                }
+            }
+        },
 		{
 			"path": "pages/product/product",
 			"style": {
@@ -97,6 +148,15 @@
 				"app-plus": {
 					"titleNView": false,
 					"animationType": "slide-in-bottom"
+				}
+			}
+		}, {
+			"path": "pages/public/register",
+			"style": {
+				"navigationBarTitleText": "",
+				"navigationStyle": "custom",
+				"app-plus": {
+					"titleNView": false
 				}
 			}
 		}, {

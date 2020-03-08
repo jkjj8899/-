@@ -6,10 +6,15 @@
 				<text class="amount">0.000090058</text>
 				<text class="cny">≈￥40.5</text>
 			</view>
+			<view class="operat">
+				<view class="btn" @click="navTo('/pages/wallet/deposit')">充币</view>
+				<view class="btn" @click="navTo('/pages/wallet/withdraw')">提币</view>
+				<view class="btn" @click="navTo('/pages/exchange/index')">兑换</view>
+			</view>
 		</view>
 		<!-- 列表 -->
 		<view class="coin-section m-t">
-			<view class="block little-line" @click="navToDetail()">
+			<view class="block little-line" @click="navTo('/pages/wallet/detail')">
 				<view class="s-row">
 					<view class="col">
 						<image src="https://s1.bqiapp.com/coin/20181030_72_webp/bitcoin_200_200.webp?v=67" class="coinLogo"></image>
@@ -108,9 +113,9 @@
 					return item;
 				});
 			},
-			navToDetail(){
+			navTo(url){
 				uni.navigateTo({
-					url: '/pages/wallet/detail'
+					url: url
 				})
 			}
 		}
@@ -124,7 +129,7 @@
 	.total-box{
 		background: #0952C3;
 		font-size: $font-base;
-		padding: 100upx 30upx 60upx 30upx;
+		padding: 100upx 30upx 40upx 30upx;
 		color: $font-color-light;
 		.title{
 			padding-bottom: 10upx;
@@ -136,6 +141,21 @@
 		}
 		.cny{
 			padding-left: 20upx;
+		}
+		.operat{
+			display: flex;
+			flex-direction: row;
+			justify-content: space-between;
+			align-items: middle;
+			padding-top: 20upx;
+			.btn{
+				text-align: center;
+				flex: 0 0 32%;
+				height: 60upx;
+				line-height: 60upx;
+				color: #ffffff;
+				background-color: rgba(255,255,255,0.08);
+			}
 		}
 	}
 	.coin-section{
