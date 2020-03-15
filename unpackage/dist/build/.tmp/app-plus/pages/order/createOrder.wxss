@@ -50,7 +50,7 @@ page {
     -webkit-flex: 1;
             flex: 1;
     font-size: 28rpx;
-    color: #303133;
+    color: #14191F;
 }
 .address-section .name {
     font-size: 34rpx;
@@ -59,11 +59,11 @@ page {
 .address-section .address {
     margin-top: 16rpx;
     margin-right: 20rpx;
-    color: #909399;
+    color: #8B9FAA;
 }
 .address-section .icon-you {
     font-size: 32rpx;
-    color: #909399;
+    color: #8B9FAA;
     margin-right: 30rpx;
 }
 .address-section .a-bg {
@@ -124,11 +124,11 @@ page {
 }
 .goods-section .g-item .title {
       font-size: 30rpx;
-      color: #303133;
+      color: #14191F;
 }
 .goods-section .g-item .spec {
       font-size: 26rpx;
-      color: #909399;
+      color: #8B9FAA;
 }
 .goods-section .g-item .price-box {
       display: -webkit-box;
@@ -138,7 +138,7 @@ page {
       -webkit-align-items: center;
               align-items: center;
       font-size: 32rpx;
-      color: #303133;
+      color: #14191F;
       padding-top: 10rpx;
 }
 .goods-section .g-item .price-box .price {
@@ -194,7 +194,7 @@ page {
     -webkit-align-self: center;
             align-self: center;
     font-size: 24rpx;
-    color: #909399;
+    color: #8B9FAA;
     margin-left: 8rpx;
     margin-right: -10rpx;
 }
@@ -203,15 +203,15 @@ page {
     -webkit-flex: 1;
             flex: 1;
     font-size: 26rpx;
-    color: #909399;
+    color: #8B9FAA;
     margin-right: 10rpx;
 }
 .yt-list-cell .cell-tip {
     font-size: 26rpx;
-    color: #303133;
+    color: #14191F;
 }
 .yt-list-cell .cell-tip.disabled {
-      color: #909399;
+      color: #8B9FAA;
 }
 .yt-list-cell .cell-tip.active {
       color: #fa436a;
@@ -227,7 +227,7 @@ page {
     -webkit-flex: 1;
             flex: 1;
     font-size: 28rpx;
-    color: #303133;
+    color: #14191F;
 }
 /* 支付列表 */
 .pay-list {
@@ -274,7 +274,7 @@ page {
 }
 .pay-list .tit {
     font-size: 32rpx;
-    color: #303133;
+    color: #14191F;
     -webkit-box-flex: 1;
     -webkit-flex: 1;
             flex: 1;
@@ -420,12 +420,12 @@ page {
 }
 .coupon-item .title {
     font-size: 32rpx;
-    color: #303133;
+    color: #14191F;
     margin-bottom: 10rpx;
 }
 .coupon-item .time {
     font-size: 24rpx;
-    color: #909399;
+    color: #8B9FAA;
 }
 .coupon-item .right {
     display: -webkit-box;
@@ -455,7 +455,7 @@ page {
 }
 .coupon-item .tips {
     font-size: 24rpx;
-    color: #909399;
+    color: #8B9FAA;
     line-height: 60rpx;
     padding-left: 30rpx;
 }

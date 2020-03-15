@@ -39,7 +39,7 @@ page, .content {
             align-items: center;
     height: 100%;
     font-size: 30rpx;
-    color: #303133;
+    color: #14191F;
     position: relative;
 }
 .navbar .nav-item.current {
@@ -215,8 +215,8 @@ page, .content {
       opacity: 1;
 }
 .goods-list .title {
-    font-size: 32rpx;
-    color: #303133;
+    font-size: 34rpx;
+    color: #14191F;
     line-height: 80rpx;
 }
 .goods-list .price-box {
@@ -231,10 +231,10 @@ page, .content {
             justify-content: space-between;
     padding-right: 10rpx;
     font-size: 24rpx;
-    color: #909399;
+    color: #8B9FAA;
 }
 .goods-list .price {
-    font-size: 32rpx;
+    font-size: 34rpx;
     color: #fa436a;
     line-height: 1;
 }

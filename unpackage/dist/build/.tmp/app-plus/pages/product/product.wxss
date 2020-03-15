@@ -47,7 +47,7 @@ page {
 }
 .introduce-section .title {
     font-size: 32rpx;
-    color: #303133;
+    color: #14191F;
     height: 50rpx;
     line-height: 50rpx;
 }
@@ -64,11 +64,11 @@ page {
     color: #fa436a;
 }
 .introduce-section .price {
-    font-size: 34rpx;
+    font-size: 36rpx;
 }
 .introduce-section .m-price {
     margin: 0 12rpx;
-    color: #909399;
+    color: #8B9FAA;
     text-decoration: line-through;
 }
 .introduce-section .coupon-tip {
@@ -93,7 +93,7 @@ page {
             align-items: center;
     height: 50rpx;
     font-size: 24rpx;
-    color: #909399;
+    color: #8B9FAA;
 }
 .introduce-section .bot-row text {
       -webkit-box-flex: 1;
@@ -193,7 +193,7 @@ page {
     -webkit-box-flex: 1;
     -webkit-flex: 1;
             flex: 1;
-    color: #303133;
+    color: #14191F;
 }
 .c-list .con .selected-text {
       margin-right: 10rpx;
@@ -201,7 +201,7 @@ page {
 .c-list .bz-list {
     height: 40rpx;
     font-size: 26rpx;
-    color: #303133;
+    color: #14191F;
 }
 .c-list .bz-list text {
       display: inline-block;
@@ -218,7 +218,7 @@ page {
     -webkit-box-direction: normal;
     -webkit-flex-direction: column;
             flex-direction: column;
-    color: #303133;
+    color: #14191F;
     line-height: 40rpx;
 }
 .c-list .red {
@@ -246,11 +246,11 @@ page {
             align-items: center;
     height: 70rpx;
     font-size: 26rpx;
-    color: #909399;
+    color: #8B9FAA;
 }
 .eva-section .e-header .tit {
       font-size: 30rpx;
-      color: #303133;
+      color: #14191F;
       margin-right: 4rpx;
 }
 .eva-section .e-header .tip {
@@ -292,7 +292,7 @@ page {
 }
 .eva-box .right .con {
       font-size: 28rpx;
-      color: #303133;
+      color: #14191F;
       padding: 20rpx 0;
 }
 .eva-box .right .bot {
@@ -303,7 +303,7 @@ page {
       -webkit-justify-content: space-between;
               justify-content: space-between;
       font-size: 24rpx;
-      color: #909399;
+      color: #8B9FAA;
 }
 /*  详情 */
 .detail-desc {
@@ -322,7 +322,7 @@ page {
             align-items: center;
     height: 80rpx;
     font-size: 30rpx;
-    color: #303133;
+    color: #14191F;
     position: relative;
 }
 .detail-desc .d-header text {
@@ -373,7 +373,7 @@ page {
       line-height: 42rpx;
 }
 .attr-content .a-t .right .price {
-        font-size: 32rpx;
+        font-size: 34rpx;
         color: #fa436a;
         margin-bottom: 10rpx;
 }
@@ -419,7 +419,7 @@ page {
       height: 60rpx;
       padding: 0 20rpx;
       font-size: 28rpx;
-      color: #303133;
+      color: #14191F;
 }
 .attr-content .item-list .selected {
       background: #fbebee;
@@ -597,7 +597,7 @@ page {
 .page-bottom .p-b-btn .yticon {
       font-size: 40rpx;
       line-height: 48rpx;
-      color: #909399;
+      color: #8B9FAA;
 }
 .page-bottom .p-b-btn.active, .page-bottom .p-b-btn.active .yticon {
       color: #fa436a;

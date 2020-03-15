@@ -26,18 +26,18 @@ page {
             flex-shrink: 0;
     width: 120rpx;
     font-size: 30rpx;
-    color: #303133;
+    color: #14191F;
 }
 .row .input {
     -webkit-box-flex: 1;
     -webkit-flex: 1;
             flex: 1;
     font-size: 30rpx;
-    color: #303133;
+    color: #14191F;
 }
 .row .icon-shouhuodizhi {
     font-size: 36rpx;
-    color: #909399;
+    color: #8B9FAA;
 }
 .default-row {
   margin-top: 16rpx;
@@ -64,7 +64,7 @@ page {
   width: 690rpx;
   height: 80rpx;
   margin: 60rpx auto;
-  font-size: 32rpx;
+  font-size: 34rpx;
   color: #fff;
   background-color: #fa436a;
   border-radius: 10rpx;

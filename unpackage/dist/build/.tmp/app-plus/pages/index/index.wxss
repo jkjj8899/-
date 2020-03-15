@@ -6,15 +6,58 @@
 /* 图片加载中颜色 */
 /* 行为相关颜色 */
 page {
-  background: #f5f5f5;
+  background: #ffffff;
+  padding-top: 50rpx;
 }
 .m-t {
   margin-top: 16rpx;
+}
+.advert {
+  padding: 10rpx 20rpx;
+  background: #EEF2F5;
+}
+.advert .img {
+    width: 100%;
+    border-radius: 10rpx;
+}
+.menu {
+  padding: 20rpx 20rpx;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+          justify-content: space-between;
+  font-size: 28rpx;
+  font-weight: bold;
+  background: #EEF2F5;
+}
+.menu .item {
+    width: 49%;
+    height: 100rpx;
+    line-height: 100rpx;
+    background: #ffffff;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+            align-items: center;
+    text-align: center;
+    vertical-align: middle;
+}
+.menu image {
+    vertical-align: middle;
+    width: 40rpx;
+    height: 45rpx;
+    margin-right: 20rpx;
+}
+.menu .miner {
+    width: 35rpx;
+    height: 35rpx;
 }
 /* 头部 轮播图 */
 .carousel-section {
   position: relative;
   padding-top: 10px;
+  background: #ffffff;
 }
 .carousel-section .titleNview-placing {
     height: var(--status-bar-height);
@@ -76,123 +119,93 @@ page {
     -webkit-transform: translateX(-50%);
             transform: translateX(-50%);
 }
-/* 分类 */
+/* 公告 */
 .cate-section {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: flex;
-  -webkit-justify-content: space-around;
-          justify-content: space-around;
-  -webkit-box-align: center;
-  -webkit-align-items: center;
-          align-items: center;
-  -webkit-flex-wrap: wrap;
-          flex-wrap: wrap;
-  padding: 30rpx 22rpx;
-  background: #fff;
-  /* 原图标颜色太深,不想改图了,所以加了透明度 */
-}
-.cate-section .cate-item {
-    display: -webkit-box;
-    display: -webkit-flex;
-    display: flex;
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-    -webkit-flex-direction: column;
-            flex-direction: column;
-    -webkit-box-align: center;
-    -webkit-align-items: center;
-            align-items: center;
-    font-size: 26rpx;
-    color: #303133;
-}
-.cate-section image {
-    width: 88rpx;
-    height: 88rpx;
-    margin-bottom: 14rpx;
-    border-radius: 50%;
-    opacity: .7;
-    box-shadow: 4rpx 4rpx 20rpx rgba(250, 67, 106, 0.3);
-}
-.ad-1 {
-  width: 100%;
-  height: 210rpx;
-  padding: 10rpx 0;
+  padding: 20rpx 22rpx 20rpx 22rpx;
   background: #fff;
 }
-.ad-1 image {
-    width: 100%;
-    height: 100%;
-}
-/* 秒杀专区 */
-.seckill-section {
+/* 市值排行 */
+.coin-section {
   padding: 4rpx 30rpx 24rpx;
   background: #fff;
 }
-.seckill-section .s-header {
+.coin-section .s-header {
     display: -webkit-box;
     display: -webkit-flex;
     display: flex;
     -webkit-box-align: center;
     -webkit-align-items: center;
             align-items: center;
-    height: 92rpx;
-    line-height: 1;
+    height: 30rpx;
+    line-height: 30rpx;
+    padding-top: 20rpx;
+    padding-bottom: 20rpx;
 }
-.seckill-section .s-header .s-img {
-      width: 140rpx;
-      height: 30rpx;
-}
-.seckill-section .s-header .tip {
+.coin-section .s-header .col {
       font-size: 28rpx;
-      color: #909399;
-      margin: 0 20rpx 0 40rpx;
-}
-.seckill-section .s-header .timer {
-      display: inline-block;
-      width: 40rpx;
-      height: 36rpx;
-      text-align: center;
-      line-height: 36rpx;
-      margin-right: 14rpx;
-      font-size: 26rpx;
-      color: #fff;
-      border-radius: 2px;
-      background: rgba(0, 0, 0, 0.8);
-}
-.seckill-section .s-header .icon-you {
-      font-size: 32rpx;
-      color: #909399;
+      color: #8B9FAA;
       -webkit-box-flex: 1;
       -webkit-flex: 1;
               flex: 1;
+}
+.coin-section .s-header .r {
       text-align: right;
 }
-.seckill-section .floor-list {
-    white-space: nowrap;
-}
-.seckill-section .scoll-wrapper {
+.coin-section .s-row {
     display: -webkit-box;
     display: -webkit-flex;
     display: flex;
-    -webkit-box-align: start;
-    -webkit-align-items: flex-start;
-            align-items: flex-start;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+            align-items: center;
+    height: 120rpx;
 }
-.seckill-section .floor-item {
-    width: 150rpx;
-    margin-right: 20rpx;
-    font-size: 26rpx;
-    color: #303133;
-    line-height: 1.8;
+.coin-section .s-row .subtitle {
+      font-size: 24rpx;
+      font-weight: normal;
+      color: #8B9FAA;
+      padding: 4rpx 0 10rpx 0;
 }
-.seckill-section .floor-item image {
-      width: 150rpx;
-      height: 150rpx;
-      border-radius: 6rpx;
+.coin-section .s-row .uni-tag--success {
+      color: #fff;
+      background-color: #00b45a;
+      border-width: 0.5px;
+      border-style: solid;
+      border-color: #00b45a;
+      width: 160rpx;
+      float: right;
 }
-.seckill-section .floor-item .price {
-      color: #fa436a;
+.coin-section .s-row .uni-tag--error {
+      color: #fff;
+      background-color: #ff6059;
+      border-width: 0.5px;
+      border-style: solid;
+      border-color: #ff6059;
+      width: 160rpx;
+      float: right;
+}
+.coin-section .s-row .col {
+      font-size: 28rpx;
+      color: #14191F;
+      -webkit-box-flex: 1;
+      -webkit-flex: 1;
+              flex: 1;
+}
+.coin-section .s-row .coinLogo {
+      width: 36rpx;
+      height: 36rpx;
+      margin-right: 8px;
+      display: inline-block;
+      vertical-align: middle;
+      float: left;
+}
+.coin-section .s-row .light {
+      font-weight: bold;
+      font-size: 34rpx;
+      color: #14191F;
+}
+.coin-section .s-row .r {
+      text-align: right;
 }
 .f-header {
   display: -webkit-box;
@@ -225,189 +238,17 @@ page {
             flex-direction: column;
 }
 .f-header .tit {
-    font-size: 34rpx;
+    font-size: 36rpx;
     color: #font-color-dark;
     line-height: 1.3;
 }
 .f-header .tit2 {
     font-size: 24rpx;
-    color: #909399;
+    color: #8B9FAA;
 }
 .f-header .icon-you {
-    font-size: 34rpx;
-    color: #909399;
-}
-/* 团购楼层 */
-.group-section {
-  background: #fff;
-}
-.group-section .g-swiper {
-    height: 650rpx;
-    padding-bottom: 30rpx;
-}
-.group-section .g-swiper-item {
-    width: 100%;
-    padding: 0 30rpx;
-    display: -webkit-box;
-    display: -webkit-flex;
-    display: flex;
-}
-.group-section image {
-    width: 100%;
-    height: 460rpx;
-    border-radius: 4px;
-}
-.group-section .g-item {
-    display: -webkit-box;
-    display: -webkit-flex;
-    display: flex;
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-    -webkit-flex-direction: column;
-            flex-direction: column;
-    overflow: hidden;
-}
-.group-section .left {
-    -webkit-box-flex: 1.2;
-    -webkit-flex: 1.2;
-            flex: 1.2;
-    margin-right: 24rpx;
-}
-.group-section .left .t-box {
-      padding-top: 20rpx;
-}
-.group-section .right {
-    -webkit-box-flex: 0.8;
-    -webkit-flex: 0.8;
-            flex: 0.8;
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: reverse;
-    -webkit-flex-direction: column-reverse;
-            flex-direction: column-reverse;
-}
-.group-section .right .t-box {
-      padding-bottom: 20rpx;
-}
-.group-section .t-box {
-    height: 160rpx;
-    font-size: 30rpx;
-    color: #303133;
-    line-height: 1.6;
-}
-.group-section .price {
-    color: #fa436a;
-}
-.group-section .m-price {
-    font-size: 26rpx;
-    text-decoration: line-through;
-    color: #909399;
-    margin-left: 8rpx;
-}
-.group-section .pro-box {
-    display: -webkit-box;
-    display: -webkit-flex;
-    display: flex;
-    -webkit-box-align: center;
-    -webkit-align-items: center;
-            align-items: center;
-    margin-top: 10rpx;
-    font-size: 24rpx;
-    color: 28rpx;
-    padding-right: 10rpx;
-}
-.group-section .progress-box {
-    -webkit-box-flex: 1;
-    -webkit-flex: 1;
-            flex: 1;
-    border-radius: 10px;
-    overflow: hidden;
-    margin-right: 8rpx;
-}
-/* 分类推荐楼层 */
-.hot-floor {
-  width: 100%;
-  overflow: hidden;
-  margin-bottom: 20rpx;
-}
-.hot-floor .floor-img-box {
-    width: 100%;
-    height: 320rpx;
-    position: relative;
-}
-.hot-floor .floor-img-box:after {
-      content: '';
-      position: absolute;
-      left: 0;
-      top: 0;
-      width: 100%;
-      height: 100%;
-      background: -webkit-linear-gradient(rgba(255, 255, 255, 0.06) 30%, #f8f8f8);
-      background: linear-gradient(rgba(255, 255, 255, 0.06) 30%, #f8f8f8);
-}
-.hot-floor .floor-img {
-    width: 100%;
-    height: 100%;
-}
-.hot-floor .floor-list {
-    white-space: nowrap;
-    padding: 20rpx;
-    padding-right: 50rpx;
-    border-radius: 6rpx;
-    margin-top: -140rpx;
-    margin-left: 30rpx;
-    background: #fff;
-    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2);
-    position: relative;
-    z-index: 1;
-}
-.hot-floor .scoll-wrapper {
-    display: -webkit-box;
-    display: -webkit-flex;
-    display: flex;
-    -webkit-box-align: start;
-    -webkit-align-items: flex-start;
-            align-items: flex-start;
-}
-.hot-floor .floor-item {
-    width: 180rpx;
-    margin-right: 20rpx;
-    font-size: 26rpx;
-    color: #303133;
-    line-height: 1.8;
-}
-.hot-floor .floor-item image {
-      width: 180rpx;
-      height: 180rpx;
-      border-radius: 6rpx;
-}
-.hot-floor .floor-item .price {
-      color: #fa436a;
-}
-.hot-floor .more {
-    display: -webkit-box;
-    display: -webkit-flex;
-    display: flex;
-    -webkit-box-align: center;
-    -webkit-align-items: center;
-            align-items: center;
-    -webkit-box-pack: center;
-    -webkit-justify-content: center;
-            justify-content: center;
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-    -webkit-flex-direction: column;
-            flex-direction: column;
-    -webkit-flex-shrink: 0;
-            flex-shrink: 0;
-    width: 180rpx;
-    height: 180rpx;
-    border-radius: 6rpx;
-    background: #f3f3f3;
-    font-size: 28rpx;
-    color: #909399;
-}
-.hot-floor .more text:first-child {
-      margin-bottom: 4rpx;
+    font-size: 36rpx;
+    color: #8B9FAA;
 }
 /* 猜你喜欢 */
 .guess-section {
@@ -445,12 +286,12 @@ page {
       opacity: 1;
 }
 .guess-section .title {
-    font-size: 32rpx;
-    color: #303133;
+    font-size: 34rpx;
+    color: #14191F;
     line-height: 80rpx;
 }
 .guess-section .price {
-    font-size: 32rpx;
+    font-size: 34rpx;
     color: #fa436a;
     line-height: 1;
 }

@@ -1,31 +1,8 @@
 {
-  "titleNView": {
-    "type": "transparent",
-    "searchInput": {
-      "backgroundColor": "rgba(231, 231, 231,.7)",
-      "borderRadius": "16px",
-      "placeholder": "请输入地址 如：大钟寺",
-      "disabled": true,
-      "placeholderColor": "#606266"
-    },
-    "buttons": [
-      {
-        "fontSrc": "/static/yticon.ttf",
-        "text": "",
-        "fontSize": "26",
-        "color": "#303133",
-        "float": "left",
-        "background": "rgba(0,0,0,0)"
-      },
-      {
-        "fontSrc": "/static/yticon.ttf",
-        "text": "",
-        "fontSize": "27",
-        "color": "#303133",
-        "background": "rgba(0,0,0,0)",
-        "redDot": true
-      }
-    ]
-  },
-  "usingComponents": {}
+  "navigationStyle": "custom",
+  "usingComponents": {
+    "uni-notice-bar": "/node-modules/@dcloudio/uni-ui/lib/uni-notice-bar/uni-notice-bar",
+    "uni-tag": "/node-modules/@dcloudio/uni-ui/lib/uni-tag/uni-tag",
+    "notice-swiper": "/components/noticeSwiper"
+  }
 }

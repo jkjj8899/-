@@ -42,7 +42,7 @@
     background: #fff;
     z-index: 9;
     font-size: 30rpx;
-    color: #303133;
+    color: #14191F;
 }
 .mask-content {
   width: 100%;

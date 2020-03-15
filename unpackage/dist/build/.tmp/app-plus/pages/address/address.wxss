@@ -54,11 +54,11 @@ page {
 }
 .address-box .address {
     font-size: 30rpx;
-    color: #303133;
+    color: #14191F;
 }
 .u-box {
   font-size: 28rpx;
-  color: #909399;
+  color: #8B9FAA;
   margin-top: 16rpx;
 }
 .u-box .name {
@@ -73,7 +73,7 @@ page {
           align-items: center;
   height: 80rpx;
   font-size: 40rpx;
-  color: #909399;
+  color: #8B9FAA;
   padding-left: 30rpx;
 }
 .add-btn {

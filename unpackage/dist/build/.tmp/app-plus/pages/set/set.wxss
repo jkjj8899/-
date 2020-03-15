@@ -43,8 +43,8 @@ page {
 .list-cell .cell-more {
     -webkit-align-self: baseline;
             align-self: baseline;
-    font-size: 32rpx;
-    color: #909399;
+    font-size: 34rpx;
+    color: #8B9FAA;
     margin-left: 10rpx;
 }
 .list-cell .cell-tit {
@@ -52,12 +52,12 @@ page {
     -webkit-flex: 1;
             flex: 1;
     font-size: 30rpx;
-    color: #303133;
+    color: #14191F;
     margin-right: 10rpx;
 }
 .list-cell .cell-tip {
     font-size: 28rpx;
-    color: #909399;
+    color: #8B9FAA;
 }
 .list-cell switch {
     -webkit-transform: translateX(16rpx) scale(0.84);

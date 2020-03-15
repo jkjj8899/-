@@ -64,8 +64,8 @@
     border-radius: 50%;
 }
 .user-info-box .username {
-    font-size: 38rpx;
-    color: #303133;
+    font-size: 40rpx;
+    color: #14191F;
     margin-left: 20rpx;
 }
 .vip-card-box {
@@ -146,8 +146,8 @@
   color: #75787d;
 }
 .tj-sction .num {
-  font-size: 32rpx;
-  color: #303133;
+  font-size: 34rpx;
+  color: #14191F;
   margin-bottom: 8rpx;
 }
 .order-section {
@@ -159,7 +159,7 @@
     height: 120rpx;
     border-radius: 10rpx;
     font-size: 24rpx;
-    color: #303133;
+    color: #14191F;
 }
 .order-section .yticon {
     font-size: 48rpx;
@@ -183,7 +183,7 @@
     -webkit-align-items: center;
             align-items: center;
     font-size: 28rpx;
-    color: #303133;
+    color: #14191F;
     line-height: 40rpx;
     margin-left: 30rpx;
 }

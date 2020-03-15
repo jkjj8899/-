@@ -3,6 +3,8 @@
     "pages/index/index",
     "pages/exchange/index",
     "pages/otc/otc",
+    "pages/otc/order/list",
+    "pages/otc/order/detail",
     "pages/news/news",
     "pages/wallet/wallet",
     "pages/wallet/detail",

@@ -33,7 +33,7 @@
 			</view>
 		</view>
 		<view class="advert">
-			<image class="img" mode="widthFix" src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1582372405579&di=b193a859db3a7cc913a139412456100d&imgtype=0&src=http%3A%2F%2Fhbimg.b0.upaiyun.com%2F4df6596a536f191f0d0ccf715ad44d61912892257553b-XV0WLE_fw658"></image>
+			<image class="img" mode="widthFix" src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1583941118254&di=8c75b06eaaa70c00a00648d9cf8e2318&imgtype=0&src=http%3A%2F%2Fwww.tiandianyun.cc%2Fupload%2Fgallery%2Fthumbnail%2FE688F1B8-815E-2968-1C1A621F23EA-tbl.png"></image>
 		</view>
 		<!-- 市值排行 -->
 		<view class="coin-section m-t">

@@ -89,7 +89,7 @@
       }
     },
     "uni-app": {
-      "compilerVersion": "2.4.5",
+      "compilerVersion": "2.4.6",
       "control": "v8",
       "nvueCompiler": "uni-app",
       "renderer": "auto",
@@ -99,32 +99,32 @@
     },
     "tabBar": {
       "color": "#C0C4CC",
-      "selectedColor": "#fa436a",
+      "selectedColor": "#1890ff",
       "borderStyle": "rgba(0,0,0,0.4)",
       "backgroundColor": "#ffffff",
       "list": [
         {
           "pagePath": "pages/index/index",
-          "iconPath": "static/tab-home.png",
-          "selectedIconPath": "static/tab-home-current.png",
-          "text": "首页"
+          "iconPath": "static/tabbar/tab-coin.svg",
+          "selectedIconPath": "static/tabbar/tab-coin-active.svg",
+          "text": "行情"
         },
         {
-          "pagePath": "pages/category/category",
-          "iconPath": "static/tab-cate.png",
-          "selectedIconPath": "static/tab-cate-current.png",
-          "text": "分类"
+          "pagePath": "pages/news/news",
+          "iconPath": "static/tabbar/tab-news.svg",
+          "selectedIconPath": "static/tabbar/tab-news-active.svg",
+          "text": "资讯"
         },
         {
-          "pagePath": "pages/cart/cart",
-          "iconPath": "static/tab-cart.png",
-          "selectedIconPath": "static/tab-cart-current.png",
-          "text": "购物车"
+          "pagePath": "pages/wallet/wallet",
+          "iconPath": "static/tabbar/tab-wallet.svg",
+          "selectedIconPath": "static/tabbar/tab-wallet-active.svg",
+          "text": "钱包"
         },
         {
           "pagePath": "pages/user/user",
-          "iconPath": "static/tab-my.png",
-          "selectedIconPath": "static/tab-my-current.png",
+          "iconPath": "static/tabbar/tab-my.svg",
+          "selectedIconPath": "static/tabbar/tab-my-active.svg",
           "text": "我的"
         }
       ],

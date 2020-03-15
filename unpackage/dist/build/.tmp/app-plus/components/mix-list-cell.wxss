@@ -44,11 +44,11 @@
     -webkit-flex: 1;
             flex: 1;
     font-size: 28rpx;
-    color: #303133;
+    color: #14191F;
     margin-right: 10rpx;
 }
 .mix-list-cell .cell-tip {
     font-size: 26rpx;
-    color: #909399;
+    color: #8B9FAA;
 }
 

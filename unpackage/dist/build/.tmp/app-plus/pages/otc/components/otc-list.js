@@ -1,0 +1,10 @@
+(global["webpackJsonp"]=global["webpackJsonp"]||[]).push([["pages/otc/components/otc-list"],{"045f":function(t,e,n){"use strict";var a=function(){var t=this,e=t.$createElement;t._self._c},o=[];n.d(e,"a",function(){return a}),n.d(e,"b",function(){return o})},"994e":function(t,e,n){"use strict";(function(t){Object.defineProperty(e,"__esModule",{value:!0}),e.default=void 0;var a=function(){return Promise.all([n.e("common/vendor"),n.e("pages/otc/components/otc-list-item")]).then(n.bind(null,"5e5e"))},o={components:{otcListItem:a},data:function(){return{tabCurrentIndex:0,navList:[{state:0,text:"USDT",loadingType:"more",orderList:[]},{state:1,text:"EOS",loadingType:"more",orderList:[]},{state:2,text:"ETH",loadingType:"more",orderList:[]}]}},onLoad:function(t){this.tabCurrentIndex=+t.state,this.loadData()},methods:{loadData:function(e){this.dataList=this.dataList.concat([1]),t.showToast({title:"点击了按钮,具体逻辑自行实现"})},changeTab:function(t){this.tabCurrentIndex=t.target.current,this.loadData("tabChange")},tabClick:function(t){this.tabCurrentIndex=t}}};e.default=o}).call(this,n("6e42")["default"])},cace:function(t,e,n){},cb2e:function(t,e,n){"use strict";n.r(e);var a=n("045f"),o=n("cc6d");for(var c in o)"default"!==c&&function(t){n.d(e,t,function(){return o[t]})}(c);n("cbaa");var r=n("2877"),i=Object(r["a"])(o["default"],a["a"],a["b"],!1,null,"16ca9714",null);e["default"]=i.exports},cbaa:function(t,e,n){"use strict";var a=n("cace"),o=n.n(a);o.a},cc6d:function(t,e,n){"use strict";n.r(e);var a=n("994e"),o=n.n(a);for(var c in a)"default"!==c&&function(t){n.d(e,t,function(){return a[t]})}(c);e["default"]=o.a}}]);
+;(global["webpackJsonp"] = global["webpackJsonp"] || []).push([
+    'pages/otc/components/otc-list-create-component',
+    {
+        'pages/otc/components/otc-list-create-component':(function(module, exports, __webpack_require__){
+            __webpack_require__('6e42')['createComponent'](__webpack_require__("cb2e"))
+        })
+    },
+    [['pages/otc/components/otc-list-create-component']]
+]);

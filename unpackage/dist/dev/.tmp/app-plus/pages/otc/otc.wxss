@@ -60,4 +60,16 @@ page.data-v-005ab14c, .content.data-v-005ab14c {
       font-size: 40rpx;
       font-weight: bold;
 }
+.filter.data-v-005ab14c {
+  padding: 30rpx 30rpx;
+}
+.filter .uni-title.data-v-005ab14c {
+    font-size: 34rpx;
+    padding: 20rpx 0;
+}
+.filter .price.data-v-005ab14c {
+    border: 1rpx solid #EBEEF5;
+    font-size: 24rpx;
+    padding: 30rpx 20rpx;
+}
 

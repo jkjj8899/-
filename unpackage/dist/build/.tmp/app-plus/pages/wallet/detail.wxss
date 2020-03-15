@@ -1,0 +1,74 @@
+@charset "UTF-8";
+/* 页面左右间距 */
+/* 文字尺寸 */
+/*文字颜色*/
+/* 边框颜色 */
+/* 图片加载中颜色 */
+/* 行为相关颜色 */
+.container.data-v-30008a6f {
+  padding: 0rpx 0rpx;
+}
+.coin-section.data-v-30008a6f {
+  background: #fff;
+}
+.coin-section .block.data-v-30008a6f {
+    padding: 20rpx 0;
+}
+.coin-section .block .s-list.data-v-30008a6f {
+      position: absolute;
+      width: 100%;
+      top: 480rpx;
+      bottom: 0rpx;
+}
+.coin-section .block .s-row.data-v-30008a6f {
+      display: -webkit-box;
+      display: -webkit-flex;
+      display: flex;
+      -webkit-box-align: center;
+      -webkit-align-items: center;
+              align-items: center;
+      padding-top: 20rpx;
+      padding-bottom: 20rpx;
+      margin: 0rpx 30rpx;
+}
+.coin-section .block .s-row .subtitle.data-v-30008a6f {
+        padding: 4rpx 0 10rpx 0;
+}
+.coin-section .block .s-row .col.data-v-30008a6f {
+        font-size: 28rpx;
+        color: #14191F;
+        -webkit-box-flex: 1;
+        -webkit-flex: 1;
+                flex: 1;
+}
+.coin-section .block .s-row .col .coin.data-v-30008a6f {
+          font-weight: bold;
+          font-size: 30rpx;
+}
+.coin-section .block .s-row .coinLogo.data-v-30008a6f {
+        width: 36rpx;
+        height: 36rpx;
+        margin-right: 8px;
+        display: inline-block;
+        vertical-align: middle;
+        float: left;
+}
+.coin-section .block .s-row .light.data-v-30008a6f {
+        font-weight: bold;
+        font-size: 34rpx;
+        color: #14191F;
+}
+.coin-section .block .s-row .r.data-v-30008a6f {
+        text-align: right;
+}
+.coin-section .block .s-row .row-title.data-v-30008a6f {
+        font-size: 28rpx;
+        font-weight: normal;
+        color: #8B9FAA;
+}
+.coin-section .block .s-row .row-amount.data-v-30008a6f {
+        font-size: 28rpx;
+        font-weight: normal;
+        color: #14191F;
+}
+

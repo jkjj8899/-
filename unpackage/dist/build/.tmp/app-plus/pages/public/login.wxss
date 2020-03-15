@@ -29,7 +29,7 @@ page {
   padding-top: var(--status-bar-height);
   top: 40rpx;
   font-size: 40rpx;
-  color: #303133;
+  color: #14191F;
 }
 .left-top-sign {
   font-size: 120rpx;
@@ -115,7 +115,7 @@ page {
 .input-item input {
     height: 60rpx;
     font-size: 30rpx;
-    color: #303133;
+    color: #14191F;
     width: 100%;
 }
 .confirm-btn {
@@ -126,7 +126,7 @@ page {
   margin-top: 70rpx;
   background: #fa436a;
   color: #fff;
-  font-size: 32rpx;
+  font-size: 34rpx;
 }
 .confirm-btn:after {
     border-radius: 100px;

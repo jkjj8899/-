@@ -21,7 +21,7 @@
 						<text class="coin">BTC</text>
 					</view>
 					<view class="col r light">
-						<uni-icons type="forward" size="20" class="notice"></uni-icons>
+						<uni-icons type="forward" size="20" class="gt"></uni-icons>
 					</view>
 				</view>
 				<view class="s-row">
@@ -43,7 +43,7 @@
 						<text class="coin">BTC</text>
 					</view>
 					<view class="col r light">
-						<uni-icons type="forward" size="20" class="notice"></uni-icons>
+						<uni-icons type="forward" size="20" class="gt"></uni-icons>
 					</view>
 				</view>
 				<view class="s-row">
@@ -202,6 +202,9 @@
 					font-size: $font-base;
 					font-weight: normal;
 					color: $font-color-dark;
+				}
+				.gt{
+					font-weight: 10;
 				}
 			}
 		}

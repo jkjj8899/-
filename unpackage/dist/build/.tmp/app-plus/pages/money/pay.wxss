@@ -71,8 +71,8 @@
     color: #01aaef;
 }
 .pay-type-list .tit {
-    font-size: 32rpx;
-    color: #303133;
+    font-size: 34rpx;
+    color: #14191F;
     margin-bottom: 4rpx;
 }
 .pay-type-list .con {
@@ -87,7 +87,7 @@
     -webkit-flex-direction: column;
             flex-direction: column;
     font-size: 24rpx;
-    color: #909399;
+    color: #8B9FAA;
 }
 .mix-btn {
   display: -webkit-box;
@@ -102,7 +102,7 @@
   width: 630rpx;
   height: 80rpx;
   margin: 80rpx auto 30rpx;
-  font-size: 32rpx;
+  font-size: 34rpx;
   color: #fff;
   background-color: #fa436a;
   border-radius: 10rpx;

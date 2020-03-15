@@ -1,0 +1,29 @@
+{
+  "navigationBarTitleText": "订单记录",
+  "bounce": "none",
+  "titleNView": {
+    "tags": [
+      {
+        "tag": "img",
+        "src": "/static/filter.png",
+        "position": {
+          "right": "15px",
+          "top": "14px",
+          "width": "20px",
+          "height": "20px"
+        }
+      }
+    ],
+    "buttons": [
+      {
+        "text": "",
+        "fontSize": "15px",
+        "float": "right"
+      }
+    ]
+  },
+  "usingComponents": {
+    "uni-popup": "/node-modules/@dcloudio/uni-ui/lib/uni-popup/uni-popup",
+    "uni-icons": "/node-modules/@dcloudio/uni-ui/lib/uni-icons/uni-icons"
+  }
+}

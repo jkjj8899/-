@@ -29,7 +29,58 @@
 				"disableScroll": true, // 禁止滚动, 解决scroll-view在Android小程序卡顿的问题
 				// "enablePullDownRefresh" : false, // 不开启下拉刷新, 默认就是false
 				"app-plus" : {
-					"bounce" : "none" // 取消iOS回弹,避免和下拉刷新冲突 (小程序无法取消)
+					"bounce" : "none", // 取消iOS回弹,避免和下拉刷新冲突 (小程序无法取消)
+					"subNVues": [{
+						"id": "otcFilterDrawer",
+						"path": "pages/otc/subnvue/drawer",
+						"type": "popup",
+						"style": {
+							"width": "65%",
+							"right": "0px"
+						}
+					}]
+				}
+			}
+		},
+		{
+			"path": "pages/otc/order/list",
+			"style": {
+				"navigationBarTitleText": "订单记录",
+				"app-plus": {
+					"bounce": "none",
+					"titleNView": {
+						"tags": [{
+						        "tag" : "img",  
+								"src" : "/static/filter.png",  
+								"position" : {  
+									"right" : "15px",  
+									"top" : "14px",  
+									"width" : "20px",  
+									"height" : "20px"  
+								}  
+						    }
+						],
+						"buttons": [{
+						        "text": "",
+						        "fontSize": "15px",
+						        "float": "right"
+						    }
+						]
+					}
+				}
+			}
+		},
+		{
+			"path": "pages/otc/order/detail",
+			"style": {
+				"navigationBarTitleText": "我的资产",
+				"navigationBarBackgroundColor": "#0952C3",
+				"navigationBarTextStyle": "white",
+				"app-plus": {
+					"titleView":false,
+					"titleNView": {
+						"type": "transparent"
+					}
 				}
 			}
 		},

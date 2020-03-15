@@ -72,7 +72,7 @@ page,
   height: 70rpx;
   padding-top: 8rpx;
   font-size: 28rpx;
-  color: #303133;
+  color: #14191F;
 }
 .t-list {
   display: -webkit-box;

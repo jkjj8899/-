@@ -41,7 +41,7 @@ page, .content {
             align-items: center;
     height: 100%;
     font-size: 15px;
-    color: #303133;
+    color: #14191F;
     position: relative;
 }
 .navbar .nav-item.current {
@@ -85,7 +85,7 @@ page, .content {
     height: 80rpx;
     padding-right: 30rpx;
     font-size: 28rpx;
-    color: #303133;
+    color: #14191F;
     position: relative;
 }
 .order-item .i-top .time {
@@ -98,8 +98,8 @@ page, .content {
 }
 .order-item .i-top .del-btn {
       padding: 10rpx 0 10rpx 36rpx;
-      font-size: 32rpx;
-      color: #909399;
+      font-size: 34rpx;
+      color: #8B9FAA;
       position: relative;
 }
 .order-item .i-top .del-btn:after {
@@ -156,17 +156,17 @@ page, .content {
 }
 .order-item .goods-box-single .right .title {
         font-size: 30rpx;
-        color: #303133;
+        color: #14191F;
         line-height: 1;
 }
 .order-item .goods-box-single .right .attr-box {
         font-size: 26rpx;
-        color: #909399;
+        color: #8B9FAA;
         padding: 10rpx 12rpx;
 }
 .order-item .goods-box-single .right .price {
         font-size: 30rpx;
-        color: #303133;
+        color: #14191F;
 }
 .order-item .goods-box-single .right .price:before {
           content: '\FFE5';
@@ -185,15 +185,15 @@ page, .content {
             align-items: baseline;
     padding: 20rpx 30rpx;
     font-size: 26rpx;
-    color: #909399;
+    color: #8B9FAA;
 }
 .order-item .price-box .num {
       margin: 0 8rpx;
-      color: #303133;
+      color: #14191F;
 }
 .order-item .price-box .price {
-      font-size: 32rpx;
-      color: #303133;
+      font-size: 34rpx;
+      color: #14191F;
 }
 .order-item .price-box .price:before {
         content: '\FFE5';
@@ -223,7 +223,7 @@ page, .content {
     text-align: center;
     line-height: 60rpx;
     font-size: 26rpx;
-    color: #303133;
+    color: #14191F;
     background: #fff;
     border-radius: 100px;
 }
