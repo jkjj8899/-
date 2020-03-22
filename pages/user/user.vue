@@ -18,7 +18,7 @@
 				</view>
 				<view class="tit">
 					<text class="yticon icon-iLinkapp-"></text>
-					DCloud会员
+					Fex 会员
 				</view>
 				<text class="e-m">DCloud Union</text>
 				<text class="e-b">开通会员开发无bug 一测就上线</text>
@@ -54,8 +54,7 @@
 			</view>
 			<!-- 浏览历史 -->
 			<view class="history-section icon">
-				<list-cell icon="icon-iconfontweixin" iconColor="#e07472" title="账户与安全" tips=""></list-cell>
-				<list-cell icon="icon-dizhi" iconColor="#5fcda2" title="我的收益" @eventClick="navTo('/pages/address/address')"></list-cell>
+				<list-cell icon="icon-iconfontweixin" iconColor="#e07472" @eventClick="navTo('/pages/user/safe')" title="账户与安全"></list-cell>
 				<list-cell icon="icon-share" iconColor="#9789f7" title="地址本"></list-cell>
 				<list-cell icon="icon-pinglun-copy" iconColor="#ee883b" title="帮助中心"></list-cell>
 				<list-cell icon="icon-shoucang_xuanzhongzhuangtai" iconColor="#54b4ef" title="问题反馈"></list-cell>
@@ -115,9 +114,9 @@
 			 * navigator标签现在默认没有转场动画，所以用view
 			 */
 			navTo(url){
-				if(!this.hasLogin){
+				/* if(!this.hasLogin){
 					url = '/pages/public/login';
-				}
+				} */
 				uni.navigateTo({  
 					url
 				})  

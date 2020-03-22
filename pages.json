@@ -85,6 +85,12 @@
 			}
 		},
 		{
+			"path": "pages/otc/business/business",
+			"style": {
+				"navigationBarTitleText": ""
+			}
+		},
+		{
 			"path": "pages/news/news",
 			"style": {
 				"navigationBarTitleText": "快讯"
@@ -228,20 +234,37 @@
 								"color": "#303133",
 								"width": "46px",
 								"background": "rgba(0,0,0,0)"
-							},
-							{
-								"fontSrc": "/static/yticon.ttf",
-								"text": "\ue744",
-								"fontSize": "28",
-								"color": "#303133",
-								"background": "rgba(0,0,0,0)",
-								"redDot": true
 							}
 						]
 					}
 				}
 			}
 		}, {
+			"path": "pages/user/safe",
+			"style": {
+				"navigationBarTitleText": "账户与安全"
+			}
+		}, {
+			"path": "pages/user/updateLoginPwd",
+			"style": {
+				"navigationBarTitleText": "修改登录密码"
+			}
+		}, {
+			"path": "pages/user/updateEmail",
+			"style": {
+				"navigationBarTitleText": "修改邮箱"
+			}
+		}, {
+			"path": "pages/user/updateMobile",
+			"style": {
+				"navigationBarTitleText": "修改手机号"
+			}
+		},{
+			"path": "pages/user/updatePayPwd",
+			"style": {
+				"navigationBarTitleText": "修改支付密码"
+			}
+		},{
 			"path": "pages/detail/detail",
 			"style": {
 				"navigationBarTitleText": "",

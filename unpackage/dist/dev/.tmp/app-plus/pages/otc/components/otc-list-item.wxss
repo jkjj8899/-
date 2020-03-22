@@ -15,7 +15,7 @@
   -webkit-flex-direction: column;
           flex-direction: column;
   padding: 30rpx 30rpx;
-  font-size: 30rpx;
+  font-size: 28rpx;
   color: #8B9FAA;
 }
 .box .coin.data-v-030f1c7c {
@@ -92,6 +92,7 @@
 }
 .box .input input.data-v-030f1c7c {
       color: #8B9FAA;
+      font-size: 28rpx;
 }
 .box .input .cny.data-v-030f1c7c {
       margin-right: 20rpx;
@@ -141,11 +142,11 @@
       line-height: 70rpx;
       text-align: center;
       color: #fff;
-      border-radius: 10rpx;
-      font-size: 30rpx;
+      border-radius: 0;
+      font-size: 28rpx;
 }
 .box .btns .cancel.data-v-030f1c7c {
-      background: #999999;
+      background: #96A7BA;
 }
 .box .btns .submit.data-v-030f1c7c {
       background: #0952C3;

@@ -2,7 +2,7 @@
 	<mescroll-uni ref="mescrollRef" @init="mescrollInit" height="100%" top="0" :down="downOption" @down="downCallback" :up="upOption" @up="upCallback" @emptyclick="emptyClick">
 		<view class="order-list">
 			<view class="order-item little-line" v-for="count in dataList">
-				<view class="row user-info">
+				<view class="row user-info" @click="navTo('/pages/otc/business/business')">
 					<view class="name"><view class="profile">{{count}}</view>1币币</view>
 					<view class="nomarl">1091 | 99%</view>
 				</view>
@@ -157,7 +157,11 @@
 					title:'点击了按钮,具体逻辑自行实现'
 				})
 			},
-			
+			navTo(url){
+				uni.navigateTo({
+					url: url
+				})
+			},
 			buy(){
 				this.$refs.popup.open()
 			}
@@ -171,7 +175,7 @@
 		display: flex;
 		flex-direction: column;
 		padding: 30upx 30upx;
-		font-size: $font-md;
+		font-size: $font-base;
 		color: $font-color-light;
 		.coin{
 			display: flex;
@@ -225,6 +229,7 @@
 			border: 1upx solid #8B9FAA;
 			input{
 				color: $font-color-light;
+				font-size: $font-base;
 			}
 			.cny{
 				margin-right: 20upx;
@@ -259,11 +264,11 @@
 				line-height: 70upx;
 				text-align: center;
 				color: #fff;
-				border-radius: 10upx;
-				font-size: $font-md;
+				border-radius: 0;
+				font-size: $font-base;
 			}
 			.cancel{
-				background: #999999;
+				background: #96A7BA;
 			}
 			.submit{
 				background: $uni-color-blue;
