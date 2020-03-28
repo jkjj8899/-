@@ -72,8 +72,8 @@
         color: #8B9FAA;
 }
 .transfer-info .order-list .order-item .row .pay image.data-v-3bfe975c {
-        width: 32px;
-        height: 23px;
+        width: 25px;
+        height: 25px;
 }
 .transfer-info .order-list .order-item .row .buy.data-v-3bfe975c {
         background: #0952C3;

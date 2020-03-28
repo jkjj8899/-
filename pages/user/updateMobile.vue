@@ -6,14 +6,14 @@
 		</view>
 		<view class="list-cell b-b" hover-class="cell-hover" :hover-stay-time="50">
 			<input class="cell-input" placeholder="请输入验证码"/>
-			<text class="cell-btn">获取验证码</text>
+			<button class="cell-btn">获取验证码</button>
 		</view>
 		<view class="list-cell b-b" hover-class="cell-hover" :hover-stay-time="50">
 			<input class="cell-input" placeholder="请输入新手机号"/>
 		</view>
 		<view class="list-cell" hover-class="cell-hover" :hover-stay-time="50">
 			<input class="cell-input" placeholder="请输入验证码"/>
-			<text class="cell-btn">获取验证码</text>
+			<button class="cell-btn">获取验证码</button>
 		</view>
 		<button class="submit">确认</button>
 	</view>
@@ -67,8 +67,8 @@
 		display:flex;
 		flex-direction: row;
 		align-items:baseline;
-		padding: 20upx $page-row-spacing;
-		line-height:60upx;
+		padding: 30upx $page-row-spacing;
+		line-height:80upx;
 		position:relative;
 		background: #fff;
 		justify-content: space-between;
@@ -110,12 +110,14 @@
 			font-size: $font-base;
 		}
 		.cell-btn{
-			display: block;
 			margin-right: 0;
-			padding: 2upx 40upx;
 			font-size: $font-base;
 			border: 1upx solid $font-color-blue;
 			color: $font-color-blue;
+			background: #fff;
+			height: 68upx;
+			line-height: 68upx;
+			padding: 0 10upx 0 10upx;
 		}
 	}
 	.submit{

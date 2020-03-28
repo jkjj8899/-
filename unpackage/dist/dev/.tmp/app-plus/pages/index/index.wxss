@@ -138,8 +138,8 @@ page {
             align-items: center;
     height: 30rpx;
     line-height: 30rpx;
-    padding-top: 20rpx;
-    padding-bottom: 20rpx;
+    padding-top: 30rpx;
+    padding-bottom: 30rpx;
 }
 .coin-section .s-header .col {
       font-size: 28rpx;

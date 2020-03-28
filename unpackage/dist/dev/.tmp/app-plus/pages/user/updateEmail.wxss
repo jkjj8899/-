@@ -19,8 +19,8 @@ page.data-v-578a7b00 {
   -webkit-box-align: baseline;
   -webkit-align-items: baseline;
           align-items: baseline;
-  padding: 20rpx 30rpx;
-  line-height: 60rpx;
+  padding: 30rpx 30rpx;
+  line-height: 80rpx;
   position: relative;
   background: #fff;
   -webkit-box-pack: justify;
@@ -67,12 +67,14 @@ page.data-v-578a7b00 {
     font-size: 28rpx;
 }
 .list-cell .cell-btn.data-v-578a7b00 {
-    display: block;
     margin-right: 0;
-    padding: 2rpx 40rpx;
     font-size: 28rpx;
     border: 1rpx solid #0952C3;
     color: #0952C3;
+    background: #fff;
+    height: 68rpx;
+    line-height: 68rpx;
+    padding: 0 10rpx 0 10rpx;
 }
 .submit.data-v-578a7b00 {
   margin: 60rpx 20rpx;

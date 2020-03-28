@@ -91,6 +91,30 @@
 			}
 		},
 		{
+			"path": "pages/otc/merchant/merchant",
+			"style": {
+				"navigationBarTitleText": "承兑商管理"
+			}
+		},
+		{
+			"path": "pages/otc/merchant/apply",
+			"style": {
+				"navigationBarTitleText": "承兑商申请"
+			}
+		},
+		{
+			"path": "pages/otc/merchant/advertList",
+			"style": {
+				"navigationBarTitleText": "广告列表"
+			}
+		},
+		{
+			"path": "pages/otc/merchant/addAdvert",
+			"style": {
+				"navigationBarTitleText": "添加广告"
+			}
+		},
+		{
 			"path": "pages/news/news",
 			"style": {
 				"navigationBarTitleText": "快讯"
@@ -193,11 +217,6 @@
 				"navigationBarTitleText": "修改资料"
 			}
 		}, {
-			"path": "pages/cart/cart",
-			"style": {
-				"navigationBarTitleText": "购物车"
-			}
-		}, {
 			"path": "pages/public/login",
 			"style": {
 				"navigationBarTitleText": "",
@@ -265,6 +284,16 @@
 				"navigationBarTitleText": "修改支付密码"
 			}
 		},{
+			"path": "pages/user/payType",
+			"style": {
+				"navigationBarTitleText": "收款方式"
+			}
+		},{
+			"path": "pages/user/updatePayType",
+			"style": {
+				"navigationBarTitleText": ""
+			}
+		},{
 			"path": "pages/detail/detail",
 			"style": {
 				"navigationBarTitleText": "",
@@ -327,13 +356,6 @@
 				}
 			}
         }
-        ,{
-            "path" : "pages/product/list",
-            "style" : {
-				"enablePullDownRefresh": true,
-				"navigationBarTitleText": "商品列表"
-			}
-        }
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
@@ -348,26 +370,26 @@
 		"backgroundColor": "#ffffff",
 		"list": [{
 				"pagePath": "pages/index/index",
-				"iconPath": "static/tabbar/tab-coin.svg",
-				"selectedIconPath": "static/tabbar/tab-coin-active.svg",
+				"iconPath": "static/tabbar/tab-coin.png",
+				"selectedIconPath": "static/tabbar/tab-coin-active.png",
 				"text": "行情"
 			},
 			{
 				"pagePath": "pages/news/news",
-				"iconPath": "static/tabbar/tab-news.svg",
-				"selectedIconPath": "static/tabbar/tab-news-active.svg",
+				"iconPath": "static/tabbar/tab-news.png",
+				"selectedIconPath": "static/tabbar/tab-news-active.png",
 				"text": "资讯"
 			},
 			{
 				"pagePath": "pages/wallet/wallet",
-				"iconPath": "static/tabbar/tab-wallet.svg",
-				"selectedIconPath": "static/tabbar/tab-wallet-active.svg",
+				"iconPath": "static/tabbar/tab-wallet.png",
+				"selectedIconPath": "static/tabbar/tab-wallet-active.png",
 				"text": "钱包"
 			},
 			{
 				"pagePath": "pages/user/user",
-				"iconPath": "static/tabbar/tab-my.svg",
-				"selectedIconPath": "static/tabbar/tab-my-active.svg",
+				"iconPath": "static/tabbar/tab-my.png",
+				"selectedIconPath": "static/tabbar/tab-my-active.png",
 				"text": "我的"
 			}
 		]

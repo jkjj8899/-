@@ -32,7 +32,7 @@
   border-radius: 10rpx;
 }
 .user-section {
-  height: 520rpx;
+  height: 510rpx;
   padding: 100rpx 30rpx 0;
   position: relative;
 }
@@ -42,9 +42,6 @@
     top: 0;
     width: 100%;
     height: 100%;
-    -webkit-filter: blur(1px);
-            filter: blur(1px);
-    opacity: .7;
 }
 .user-info-box {
   height: 180rpx;
@@ -65,7 +62,7 @@
 }
 .user-info-box .username {
     font-size: 40rpx;
-    color: #14191F;
+    color: #ffffff;
     margin-left: 20rpx;
 }
 .vip-card-box {
@@ -158,11 +155,11 @@
     width: 120rpx;
     height: 120rpx;
     border-radius: 10rpx;
-    font-size: 24rpx;
+    font-size: 28rpx;
     color: #14191F;
 }
 .order-section .yticon {
-    font-size: 48rpx;
+    font-size: 58rpx;
     margin-bottom: 18rpx;
     color: #fa436a;
 }

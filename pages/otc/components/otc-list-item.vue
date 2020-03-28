@@ -323,8 +323,8 @@
 				}
 				.pay{
 					image{
-						width: 32px;
-						height: 23px;
+						width: 25px;
+						height: 25px;
 					}
 				}
 				.btn{

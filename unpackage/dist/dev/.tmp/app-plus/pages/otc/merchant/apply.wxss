@@ -1,0 +1,89 @@
+@charset "UTF-8";
+/* 页面左右间距 */
+/* 文字尺寸 */
+/*文字颜色*/
+/* 边框颜色 */
+/* 图片加载中颜色 */
+/* 行为相关颜色 */
+page.data-v-26e049ae {
+  background: #f8f8f8;
+}
+.list-cell.data-v-26e049ae {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-align: baseline;
+  -webkit-align-items: baseline;
+          align-items: baseline;
+  padding: 30rpx 30rpx;
+  line-height: 80rpx;
+  position: relative;
+  background: #fff;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+          justify-content: space-between;
+}
+.list-cell.log-out-btn.data-v-26e049ae {
+    margin-top: 40rpx;
+}
+.list-cell.log-out-btn .cell-tit.data-v-26e049ae {
+      color: #fa436a;
+      text-align: center;
+      margin-right: 0;
+}
+.list-cell.cell-hover.data-v-26e049ae {
+    background: #fafafa;
+}
+.list-cell.b-b.data-v-26e049ae:after {
+    left: 30rpx;
+}
+.list-cell.m-t.data-v-26e049ae {
+    margin-top: 16rpx;
+}
+.list-cell .cell-more.data-v-26e049ae {
+    -webkit-align-self: baseline;
+            align-self: baseline;
+    font-size: 28rpx;
+    color: #0952C3;
+    margin-left: 10rpx;
+}
+.list-cell .cell-tit.data-v-26e049ae {
+    font-size: 30rpx;
+    color: #14191F;
+}
+.list-cell .cell-tip.data-v-26e049ae {
+    font-size: 28rpx;
+    color: #8B9FAA;
+}
+.list-cell switch.data-v-26e049ae {
+    -webkit-transform: translateX(16rpx) scale(0.84);
+            transform: translateX(16rpx) scale(0.84);
+}
+.list-cell .cell-input.data-v-26e049ae {
+    font-size: 28rpx;
+}
+.list-cell .cell-btn.data-v-26e049ae {
+    display: block;
+    margin-right: 0;
+    padding: 2rpx 40rpx;
+    font-size: 28rpx;
+    border: 1rpx solid #0952C3;
+    color: #0952C3;
+}
+.submit.data-v-26e049ae {
+  margin: 60rpx 20rpx;
+  background: #0952C3;
+  color: #fff;
+  font-size: 30rpx;
+}
+.safe-tip.data-v-26e049ae {
+  font-size: 24rpx;
+  color: #0952C3;
+  background: #E8F2FC;
+  padding: 20rpx 30rpx;
+}
+

@@ -213,8 +213,8 @@
         color: #8B9FAA;
 }
 .order-list .order-item .row .pay image.data-v-030f1c7c {
-        width: 32px;
-        height: 23px;
+        width: 25px;
+        height: 25px;
 }
 .order-list .order-item .row .btn.data-v-030f1c7c {
         border: 0;

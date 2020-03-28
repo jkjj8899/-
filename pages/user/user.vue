@@ -2,7 +2,7 @@
     <view class="container">  
 		
 		<view class="user-section">
-			<image mode="aspectFill" class="bg" src="https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=2664333817,1728704333&fm=26&gp=0.jpg"></image>
+			<image mode="widthFix" class="bg" src="../../static/personal-bg.jpg"></image>
 			<view class="user-info-box">
 				<view class="portrait-box">
 					<image class="portrait" :src="userInfo.portrait || '/static/missing-face.png'"></image>
@@ -12,7 +12,6 @@
 				</view>
 			</view>
 			<view class="vip-card-box">
-				<image class="card-bg" src="/static/vip-card-bg.png" mode=""></image>
 				<view class="b-btn">
 					立即开通
 				</view>
@@ -31,13 +30,9 @@
 				transform: coverTransform,
 				transition: coverTransition
 			}]"
-			@touchstart="coverTouchstart"
-			@touchmove="coverTouchmove"
-			@touchend="coverTouchend"
 		>
 			<image class="arc" src="/static/arc.png"></image>
 			
-			<!-- 订单 -->
 			<view class="order-section">
 				<view class="order-item" @click="navTo('/pages/notice/notice')" hover-class="common-hover"  :hover-stay-time="50">
 					<text class="yticon icon-shouye"></text>
@@ -45,7 +40,7 @@
 				</view>
 				<view class="order-item" @click="navTo('/pages/order/order?state=1')"  hover-class="common-hover" :hover-stay-time="50">
 					<text class="yticon icon-daifukuan"></text>
-					<text>社区</text>
+					<text>地址本</text>
 				</view>
 				<view class="order-item" @click="navTo('/pages/order/order?state=2')" hover-class="common-hover"  :hover-stay-time="50">
 					<text class="yticon icon-yishouhuo"></text>
@@ -55,10 +50,12 @@
 			<!-- 浏览历史 -->
 			<view class="history-section icon">
 				<list-cell icon="icon-iconfontweixin" iconColor="#e07472" @eventClick="navTo('/pages/user/safe')" title="账户与安全"></list-cell>
-				<list-cell icon="icon-share" iconColor="#9789f7" title="地址本"></list-cell>
-				<list-cell icon="icon-pinglun-copy" iconColor="#ee883b" title="帮助中心"></list-cell>
-				<list-cell icon="icon-shoucang_xuanzhongzhuangtai" iconColor="#54b4ef" title="问题反馈"></list-cell>
-				<list-cell icon="icon-shezhi1" iconColor="#e07472" title="设置" border="" @eventClick="navTo('/pages/set/set')"></list-cell>
+				<list-cell icon="icon-pingjia" iconColor="#4eb432" @eventClick="navTo('/pages/user/payType')" title="收款方式"></list-cell>
+				<list-cell icon="icon-shoucang2" iconColor="#9789f7" @eventClick="navTo('/pages/otc/merchant/apply')" title="承兑商申请"></list-cell>
+				<list-cell icon="icon-tuandui" iconColor="#543632" @eventClick="navTo('/pages/otc/merchant/merchant')" title="承兑商管理"></list-cell>
+				<list-cell icon="icon-bangzhu1" iconColor="#ee883b" title="帮助中心"></list-cell>
+				<list-cell icon="icon-pinglun-copy" iconColor="#54b4ef" title="问题反馈"></list-cell>
+				<list-cell icon="icon-shezhi1" iconColor="#e07472" title="设置" border="" @eventClick="navTo('/pages/public/login')"></list-cell>
 			</view>
 		</view>
 			
@@ -120,45 +117,6 @@
 				uni.navigateTo({  
 					url
 				})  
-			}, 
-	
-			/**
-			 *  会员卡下拉和回弹
-			 *  1.关闭bounce避免ios端下拉冲突
-			 *  2.由于touchmove事件的缺陷（以前做小程序就遇到，比如20跳到40，h5反而好很多），下拉的时候会有掉帧的感觉
-			 *    transition设置0.1秒延迟，让css来过渡这段空窗期
-			 *  3.回弹效果可修改曲线值来调整效果，推荐一个好用的bezier生成工具 http://cubic-bezier.com/
-			 */
-			coverTouchstart(e){
-				if(pageAtTop === false){
-					return;
-				}
-				this.coverTransition = 'transform .1s linear';
-				startY = e.touches[0].clientY;
-			},
-			coverTouchmove(e){
-				moveY = e.touches[0].clientY;
-				let moveDistance = moveY - startY;
-				if(moveDistance < 0){
-					this.moving = false;
-					return;
-				}
-				this.moving = true;
-				if(moveDistance >= 80 && moveDistance < 100){
-					moveDistance = 80;
-				}
-		
-				if(moveDistance > 0 && moveDistance <= 80){
-					this.coverTransform = `translateY(${moveDistance}px)`;
-				}
-			},
-			coverTouchend(){
-				if(this.moving === false){
-					return;
-				}
-				this.moving = false;
-				this.coverTransition = 'transform 0.3s cubic-bezier(.21,1.93,.53,.64)';
-				this.coverTransform = 'translateY(0px)';
 			}
         }  
     }  
@@ -179,7 +137,7 @@
 	}
 
 	.user-section{
-		height: 520upx;
+		height: 510upx;
 		padding: 100upx 30upx 0;
 		position:relative;
 		.bg{
@@ -188,8 +146,6 @@
 			top: 0;
 			width: 100%;
 			height: 100%;
-			filter: blur(1px);
-			opacity: .7;
 		}
 	}
 	.user-info-box{
@@ -206,7 +162,7 @@
 		}
 		.username{
 			font-size: $font-lg + 6upx;
-			color: $font-color-dark;
+			color: #ffffff;
 			margin-left: 20upx;
 		}
 	}
@@ -296,11 +252,11 @@
 			width: 120upx;
 			height: 120upx;
 			border-radius: 10upx;
-			font-size: $font-sm;
+			font-size: $font-base;
 			color: $font-color-dark;
 		}
 		.yticon{
-			font-size: 48upx;
+			font-size: 58upx;
 			margin-bottom: 18upx;
 			color: #fa436a;
 		}

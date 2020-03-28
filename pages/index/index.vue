@@ -311,8 +311,8 @@
 			align-items:center;
 			height: 30upx;
 			line-height: 30upx;
-			padding-top: 20upx;
-			padding-bottom: 20upx;
+			padding-top: 30upx;
+			padding-bottom: 30upx;
 			.col{
 				font-size: $font-base;
 				color: $font-color-light;

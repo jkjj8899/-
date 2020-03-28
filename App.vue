@@ -39,7 +39,7 @@
 		font-family: yticon;
 		font-weight: normal;
 		font-style: normal;
-		src: url('https://at.alicdn.com/t/font_1078604_w4kpxh0rafi.ttf') format('truetype');
+		src: url('./static/font/font_1078604_w4kpxh0rafi.ttf') format('truetype');
 	}
 
 	.yticon {
@@ -334,9 +334,144 @@
 		content: "\e617";
 	}
 
+	@font-face {
+		font-family: fexfont;
+		font-weight: normal;
+		font-style: normal;
+		src: url('./static/font/fexfont.ttf') format('truetype');
+	}
 
-
-
+	.fexfont {
+	  font-family: "fexfont" !important;
+	  font-size: 16px;
+	  font-style: normal;
+	  -webkit-font-smoothing: antialiased;
+	  -moz-osx-font-smoothing: grayscale;
+	}
+	
+	.icon-list-1-copy:before {
+	  content: "\e605";
+	}
+	
+	.icon-shaixuan:before {
+	  content: "\e671";
+	}
+	
+	.icon-weixin:before {
+	  content: "\e63e";
+	}
+	
+	.icon-yinhangqia:before {
+	  content: "\e873";
+	}
+	
+	.icon-zhifubao:before {
+	  content: "\e68a";
+	}
+	
+	.icon-paypal:before {
+	  content: "\e68b";
+	}
+	
+	.icon-yinlian:before {
+	  content: "\e68c";
+	}
+	
+	.icon-12:before {
+	  content: "\e63d";
+	}
+	
+	.icon-work-copy:before {
+	  content: "\e611";
+	}
+	
+	.icon-xitonggonggao:before {
+	  content: "\e673";
+	}
+	
+	.icon-bangzhu:before {
+	  content: "\e656";
+	}
+	
+	.icon-shequguanli:before {
+	  content: "\e628";
+	}
+	
+	.icon-tuijian:before {
+	  content: "\e627";
+	}
+	
+	.icon-anquan:before {
+	  content: "\e681";
+	}
+	
+	.icon-fankui:before {
+	  content: "\e64f";
+	}
+	
+	.icon-zijin:before {
+	  content: "\e62d";
+	}
+	
+	.icon-shezhi:before {
+	  content: "\e62e";
+	}
+	
+	.icon-bianminshenghuo:before {
+	  content: "\e62f";
+	}
+	
+	.icon-fengxinpinggu:before {
+	  content: "\e630";
+	}
+	
+	.icon-zhibo:before {
+	  content: "\e631";
+	}
+	
+	.icon-qushi:before {
+	  content: "\e632";
+	}
+	
+	.icon-zaixiankefu:before {
+	  content: "\e633";
+	}
+	
+	.icon-xinxuanshangcheng:before {
+	  content: "\e634";
+	}
+	
+	.icon-fulizhongxin:before {
+	  content: "\e635";
+	}
+	
+	.icon-hudongshequ:before {
+	  content: "\e636";
+	}
+	
+	.icon-licai:before {
+	  content: "\e637";
+	}
+	
+	.icon-lingquhongbao:before {
+	  content: "\e638";
+	}
+	
+	.icon-bangdan:before {
+	  content: "\e639";
+	}
+	
+	.icon-gerenzhongxin:before {
+	  content: "\e63a";
+	}
+	
+	.icon-qianbao:before {
+	  content: "\e63b";
+	}
+	
+	.icon-xiaoxi:before {
+	  content: "\e63c";
+	}
 
 	view,
 	scroll-view,
