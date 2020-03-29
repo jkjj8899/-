@@ -236,6 +236,22 @@
 				}
 			}
 		}, {
+			"path": "pages/public/coinList",
+			"style": {
+			    "app-plus": {
+			        "titleNView": {
+			            //"type": "transparent",//透明渐变导航栏 App-nvue 2.4.4+ 支持
+			            "searchInput": {
+							"align": "left",
+							"backgroundColor": "rgba(231, 231, 231,.7)",
+							"borderRadius": "16px",
+							"placeholder": "搜索币种",
+							"placeholderColor": "#606266"
+						}
+			        }
+			    }
+			}
+		},{
 			"path": "pages/user/user",
 			"style": {
 				"navigationBarTitleText": "我的",
@@ -259,6 +275,11 @@
 				}
 			}
 		}, {
+			"path": "pages/user/invit",
+			"style": {
+				"navigationBarTitleText": "邀请攻略"
+			}
+		},{
 			"path": "pages/user/safe",
 			"style": {
 				"navigationBarTitleText": "账户与安全"
@@ -292,6 +313,37 @@
 			"path": "pages/user/updatePayType",
 			"style": {
 				"navigationBarTitleText": ""
+			}
+		},{
+			"path": "pages/user/updateEncrypAddress",
+			"style": {
+				"navigationBarTitleText": "添加地址"
+			}
+		},{
+			"path": "pages/user/encrypAddress",
+			"style": {
+				"navigationBarTitleText": "地址本",
+				"app-plus": {
+					"bounce": "none",
+					"titleNView": {
+						"buttons": [{
+								"fontSrc": "/static/font/font_1078604_w4kpxh0rafi.ttf",
+								"text": "\ue60a",
+								"fontSize": "24",
+								"color": "#303133",
+								"width": "40px",
+								"background": "rgba(0,0,0,0)"
+							},{
+								"fontSrc": "/static/font/font_1078604_w4kpxh0rafi.ttf",
+								"text": "\ue7ce",
+								"fontSize": "24",
+								"color": "#303133",
+								"width": "40px",
+								"background": "rgba(0,0,0,0)"
+							}
+						]
+					}
+				}
 			}
 		},{
 			"path": "pages/detail/detail",

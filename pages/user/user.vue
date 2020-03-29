@@ -38,11 +38,11 @@
 					<text class="yticon icon-shouye"></text>
 					<text>公告</text>
 				</view>
-				<view class="order-item" @click="navTo('/pages/order/order?state=1')"  hover-class="common-hover" :hover-stay-time="50">
+				<view class="order-item" @click="navTo('/pages/user/encrypAddress')"  hover-class="common-hover" :hover-stay-time="50">
 					<text class="yticon icon-daifukuan"></text>
 					<text>地址本</text>
 				</view>
-				<view class="order-item" @click="navTo('/pages/order/order?state=2')" hover-class="common-hover"  :hover-stay-time="50">
+				<view class="order-item" @click="navTo('/pages/user/invit')" hover-class="common-hover"  :hover-stay-time="50">
 					<text class="yticon icon-yishouhuo"></text>
 					<text>推荐</text>
 				</view>

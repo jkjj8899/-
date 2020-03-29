@@ -1,0 +1,43 @@
+@charset "UTF-8";
+/* 页面左右间距 */
+/* 文字尺寸 */
+/*文字颜色*/
+/* 边框颜色 */
+/* 图片加载中颜色 */
+/* 行为相关颜色 */
+page.data-v-029b5cf2 {
+  background: #f8f8f8;
+}
+.container.data-v-029b5cf2 {
+  padding: 10rpx 30rpx;
+  height: 100%;
+}
+.addr-item.data-v-029b5cf2 {
+  font-size: 28rpx;
+  background: -webkit-linear-gradient(right, #3783D9, #53A6EA);
+  background: linear-gradient(right, #3783D9, #53A6EA);
+  padding: 20rpx 20rpx;
+  margin: 10rpx 0;
+  border-radius: 10rpx;
+  color: #fff;
+}
+.addr-item .t.data-v-029b5cf2 {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: row;
+            flex-direction: row;
+    -webkit-box-pack: justify;
+    -webkit-justify-content: space-between;
+            justify-content: space-between;
+    padding-bottom: 20rpx;
+}
+.addr-item .t .coin.data-v-029b5cf2 {
+      font-weight: bold;
+}
+.addr-item .t .name.data-v-029b5cf2 {
+      margin-left: 20rpx;
+}
+
