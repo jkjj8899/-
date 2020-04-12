@@ -5,16 +5,16 @@
 /* 边框颜色 */
 /* 图片加载中颜色 */
 /* 行为相关颜色 */
-page.data-v-32542585, .content.data-v-32542585 {
+page.data-v-6bfa151e, .content.data-v-6bfa151e {
   height: 100%;
 }
-.swiper-box.data-v-32542585 {
+.swiper-box.data-v-6bfa151e {
   height: calc(100% - 40px);
 }
-.list-scroll-content.data-v-32542585 {
+.list-scroll-content.data-v-6bfa151e {
   height: 100%;
 }
-.header.data-v-32542585 {
+.header.data-v-6bfa151e {
   display: -webkit-box;
   display: -webkit-flex;
   display: flex;
@@ -28,12 +28,12 @@ page.data-v-32542585, .content.data-v-32542585 {
   -webkit-justify-content: space-between;
           justify-content: space-between;
 }
-.header .menu image.data-v-32542585 {
+.header .menu image.data-v-6bfa151e {
     width: 20px;
     height: 20px;
     margin: 0rpx 30rpx 0rpx 10rpx;
 }
-.navbar.data-v-32542585 {
+.navbar.data-v-6bfa151e {
   display: -webkit-box;
   display: -webkit-flex;
   display: flex;
@@ -43,7 +43,7 @@ page.data-v-32542585, .content.data-v-32542585 {
   margin: 0 30rpx 20rpx 30rpx;
   padding-bottom: 30rpx;
 }
-.navbar .nav-item.data-v-32542585 {
+.navbar .nav-item.data-v-6bfa151e {
     height: 100%;
     font-size: 30rpx;
     color: #8B9FAA;
@@ -55,9 +55,21 @@ page.data-v-32542585, .content.data-v-32542585 {
     -webkit-align-items: flex-end;
             align-items: flex-end;
 }
-.navbar .nav-item.current.data-v-32542585 {
+.navbar .nav-item.current.data-v-6bfa151e {
       color: #14191F;
       font-size: 40rpx;
       font-weight: bold;
+}
+.filter.data-v-6bfa151e {
+  padding: 30rpx 30rpx;
+}
+.filter .uni-title.data-v-6bfa151e {
+    font-size: 34rpx;
+    padding: 20rpx 0;
+}
+.filter .price.data-v-6bfa151e {
+    border: 1rpx solid #EBEEF5;
+    font-size: 24rpx;
+    padding: 30rpx 20rpx;
 }
 

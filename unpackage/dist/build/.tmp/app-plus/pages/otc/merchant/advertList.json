@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "广告列表",
+  "usingComponents": {
+    "advert-list-item": "/pages/otc/components/advert-list-item"
+  }
+}

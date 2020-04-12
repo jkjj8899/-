@@ -5,7 +5,7 @@
 /* 边框颜色 */
 /* 图片加载中颜色 */
 /* 行为相关颜色 */
-.box.data-v-487c0066 {
+.box.data-v-a3823132 {
   background: #fff;
   display: -webkit-box;
   display: -webkit-flex;
@@ -15,10 +15,10 @@
   -webkit-flex-direction: column;
           flex-direction: column;
   padding: 30rpx 30rpx;
-  font-size: 30rpx;
+  font-size: 28rpx;
   color: #8B9FAA;
 }
-.box .coin.data-v-487c0066 {
+.box .coin.data-v-a3823132 {
     display: -webkit-box;
     display: -webkit-flex;
     display: flex;
@@ -33,19 +33,19 @@
             justify-content: space-between;
     margin-bottom: 10rpx;
 }
-.box .coin .name.data-v-487c0066 {
+.box .coin .name.data-v-a3823132 {
       font-size: 34rpx;
       color: #606266;
       padding-bottom: 10rpx;
 }
-.box .coin .price.data-v-487c0066 {
+.box .coin .price.data-v-a3823132 {
       color: #0952C3;
 }
-.box .coin .icon.data-v-487c0066 {
+.box .coin .icon.data-v-a3823132 {
       width: 40px;
       height: 40px;
 }
-.box .type.data-v-487c0066 {
+.box .type.data-v-a3823132 {
     display: -webkit-box;
     display: -webkit-flex;
     display: flex;
@@ -55,15 +55,15 @@
             flex-direction: row;
     padding: 10rpx 0;
 }
-.box .type view.data-v-487c0066 {
+.box .type view.data-v-a3823132 {
       margin-right: 30rpx;
       position: relative;
       padding: 10rpx 0;
 }
-.box .type view.active.data-v-487c0066 {
+.box .type view.active.data-v-a3823132 {
         color: #0952C3;
 }
-.box .type view.active.data-v-487c0066:after {
+.box .type view.active.data-v-a3823132:after {
           content: '';
           position: absolute;
           left: 50%;
@@ -74,7 +74,7 @@
           height: 0;
           border-bottom: 2px solid #0952C3;
 }
-.box .input.data-v-487c0066 {
+.box .input.data-v-a3823132 {
     display: -webkit-box;
     display: -webkit-flex;
     display: flex;
@@ -90,18 +90,19 @@
     margin: 20rpx 0;
     border: 1rpx solid #8B9FAA;
 }
-.box .input input.data-v-487c0066 {
+.box .input input.data-v-a3823132 {
       color: #8B9FAA;
+      font-size: 28rpx;
 }
-.box .input .cny.data-v-487c0066 {
+.box .input .cny.data-v-a3823132 {
       margin-right: 20rpx;
       color: #606266;
 }
-.box .input .all.data-v-487c0066 {
+.box .input .all.data-v-a3823132 {
       margin-left: 20rpx;
       color: #0952C3;
 }
-.box .amount.data-v-487c0066 {
+.box .amount.data-v-a3823132 {
     display: -webkit-box;
     display: -webkit-flex;
     display: flex;
@@ -116,11 +117,11 @@
             justify-content: space-between;
     padding: 10rpx 0;
 }
-.box .amount .p.data-v-487c0066 {
+.box .amount .p.data-v-a3823132 {
       font-size: 34rpx;
       color: #0952C3;
 }
-.box .btns.data-v-487c0066 {
+.box .btns.data-v-a3823132 {
     display: -webkit-box;
     display: -webkit-flex;
     display: flex;
@@ -134,36 +135,36 @@
     width: 100%;
     padding: 10rpx 0;
 }
-.box .btns .btn.data-v-487c0066 {
+.box .btns .btn.data-v-a3823132 {
       display: block;
       width: 48%;
       height: 70rpx;
       line-height: 70rpx;
       text-align: center;
       color: #fff;
-      border-radius: 10rpx;
-      font-size: 30rpx;
+      border-radius: 0;
+      font-size: 28rpx;
 }
-.box .btns .cancel.data-v-487c0066 {
-      background: #999999;
+.box .btns .cancel.data-v-a3823132 {
+      background: #96A7BA;
 }
-.box .btns .submit.data-v-487c0066 {
+.box .btns .submit.data-v-a3823132 {
       background: #0952C3;
 }
-.order-list.data-v-487c0066 {
+.order-list.data-v-a3823132 {
   padding-bottom: 50rpx;
 }
-.order-list .order-item.data-v-487c0066 {
+.order-list .order-item.data-v-a3823132 {
     width: 100%;
     padding: 20rpx 30rpx;
     display: block;
 }
-.order-list .order-item .user-info.data-v-487c0066 {
+.order-list .order-item .user-info.data-v-a3823132 {
       margin: 40rpx 0 20rpx 0;
       height: 50rpx;
       line-height: 50rpx;
 }
-.order-list .order-item .user-info .name.data-v-487c0066 {
+.order-list .order-item .user-info .name.data-v-a3823132 {
         font-size: 30rpx;
         font-weight: bold;
         display: -webkit-box;
@@ -174,7 +175,7 @@
         -webkit-flex-direction: row;
                 flex-direction: row;
 }
-.order-list .order-item .user-info .profile.data-v-487c0066 {
+.order-list .order-item .user-info .profile.data-v-a3823132 {
         width: 50rpx;
         height: 50rpx;
         line-height: 50rpx;
@@ -186,10 +187,10 @@
         font-size: 24rpx;
         margin-right: 10rpx;
 }
-.order-list .order-item .opt.data-v-487c0066 {
+.order-list .order-item .opt.data-v-a3823132 {
       margin: 20rpx 0;
 }
-.order-list .order-item .row.data-v-487c0066 {
+.order-list .order-item .row.data-v-a3823132 {
       width: 100%;
       display: -webkit-box;
       display: -webkit-flex;
@@ -204,18 +205,18 @@
       -webkit-align-items: flex-end;
               align-items: flex-end;
 }
-.order-list .order-item .row .price.data-v-487c0066 {
+.order-list .order-item .row .price.data-v-a3823132 {
         color: #0952C3;
 }
-.order-list .order-item .row .nomarl.data-v-487c0066 {
+.order-list .order-item .row .nomarl.data-v-a3823132 {
         font-size: 24rpx;
         color: #8B9FAA;
 }
-.order-list .order-item .row .pay image.data-v-487c0066 {
-        width: 32px;
-        height: 23px;
+.order-list .order-item .row .pay image.data-v-a3823132 {
+        width: 25px;
+        height: 25px;
 }
-.order-list .order-item .row .btn.data-v-487c0066 {
+.order-list .order-item .row .btn.data-v-a3823132 {
         border: 0;
         background: #0952C3;
         color: #fff;

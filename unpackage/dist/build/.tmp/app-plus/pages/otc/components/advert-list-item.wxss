@@ -1,0 +1,92 @@
+@charset "UTF-8";
+/* 页面左右间距 */
+/* 文字尺寸 */
+/*文字颜色*/
+/* 边框颜色 */
+/* 图片加载中颜色 */
+/* 行为相关颜色 */
+.transfer-info .w-title.data-v-27c29cf9 {
+  font-size: 30rpx;
+  font-weight: bold;
+  padding: 20rpx 30rpx 20rpx 30rpx;
+}
+.transfer-info .order-list.data-v-27c29cf9 {
+  padding-bottom: 50rpx;
+}
+.transfer-info .order-list .order-item.data-v-27c29cf9 {
+    width: 100%;
+    padding: 20rpx 30rpx;
+    display: block;
+}
+.transfer-info .order-list .order-item .user-info.data-v-27c29cf9 {
+      margin: 40rpx 0 20rpx 0;
+      height: 50rpx;
+      line-height: 50rpx;
+}
+.transfer-info .order-list .order-item .user-info .name.data-v-27c29cf9 {
+        font-size: 30rpx;
+        font-weight: bold;
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: flex;
+        -webkit-box-orient: horizontal;
+        -webkit-box-direction: normal;
+        -webkit-flex-direction: row;
+                flex-direction: row;
+}
+.transfer-info .order-list .order-item .user-info .profile.data-v-27c29cf9 {
+        width: 50rpx;
+        height: 50rpx;
+        line-height: 50rpx;
+        border-radius: 50%;
+        text-align: center;
+        background: #0952C3;
+        color: #fff;
+        font-weight: 100;
+        font-size: 24rpx;
+        margin-right: 10rpx;
+}
+.transfer-info .order-list .order-item .opt.data-v-27c29cf9 {
+      margin: 20rpx 0;
+}
+.transfer-info .order-list .order-item .row.data-v-27c29cf9 {
+      width: 100%;
+      display: -webkit-box;
+      display: -webkit-flex;
+      display: flex;
+      -webkit-flex-wrap: wrap;
+              flex-wrap: wrap;
+      -webkit-box-pack: justify;
+      -webkit-justify-content: space-between;
+              justify-content: space-between;
+      padding: 2rpx 0;
+      -webkit-box-align: end;
+      -webkit-align-items: flex-end;
+              align-items: flex-end;
+}
+.transfer-info .order-list .order-item .row .price.data-v-27c29cf9 {
+        color: #0952C3;
+}
+.transfer-info .order-list .order-item .row .nomarl.data-v-27c29cf9 {
+        font-size: 24rpx;
+        color: #8B9FAA;
+}
+.transfer-info .order-list .order-item .row .pay image.data-v-27c29cf9 {
+        width: 25px;
+        height: 25px;
+}
+.transfer-info .order-list .order-item .row .buy.data-v-27c29cf9 {
+        background: #0952C3;
+}
+.transfer-info .order-list .order-item .row .sell.data-v-27c29cf9 {
+        background: #475F78;
+}
+.transfer-info .order-list .order-item .row .btn.data-v-27c29cf9 {
+        border: 0;
+        color: #fff;
+        font-size: 24rpx;
+        height: 60rpx;
+        line-height: 60rpx;
+        padding: 0 50rpx;
+}
+

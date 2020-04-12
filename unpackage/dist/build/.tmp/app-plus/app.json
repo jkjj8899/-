@@ -3,6 +3,13 @@
     "pages/index/index",
     "pages/exchange/index",
     "pages/otc/otc",
+    "pages/otc/order/list",
+    "pages/otc/order/detail",
+    "pages/otc/business/business",
+    "pages/otc/merchant/merchant",
+    "pages/otc/merchant/apply",
+    "pages/otc/merchant/advertList",
+    "pages/otc/merchant/addAdvert",
     "pages/news/news",
     "pages/wallet/wallet",
     "pages/wallet/detail",
@@ -12,10 +19,20 @@
     "pages/product/product",
     "pages/set/set",
     "pages/userinfo/userinfo",
-    "pages/cart/cart",
     "pages/public/login",
     "pages/public/register",
+    "pages/public/coinList",
     "pages/user/user",
+    "pages/user/invit",
+    "pages/user/safe",
+    "pages/user/updateLoginPwd",
+    "pages/user/updateEmail",
+    "pages/user/updateMobile",
+    "pages/user/updatePayPwd",
+    "pages/user/payType",
+    "pages/user/updatePayType",
+    "pages/user/updateEncrypAddress",
+    "pages/user/encrypAddress",
     "pages/detail/detail",
     "pages/order/order",
     "pages/money/money",
@@ -25,8 +42,7 @@
     "pages/money/pay",
     "pages/money/paySuccess",
     "pages/notice/notice",
-    "pages/category/category",
-    "pages/product/list"
+    "pages/category/category"
   ],
   "window": {
     "navigationBarTextStyle": "black",
@@ -42,26 +58,26 @@
     "list": [
       {
         "pagePath": "pages/index/index",
-        "iconPath": "static/tabbar/tab-coin.svg",
-        "selectedIconPath": "static/tabbar/tab-coin-active.svg",
+        "iconPath": "static/tabbar/tab-coin.png",
+        "selectedIconPath": "static/tabbar/tab-coin-active.png",
         "text": "行情"
       },
       {
         "pagePath": "pages/news/news",
-        "iconPath": "static/tabbar/tab-news.svg",
-        "selectedIconPath": "static/tabbar/tab-news-active.svg",
+        "iconPath": "static/tabbar/tab-news.png",
+        "selectedIconPath": "static/tabbar/tab-news-active.png",
         "text": "资讯"
       },
       {
         "pagePath": "pages/wallet/wallet",
-        "iconPath": "static/tabbar/tab-wallet.svg",
-        "selectedIconPath": "static/tabbar/tab-wallet-active.svg",
+        "iconPath": "static/tabbar/tab-wallet.png",
+        "selectedIconPath": "static/tabbar/tab-wallet-active.png",
         "text": "钱包"
       },
       {
         "pagePath": "pages/user/user",
-        "iconPath": "static/tabbar/tab-my.svg",
-        "selectedIconPath": "static/tabbar/tab-my-active.svg",
+        "iconPath": "static/tabbar/tab-my.png",
+        "selectedIconPath": "static/tabbar/tab-my-active.png",
         "text": "我的"
       }
     ]

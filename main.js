@@ -20,7 +20,7 @@ const navTo = (url)=>{
 		url: url
 	})
 }
-const msg = (title, duration=1500, mask=false, icon='none')=>{
+const msg = (title, duration=1500, mask=false, icon='none', success)=>{
 	//统一提示方便全局修改
 	if(Boolean(title) === false){
 		return;
@@ -29,7 +29,8 @@ const msg = (title, duration=1500, mask=false, icon='none')=>{
 		title,
 		duration,
 		mask,
-		icon
+		icon,
+		success
 	});
 }
 const json = type=>{
@@ -54,7 +55,7 @@ const prePage = ()=>{
 Vue.config.productionTip = false
 Vue.prototype.$fire = new Vue();
 Vue.prototype.$store = store;
-Vue.prototype.$api = {msg, json, prePage};
+Vue.prototype.$api = {msg, json, prePage, navTo};
 
 
 App.mpType = 'app'

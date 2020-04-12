@@ -1,0 +1,1 @@
+<view class="container data-v-86a9945e"><uni-indexed-list vue-id="1" options="{{list}}" show-select="{{false}}" data-event-opts="{{[['^click',[['change']]]]}}" bind:click="__e" class="data-v-86a9945e" bind:__l="__l"></uni-indexed-list></view>

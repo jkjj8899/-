@@ -105,4 +105,7 @@
         font-weight: normal;
         color: #14191F;
 }
+.coin-section .block .s-row .gt {
+        font-weight: 10;
+}
 

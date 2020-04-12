@@ -11,14 +11,6 @@
         "color": "#303133",
         "width": "46px",
         "background": "rgba(0,0,0,0)"
-      },
-      {
-        "fontSrc": "/static/yticon.ttf",
-        "text": "",
-        "fontSize": "28",
-        "color": "#303133",
-        "background": "rgba(0,0,0,0)",
-        "redDot": true
       }
     ]
   },
