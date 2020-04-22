@@ -13,19 +13,19 @@
 				<view class="input-item">
 					<text class="tit">手机号码</text>
 					<input 
-						type="number" 
-						:value="mobile" 
+						type="mobile" 
+						v-model="form.username" 
 						placeholder="请输入手机号码"
 						maxlength="11"
-						data-key="mobile"
+						data-key="username"
 						@input="inputChange"
 					/>
 				</view>
 				<view class="input-item">
 					<text class="tit">密码</text>
 					<input 
-						type="mobile" 
-						value="" 
+						type="password" 
+						v-model="form.password" 
 						placeholder="8-18位不含特殊字符的数字、字母组合"
 						placeholder-class="input-empty"
 						maxlength="20"
@@ -49,23 +49,23 @@
 </template>
 
 <script>
-	import {  
-        mapMutations  
-    } from 'vuex';
-	
+	import {
+		mapState,
+		mapActions
+	} from 'vuex'
+	import {isMobile, isPassword} from '../../utils/validate'
 	export default{
 		data(){
 			return {
-				mobile: '',
-				password: '',
+				form: {
+					username: '13585883424',
+					password: '123456'
+				},
 				logining: false
 			}
 		},
-		onLoad(){
-			
-		},
 		methods: {
-			...mapMutations(['login']),
+			...mapActions('user', ['login']),
 			inputChange(e){
 				const key = e.currentTarget.dataset.key;
 				this[key] = e.detail.value;
@@ -78,30 +78,34 @@
 					url: '/pages/public/register'
 				})
 			},
-			async toLogin(){
+			toLogin(){
 				this.logining = true;
-				const {mobile, password} = this;
-				/* 数据验证模块
-				if(!this.$api.match({
-					mobile,
-					password
-				})){
-					this.logining = false;
+				const {username, password} = this;
+				if(username == ''){
+					this.$api.msg('请输入手机号')
+					this.logining = false
 					return;
 				}
-				*/
-				const sendData = {
-					mobile,
-					password
-				};
-				const result = await this.$api.json('userInfo');
-				if(result.status === 1){
-					this.login(result.data);
-                    uni.navigateBack();  
-				}else{
-					this.$api.msg(result.msg);
-					this.logining = false;
+				if (!isMobile(username)) {
+					this.$api.msg('手机号不正确')
+					this.logining = false
+					return;
 				}
+				if(password == ''){
+					this.$api.msg('请输入密码')
+					this.logining = false
+					return;
+				}
+				this.login(this.form).then(res => {
+					this.$api.msg('登录成功', 1000, false, 'none', function() {
+						setTimeout(function() {
+							this.logining = false
+							uni.navigateBack({})
+						}, 1000)
+					})
+				}).catch(error => {
+					this.logining = false
+				})
 			}
 		},
 

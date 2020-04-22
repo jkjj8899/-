@@ -74,6 +74,7 @@
 		},
 		data(){
 			return {
+				userInfo: {},
 				coverTransform: 'translateY(0px)',
 				coverTransition: '0s',
 				moving: false,
@@ -101,9 +102,9 @@
 			}
 		},
 		// #endif
-        computed: {
+        /* computed: {
 			...mapState(['hasLogin','userInfo'])
-		},
+		}, */
         methods: {
 
 			/**

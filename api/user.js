@@ -8,3 +8,11 @@ export function register(data) {
     data: data
   })
 }
+
+export function login(data) {
+  return request({
+    url: '/v1/login',
+    method: 'POST',
+    data: data
+  })
+}
