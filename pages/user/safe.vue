@@ -1,32 +1,38 @@
 <template>
 	<view class="container">
-		<view class="list-cell b-b m-t" @click="navTo('/pages/user/updatePayPwd')" hover-class="cell-hover" :hover-stay-time="50">
+		<view class="list-cell b-b m-t" @click="navTo('/pages/user/updateLoginPwd')" hover-class="cell-hover" :hover-stay-time="50">
+			<text class="cell-tit">登录密码</text>
+			<text class="cell-more yticon icon-you"></text>
+		</view>
+		<view class="list-cell b-b" @click="navTo('/pages/user/updatePayPwd')" hover-class="cell-hover" :hover-stay-time="50">
 			<text class="cell-tit">交易密码</text>
 			<text class="cell-more yticon icon-you"></text>
 		</view>
-		<view class="list-cell b-b" @click="navTo('手势密码')" hover-class="cell-hover" :hover-stay-time="50">
+		<!-- <view class="list-cell b-b" @click="navTo('/pages/user/updateEmail')" hover-class="cell-hover" :hover-stay-time="50">
+			<text class="cell-tit">绑定/修改邮箱</text>
+			<text class="cell-more yticon icon-you"></text>
+		</view> -->
+		<view class="list-cell b-b" hover-class="cell-hover" :hover-stay-time="50">
 			<text class="cell-tit">手势密码</text>
-			<switch checked color="#fa436a" @change="switchChange" />
+			<switch color="#fa436a" @change="switchChange" />
+		</view>
+		<view v-show="isFingerprint" class="list-cell b-b" hover-class="cell-hover" :hover-stay-time="50">
+			<text class="cell-tit">指纹登录</text>
+			<switch color="#fa436a" @change="fingerprint" />
 		</view>
 		<view class="list-cell m-t" @click="navTo('实名认证')" hover-class="cell-hover" :hover-stay-time="50">
 			<text class="cell-tit">实名认证</text>
 			<text class="cell-more yticon icon-you"></text>
 		</view>
-		<view class="list-cell b-b m-t" @click="navTo('/pages/user/updateLoginPwd')" hover-class="cell-hover" :hover-stay-time="50">
-			<text class="cell-tit">修改登录密码</text>
-			<text class="cell-more yticon icon-you"></text>
-		</view>
-		<view class="list-cell b-b" @click="navTo('/pages/user/updateEmail')" hover-class="cell-hover" :hover-stay-time="50">
-			<text class="cell-tit">绑定/修改邮箱</text>
-			<text class="cell-more yticon icon-you"></text>
-		</view>
-		<view class="list-cell" @click="navTo('/pages/user/updateMobile')" hover-class="cell-hover" :hover-stay-time="50">
+		
+		<!-- <view class="list-cell" @click="navTo('/pages/user/updateMobile')" hover-class="cell-hover" :hover-stay-time="50">
 			<text class="cell-tit">绑定/修改手机号码</text>
 			<text class="cell-more yticon icon-you"></text>
-		</view>
+		</view> -->
 		<view class="list-cell log-out-btn" @click="toLogout">
 			<text class="cell-tit">退出登录</text>
 		</view>
+		
 	</view>
 </template>
 
@@ -37,8 +43,13 @@
 	export default {
 		data() {
 			return {
-				
+				isFingerprint: false
 			};
+		},
+		onLoad() {
+			if(plus.fingerprint && plus.fingerprint.isSupport()) {
+				this.isFingerprint = true
+			}
 		},
 		methods:{
 			...mapMutations(['logout']),
@@ -64,15 +75,48 @@
 			},
 			//switch
 			switchChange(e){
-				let statusTip = e.detail.value ? '打开': '关闭';
-				this.$api.msg(`${statusTip}消息推送`);
+				
+				//let statusTip = e.detail.value ? '打开': '关闭';
+				//this.$api.msg(`${statusTip}消息推送`);
 			},
-
+			
+			fingerprint: function() {
+				// #ifdef APP-PLUS
+				plus.fingerprint.authenticate(function(e) {
+					console.log(e)
+					plus.nativeUI.closeWaiting(); //兼容Android平台关闭等待框
+					plus.nativeUI.alert('指纹识别成功');
+				}, function(e) {
+					switch (e.code) {
+						case e.AUTHENTICATE_MISMATCH:
+							plus.nativeUI.toast('指纹匹配失败，请重新输入');
+							break;
+						case e.AUTHENTICATE_OVERLIMIT:
+							plus.nativeUI.closeWaiting(); //兼容Android平台关闭等待框
+							plus.nativeUI.alert('指纹识别失败次数超出限制，请使用其它方式进行认证');
+							break;
+						case e.CANCEL:
+							plus.nativeUI.toast('已取消识别');
+							break;
+						default:
+							plus.nativeUI.closeWaiting(); //兼容Android平台关闭等待框
+							plus.nativeUI.alert('指纹识别失败，请重试');
+							break;
+					}
+				});
+				// Android平台手动弹出等待提示框 
+				if ('Android' == plus.os.name) {
+					plus.nativeUI.showWaiting('指纹识别中...').onclose = function(){
+						plus.fingerprint.cancel();
+					}
+				}
+				// #endif
+			}
 		}
 	}
 </script>
 
-<style lang='scss'>
+<style lang='scss' scoped>
 	page{
 		background: $page-color-base;
 	}

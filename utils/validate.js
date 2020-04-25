@@ -23,6 +23,14 @@ export function isPassword (s) {
 }
 
 /**
+ * 支付密码
+ * @param {Object} s
+ */
+export function isPayPassword (s) {
+  return /^\d{6}$/.test(s)
+}
+
+/**
  * 电话号码
  * @param {*} s
  */

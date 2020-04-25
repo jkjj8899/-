@@ -1,58 +1,110 @@
 <template>
 	<view class="container">
-		<view class="list-cell b-b m-t" tips="aaaaa" @click="navTo('交易密码')" hover-class="cell-hover" :hover-stay-time="50">
+		<view class="list-cell b-b m-t"  @click="navTo('交易密码')" hover-class="cell-hover" :hover-stay-time="50">
 			<text class="cell-tit">手机号</text>
-			<text class="cell-more">13694883945</text>
+			<text class="cell-more">{{loginInfo.mobile}}</text>
 		</view>
 		<view class="list-cell b-b" hover-class="cell-hover" :hover-stay-time="50">
-			<input class="cell-input" placeholder="请输入验证码"/>
-			<button class="cell-btn">获取验证码</button>
+			<input class="cell-input" v-model="authCode.captchaCode" placeholder="请输入验证码"/>
+			<button :class="[isDisableCode?'cell-btn btn-disabled':'cell-btn']" :disabled="isDisableCode" @click="toSendSms">{{captchaTxt}}</button>
 		</view>
 		<view class="list-cell b-b" hover-class="cell-hover" :hover-stay-time="50">
-			<input class="cell-input" placeholder="请输入新登录密码"/>
+			<input class="cell-input" v-model="form.newPwd" placeholder="请输入新密码"/>
 		</view>
 		<view class="list-cell" hover-class="cell-hover" :hover-stay-time="50">
-			<input class="cell-input" placeholder="请重新输入密码"/>
+			<input class="cell-input" v-model="form.againPwd" placeholder="请重新输入密码"/>
 		</view>
-		<button class="submit">确认</button>
+		<view class="list-cell tip" hover-class="cell-hover" :hover-stay-time="50">
+			<text>登录密码由8-18位不含特殊字符的数字、字母组合</text>
+		</view>
+		<button :disabled="loading" class="submit" @click="submit">确认</button>
 	</view>
 </template>
 
 <script>
-	import {  
-	    mapMutations  
-	} from 'vuex';
+	import {
+		mapState,
+		mapActions
+	} from 'vuex'
+	import {isPassword} from '../../utils/validate'
 	export default {
 		data() {
 			return {
-				
+				loading: false,
+				isDisableCode: false,
+				captchaTxt: '获取验证码',
+				authCode: {
+					captchaCode: undefined,
+					token: undefined
+				},
+				form: {
+					newPwd: undefined
+				}
 			};
 		},
+		computed: {
+			...mapState('user', ['loginInfo'])
+		},
 		methods:{
-			...mapMutations(['logout']),
-
-			navTo(url){
-				this.$api.msg(`跳转到${url}`);
+			...mapActions('common', ['sendSms']),
+			...mapActions('user', ['updatePwd']),
+			toSendSms(){
+				let data = {
+					type: this.$g.CAPTCHA_TYPE.COMMON,
+					number: this.loginInfo.mobile
+				}
+				this.isDisableCode = true
+				this.sendSms(data).then(res => {
+					this.authCode.token = res.data
+					let i = 120;
+					let timer = setInterval(() => {
+						this.captchaTxt = i + 's'
+						i = i - 1;
+						if(i == 0){
+							clearInterval(timer);
+							this.isDisableCode = false
+							this.captchaTxt = '获取验证码'
+						}
+					}, 1000)
+				}).catch(error => {
+					this.isDisableCode = false
+				})
 			},
-			//退出登录
-			toLogout(){
-				uni.showModal({
-				    content: '确定要退出登录么',
-				    success: (e)=>{
-				    	if(e.confirm){
-				    		this.logout();
-				    		setTimeout(()=>{
-				    			uni.navigateBack();
-				    		}, 200)
-				    	}
-				    }
-				});
-			},
-			//switch
-			switchChange(e){
-				let statusTip = e.detail.value ? '打开': '关闭';
-				this.$api.msg(`${statusTip}消息推送`);
-			},
+			submit(){
+				if(!this.authCode.captchaCode){
+					this.$api.msg('请输入验证码')
+					return;
+				}
+				if(!this.form.newPwd){
+					this.$api.msg('请输入密码')
+					return;
+				}
+				if(!isPassword(this.form.newPwd)){
+					this.$api.msg('登录密码不正确')
+					return;
+				}
+				if(!this.form.againPwd){
+					this.$api.msg('请输入密码')
+					return;
+				}
+				if(this.form.againPwd !== this.form.newPwd){
+					this.$api.msg('两次密码输入不一致')
+					return;
+				}
+				this.loading = true
+				this.form.authCode = this.authCode.token + ":" + this.authCode.captchaCode
+				console.log(this.form)
+				this.updatePwd(this.form).then(res => {
+					this.$api.msg('登录密码修改成功', 1000, false, 'none', function() {
+						setTimeout(function() {
+							this.logining = false
+							uni.navigateBack({})
+						}, 1000)
+					})
+				}).catch(error => {
+					this.loading = false
+				})
+			}
 
 		}
 	}
@@ -114,10 +166,20 @@
 			border: 1upx solid $font-color-blue;
 			color: $font-color-blue;
 			background: #fff;
+			width: 180upx;
 			height: 68upx;
 			line-height: 68upx;
 			padding: 0 10upx 0 10upx;
 		}
+		.btn-disabled{
+			border: 0upx;
+			color: $font-color-disabled;
+		}
+	}
+	.tip{
+		line-height:60upx;
+		font-size: $font-sm;
+		padding: 4upx $page-row-spacing;
 	}
 	.submit{
 		margin: 60upx 20upx;

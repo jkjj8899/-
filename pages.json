@@ -18,8 +18,10 @@
 		},{
 			"path": "pages/exchange/index",
 			"style": {
-				"navigationBarTitleText": "闪兑"
-				//"navigationStyle": "custom",
+				"navigationBarTitleText": "闪兑",
+				"app-plus" : {
+					"softinputMode": "adjustResize"
+				}
 			}
 		},
 		{

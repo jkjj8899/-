@@ -24,7 +24,7 @@
 			</view>
 			<view class="rate-amount">汇率: 1BTC = 0.00001ETH</view>
 		</view>
-		<button type="primary" class="btn">闪电兑换</button>
+		<button type="primary" @click="submit" class="btn">闪电兑换</button>
 		
 		
 		<view class="record">
@@ -76,6 +76,8 @@
 				</picker-view>
 			</view>
 		</uni-popup>
+		
+		<uni-valid-popup ref="validPopup" type="mobile" @ok="ok"></uni-valid-popup>
 	</view>
 </template>
 
@@ -89,10 +91,12 @@
 	import uniRefresh from '@/components/uni-refresh.vue';
 	import uniLoadMore from '@/components/uni-load-more.vue';
 	import empty from '../../components/empty.vue'
+	import uniValidPopup from '@/components/uni-valid-popup.vue';
 	export default {
-		components: {uniIcons, uniPopup, uniSearchBar, empty, uniList, uniCell, uniRefresh, uniLoadMore},
+		components: {uniIcons, uniPopup, uniSearchBar, empty, uniList, uniCell, uniRefresh, uniLoadMore, uniValidPopup},
 		data() {
 			return {
+				bottom: 0,
 				total: 0, //总价格
 				allChecked: false, //全选状态  true|false
 				empty: false, //空白页现实  true|false
@@ -102,6 +106,7 @@
 				indicatorStyle: 'height:90upx; line-height:90upx;'
 			};
 		},
+		
 		onLoad(){
 			this.loadData();
 		},
@@ -109,6 +114,12 @@
 			...mapState(['hasLogin'])
 		},
 		methods: {
+			submit(){
+				this.$refs.validPopup.open()
+			},
+			ok(data){
+				console.log(data)
+			},
 			changeCoin(){
 				this.$refs.popup.open()
 			},
@@ -133,6 +144,7 @@
 </script>
 
 <style lang='scss' scoped>
+	
 	page{
 		overflow: hidden;
 	}
@@ -141,6 +153,7 @@
 		display: flex;
 		flex-direction: column;
 		overflow: hidden;
+		z-index: 1;
 	}
 	.coin-box{
 		background: #ffffff;

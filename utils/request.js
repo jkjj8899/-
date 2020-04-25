@@ -4,9 +4,15 @@ export default function $http(options) {
     // options.url是index中请求配置的，完美拼接
   options.url = _config.url + options.url;
   return new Promise((resolve, reject) => {
-	_config.header['Fex-auth'] = options.data.authCode
+	let authCode = options.data.authCode
+	if(authCode){
+		_config.header['Fex-auth'] = options.data.authCode
+	}
     // 拦截请求
-	_config.header.Authorization = uni.getStorageSync('token');
+	let token = uni.getStorageSync('token')
+	if(token){
+		_config.header.Authorization = token;
+	}
     _config.complete = (response) => {
        // 登录失效这边后台是返回403看情况
 	   if(response.data.code === 403){

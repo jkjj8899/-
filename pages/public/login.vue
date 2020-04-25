@@ -59,7 +59,7 @@
 			return {
 				form: {
 					username: '13585883424',
-					password: '123456'
+					password: '111111'
 				},
 				logining: false
 			}
@@ -80,18 +80,17 @@
 			},
 			toLogin(){
 				this.logining = true;
-				const {username, password} = this;
-				if(username == ''){
+				if(this.form.username == ''){
 					this.$api.msg('请输入手机号')
 					this.logining = false
 					return;
 				}
-				if (!isMobile(username)) {
+				if (!isMobile(this.form.username)) {
 					this.$api.msg('手机号不正确')
 					this.logining = false
 					return;
 				}
-				if(password == ''){
+				if(this.form.password == ''){
 					this.$api.msg('请输入密码')
 					this.logining = false
 					return;

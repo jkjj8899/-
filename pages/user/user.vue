@@ -5,22 +5,23 @@
 			<image mode="widthFix" class="bg" src="../../static/personal-bg.jpg"></image>
 			<view class="user-info-box">
 				<view class="portrait-box">
-					<image class="portrait" :src="userInfo.portrait || '/static/missing-face.png'"></image>
+					<image class="portrait" :src="'/static/missing-face.png'"></image>
 				</view>
-				<view class="info-box">
-					<text class="username">{{userInfo.nickname || '游客'}}</text>
+				<view class="info-box" @click="toLogin">
+					<text class="username">{{loginInfo.nickname || '请登录'}}</text>
+					<view class="tip">欢迎来到FEXCOIN.COM</view>
 				</view>
 			</view>
 			<view class="vip-card-box">
 				<view class="b-btn">
-					立即开通
+					暂未开通
 				</view>
 				<view class="tit">
 					<text class="yticon icon-iLinkapp-"></text>
 					Fex 会员
 				</view>
 				<text class="e-m">DCloud Union</text>
-				<text class="e-b">开通会员开发无bug 一测就上线</text>
+				<text class="e-b">开通会员</text>
 			</view>
 		</view>
 		
@@ -102,19 +103,25 @@
 			}
 		},
 		// #endif
-        /* computed: {
-			...mapState(['hasLogin','userInfo'])
-		}, */
+        computed: {
+			...mapState('user', ['loginInfo'])
+		},
         methods: {
-
+			toLogin(){
+				if(!this.loginInfo.hasLogin){
+					uni.navigateTo({
+						url: '/pages/public/login'
+					})
+				}
+			},
 			/**
 			 * 统一跳转接口,拦截未登录路由
 			 * navigator标签现在默认没有转场动画，所以用view
 			 */
 			navTo(url){
-				/* if(!this.hasLogin){
+				if(!this.loginInfo.hasLogin){
 					url = '/pages/public/login';
-				} */
+				}
 				uni.navigateTo({  
 					url
 				})  
@@ -163,6 +170,11 @@
 		}
 		.username{
 			font-size: $font-lg + 6upx;
+			color: #ffffff;
+			margin-left: 20upx;
+		}
+		.tip{
+			font-size: $font-sm + 2upx;
 			color: #ffffff;
 			margin-left: 20upx;
 		}

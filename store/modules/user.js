@@ -1,18 +1,29 @@
-import { USER_LOGIN } from './../mutations_type'
-import { register, login } from '@/api/user'
+import { USER_LOGIN, USER_UPDATE_PAY_PWD } from './../mutations_type'
+import { register, login, updatePayPwd, updatePwd } from '@/api/user'
 
 const user = {
   state: {
-	  nickname: null
+	  loginInfo: {
+		  nickname: null,
+		  profile: null,
+		  hasLogin: false
+	  }
   },
 
   mutations: {
 	  [USER_LOGIN](state, payload) {
 	  		if(payload.code == 200){
-	  			state.nickname = payload.nickname
-	  			uni.setStorageSync('token', payload.token);
+	  			state.loginInfo = payload.data
+				state.loginInfo.hasLogin = true
+	  			uni.setStorageSync('token', payload.data.token);
 	  		}
-	  }
+	  },
+	  [USER_UPDATE_PAY_PWD](state, payload) {
+	  		if(payload.code == 200){
+	  			state.loginInfo.isCapitalPasswd = true
+	  			
+	  		}
+	  },
   },
 
   actions: {
@@ -37,6 +48,25 @@ const user = {
 	  return new Promise((resolve, reject) => {
 	    login(data).then(res => {
 			commit(USER_LOGIN, res)
+	      resolve()
+	    }).catch(error => {
+	      reject(error)
+	    })
+	  })
+	},
+	updatePwd({ commit }, data) {
+	  return new Promise((resolve, reject) => {
+	    updatePwd(data).then(res => {
+	      resolve()
+	    }).catch(error => {
+	      reject(error)
+	    })
+	  })
+	},
+	updatePayPwd({ commit }, data) {
+	  return new Promise((resolve, reject) => {
+	    updatePayPwd(data).then(res => {
+			commit(USER_UPDATE_PAY_PWD, res)
 	      resolve()
 	    }).catch(error => {
 	      reject(error)

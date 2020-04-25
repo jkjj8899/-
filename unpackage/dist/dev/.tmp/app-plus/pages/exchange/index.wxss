@@ -18,6 +18,7 @@ page.data-v-5f1bef17 {
   -webkit-flex-direction: column;
           flex-direction: column;
   overflow: hidden;
+  z-index: 1;
 }
 .coin-box.data-v-5f1bef17 {
   background: #ffffff;

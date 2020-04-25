@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import store from './store'
 import App from './App'
+import global from './utils/global'
 
 import Json from './Json' //测试用数据
 
@@ -56,7 +57,7 @@ Vue.config.productionTip = false
 Vue.prototype.$fire = new Vue();
 Vue.prototype.$store = store;
 Vue.prototype.$api = {msg, json, prePage, navTo};
-
+Vue.prototype.$g = global;
 
 App.mpType = 'app'
 
