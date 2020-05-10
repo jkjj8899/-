@@ -1,19 +1,14 @@
 <template>  
     <view class="container">  
-		<view class="addr-item">
+		<empty v-if="empty"></empty>
+		<view class="addr-item" v-for="(item, i) in list" :key="item.id">
 			<view class="t">
-				<text class="coin">ETH<text class="name">交易所ETH地址</text></text>
-				<text class="del">删除</text>
+				<text class="coin">{{item.coin}}<text class="name">{{item.remark}}</text></text>
+				<text class="del" @click="handleDelete(item.id, i)">删除</text>
 			</view>
-			<text>0x282eac8b325cca6227377329892983429</text>
+			<text>{{item.address}}</text>
 		</view>
-		<view class="addr-item">
-			<view class="t">
-				<text class="coin">ETH<text class="name">交易所ETH地址</text></text>
-				<text class="del">删除</text>
-			</view>
-			<text>0x282eac8b325cca6227377329892983429</text>
-		</view>
+		<uni-load-more :status="loadingStatus"></uni-load-more>
 		<mpvue-picker
 			:themeColor="themeColor"
 			ref="mpvuePicker"
@@ -21,44 +16,59 @@
 			:deepLength="deepLength"
 			:pickerValueDefault="pickerValueDefault"
 			@onConfirm="onConfirm"
-			@onCancel="onCancel"
 			:pickerValueArray="pickerValueArray"
 		></mpvue-picker>
     </view>  
 </template>  
 <script>  
-    import {  
-        mapState 
-    } from 'vuex';  
+    import {
+    	mapState,
+    	mapActions
+    } from 'vuex'
 	import mpvuePicker from '../../components/mpvuePicker.vue'
+	import empty from '../../components/empty.vue'
+	import uniLoadMore from '@/components/uni-load-more/uni-load-more.vue';
 	let startY = 0, moveY = 0, pageAtTop = true;
     export default {
 		components: {
-			mpvuePicker
+			mpvuePicker,
+			empty,
+			uniLoadMore
 		},
 		data(){
 			return {
-				pickerValueArray: [
-					{
-						label: 'ETH',
-						value: 110000
-					},
-					{
-						label: 'USDT',
-						value: 120000
-					},
-					{
-						label: 'BTC',
-						value: 440100
-					}
-				],
+				pickerValueArray: [],
 				themeColor: '#007AFF',
 				mode: '',
 				deepLength: 1,
-				pickerValueDefault: [0]
+				pickerValueDefault: [0],
+				empty: false,
+				list: [],
+				isLastPage: false,
+				loadingStatus: 'more',
+				query: {
+					page: 1,
+					limit: 10,
+					coin: ""
+				}
 			}
 		},
+		onReachBottom(){
+			if(!this.isLastPage){
+				this.query.page += 1
+				this.getList()
+			}
+		},
+		onShow() {
+			this.list = []
+			this.getList()
+		},
 		onLoad(){
+			this.coinList().then(res =>{
+				res.data.forEach((item, index) => {
+					this.pickerValueArray.push({label: item.symbol, value: item.symbol})
+				})
+			})
 		},
 		// #ifndef MP
 		onNavigationBarButtonTap(e) {
@@ -70,10 +80,44 @@
 			}
 		},
 		// #endif
-        computed: {
-			...mapState(['hasLogin','userInfo'])
-		},
         methods: {
+			...mapActions('user', ['encryptBookList', 'deleteEncryptBook']),
+			...mapActions('common', ['coinList']),
+			async getList(){
+				this.loadingStatus = 'loading'
+				this.encryptBookList(this.query).then(res =>{
+					this.empty = (res.total == 0)
+					this.isLastPage = (this.query.page == res.pages)
+					if(this.isLastPage){
+						this.loadingStatus = 'noMore'
+					} else {
+						this.loadingStatus = 'more'
+					}
+					if(this.empty){
+						this.list = [];
+					} else {
+						this.list = this.list.concat(res.rows)
+					}
+				}).catch(error => {
+					this.loadingStatus = 'more'
+				})
+			},
+			handleDelete(id, i){
+				let $this = this;
+				uni.showModal({
+				    title: '提示',
+				    content: '是否确认删除?',
+				    success: function (res) {
+				        if (res.confirm) {
+				            $this.deleteEncryptBook(id).then(res =>{
+				            	$this.$api.msg('删除成功', 1000, false, 'none', function() {})
+								$this.list.splice(i, 1)
+							})
+				        }
+				    }
+				});
+				
+			},
 			navTo(url){
 				uni.navigateTo({  
 					url
@@ -84,14 +128,15 @@
 				this.deepLength = 1;
 				this.pickerValueDefault = [0];
 				this.$refs.mpvuePicker.show();
+			},
+			onConfirm(item){
+				this.query.coin = item.value[0]
+				this.getList()
 			}
         }  
     }  
 </script>  
 <style lang='scss' scoped>
-	page{
-		background: $page-color-base;
-	}
 	.container{
 		padding: 10upx 30upx;
 		height: 100%;

@@ -1,7 +1,7 @@
 //  http 请求配置项
 export default {
     //  填自己的开发者服务器接口地址 
-    url: "http://localhost:8083",
+    url: "http://192.168.1.5:8083",
     //  请求的参数   
     data: {},
     //  设置请求的 header，header 中不能设置 Referer。

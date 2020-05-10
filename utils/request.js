@@ -4,8 +4,7 @@ export default function $http(options) {
     // options.url是index中请求配置的，完美拼接
   options.url = _config.url + options.url;
   return new Promise((resolve, reject) => {
-	let authCode = options.data.authCode
-	if(authCode){
+	if(options.data && options.data.authCode){
 		_config.header['Fex-auth'] = options.data.authCode
 	}
     // 拦截请求

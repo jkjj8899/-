@@ -65,6 +65,11 @@
     color: #ffffff;
     margin-left: 20rpx;
 }
+.user-info-box .tip {
+    font-size: 26rpx;
+    color: #ffffff;
+    margin-left: 20rpx;
+}
 .vip-card-box {
   display: -webkit-box;
   display: -webkit-flex;

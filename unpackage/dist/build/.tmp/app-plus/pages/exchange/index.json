@@ -1,5 +1,6 @@
 {
   "navigationBarTitleText": "闪兑",
+  "softinputMode": "adjustResize",
   "usingComponents": {
     "uni-icons": "/node-modules/@dcloudio/uni-ui/lib/uni-icons/uni-icons",
     "uni-popup": "/node-modules/@dcloudio/uni-ui/lib/uni-popup/uni-popup",
@@ -8,6 +9,7 @@
     "uni-list": "/components/uni-list",
     "uni-cell": "/components/uni-cell",
     "uni-refresh": "/components/uni-refresh",
-    "uni-load-more": "/components/uni-load-more"
+    "uni-load-more": "/components/uni-load-more",
+    "uni-valid-popup": "/components/uni-valid-popup"
   }
 }

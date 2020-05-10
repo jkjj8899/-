@@ -5,9 +5,6 @@
 /* 边框颜色 */
 /* 图片加载中颜色 */
 /* 行为相关颜色 */
-page.data-v-029b5cf2 {
-  background: #f8f8f8;
-}
 .container.data-v-029b5cf2 {
   padding: 10rpx 30rpx;
   height: 100%;

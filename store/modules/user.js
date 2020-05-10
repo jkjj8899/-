@@ -1,5 +1,5 @@
 import { USER_LOGIN, USER_UPDATE_PAY_PWD } from './../mutations_type'
-import { register, login, updatePayPwd, updatePwd } from '@/api/user'
+import { register, login, updatePayPwd, updatePwd, encryptBookList, addEncryptBook, deleteEncryptBook } from '@/api/user'
 
 const user = {
   state: {
@@ -72,8 +72,34 @@ const user = {
 	      reject(error)
 	    })
 	  })
+	},
+	encryptBookList({ commit }, data) {
+	  return new Promise((resolve, reject) => {
+	    encryptBookList(data).then(res => {
+	      resolve(res)
+	    }).catch(error => {
+	      reject(error)
+	    })
+	  })
+	},
+	addEncryptBook({ commit }, data) {
+	  return new Promise((resolve, reject) => {
+	    addEncryptBook(data).then(res => {
+	      resolve(res)
+	    }).catch(error => {
+	      reject(error)
+	    })
+	  })
+	},
+	deleteEncryptBook({ commit }, id) {
+	  return new Promise((resolve, reject) => {
+	    deleteEncryptBook(id).then(res => {
+	      resolve(res)
+	    }).catch(error => {
+	      reject(error)
+	    })
+	  })
 	}
-	
   }
 }
 

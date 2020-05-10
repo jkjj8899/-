@@ -32,3 +32,26 @@ export function updatePayPwd(data) {
     data: data
   })
 }
+//查询加密地址簿列表
+export function encryptBookList(data) {
+  return request({
+    url: '/v1/encrypt/book/list',
+    method: 'GET',
+    data: data
+  })
+}
+//添加加密地址
+export function addEncryptBook(data) {
+  return request({
+    url: '/v1/encrypt/book',
+    method: 'POST',
+    data: data
+  })
+}
+//删除加密地址
+export function deleteEncryptBook(id) {
+  return request({
+    url: `/v1/encrypt/book/${id}`,
+    method: 'DELETE'
+  })
+}

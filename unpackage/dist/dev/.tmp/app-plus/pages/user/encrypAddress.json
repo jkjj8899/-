@@ -22,6 +22,8 @@
     ]
   },
   "usingComponents": {
-    "mpvue-picker": "/components/mpvuePicker"
+    "mpvue-picker": "/components/mpvuePicker",
+    "empty": "/components/empty",
+    "uni-load-more": "/components/uni-load-more/uni-load-more"
   }
 }

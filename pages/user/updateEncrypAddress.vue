@@ -1,33 +1,37 @@
 <template>
 	<view class="container">
 		<view class="list-cell b-b" hover-class="cell-hover" :hover-stay-time="50">
-			<input v-model="coin" class="cell-input" placeholder="请选择币种" disabled="true" readonly="true"/>
+			<input v-model="form.coin" class="cell-input" placeholder="请选择币种" disabled="true" readonly="true"/>
 			<text class="cell-more" @click="navTo('/pages/public/coinList')">请选择</text>
 		</view>
 		<view class="list-cell b-b" hover-class="cell-hover" :hover-stay-time="50">
-			<input class="cell-input" placeholder="请输入地址名称"/>
+			<input v-model="form.address" class="cell-input" placeholder="请输入地址"/>
 		</view>
 		<view class="list-cell b-b" hover-class="cell-hover" :hover-stay-time="50">
-			<input class="cell-input" placeholder="请输入地址"/>
+			<input v-model="form.remark" class="cell-input" placeholder="请输入地址名称"/>
 		</view>
-		<button class="submit">确认</button>
+		<button class="submit" @click="handleSubmit">确认</button>
 	</view>
 </template>
 
 <script>
-	import {  
-	    mapMutations  
-	} from 'vuex';
+	import {
+		mapState,
+		mapActions
+	} from 'vuex'
 	export default {
-		components: {
-		},
+		components: {},
 		data() {
 			return {
-				coin: undefined
+				form: {
+					coin: undefined,
+					remark: undefined,
+					address: undefined
+				}
 			};
 		},
 		methods:{
-			...mapMutations(['logout']),
+			...mapActions('user', ['addEncryptBook']),
 			onLoad(){
 				uni.$on('selectCoin', this.selectCoin)
 			},
@@ -35,11 +39,37 @@
 				uni.$off('selectCoin', this.selectCoin)
 			},
 			selectCoin(data){
-				this.coin = data.coin.item.name
+				this.form.coin = data.coin.item.name
 			},
 			navTo(url){
 				uni.navigateTo({
 					url: url
+				})
+			},
+			handleSubmit(){
+				if(!this.form.coin){
+					this.$api.msg('请选择币种')
+					return;
+				}
+				if(!this.form.address){
+					this.$api.msg('请输入地址')
+					return;
+				}
+				if(!this.form.remark){
+					this.$api.msg('请输入地址名称')
+					return;
+				}
+				let data = this.form
+				uni.showLoading({ title: '添加中' });
+				this.addEncryptBook(data).then(res =>{
+					uni.hideLoading()
+					this.$api.msg('添加成功', 1000, false, 'none', function() {
+						setTimeout(function() {
+							uni.navigateBack({})
+						}, 1000)
+					})
+				}).catch(error => {
+					uni.hideLoading()
 				})
 			}
 		}

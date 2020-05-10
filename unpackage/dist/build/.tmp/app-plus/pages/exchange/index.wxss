@@ -5,10 +5,10 @@
 /* 边框颜色 */
 /* 图片加载中颜色 */
 /* 行为相关颜色 */
-page.data-v-312668ed {
+page.data-v-6a5dbe99 {
   overflow: hidden;
 }
-.container.data-v-312668ed {
+.container.data-v-6a5dbe99 {
   width: 100%;
   display: -webkit-box;
   display: -webkit-flex;
@@ -18,44 +18,45 @@ page.data-v-312668ed {
   -webkit-flex-direction: column;
           flex-direction: column;
   overflow: hidden;
+  z-index: 1;
 }
-.coin-box.data-v-312668ed {
+.coin-box.data-v-6a5dbe99 {
   background: #ffffff;
 }
-.coin-box picker-view.data-v-312668ed {
+.coin-box picker-view.data-v-6a5dbe99 {
     width: 100%;
     height: 400rpx;
 }
-.coin-box .item.data-v-312668ed {
+.coin-box .item.data-v-6a5dbe99 {
     height: 90rpx;
     line-height: 90rpx;
     text-align: center;
 }
-.coin-box .item .coinLogo.data-v-312668ed {
+.coin-box .item .coinLogo.data-v-6a5dbe99 {
       width: 34rpx;
       height: 34rpx;
       margin-right: 10px;
       vertical-align: middle;
 }
-.coin-box .item .name.data-v-312668ed {
+.coin-box .item .name.data-v-6a5dbe99 {
       font-size: 28rpx;
       vertical-align: middle;
 }
-.record.data-v-312668ed {
+.record.data-v-6a5dbe99 {
   background: #ffffff;
   -webkit-box-flex: 1;
   -webkit-flex: 1;
           flex: 1;
 }
-.record .tip.data-v-312668ed {
+.record .tip.data-v-6a5dbe99 {
     font-weight: bold;
     font-size: 30rpx;
     padding-left: 20rpx;
 }
-.record .r.data-v-312668ed {
+.record .r.data-v-6a5dbe99 {
     text-align: right;
 }
-.record .title.data-v-312668ed {
+.record .title.data-v-6a5dbe99 {
     display: -webkit-box;
     display: -webkit-flex;
     display: flex;
@@ -65,14 +66,14 @@ page.data-v-312668ed {
             flex-direction: row;
     padding: 6rpx 20rpx;
 }
-.record .title .col.data-v-312668ed {
+.record .title .col.data-v-6a5dbe99 {
       -webkit-box-flex: 1;
       -webkit-flex: 1;
               flex: 1;
       font-size: 28rpx;
       color: #8B9FAA;
 }
-.record .uni-list.data-v-312668ed {
+.record .uni-list.data-v-6a5dbe99 {
     -webkit-box-flex: 1;
     -webkit-flex: 1;
             flex: 1;
@@ -87,7 +88,7 @@ page.data-v-312668ed {
     -webkit-flex-direction: column;
             flex-direction: column;
 }
-.record .uni-list .uni-row.data-v-312668ed {
+.record .uni-list .uni-row.data-v-6a5dbe99 {
       display: -webkit-box;
       display: -webkit-flex;
       display: flex;
@@ -99,39 +100,39 @@ page.data-v-312668ed {
       height: 80rpx;
       line-height: 80rpx;
 }
-.record .uni-list .uni-row .col.data-v-312668ed {
+.record .uni-list .uni-row .col.data-v-6a5dbe99 {
         -webkit-box-flex: 1;
         -webkit-flex: 1;
                 flex: 1;
         font-size: 28rpx;
 }
-.btn.data-v-312668ed {
+.btn.data-v-6a5dbe99 {
   margin: 20rpx 20rpx;
 }
-.exchange-box.data-v-312668ed {
+.exchange-box.data-v-6a5dbe99 {
   background: #ffffff;
   border-radius: 10rpx;
 }
-.exchange-box .params.data-v-312668ed {
+.exchange-box .params.data-v-6a5dbe99 {
     display: -webkit-box;
     display: -webkit-flex;
     display: flex;
     padding: 20rpx 30rpx 10rpx 30rpx;
     font-size: 28rpx;
 }
-.exchange-box .params view.data-v-312668ed {
+.exchange-box .params view.data-v-6a5dbe99 {
       -webkit-box-flex: 1;
       -webkit-flex: 1;
               flex: 1;
 }
-.exchange-box .params .fee.data-v-312668ed {
+.exchange-box .params .fee.data-v-6a5dbe99 {
       text-align: right;
 }
-.exchange-box .rate-amount.data-v-312668ed {
+.exchange-box .rate-amount.data-v-6a5dbe99 {
     padding: 0rpx 30rpx 30rpx 30rpx;
     font-size: 28rpx;
 }
-.exchange-box .amount.data-v-312668ed {
+.exchange-box .amount.data-v-6a5dbe99 {
     display: -webkit-box;
     display: -webkit-flex;
     display: flex;
@@ -141,16 +142,16 @@ page.data-v-312668ed {
     padding-left: 30rpx;
     padding-right: 30rpx;
 }
-.exchange-box .amount .out.data-v-312668ed {
+.exchange-box .amount .out.data-v-6a5dbe99 {
       width: 50%;
       font-size: 28rpx;
 }
-.exchange-box .amount .in.data-v-312668ed {
+.exchange-box .amount .in.data-v-6a5dbe99 {
       width: 50%;
       text-align: right;
       font-size: 28rpx;
 }
-.exchange-box .coin.data-v-312668ed {
+.exchange-box .coin.data-v-6a5dbe99 {
     position: relative;
     display: -webkit-box;
     display: -webkit-flex;
@@ -158,7 +159,7 @@ page.data-v-312668ed {
     height: 120rpx;
     line-height: 120rpx;
 }
-.exchange-box .coin .transform.data-v-312668ed {
+.exchange-box .coin .transform.data-v-6a5dbe99 {
       width: 68rpx;
       height: 68rpx;
       position: absolute;
@@ -169,31 +170,31 @@ page.data-v-312668ed {
       background: #ffffff;
       z-index: 99;
 }
-.exchange-box .coin .exc.data-v-312668ed {
+.exchange-box .coin .exc.data-v-6a5dbe99 {
       width: 68rpx;
       height: 68rpx;
 }
-.exchange-box .coin .item.data-v-312668ed {
+.exchange-box .coin .item.data-v-6a5dbe99 {
       -webkit-box-flex: 1;
       -webkit-flex: 1;
               flex: 1;
       text-align: center;
 }
-.exchange-box .coin .item .name.data-v-312668ed {
+.exchange-box .coin .item .name.data-v-6a5dbe99 {
         font-weight: 500;
 }
-.exchange-box .coin .coinLogo.data-v-312668ed {
+.exchange-box .coin .coinLogo.data-v-6a5dbe99 {
       width: 42rpx;
       height: 42rpx;
       margin-right: 8px;
       display: inline-block;
       vertical-align: middle;
 }
-.exchange-box .coin text.data-v-312668ed {
+.exchange-box .coin text.data-v-6a5dbe99 {
       padding-top: 12rpx;
       vertical-align: middle;
 }
-.exchange-box .coin .tri.data-v-312668ed {
+.exchange-box .coin .tri.data-v-6a5dbe99 {
       width: 32rpx;
       height: 32rpx;
       display: inline-block;

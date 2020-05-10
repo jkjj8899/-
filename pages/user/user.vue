@@ -124,12 +124,12 @@
 				}
 				uni.navigateTo({  
 					url
-				})  
+				})
 			}
         }  
     }  
 </script>  
-<style lang='scss'>
+<style lang='scss' scoped>
 	%flex-center {
 	 display:flex;
 	 flex-direction: column;
@@ -143,7 +143,6 @@
 	  background: #fff;
 	  border-radius: 10upx;
 	}
-
 	.user-section{
 		height: 510upx;
 		padding: 100upx 30upx 0;
