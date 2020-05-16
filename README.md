@@ -1,39 +1,35 @@
-# FexCoin区块链钱包
+# FexCoin钱包是一款存储加密货币的手机钱包, 属于区块链数字资产管理工具
 
-#### 介绍
-{**以下是码云平台说明，您可以替换此简介**
-码云是 OSCHINA 推出的基于 Git 的代码托管平台（同时支持 SVN）。专为开发者提供稳定、高效、安全的云端软件开发协作平台
-无论是个人、团队、或是企业，都能够用码云实现代码托管、项目管理、协作开发。企业项目请看 [https://gitee.com/enterprises](https://gitee.com/enterprises)}
+#### 特别声明
+本软件属于技术开源软件, 任何使用本源码从事商业活动，对别人和自己造成损失的，本人概不负责！
 
-#### 软件架构
-软件架构说明
+#### 技术交流社区
+
+QQ群：731992394
+
+#### 功能规划
+1. 资产托管
+2. 闪电兑换
+3. 法币交易
+4. 行情资讯
+5. 存币理财
+6. 数字商城
+
+![Image text](doc/fexcoin.jpg) 
 
 
 #### 安装教程
 
-1.  xxxx
-2.  xxxx
-3.  xxxx
+1. 下载HbuilderX
+2. 手机USB连接电脑
+3. 打开开发者模式, USB调试
+4. 打开HbuilderX, 选择 运行 -> 运行到手机或模拟器 -> 选择连接的手机  等待安装
 
 #### 使用说明
-
-1.  xxxx
-2.  xxxx
-3.  xxxx
+将项目拖入[HbuilderX](http://www.dcloud.io/hbuilderx.html),直接运行即可
+[uni-app教程](https://uniapp.dcloud.io)
 
 #### 参与贡献
 
-1.  Fork 本仓库
-2.  新建 Feat_xxx 分支
-3.  提交代码
-4.  新建 Pull Request
+暂无
 
-
-#### 码云特技
-
-1.  使用 Readme\_XXX.md 来支持不同的语言，例如 Readme\_en.md, Readme\_zh.md
-2.  码云官方博客 [blog.gitee.com](https://blog.gitee.com)
-3.  你可以 [https://gitee.com/explore](https://gitee.com/explore) 这个地址来了解码云上的优秀开源项目
-4.  [GVP](https://gitee.com/gvp) 全称是码云最有价值开源项目，是码云综合评定出的优秀开源项目
-5.  码云官方提供的使用手册 [https://gitee.com/help](https://gitee.com/help)
-6.  码云封面人物是一档用来展示码云会员风采的栏目 [https://gitee.com/gitee-stars/](https://gitee.com/gitee-stars/)
