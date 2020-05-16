@@ -3,6 +3,7 @@ import Vuex from 'vuex'
 
 
 import user from './modules/user'
+import otc from './modules/otc'
 import common from './modules/common'
 
 Vue.use(Vuex)
@@ -12,6 +13,10 @@ const store = new Vuex.Store({
 	user: {
 	  namespaced: true,
 	  ...user
+	},
+	otc: {
+	  namespaced: true,
+	  ...otc
 	},
 	common: {
 	  namespaced: true,

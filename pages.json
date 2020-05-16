@@ -309,7 +309,21 @@
 		},{
 			"path": "pages/user/payType",
 			"style": {
-				"navigationBarTitleText": "收款方式"
+				"navigationBarTitleText": "收款方式",
+				"app-plus": {
+					"bounce": "none",
+					"titleNView": {
+						"buttons": [{
+								"fontSrc": "/static/font/font_1078604_w4kpxh0rafi.ttf",
+								"text": "\ue60a",
+								"fontSize": "24",
+								"color": "#303133",
+								"width": "40px",
+								"background": "rgba(0,0,0,0)"
+							}
+						]
+					}
+				}
 			}
 		},{
 			"path": "pages/user/updatePayType",

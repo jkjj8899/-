@@ -1,71 +1,133 @@
 <template>
 	<view class="container">
-		<view class="list-cell b-b m-t" hover-class="cell-hover" :hover-stay-time="50">
-			<input class="cell-input" placeholder="请输入姓名"/>
-		</view>
-		<view class="list-cell b-b" hover-class="cell-hover" :hover-stay-time="50">
-			<input class="cell-input" placeholder="请输入银行卡号"/>
-		</view>
-		<view class="list-cell b-b" hover-class="cell-hover" :hover-stay-time="50">
-			<input class="cell-input" placeholder="请输入开户行"/>
-		</view>
-		<view class="list-cell b-b" hover-class="cell-hover" :hover-stay-time="50">
-			<input class="cell-input" placeholder="请输入开户支行"/>
-		</view>
-		<button class="submit">确认</button>
+		<block v-if="config.type == 0">
+			<view class="list-cell b-b m-t" hover-class="cell-hover" :hover-stay-time="50">
+				<text class="cell-tit">姓名</text>
+				<input v-model="form.username" class="cell-input" placeholder="请输入姓名"/>
+			</view>
+			<view class="list-cell b-b" hover-class="cell-hover" :hover-stay-time="50">
+				<text class="cell-tit">银行卡号</text>
+				<input v-model="form.accountNo" class="cell-input" placeholder="请输入银行卡号"/>
+			</view>
+			<view class="list-cell b-b" hover-class="cell-hover" :hover-stay-time="50">
+				<text class="cell-tit">开户银行</text>
+				<input v-model="form.bankName" class="cell-input" placeholder="请输入开户行"/>
+			</view>
+			<view class="list-cell b-b" hover-class="cell-hover" :hover-stay-time="50">
+				<text class="cell-tit">开户支行</text>
+				<input v-model="form.subBranch" class="cell-input" placeholder="请输入开户支行"/>
+			</view>
+		</block>
+		<block v-if="config.type == 1">
+			<view class="list-cell b-b m-t" hover-class="cell-hover" :hover-stay-time="50">
+				<text class="cell-tit">姓名</text>
+				<input v-model="form.username" class="cell-input" placeholder="请输入姓名"/>
+			</view>
+			<view class="list-cell b-b" hover-class="cell-hover" :hover-stay-time="50">
+				<text class="cell-tit">账号</text>
+				<input v-model="form.accountNo" class="cell-input" placeholder="请输入账号"/>
+			</view>
+			<view class="list-cell b-b" hover-class="cell-hover" :hover-stay-time="50">
+				<text class="cell-tit">二维码</text>
+				<view class="upload">
+					<image src="../../static/icon-upload.png"></image>
+					<view class="tip">
+						请上传你的收款码图片(jpg/jpeg/png格式,大小不超过2M)
+					</view>
+				</view>
+			</view>
+		</block>
+		<button class="submit" @click="handleSubmit">确认</button>
 	</view>
 </template>
 
 <script>
-	import {  
-	    mapMutations  
-	} from 'vuex';
+	import {
+		mapState,
+		mapActions
+	} from 'vuex' 
 	export default {
 		data() {
 			return {
-				
+				config: undefined,
+				form: {
+					id: undefined,
+					type: undefined,
+					username: undefined,
+					bankName: undefined,
+					subBranch: undefined,
+					accountNo: undefined,
+					payQrcode: undefined
+				}
 			};
 		},
-		onShow() {
+		onLoad(options) {
+			this.config = JSON.parse(options.data)
+			console.log(this.config)
 			uni.setNavigationBarTitle({
-				title: '银行卡'
+				title: this.config.name
 			});
-		},
-		onLoad() {
-			// #ifdef APP-PLUS
-			const pages = getCurrentPages();
-			const page = pages[pages.length - 1];
-			const currentWebview = page.$getAppWebview();
-			currentWebview.setNavigationBarTitle({
-				title: '银行卡'
-			});
-			// #endif
+			if(this.config.id){
+				this.getPayInfo(this.config.id).then(res =>{
+					this.form = Object.assign({}, this.form, res.data)
+				}).catch(error => {
+				})
+			}
 		},
 		methods:{
-			...mapMutations(['logout']),
-
-			navTo(url){
-				this.$api.msg(`跳转到${url}`);
-			},
-			//退出登录
-			toLogout(){
-				uni.showModal({
-				    content: '确定要退出登录么',
-				    success: (e)=>{
-				    	if(e.confirm){
-				    		this.logout();
-				    		setTimeout(()=>{
-				    			uni.navigateBack();
-				    		}, 200)
-				    	}
-				    }
-				});
-			},
-			//switch
-			switchChange(e){
-				let statusTip = e.detail.value ? '打开': '关闭';
-				this.$api.msg(`${statusTip}消息推送`);
-			},
+			...mapActions('otc', ['addPayInfo', 'getPayInfo', 'updatePayInfo']),
+			handleSubmit(){
+				if(!this.form.username){
+					this.$api.msg('请输入姓名')
+					return;
+				}
+				if(!this.form.accountNo){
+					if(this.config.code == 'UnionPay'){
+						this.$api.msg('请输入银行卡号')
+					} else {
+						this.$api.msg('请输入帐号')
+					}
+					return;
+				}
+				if(this.config.code == 'UnionPay' && !this.form.bankName){
+					this.$api.msg('请输入开户银行')
+					return;
+				}
+				if(this.config.code == 'UnionPay' && !this.form.subBranch){
+					this.$api.msg('请输入开户支行')
+					return;
+				}
+				if(this.config.code != 'UnionPay'){
+					this.form.bankName = this.config.name
+				}
+				this.form.type = this.config.code
+				if(this.config.id){
+					uni.showLoading({ title: '修改中' });
+					this.updatePayInfo(this.form).then(res => {
+						uni.hideLoading()
+						this.$api.msg('修改成功', 1000, false, 'none', function() {
+							setTimeout(function() {
+								uni.navigateBack({})
+							}, 1000)
+						})
+					}).catch(error => {
+						uni.hideLoading()
+					})
+				} else {
+					uni.showLoading({ title: '添加中' });
+					this.addPayInfo(this.form).then(res => {
+						uni.hideLoading()
+						this.$api.msg('添加成功', 1000, false, 'none', function() {
+							setTimeout(function() {
+								uni.navigateBack({})
+							}, 1000)
+						})
+					}).catch(error => {
+						uni.hideLoading()
+					})
+				}
+				
+			}
 
 		}
 	}
@@ -83,7 +145,6 @@
 		line-height:80upx;
 		position:relative;
 		background: #fff;
-		justify-content: space-between;
 		&.log-out-btn{
 			margin-top: 40upx;
 			.cell-tit{
@@ -108,6 +169,7 @@
 			margin-left:10upx;
 		}
 		.cell-tit{
+			width: 25%;
 			font-size: $font-base + 2upx;
 			color: $font-color-dark;
 		}
@@ -115,11 +177,30 @@
 			font-size: $font-base;
 			color: $font-color-light;
 		}
+		.upload{
+			width: 75%;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			border: 1px dashed $border-color-dark;
+			border-radius: 6upx;
+			padding: 20upx 20upx;
+			image{
+				width: 60upx;
+				height: 60upx;
+			}
+			.tip{
+				font-size: $font-sm;
+				color: $font-color-spec;
+				line-height:normal;
+			}
+		}
 		switch{
 			transform: translateX(16upx) scale(.84);
 		}
 		.cell-input{
 			font-size: $font-base;
+			width: 75%;
 		}
 		.cell-btn{
 			margin-right: 0;

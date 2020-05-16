@@ -23,9 +23,6 @@ page.data-v-232990e6 {
   line-height: 80rpx;
   position: relative;
   background: #fff;
-  -webkit-box-pack: justify;
-  -webkit-justify-content: space-between;
-          justify-content: space-between;
 }
 .list-cell.log-out-btn.data-v-232990e6 {
     margin-top: 40rpx;
@@ -52,6 +49,7 @@ page.data-v-232990e6 {
     margin-left: 10rpx;
 }
 .list-cell .cell-tit.data-v-232990e6 {
+    width: 25%;
     font-size: 30rpx;
     color: #14191F;
 }
@@ -59,12 +57,38 @@ page.data-v-232990e6 {
     font-size: 28rpx;
     color: #8B9FAA;
 }
+.list-cell .upload.data-v-232990e6 {
+    width: 75%;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: column;
+            flex-direction: column;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+            align-items: center;
+    border: 1px dashed #DCDFE6;
+    border-radius: 6rpx;
+    padding: 20rpx 20rpx;
+}
+.list-cell .upload image.data-v-232990e6 {
+      width: 60rpx;
+      height: 60rpx;
+}
+.list-cell .upload .tip.data-v-232990e6 {
+      font-size: 24rpx;
+      color: #4399fc;
+      line-height: normal;
+}
 .list-cell switch.data-v-232990e6 {
     -webkit-transform: translateX(16rpx) scale(0.84);
             transform: translateX(16rpx) scale(0.84);
 }
 .list-cell .cell-input.data-v-232990e6 {
     font-size: 28rpx;
+    width: 75%;
 }
 .list-cell .cell-btn.data-v-232990e6 {
     margin-right: 0;
