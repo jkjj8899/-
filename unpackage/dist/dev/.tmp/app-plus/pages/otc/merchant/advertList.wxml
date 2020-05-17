@@ -1,1 +1,0 @@
-<view class="container data-v-199c9432"><view class="line data-v-199c9432"></view><advert-list-item vue-id="1" title="在线出售" type="0" class="data-v-199c9432" bind:__l="__l"></advert-list-item><view class="line data-v-199c9432"></view><advert-list-item vue-id="2" title="在线购买" type="1" class="data-v-199c9432" bind:__l="__l"></advert-list-item></view>

@@ -1,8 +1,0 @@
-{
-  "navigationStyle": "custom",
-  "usingComponents": {
-    "uni-notice-bar": "/node-modules/@dcloudio/uni-ui/lib/uni-notice-bar/uni-notice-bar",
-    "uni-tag": "/node-modules/@dcloudio/uni-ui/lib/uni-tag/uni-tag",
-    "notice-swiper": "/components/noticeSwiper"
-  }
-}

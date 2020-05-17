@@ -3,7 +3,7 @@
 		<uni-icons type="sound" size="20" class="notice"></uni-icons>
 		<swiper vertical="true" autoplay="true" circular="true" interval="3000">
 			<swiper-item v-for="(item, index) in list_" :key="index" @click="onClick()">
-				<navigator>{{item}}</navigator>
+				<navigator>{{item.noticeTitle}}</navigator>
 			</swiper-item>
 		</swiper>
 	</view>

@@ -1,6 +1,0 @@
-{
-  "usingComponents": {
-    "uni-transition": "/node-modules/@dcloudio/uni-ui/lib/uni-transition/uni-transition"
-  },
-  "component": true
-}

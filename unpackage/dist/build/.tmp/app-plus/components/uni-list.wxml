@@ -1,2 +1,0 @@
-<wxs src="./uni-refresh.wxs" module="refresh"></wxs>
-<view class="data-v-f83f8462"><view class="uni-list data-v-f83f8462"><slot></slot></view></view>

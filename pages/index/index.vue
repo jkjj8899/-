@@ -3,9 +3,9 @@
 		<!-- 头部轮播 -->
 		<view class="carousel-section">
 			<!-- 背景色区域 -->
-			<swiper class="carousel" circular @change="swiperChange">
-				<swiper-item v-for="(item, index) in carouselList" :key="index" class="carousel-item" @click="navToDetailPage({title: '轮播广告'})">
-					<image :src="item.src" />
+			<swiper class="carousel" circular @change="swiperChange" autoplay="true">
+				<swiper-item v-for="(item, index) in carousels" :key="index" class="carousel-item">
+					<image :src="item.url" />
 				</swiper-item>
 			</swiper>
 			<!-- 自定义swiper指示器 -->
@@ -20,7 +20,7 @@
 			<!-- 文字滚动 -->
 			<!-- <uni-notice-bar show-icon="true" scrollable="true" single="true" text="[单行] 这是 NoticeBar 通告栏，这是 NoticeBar 通告栏，这是 NoticeBar 通告栏"></uni-notice-bar>
 			 -->
-			<noticeSwiper :list="noticeList"></noticeSwiper>
+			<noticeSwiper :list="notices"></noticeSwiper>
 		</view>
 		<view class="menu">
 			<view class="item exchange" @click="navTo('/pages/exchange/index')">
@@ -33,7 +33,13 @@
 			</view>
 		</view>
 		<view class="advert">
-			<image class="img" mode="widthFix" src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1583941118254&di=8c75b06eaaa70c00a00648d9cf8e2318&imgtype=0&src=http%3A%2F%2Fwww.tiandianyun.cc%2Fupload%2Fgallery%2Fthumbnail%2FE688F1B8-815E-2968-1C1A621F23EA-tbl.png"></image>
+			<uni-swiper-dot :current="current" :mode="mode" :dotsStyles="dotsStyles">
+			    <swiper class="swiper-box" autoplay="true">
+			        <swiper-item v-for="(item, index) in ads" :key="index" class="swiper-item">
+			        	<image :src="item.url" mode="widthFix"/>
+			        </swiper-item>
+			    </swiper>
+			</uni-swiper-dot>
 		</view>
 		<!-- 市值排行 -->
 		<view class="coin-section m-t">
@@ -42,41 +48,17 @@
 				<view class="col r">全球指数</view>
 				<view class="col r">24小时涨幅</view>
 			</view>
-			<view class="s-row little-line">
+			<view class="s-row little-line" v-for="(item, i) in markets" :key="item.symbol">
 				<view class="col light">
-					<image src="https://s1.bqiapp.com/coin/20181030_72_webp/bitcoin_200_200.webp?v=67" class="coinLogo"></image>
-					BTC
-					<view class="subtitle">9262.6亿</view>
+					<image :src="item.icon" class="coinLogo"></image>
+					{{item.symbol}}
+					<view class="subtitle">{{item.marketcap | formatMarketcap}}</view>
 				</view>
 				<view class="col r light">
-					55555
-					<view class="subtitle">$9262.6</view>
+					{{item.priceCny}}
+					<view class="subtitle">${{item.priceUsd}}</view>
 				</view>
-				<view class="col r"><uni-tag text="+5%" type="success"></uni-tag></view>
-			</view>
-			<view class="s-row little-line">
-				<view class="col light">
-					<image src="https://s1.bqiapp.com/coin/20181030_72_webp/bitcoin_200_200.webp?v=67" class="coinLogo"></image>
-					BTC
-					<view class="subtitle">9262.6亿</view>
-				</view>
-				<view class="col r light">
-					55555
-					<view class="subtitle">$9262.6</view>
-				</view>
-				<view class="col r"><uni-tag text="+5%" type="error"></uni-tag></view>
-			</view>
-			<view class="s-row little-line">
-				<view class="col light">
-					<image src="https://s1.bqiapp.com/coin/20181030_72_webp/bitcoin_200_200.webp?v=67" class="coinLogo"></image>
-					BTC
-					<view class="subtitle">9262.6亿</view>
-				</view>
-				<view class="col r light">
-					55555
-					<view class="subtitle">$9262.6</view>
-				</view>
-				<view class="col r"><uni-tag text="+5%" type="success"></uni-tag></view>
+				<view class="col r"><uni-tag :text="item.changePercent | formatChange" :type="item.changePercent >= 0 ? 'success' : 'error'"></uni-tag></view>
 			</view>
 		</view>
 		
@@ -85,44 +67,77 @@
 </template>
 
 <script>
-	import {uniNoticeBar, uniTag} from '@dcloudio/uni-ui'
+	import {
+		mapState,
+		mapActions
+	} from 'vuex'
+	import {formatUnit} from '../../utils/number'
+	import {uniNoticeBar, uniTag, uniSwiperDot} from '@dcloudio/uni-ui'
 	import noticeSwiper from '../../components/noticeSwiper.vue'
 	export default {
-		components: {uniNoticeBar, uniTag, noticeSwiper},
+		components: {uniNoticeBar, uniTag, noticeSwiper, uniSwiperDot},
 		data() {
 			return {
-				noticeList: [],
+				markets: [],
+				notices: [],
 				titleNViewBackground: '',
 				swiperCurrent: 0,
 				swiperLength: 0,
-				carouselList: [],
-				goodsList: []
+				carousels: [],
+				ads: [],
+				current: 0,
+				mode: 'round',
+				dotsStyles:{  
+					bottom:100,  
+					backgroundColor: 'rgba(255, 255, 255,1)',  
+					border: '1px rgba(255, 255, 255,1) solid',  
+					color: '#fff',  
+					selectedBackgroundColor: 'rgba(255, 90, 95,0.9)',  
+					selectedBorder: '1px rgba(255, 90, 95,0.9) solid'  
+				}  
 			};
 		},
-
+		filters:{
+			formatChange(v){
+				return parseFloat(v).toFixed(2) + '%'
+			},
+			formatMarketcap(v){
+				return formatUnit(v);
+			}
+		},
+		onShow() {
+			this.getMaketList()
+		},
 		onLoad() {
 			this.loadData();
-			this.noticeList = ["国际站4月1日14:00开放MDC/USDT交易市场", "国际站4月2日10:00上线HKL", "关于国际站即将上线 GCCT（Global Cash Coin)"];
+			this.notices = ["国际站4月1日14:00开放MDC/USDT交易市场", "国际站4月2日10:00上线HKL", "关于国际站即将上线 GCCT（Global Cash Coin)"];
 		},
 		methods: {
+			...mapActions('common', ['marketList', 'adList', 'noticeList']),
 			/**
 			 * 请求静态数据只是为了代码不那么乱
 			 * 分次请求未作整合
 			 */
 			async loadData() {
-				let carouselList = await this.$api.json('carouselList');
-				this.titleNViewBackground = carouselList[0].background;
-				this.swiperLength = carouselList.length;
-				this.carouselList = carouselList;
-				
-				let goodsList = await this.$api.json('goodsList');
-				this.goodsList = goodsList || [];
+				this.adList().then(res =>{
+					let casrousels = res.data.casrousels
+					this.swiperLength = casrousels.length
+					this.carousels = casrousels
+					this.ads = res.data.ads
+				})
+				this.noticeList().then(res =>{
+					this.notices = res.rows
+				})
+			},
+			getMaketList(){
+				this.marketList().then(res =>{
+					this.markets = res.data
+				})
 			},
 			//轮播图切换修改背景色
 			swiperChange(e) {
 				const index = e.detail.current;
 				this.swiperCurrent = index;
-				this.titleNViewBackground = this.carouselList[index].background;
 			},
 			//详情页
 			navTo(url) {
@@ -160,35 +175,6 @@
 </script>
 
 <style lang="scss">
-	/* #ifdef MP */
-	page{
-		.cate-section{
-			position:relative;
-			z-index:5;
-			border-radius:16upx 16upx 0 0;
-			margin-top:-20upx;
-		}
-		.carousel-section{
-			background-color: #ffffff;
-			padding: 0;
-			.titleNview-placing {
-				padding-top: 0;
-				height: 0;
-			}
-			.carousel{
-				.carousel-item{
-					padding: 0;
-				}
-			}
-			.swiper-dots{
-				left:45upx;
-				bottom:40upx;
-			}
-		}
-	}
-	/* #endif */
-	
-	
 	page {
 		background: #ffffff;
 		padding-top: 50upx;
@@ -197,11 +183,16 @@
 		margin-top: 16upx;
 	}
 	.advert{
-		padding: 10upx 20upx;
-		background: $uni-color-gap;
-		.img{
+		padding: 0;
+		.swiper-box{
 			width: 100%;
-			border-radius: 10upx;
+			height: 230upx;
+		}
+		.swiper-item{
+			padding: 0;
+			image{
+				width: 100%;
+			}
 		}
 	}
 	.menu{

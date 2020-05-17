@@ -1,6 +1,0 @@
-{
-  "usingComponents": {
-    "otc-list-item": "/pages/otc/components/otc-list-item"
-  },
-  "component": true
-}
