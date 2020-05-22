@@ -3,95 +3,83 @@
 		<view class="exchange-box">
 			<view class="coin little-line">
 				<view class="base item" @click="changeCoin()">
-					<image src="https://s1.bqiapp.com/coin/20181030_72_webp/bitcoin_200_200.webp?v=67" class="coinLogo"></image>
-					<text class="name">BTC</text>
+					<image :src="exItem.baseCoinIcon" class="coinLogo"></image>
+					<text class="name">{{exItem.base}}</text>
 					<image src="../../static/tri.png" class="tri"></image>
 				</view>
 				<view class="quote item">
-					<image src="https://s1.bqiapp.com/coin/20181030_72_webp/bitcoin_200_200.webp?v=67" class="coinLogo"></image>
-					<text class="name">ETH</text>
+					<image :src="exItem.quoteCoinIcon" class="coinLogo"></image>
+					<text class="name">{{exItem.quote}}</text>
 					<image src="../../static/tri.png" class="tri"></image>
 				</view>
 				<view class="transform"><image src="../../static/exc.png" class="exc"></image></view>
 			</view>
 			<view class="amount little-line">
-				<input type="number" placeholder="转出数量" class="out"/>
-				<input type="number" placeholder="收到数量" class="in"/>
+				<input type="number" v-model="form.amount" placeholder="转出数量" class="out"/>
+				<input type="number" v-model="inAmount" placeholder="收到数量" class="in"/>
 			</view>
 			<view class="params">
-				<view class="rate">余额: 10000 BTC</view>
-				<view class="fee">手续费:0.1%</view>
+				<view class="rate">余额: {{account.normalBalance}} {{exItem.base}}</view>
+				<view class="fee">手续费:{{exItem.fee * 100}}%</view>
 			</view>
-			<view class="rate-amount">汇率: 1BTC = 0.00001ETH</view>
+			<view class="rate-amount">汇率: 1{{exItem.base}} = {{1 * exItem.scale}}{{exItem.quote}}</view>
 		</view>
 		<button type="primary" @click="submit" class="btn">闪电兑换</button>
 		
 		
 		<view class="record">
-			<view class="tip">兑换记录</view>
+			<!-- <view class="tip">兑换记录</view> -->
 			<view class="title">
-				<view class="col">数量</view>
-				<view class="col">状态</view>
-				<view class="col r">时间</view>
+				<view class="col">兑出资产/兑入资产</view>
+				<view class="col r">手续费/时间</view>
 			</view>
 			<scroll-view class="uni-list" :enableBackToTop="enableBackToTop" :scroll-y="scrollY" @scrolltolower="loadMore">
-				<view class="uni-row little-line" v-for="item in records" :key="item">
-					<view class="col">100</view>
-					<view class="col">已完成</view>
-					<view class="col r">16:52 01/04</view>
+				<empty v-if="empty"></empty>
+				<view class="uni-row little-line" v-for="(item, i) in records" :key="item.id">
+					<view class="col">
+						{{item.baseAmount}} {{item.base}} / {{item.quoteAmount}} {{item.quote}}
+					 </view>
+					<view class="col r">{{item.fee}} {{item.quote}} / {{item.ctime | moment('HH:mm MM/DD')}}</view>
 				</view>
+				<uni-load-more :status="loadingStatus"></uni-load-more>
 			</scroll-view>
 		</view>
-		<uni-popup ref="popup" type="top">
+		<uni-popup ref="popup" type="bottom">
 			<view class="coin-box">
-				<picker-view :indicator-style="indicatorStyle">
-					<picker-view-column>
-						<view class="item">
-							<image src="https://s1.bqiapp.com/coin/20181030_72_webp/bitcoin_200_200.webp?v=67" class="coinLogo"></image>
-							<text class="name">BTC</text>
+				<view class="coin-search">
+					<uni-search-bar placeholder="搜索token" @confirm="search"></uni-search-bar>
+				</view>
+				<view class="item-wrapper">
+					<view class="coin-item little-line" v-for="(item, i) in coinList" :key="item.id">
+						<view class="col">
+							<image :src="item.baseCoinIcon"/>
+							<text>{{item.base}}</text>
 						</view>
-						<view class="item">
-							<image src="https://s1.bqiapp.com/coin/20181030_72_webp/bitcoin_200_200.webp?v=67" class="coinLogo"></image>
-							<text class="name">BTC</text>
+						<view class="col">
+							<image :src="item.quoteCoinIcon"/>
+							<text>{{item.quote}}</text>
 						</view>
-						<view class="item">
-							<image src="https://s1.bqiapp.com/coin/20181030_72_webp/bitcoin_200_200.webp?v=67" class="coinLogo"></image>
-							<text class="name">BTC</text>
-						</view>
-					</picker-view-column>
-					<picker-view-column>
-						<view class="item">
-							<image src="https://s1.bqiapp.com/coin/20181030_72_webp/bitcoin_200_200.webp?v=67" class="coinLogo"></image>
-							<text class="name">ETH</text>
-						</view>
-						<view class="item">
-							<image src="https://s1.bqiapp.com/coin/20181030_72_webp/bitcoin_200_200.webp?v=67" class="coinLogo"></image>
-							<text class="name">ETH</text>
-						</view>
-						<view class="item">
-							<image src="https://s1.bqiapp.com/coin/20181030_72_webp/bitcoin_200_200.webp?v=67" class="coinLogo"></image>
-							<text class="name">ETH</text>
-						</view>
-					</picker-view-column>
-				</picker-view>
+					</view>
+				</view>
 			</view>
 		</uni-popup>
 		
-		<uni-valid-popup ref="validPopup" type="mobile" @ok="ok"></uni-valid-popup>
+		<uni-valid-popup ref="validPopup" @ok="ok"></uni-valid-popup>
 	</view>
 </template>
 
 <script>
 	import {
-		mapState
-	} from 'vuex';
+		mapState,
+		mapActions
+	} from 'vuex'
 	import {uniIcons, uniPopup, uniSearchBar} from '@dcloudio/uni-ui'
 	import uniList from '@/components/uni-list.vue';
 	import uniCell from '@/components/uni-cell.vue';
 	import uniRefresh from '@/components/uni-refresh.vue';
-	import uniLoadMore from '@/components/uni-load-more.vue';
 	import empty from '../../components/empty.vue'
 	import uniValidPopup from '@/components/uni-valid-popup.vue';
+	import uniLoadMore from '@/components/uni-load-more/uni-load-more.vue';
 	export default {
 		components: {uniIcons, uniPopup, uniSearchBar, empty, uniList, uniCell, uniRefresh, uniLoadMore, uniValidPopup},
 		data() {
@@ -102,37 +90,132 @@
 				empty: false, //空白页现实  true|false
 				scrollY: true,
 				enableBackToTop: true,
-				records: [1,2,3,4,5,6,7,8,9,0,10,11,12,13,14,15,16,17,18,19],
-				indicatorStyle: 'height:90upx; line-height:90upx;'
+				indicatorStyle: 'height:90upx; line-height:90upx;',
+				coinList: [],
+				exItem: {},
+				account: {},
+				inAmount: undefined,
+				form:{
+					id: undefined,
+					amount: undefined,
+					from: undefined,
+					to: undefined,
+					capitalPasswd: undefined
+				},
+				query: {
+					page: 1,
+					limit: 10
+				},
+				totalCount: 0,
+				records: [],
+				loadingStatus: 'more',
+				isLastPage: false
 			};
 		},
-		
+		watch: {
+		    'form.amount'(newValue, oldValue) {
+				if(newValue){
+					this.inAmount = parseFloat(newValue * this.exItem.scale)
+				} else {
+					this.inAmount = undefined
+				}
+		    }
+		},
 		onLoad(){
+			if(!this.loginInfo.hasLogin){
+				uni.navigateTo({
+					url: '/pages/public/login'
+				})
+			}
 			this.loadData();
 		},
 		computed:{
-			...mapState(['hasLogin'])
+			...mapState('user', ['loginInfo'])
 		},
 		methods: {
+			...mapActions('exchange', ['exchangeList', 'addExchange', 'exchangeRecordList']),
+			...mapActions('account', ['getAccount']),
 			submit(){
-				this.$refs.validPopup.open()
+				if(!this.loginInfo.isCapitalPasswd){
+					uni.showModal({
+					    title: '提示',
+					    content: '请设置资金密码',
+						confirmText: '设置',
+						cancelText: '取消',
+					    success: function (res) {
+					        if (res.confirm) {
+					            uni.navigateTo({
+					            	url: '/pages/user/updatePayPwd'
+					            })
+					        }
+					    }
+					});
+					return
+				}
+				if(!this.form.amount){
+					this.$api.msg('请输入兑换数量')
+					return;
+				}
+				this.$refs.validPopup.open('capitalPasswd')
+				
 			},
 			ok(data){
-				console.log(data)
+				if(!data.code){
+					this.$api.msg('请输入资金密码')
+					return;
+				}
+				this.form.id = this.exItem.id
+				this.form.from = this.exItem.base
+				this.form.to = this.exItem.quote
+				this.form.capitalPasswd = data.code
+				this.addExchange(this.form).then(res =>{
+					this.loadMore()
+					this.$refs.popup.close()
+					this.$refs.validPopup.close()
+					this.$api.msg('兑换成功')
+				}).catch(error => {
+					this.$refs.validPopup.enable()
+				})
 			},
 			changeCoin(){
 				this.$refs.popup.open()
 			},
+			getExchangeRecordList(){
+				this.exchangeRecordList(this.query).then(res =>{
+					this.empty = res.total <= 0
+					this.isLastPage = (this.query.page == res.pages)
+					if(this.isLastPage){
+						this.loadingStatus = 'noMore'
+					} else {
+						this.loadingStatus = 'more'
+					}
+					if(this.empty){
+						this.records = [];
+					} else {
+						this.records = this.records.concat(res.rows)
+					}
+				})
+			},
 			loadMore(){
-				this.$refs.popup.open()
+				if(!this.isLastPage){
+					this.loadingStatus = 'loading'
+					this.query.page += 1
+					this.getExchangeRecordList()
+				}
 			},
 			//请求数据
 			async loadData(){
-				let list = await this.$api.json('cartList'); 
-				let cartList = list.map(item=>{
-					item.checked = true;
-					return item;
-				});
+				this.exchangeList().then(res =>{
+					this.coinList = res.data
+					this.exItem = this.coinList[0]
+					this.loadAccount(this.exItem.base)
+				})
+				this.getExchangeRecordList()
+			},
+			async loadAccount(coin){
+				this.getAccount(coin).then(res =>{
+					this.account = res.data
+				})
 			},
 			navToDetail(){
 				uni.navigateTo({
@@ -157,23 +240,29 @@
 	}
 	.coin-box{
 		background: #ffffff;
-		picker-view {
-		    width: 100%;
-		    height: 400upx;
+		.item-wrapper{
+			height: 500upx;
+			overflow: auto;
 		}
-		.item{
+		.coin-item{
+			display: flex;
+			flex-direction: row;
+			justify-content: space-between;
+			align-items: center;
 			height: 90upx;
 			line-height: 90upx;
-			text-align: center;
-			.coinLogo {
-			    width: 34upx;
-				height: 34upx;
-			    margin-right: 10px;
-				vertical-align: middle;
+			padding: 0 20upx;
+			.col{
+				display: flex;
+				flex-direction: row;
+				align-items: center;
 			}
-			.name{
-				font-size: $font-base;
-				vertical-align: middle;
+			image{
+				width: 50upx;
+				height: 50upx;
+				border-radius: 50%;
+				border: 1upx solid $font-color-disabled;
+				margin-right: 10upx;
 			}
 		}
 	}
@@ -191,7 +280,8 @@
 		.title{
 			display: flex;
 			flex-direction: row;
-			padding: 6upx 20upx;
+			padding: 20upx 20upx;
+			z-index: 9999999;
 			.col{
 				flex: 1;
 				font-size: $font-base;
@@ -202,7 +292,7 @@
 			flex: 1;
 			display: flex;
 			position: absolute;
-			top: 580upx;
+			top: 570upx;
 			bottom: 0upx;
 			flex-direction: column;
 			.uni-row{

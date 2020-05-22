@@ -5,6 +5,8 @@ import Vuex from 'vuex'
 import user from './modules/user'
 import otc from './modules/otc'
 import common from './modules/common'
+import exchange from './modules/exchange'
+import account from './modules/account'
 
 Vue.use(Vuex)
 
@@ -21,6 +23,14 @@ const store = new Vuex.Store({
 	common: {
 	  namespaced: true,
 	  ...common
+	},
+	exchange: {
+	  namespaced: true,
+	  ...exchange
+	},
+	account: {
+	  namespaced: true,
+	  ...account
 	}
   }
 })

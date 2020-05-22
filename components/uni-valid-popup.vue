@@ -7,12 +7,15 @@
 				<text class="cancel" @click="close">取消</text>
 			</view>
 			<text class="tip">{{tips[type]}}</text>
-			<view class="input-wrap">
-				<input type="text" v-model="auth.code" class="input"  :placeholder="placeholders[type]"/>
+			<view class="input-wrap" v-if="type == 'mobile'">
+				<input type="number" v-model="auth.code" class="input"  :placeholder="placeholders[type]"/>
 				<view class="captcha" v-show="isSend">重新发送({{interval}})</view>
 				<view @click="toSend" class="captcha send" v-show="!isSend">发送验证码</view>
 			</view>
-			<button type="primary" @click="submit" class="btn">确认</button>
+			<view class="input-wrap" v-if="type == 'password' || type == 'capitalPasswd'">
+				<input type="password" v-model="auth.code" class="input"  :placeholder="placeholders[type]"/>
+			</view>
+			<button type="primary" :disabled="disabled" @click="submit" class="btn">确认</button>
 		</view>
 	</view>
 </template>
@@ -30,7 +33,7 @@
         		type: Boolean,
         		default: true
         	},
-        	// 弹出层类型，可选值，password: 密码验证；mobile：手机验证；email：邮箱验证; google: Google验证
+        	// 弹出层类型，可选值，password: 密码验证；capitalPasswd: 资金密码; mobile：手机验证；email：邮箱验证; google: Google验证
         	type: {
         		type: String,
         		default: 'password'
@@ -39,14 +42,17 @@
 		data(){
 			return {
 				showPopup: false,
+				disabled: false,
 				tips: {
 					password: '验证你的登录密码',
+					capitalPasswd: '验证你的资金密码',
 					mobile: '验证你的短信验证码',
 					email: '验证你的邮箱验证码',
 					google: '验证你的Google验证码'
 				},
 				placeholders: {
 					password: '登录密码',
+					capitalPasswd: '资金密码',
 					mobile: '短信验证码',
 					email: '邮箱验证码',
 					google: 'Google验证码'
@@ -54,8 +60,8 @@
 				isSend: false,
 				interval: 0,
 				auth: {
-					code: null,
-					token: null
+					code: undefined,
+					token: undefined
 				}
 			}
 		},
@@ -85,17 +91,25 @@
 					this.isSend = false
 				})
 			},
-			open() {
+			open(type) {
 				this.showPopup = true
+				if(type){
+					this.type = type
+				}
 				if(this.type === 'mobile'){
 					this.toSend()
 				}
 			},
+			enable() {
+				this.disabled = false
+			},
 			close() {
 				this.showPopup = false
+				this.disabled = false
 				this.$emit('cancel', {})
 			},
 			submit(){
+				this.disabled = true
 				this.$emit('ok', this.auth)
 			},
 			
