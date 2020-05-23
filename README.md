@@ -26,10 +26,11 @@ QQ群：731992394
 4. 打开HbuilderX, 选择 运行 -> 运行到手机或模拟器 -> 选择连接的手机  等待安装
 
 #### 使用说明
-1.将项目拖入[HbuilderX](http://www.dcloud.io/hbuilderx.html) 
-2.运行命令 npm install @dcloudio/uni-ui 
-3.[uni-app教程](https://uniapp.dcloud.io) 
-
+```bush
+1. 将项目拖入[HbuilderX](http://www.dcloud.io/hbuilderx.html) 
+2. 运行命令 npm install @dcloudio/uni-ui 
+3. [uni-app教程](https://uniapp.dcloud.io) 
+```
 #### 参与贡献
 
 暂无
