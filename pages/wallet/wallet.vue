@@ -1,10 +1,10 @@
 <template>
 	<view class="container">
 		<view class="total-box">
-			<view class="title">总资产折合(BTC)</view>
+			<view class="title">总资产折合(USDT)</view>
 			<view class="asset">
-				<text class="amount">0.000090058</text>
-				<text class="cny">≈￥40.5</text>
+				<text class="amount">{{data.totalUsdAmount}}</text>
+				<text class="cny">≈￥{{data.totalCnyAmount}}</text>
 			</view>
 			<view class="operat">
 				<view class="btn" @click="navTo('/pages/wallet/deposit')">充币</view>
@@ -14,11 +14,11 @@
 		</view>
 		<!-- 列表 -->
 		<view class="coin-section m-t">
-			<view class="block little-line" @click="navTo('/pages/wallet/detail')">
+			<view v-for="(item, i) in data.list" :key="item.symbol" class="block little-line" @click="navTo('/pages/wallet/detail', true)">
 				<view class="s-row">
 					<view class="col">
-						<image src="https://s1.bqiapp.com/coin/20181030_72_webp/bitcoin_200_200.webp?v=67" class="coinLogo"></image>
-						<text class="coin">BTC</text>
+						<image :src="item.icon" class="coinLogo"></image>
+						<text class="coin">{{item.symbol}}</text>
 					</view>
 					<view class="col r light">
 						<uni-icons type="forward" size="20" class="gt"></uni-icons>
@@ -30,94 +30,53 @@
 					<view class="col r subtitle row-title">折合(CNY)</view>
 				</view>
 				<view class="s-row">
-					<view class="col subtitle row-amount">0.025334</view>
-					<view class="col subtitle row-amount">0.025334</view>
-					<view class="col r subtitle row-amount">100.00</view>
+					<view class="col subtitle row-amount">{{item.normalBalance}}</view>
+					<view class="col subtitle row-amount">{{item.frozenBalance}}</view>
+					<view class="col r subtitle row-amount">{{item.priceCny}}</view>
 				</view>
 			</view>
 			
-			<view class="block little-line">
-				<view class="s-row">
-					<view class="col">
-						<image src="https://s1.bqiapp.com/coin/20181030_72_webp/bitcoin_200_200.webp?v=67" class="coinLogo"></image>
-						<text class="coin">BTC</text>
-					</view>
-					<view class="col r light">
-						<uni-icons type="forward" size="20" class="gt"></uni-icons>
-					</view>
-				</view>
-				<view class="s-row">
-					<view class="col subtitle row-title">可用</view>
-					<view class="col subtitle row-title">冻结</view>
-					<view class="col r subtitle row-title">折合(CNY)</view>
-				</view>
-				<view class="s-row">
-					<view class="col subtitle row-amount">0.025334</view>
-					<view class="col subtitle row-amount">0.025334</view>
-					<view class="col r subtitle row-amount">100.00</view>
-				</view>
-			</view>
-			
-			<view class="block little-line">
-				<view class="s-row">
-					<view class="col coin">
-						<image src="https://s1.bqiapp.com/coin/20181030_72_webp/bitcoin_200_200.webp?v=67" class="coinLogo"></image>
-						<text class="coin">BTC</text>
-					</view>
-					<view class="col r light">
-						<uni-icons type="forward" size="20" class="gt"></uni-icons>
-					</view>
-				</view>
-				<view class="s-row">
-					<view class="col subtitle row-title">可用</view>
-					<view class="col subtitle row-title">冻结</view>
-					<view class="col r subtitle row-title">折合(CNY)</view>
-				</view>
-				<view class="s-row">
-					<view class="col subtitle row-amount">0.025334</view>
-					<view class="col subtitle row-amount">0.025334</view>
-					<view class="col r subtitle row-amount">100.00</view>
-				</view>
-			</view>
 		</view>
 	</view>
 </template>
 
 <script>
 	import {
-		mapState
-	} from 'vuex';
+		mapState,
+		mapActions
+	} from 'vuex'
 	import {uniIcons} from '@dcloudio/uni-ui'
+	import {authMixin, commonMixin} from '@/common/mixin/mixin.js'
 	export default {
 		components: {uniIcons},
+		mixins: [authMixin, commonMixin],
 		data() {
 			return {
-				total: 0, //总价格
-				allChecked: false, //全选状态  true|false
-				empty: false, //空白页现实  true|false
-				cartList: [],
+				data: {
+					list: [],
+					totalUsdAmount: 0,
+					totalCnyAmount: 0
+				}
 			};
 		},
-		onLoad(){
+		onShow(){
 			this.loadData();
 		},
-		computed:{
-			...mapState(['hasLogin'])
+		onPullDownRefresh() {
+			this.loadData();
 		},
 		methods: {
+			...mapActions('account', ['accountList']),
 			//请求数据
 			async loadData(){
-				let list = await this.$api.json('cartList'); 
-				let cartList = list.map(item=>{
-					item.checked = true;
-					return item;
-				});
-			},
-			navTo(url){
-				uni.navigateTo({
-					url: url
+				this.accountList().then(res =>{
+					this.data = res.data
+					uni.stopPullDownRefresh();
+				}).catch(error =>{
+					
 				})
 			}
+			
 		}
 	}
 </script>

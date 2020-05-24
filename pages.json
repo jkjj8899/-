@@ -5,7 +5,7 @@
 			"path": "pages/index/index",
 			"style": {
 				// #ifdef MP 
-				"navigationBarTitleText": "钱包",
+				"navigationBarTitleText": "FexCoin",
 				// #endif 
 				"navigationStyle": "custom"
 				/* "app-plus": {
@@ -119,8 +119,8 @@
 		{
 			"path": "pages/news/news",
 			"style": {
-				"navigationBarTitleText": "快讯"
-				//"navigationStyle": "custom",
+				"navigationBarTitleText": "快讯",
+				"enablePullDownRefresh": true
 			}
 		},
 		{
@@ -129,6 +129,7 @@
 				"navigationBarTitleText": "我的资产",
 				"navigationBarBackgroundColor": "#0952C3",
 				"navigationBarTextStyle": "white",
+				"enablePullDownRefresh": true,
 				"app-plus": {
 					"titleView":false,
 					"titleNView": {

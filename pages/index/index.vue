@@ -23,7 +23,7 @@
 			<noticeSwiper :list="notices"></noticeSwiper>
 		</view>
 		<view class="menu">
-			<view class="item exchange" @click="navTo('/pages/exchange/index')">
+			<view class="item exchange" @click="navTo('/pages/exchange/index', true)">
 				<image src="../../static/exchange.png"></image>
 				<text>快捷闪兑</text>
 			</view>
@@ -74,8 +74,10 @@
 	import {formatUnit} from '../../utils/number'
 	import {uniNoticeBar, uniTag, uniSwiperDot} from '@dcloudio/uni-ui'
 	import noticeSwiper from '../../components/noticeSwiper.vue'
+	import {commonMixin} from '@/common/mixin/mixin.js'
 	export default {
 		components: {uniNoticeBar, uniTag, noticeSwiper, uniSwiperDot},
+		mixins: [commonMixin],
 		data() {
 			return {
 				markets: [],
@@ -138,13 +140,7 @@
 			swiperChange(e) {
 				const index = e.detail.current;
 				this.swiperCurrent = index;
-			},
-			//详情页
-			navTo(url) {
-				uni.navigateTo({
-					url: url
-				})
-			},
+			}
 		},
 		// #ifndef MP
 		// 标题栏input搜索框点击

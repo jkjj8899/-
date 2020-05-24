@@ -1,73 +1,89 @@
 <template>
 	<view class="container">
 		<view class="news-section m-t">
-			<view class="block">
+			<view class="block" v-for="(item, i) in list" :key="item.id">
 				<view class="circle"></view>
 				<view class="time">
-					20:00
-					<text class="source">中国社会科学网</text>
+					{{item.ctime | moment('HH:mm MM/DD')}}
+					<text class="source">{{item.origin}}</text>
 				</view>
 				<text class="title">
-				重庆市渝中区：积极创建国家级区块链产业创新示范园区
+				{{item.title}}
 				</text>
-				<view class="content">
-					今日重庆市渝中区第十八届人民代表大会第五次会议召开，在渝中区政府工作报告中，给今年渝中区块链产业发展定了个小目标。渝中将聚力打造以区块链为龙头的数字经济示范区，加快推动重庆市区块链产业创新基地扩容提质增效，积极创建国家级区块链产业创新示范园区。
-				</view>
+				<view class="content">{{item.content}}</view>
 			</view>
-			<view class="block">
-				<view class="circle"></view>
-				<view class="time">
-					20:00
-					<text class="source">中国社会科学网</text>
-				</view>
-				<text class="title">
-				重庆市渝中区：积极创建国家级区块链产业创新示范园区
-				</text>
-				<view class="content">
-					今日重庆市渝中区第十八届人民代表大会第五次会议召开，在渝中区政府工作报告中，给今年渝中区块链产业发展定了个小目标。渝中将聚力打造以区块链为龙头的数字经济示范区，加快推动重庆市区块链产业创新基地扩容提质增效，积极创建国家级区块链产业创新示范园区。
-				</view>
-			</view>
+			<uni-load-more :status="loadingStatus"></uni-load-more>
 		</view>
 	</view>
 </template>
 
 <script>
 	import {
-		mapState
-	} from 'vuex';
+		mapState,
+		mapActions
+	} from 'vuex'
 	import {uniIcons} from '@dcloudio/uni-ui'
+	import uniLoadMore from '@/components/uni-load-more/uni-load-more.vue';
+	import empty from '../../components/empty.vue'
 	export default {
 		components: {
-			uniIcons
+			uniIcons, uniLoadMore, empty
 		},
 		data() {
 			return {
 				total: 0, //总价格
-				allChecked: false, //全选状态  true|false
 				empty: false, //空白页现实  true|false
 				list: [],
+				query: {
+					page: 1,
+					limit: 10,
+					classfiy: 0
+				},
+				totalCount: 0,
+				loadingStatus: 'more',
+				isLastPage: false
 			};
 		},
 		onLoad(){
-			this.list = [
-				{title:'重庆市渝中区：积极创建国家级区块链产业创新示范园区',time:'2018-11-11',content:'今日重庆市渝中区第十八届人民代表大会第五次会议召开，在渝中区政府工作报告中，给今年渝中区块链产业发展定了个小目标。渝中将聚力打造以区块链为龙头的数字经济示范区，加快推动重庆市区块链产业创新基地扩容提质增效，积极创建国家级区块链产业创新示范园区。'},
-				{title:'重庆市渝中区：积极创建国家级区块链产业创新示范园区',time:'2018-11-11',content:'今日重庆市渝中区第十八届人民代表大会第五次会议召开，在渝中区政府工作报告中，给今年渝中区块链产业发展定了个小目标。渝中将聚力打造以区块链为龙头的数字经济示范区，加快推动重庆市区块链产业创新基地扩容提质增效，积极创建国家级区块链产业创新示范园区。'},
-				{title:'重庆市渝中区：积极创建国家级区块链产业创新示范园区',time:'2018-11-11',content:'今日重庆市渝中区第十八届人民代表大会第五次会议召开，在渝中区政府工作报告中，给今年渝中区块链产业发展定了个小目标。渝中将聚力打造以区块链为龙头的数字经济示范区，加快推动重庆市区块链产业创新基地扩容提质增效，积极创建国家级区块链产业创新示范园区。'},
-				{title:'重庆市渝中区：积极创建国家级区块链产业创新示范园区',time:'2018-11-11',content:'今日重庆市渝中区第十八届人民代表大会第五次会议召开，在渝中区政府工作报告中，给今年渝中区块链产业发展定了个小目标。渝中将聚力打造以区块链为龙头的数字经济示范区，加快推动重庆市区块链产业创新基地扩容提质增效，积极创建国家级区块链产业创新示范园区。'}
-			];
+			//this.loadData();
+			uni.startPullDownRefresh();
+		},
+		onReachBottom(){
+			if(!this.isLastPage){
+				this.query.page += 1
+				this.getNewsList()
+			}
+		},
+		onPullDownRefresh() {
 			this.loadData();
 		},
-		computed:{
-			...mapState(['hasLogin'])
-		},
 		methods: {
+			...mapActions('cms', ['newsList']),
 			//请求数据
 			async loadData(){
-				let list = await this.$api.json('cartList'); 
-				let cartList = list.map(item=>{
-					item.checked = true;
-					return item;
-				});
+				this.query.page = 1
+				this.getNewsList()
+			},
+			getNewsList(){
+				this.loadingStatus = 'loading'
+				this.newsList(this.query).then(res =>{
+					uni.stopPullDownRefresh();
+					this.empty = res.total <= 0
+					this.isLastPage = (this.query.page == res.pages)
+					if(this.isLastPage){
+						this.loadingStatus = 'noMore'
+					} else {
+						this.loadingStatus = 'more'
+					}
+					if(this.empty){
+						this.list = [];
+					} else {
+						this.list = this.list.concat(res.rows)
+					}
+				}).catch(error => {
+					this.loadingStatus = 'more'
+					uni.stopPullDownRefresh();
+				})
 			},
 			navToDetail(){
 				uni.navigateTo({

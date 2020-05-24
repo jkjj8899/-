@@ -80,8 +80,10 @@
 	import empty from '../../components/empty.vue'
 	import uniValidPopup from '@/components/uni-valid-popup.vue';
 	import uniLoadMore from '@/components/uni-load-more/uni-load-more.vue';
+	import {authMixin} from '@/common/mixin/mixin.js'
 	export default {
 		components: {uniIcons, uniPopup, uniSearchBar, empty, uniList, uniCell, uniRefresh, uniLoadMore, uniValidPopup},
+		mixins: [authMixin],
 		data() {
 			return {
 				bottom: 0,
@@ -121,16 +123,10 @@
 				}
 		    }
 		},
-		onLoad(){
-			if(!this.loginInfo.hasLogin){
-				uni.navigateTo({
-					url: '/pages/public/login'
-				})
-			}
+		onShow() {
 			this.loadData();
 		},
-		computed:{
-			...mapState('user', ['loginInfo'])
+		onLoad(){
 		},
 		methods: {
 			...mapActions('exchange', ['exchangeList', 'addExchange', 'exchangeRecordList']),
