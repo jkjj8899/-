@@ -16,8 +16,8 @@
 				</view>
 				<view class="row opt">
 					<view class="pay">
-						<image src="../../static/pay-alipay.png"></image>
-						<image src="../../static/pay-wechat.png"></image>
+						<image src="../../../static/pay-alipay.png"></image>
+						<image src="../../../static/pay-wechat.png"></image>
 					</view>
 					<view><button class="btn" @click="buy">购买</button></view>
 				</view>

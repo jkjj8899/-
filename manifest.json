@@ -50,7 +50,9 @@
             },
             "ios" : {},
             /* ios打包配置 */
-            "sdkConfigs" : {},
+            "sdkConfigs" : {
+                "ad" : {}
+            },
             "icons" : {
                 "android" : {
                     "hdpi" : "unpackage/res/icons/72x72.png",
@@ -81,6 +83,13 @@
                         "spotlight@2x" : "unpackage/res/icons/80x80.png",
                         "spotlight@3x" : "unpackage/res/icons/120x120.png"
                     }
+                }
+            },
+            "splashscreen" : {
+                "android" : {
+                    "hdpi" : "C:/Users/Kivi.Liao/Desktop/Fexcoin/hdpi.png",
+                    "xhdpi" : "C:/Users/Kivi.Liao/Desktop/Fexcoin/xhdpi.png",
+                    "xxhdpi" : "C:/Users/Kivi.Liao/Desktop/Fexcoin/xxhdpi.png"
                 }
             }
         }
