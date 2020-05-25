@@ -1,61 +1,88 @@
 <template>
 	<view class="container">
 		<view class="list-cell b-b" hover-class="cell-hover" :hover-stay-time="50">
-			<input class="cell-input" placeholder="请输入商家名称"/>
+			<input v-model="form.nickname" class="cell-input" placeholder="请输入商家名称"/>
 		</view>
 		<view class="list-cell b-b" hover-class="cell-hover" :hover-stay-time="50">
-			<input class="cell-input" placeholder="请输入手机号"/>
+			<input v-model="form.mobile" class="cell-input" placeholder="请输入手机号"/>
 		</view>
 		<view class="list-cell b-b" hover-class="cell-hover" :hover-stay-time="50">
-			<input class="cell-input" placeholder="请输入邮箱地址"/>
+			<input v-model="form.email" class="cell-input" placeholder="请输入邮箱地址"/>
 		</view>
 		<view class="list-cell" hover-class="cell-hover" :hover-stay-time="50">
 			<text class="cell-tit">保证金</text>
-			<text class="cell-more">5000 USDT</text>
+			<text class="cell-more">{{merchant.margin}} {{merchant.marginCoin}}</text>
 		</view>
 		<view class="safe-tip">
 			提示：保证金为冻结资产,在退出承兑商时退还
 		</view>
-		<button class="submit">确认</button>
+		<button class="submit" @click="submit">确认</button>
+		
+		<uni-valid-popup ref="validPopup" @ok="ok"></uni-valid-popup>
 	</view>
 </template>
 
 <script>
-	import {  
-	    mapMutations  
-	} from 'vuex';
+	import {
+		mapState,
+		mapActions
+	} from 'vuex'
+	import uniValidPopup from '@/components/uni-valid-popup.vue';
+	import {authMixin} from '@/common/mixin/mixin.js'
 	export default {
+		components: {uniValidPopup},
+		mixins: [authMixin],
 		data() {
 			return {
-				
+				merchant: {},
+				form: {
+					id: undefined,
+					nickname: undefined,
+					mobile: undefined,
+					email: undefined,
+					capitalPasswd: undefined
+				}
 			};
 		},
+		onLoad() {
+			this.getMerchant().then(res => {
+				this.merchant = res.data
+				this.form.id = this.merchant.id
+				this.form.nickname = this.merchant.nickname
+				this.form.mobile = this.merchant.mobile
+				this.form.email = this.merchant.email
+			})
+		},
 		methods:{
-			...mapMutations(['logout']),
-
-			navTo(url){
-				this.$api.msg(`跳转到${url}`);
+			...mapActions('otc', ['getMerchant', 'applyMerchant']),
+			submit(){
+				if(!this.form.nickname){
+					this.$api.msg('请输入商家名称')
+					return;
+				}
+				if(!this.form.mobile){
+					this.$api.msg('请输入手机号')
+					return;
+				}
+				if(!this.form.email){
+					this.$api.msg('请输入邮箱地址')
+					return;
+				}
+				this.$refs.validPopup.open('capitalPasswd')
 			},
-			//退出登录
-			toLogout(){
-				uni.showModal({
-				    content: '确定要退出登录么',
-				    success: (e)=>{
-				    	if(e.confirm){
-				    		this.logout();
-				    		setTimeout(()=>{
-				    			uni.navigateBack();
-				    		}, 200)
-				    	}
-				    }
-				});
-			},
-			//switch
-			switchChange(e){
-				let statusTip = e.detail.value ? '打开': '关闭';
-				this.$api.msg(`${statusTip}消息推送`);
-			},
-
+			ok(data){
+				if(!data.code){
+					this.$api.msg('请输入资金密码')
+					return;
+				}
+				this.form.capitalPasswd = data.code
+				this.applyMerchant(this.form).then(res =>{
+					this.$refs.validPopup.close()
+					this.$api.msg('保存成功')
+				}).catch(error => {
+					this.$refs.validPopup.enable()
+				})
+			}
 		}
 	}
 </script>

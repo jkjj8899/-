@@ -52,8 +52,9 @@
 			<view class="history-section icon">
 				<list-cell icon="icon-iconfontweixin" iconColor="#e07472" @eventClick="navTo('/pages/user/safe')" title="账户与安全"></list-cell>
 				<list-cell icon="icon-pingjia" iconColor="#4eb432" @eventClick="navTo('/pages/user/payType')" title="收款方式"></list-cell>
-				<list-cell icon="icon-shoucang2" iconColor="#9789f7" @eventClick="navTo('/pages/otc/merchant/apply')" title="承兑商申请"></list-cell>
-				<list-cell icon="icon-tuandui" iconColor="#543632" @eventClick="navTo('/pages/otc/merchant/merchant')" title="承兑商管理"></list-cell>
+				<list-cell v-if="!isMer" icon="icon-shoucang2" iconColor="#9789f7" @eventClick="navTo('/pages/otc/merchant/apply')" title="承兑商申请"></list-cell>
+				<list-cell v-if="isMer" icon="icon-shoucang2" iconColor="#9789f7" @eventClick="navTo('/pages/otc/merchant/apply')" title="承兑商信息"></list-cell>
+				<list-cell v-if="isMer" icon="icon-tuandui" iconColor="#543632" @eventClick="navTo('/pages/otc/merchant/merchant')" title="承兑商管理"></list-cell>
 				<list-cell icon="icon-bangzhu1" iconColor="#ee883b" title="帮助中心"></list-cell>
 				<list-cell icon="icon-pinglun-copy" iconColor="#54b4ef" title="问题反馈"></list-cell>
 				<list-cell icon="icon-shezhi1" iconColor="#e07472" title="设置" border="" @eventClick="navTo('/pages/public/login')"></list-cell>
@@ -65,9 +66,10 @@
 </template>  
 <script>  
 	import listCell from '@/components/mix-list-cell';
-    import {  
-        mapState 
-    } from 'vuex';  
+    import {
+    	mapState,
+    	mapActions
+    } from 'vuex'
 	let startY = 0, moveY = 0, pageAtTop = true;
     export default {
 		components: {
@@ -79,9 +81,15 @@
 				coverTransform: 'translateY(0px)',
 				coverTransition: '0s',
 				moving: false,
+				isMer: false
 			}
 		},
-		onLoad(){
+		onShow(){
+			if(this.loginInfo.hasLogin){
+				this.isMerchant().then(res => {
+					this.isMer = res.data
+				})
+			}
 		},
 		// #ifndef MP
 		onNavigationBarButtonTap(e) {
@@ -107,6 +115,7 @@
 			...mapState('user', ['loginInfo'])
 		},
         methods: {
+			...mapActions('otc', ['isMerchant']),
 			toLogin(){
 				if(!this.loginInfo.hasLogin){
 					uni.navigateTo({

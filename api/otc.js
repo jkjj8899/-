@@ -44,3 +44,25 @@ export function deletePayInfo(id) {
     method: 'DELETE'
   })
 }
+//是否是商家
+export function isMerchant() {
+  return request({
+    url: `/v1/otc/merchant/isMerchant`,
+    method: 'GET'
+  })
+}
+//获取商家信息
+export function getMerchant() {
+  return request({
+    url: `/v1/otc/merchant`,
+    method: 'GET'
+  })
+}
+// 申请商家
+export function applyMerchant(data) {
+  return request({
+    url: '/v1/otc/merchant/apply',
+    method: 'POST',
+	data: data
+  })
+}

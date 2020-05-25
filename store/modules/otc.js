@@ -4,7 +4,10 @@ import {
 	getPayInfo, 
 	updatePayInfo, 
 	activePayInfo,
-	deletePayInfo
+	deletePayInfo,
+	isMerchant,
+	getMerchant,
+	applyMerchant
 } from '@/api/otc'
 import {} from './../mutations_type'
 
@@ -79,6 +82,39 @@ const otc = {
 		}, id) {
 			return new Promise((resolve, reject) => {
 				deletePayInfo(id).then(res => {
+					resolve(res)
+				}).catch(error => {
+					reject(error)
+				})
+			})
+		},
+		isMerchant({
+			commit
+		}) {
+			return new Promise((resolve, reject) => {
+				isMerchant().then(res => {
+					resolve(res)
+				}).catch(error => {
+					reject(error)
+				})
+			})
+		},
+		getMerchant({
+			commit
+		}) {
+			return new Promise((resolve, reject) => {
+				getMerchant().then(res => {
+					resolve(res)
+				}).catch(error => {
+					reject(error)
+				})
+			})
+		},
+		applyMerchant({
+			commit
+		}, data) {
+			return new Promise((resolve, reject) => {
+				applyMerchant(data).then(res => {
 					resolve(res)
 				}).catch(error => {
 					reject(error)
