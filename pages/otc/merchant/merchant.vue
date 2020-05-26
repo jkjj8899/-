@@ -1,14 +1,14 @@
 <template>
 	<view class="container">
-		<view class="list-cell b-b m-t" @click="navTo('/pages/otc/merchant/apply')" hover-class="cell-hover" :hover-stay-time="50">
+		<view class="list-cell b-b m-t" @click="navTo('/pages/otc/merchant/apply', true)" hover-class="cell-hover" :hover-stay-time="50">
 			<text class="cell-tit">修改资料</text>
 			<text class="cell-more yticon icon-you"></text>
 		</view>
-		<view class="list-cell b-b m-t" @click="navTo('/pages/otc/merchant/advertList')" hover-class="cell-hover" :hover-stay-time="50">
+		<view class="list-cell b-b m-t" @click="navTo('/pages/otc/merchant/advertList', true)" hover-class="cell-hover" :hover-stay-time="50">
 			<text class="cell-tit">广告列表</text>
 			<text class="cell-more yticon icon-you"></text>
 		</view>
-		<view class="list-cell" @click="navTo('/pages/otc/merchant/addAdvert')" hover-class="cell-hover" :hover-stay-time="50">
+		<view class="list-cell" @click="navTo('/pages/otc/merchant/addAdvert', true)" hover-class="cell-hover" :hover-stay-time="50">
 			<text class="cell-tit">发币广告</text>
 			<text class="cell-more yticon icon-you"></text>
 		</view>
@@ -19,23 +19,19 @@
 </template>
 
 <script>
-	import {  
-	    mapMutations  
-	} from 'vuex';
+	import {
+		mapState,
+		mapActions
+	} from 'vuex'
+	import {commonMixin} from '@/common/mixin/mixin.js'
 	export default {
+		mixins: [commonMixin],
 		data() {
 			return {
 				
 			};
 		},
 		methods:{
-			...mapMutations(['logout']),
-
-			navTo(url){
-				uni.navigateTo({
-					url: url
-				})
-			},
 			//退出登录
 			toLogout(){
 				uni.showModal({

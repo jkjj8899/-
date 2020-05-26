@@ -66,3 +66,11 @@ export function applyMerchant(data) {
 	data: data
   })
 }
+
+export function addAdvert(data) {
+  return request({
+    url: '/v1/otc/advert/create',
+    method: 'POST',
+	data: data
+  })
+}

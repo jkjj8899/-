@@ -7,7 +7,8 @@ import {
 	deletePayInfo,
 	isMerchant,
 	getMerchant,
-	applyMerchant
+	applyMerchant,
+	addAdvert
 } from '@/api/otc'
 import {} from './../mutations_type'
 
@@ -115,6 +116,17 @@ const otc = {
 		}, data) {
 			return new Promise((resolve, reject) => {
 				applyMerchant(data).then(res => {
+					resolve(res)
+				}).catch(error => {
+					reject(error)
+				})
+			})
+		},
+		addAdvert({
+			commit
+		}, data) {
+			return new Promise((resolve, reject) => {
+				addAdvert(data).then(res => {
 					resolve(res)
 				}).catch(error => {
 					reject(error)

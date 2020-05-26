@@ -50,11 +50,10 @@
 			</view>
 			<!-- 浏览历史 -->
 			<view class="history-section icon">
-				<list-cell icon="icon-iconfontweixin" iconColor="#e07472" @eventClick="navTo('/pages/user/safe')" title="账户与安全"></list-cell>
-				<list-cell icon="icon-pingjia" iconColor="#4eb432" @eventClick="navTo('/pages/user/payType')" title="收款方式"></list-cell>
-				<list-cell v-if="!isMer" icon="icon-shoucang2" iconColor="#9789f7" @eventClick="navTo('/pages/otc/merchant/apply')" title="承兑商申请"></list-cell>
-				<list-cell v-if="isMer" icon="icon-shoucang2" iconColor="#9789f7" @eventClick="navTo('/pages/otc/merchant/apply')" title="承兑商信息"></list-cell>
-				<list-cell v-if="isMer" icon="icon-tuandui" iconColor="#543632" @eventClick="navTo('/pages/otc/merchant/merchant')" title="承兑商管理"></list-cell>
+				<list-cell icon="icon-iconfontweixin" iconColor="#e07472" @eventClick="navTo('/pages/user/safe', true)" title="账户与安全"></list-cell>
+				<list-cell icon="icon-pingjia" iconColor="#4eb432" @eventClick="navTo('/pages/user/payType', true)" title="收款方式"></list-cell>
+				<list-cell v-if="!isMer" icon="icon-shoucang2" iconColor="#9789f7" @eventClick="navTo('/pages/otc/merchant/apply', true)" title="承兑商申请"></list-cell>
+				<list-cell v-if="isMer" icon="icon-tuandui" iconColor="#543632" @eventClick="navTo('/pages/otc/merchant/merchant', true)" title="承兑商管理"></list-cell>
 				<list-cell icon="icon-bangzhu1" iconColor="#ee883b" title="帮助中心"></list-cell>
 				<list-cell icon="icon-pinglun-copy" iconColor="#54b4ef" title="问题反馈"></list-cell>
 				<list-cell icon="icon-shezhi1" iconColor="#e07472" title="设置" border="" @eventClick="navTo('/pages/public/login')"></list-cell>
@@ -70,11 +69,13 @@
     	mapState,
     	mapActions
     } from 'vuex'
+	import {commonMixin} from '@/common/mixin/mixin.js'
 	let startY = 0, moveY = 0, pageAtTop = true;
     export default {
 		components: {
 			listCell
 		},
+		mixins: [commonMixin],
 		data(){
 			return {
 				userInfo: {},
@@ -122,18 +123,6 @@
 						url: '/pages/public/login'
 					})
 				}
-			},
-			/**
-			 * 统一跳转接口,拦截未登录路由
-			 * navigator标签现在默认没有转场动画，所以用view
-			 */
-			navTo(url){
-				if(!this.loginInfo.hasLogin){
-					url = '/pages/public/login';
-				}
-				uni.navigateTo({  
-					url
-				})
 			}
         }  
     }  

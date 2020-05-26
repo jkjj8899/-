@@ -41,3 +41,11 @@ export function noticeList(data) {
 	data: data
   })
 }
+
+// 法币列表
+export function currencyList() {
+  return request({
+    url: '/v1/common/currency',
+    method: 'GET'
+  })
+}

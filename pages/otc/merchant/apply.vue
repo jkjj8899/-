@@ -9,6 +9,10 @@
 		<view class="list-cell b-b" hover-class="cell-hover" :hover-stay-time="50">
 			<input v-model="form.email" class="cell-input" placeholder="请输入邮箱地址"/>
 		</view>
+		<view v-if="merchant.id != null" class="list-cell b-b" hover-class="cell-hover" :hover-stay-time="50">
+			<text class="cell-tit">状态</text>
+			<text class="cell-more">{{status[merchant.status]}}</text>
+		</view>
 		<view class="list-cell" hover-class="cell-hover" :hover-stay-time="50">
 			<text class="cell-tit">保证金</text>
 			<text class="cell-more">{{merchant.margin}} {{merchant.marginCoin}}</text>
@@ -16,7 +20,7 @@
 		<view class="safe-tip">
 			提示：保证金为冻结资产,在退出承兑商时退还
 		</view>
-		<button class="submit" @click="submit">确认</button>
+		<button :disabled="merchant.id != null && merchant.status != 1" class="submit" @click="submit">确认</button>
 		
 		<uni-valid-popup ref="validPopup" @ok="ok"></uni-valid-popup>
 	</view>
@@ -41,6 +45,13 @@
 					mobile: undefined,
 					email: undefined,
 					capitalPasswd: undefined
+				},
+				status: {
+					0: '待审核',
+					1: '通过',
+					2: '拒绝',
+					3: '退出审核',
+					4: '已退出'
 				}
 			};
 		},
@@ -96,7 +107,7 @@
 		flex-direction: row;
 		align-items:baseline;
 		padding: 30upx $page-row-spacing;
-		line-height:80upx;
+		line-height:40upx;
 		position:relative;
 		background: #fff;
 		justify-content: space-between;
