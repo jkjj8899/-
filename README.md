@@ -30,7 +30,11 @@ Android测试包下载: [下载](http://47.107.100.112/apk/fexcoin.apk)
 #### 使用说明
 
 1. 将项目拖入[HbuilderX](http://www.dcloud.io/hbuilderx.html) 
-2. 运行命令 npm install @dcloudio/uni-ui 
+2. 运行命令 
+
+   npm install @dcloudio/uni-ui
+
+   npm install vue-moment
 3. [uni-app教程](https://uniapp.dcloud.io) 
 
 #### 参与贡献
