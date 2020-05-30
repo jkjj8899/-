@@ -5,10 +5,10 @@
 
 #### 技术交流社区
 
-微信二维码:
+##### 微信二维码:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;QQ二维码:
 ![Image text](doc/wechat_qrcode.jpg) 
+![Image text](doc/qq_qrcode.jpg) 
 
-QQ群：731992394
 
 Android测试包下载: [下载](http://47.107.100.112/apk/fexcoin.apk)
 
