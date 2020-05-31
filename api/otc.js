@@ -66,6 +66,14 @@ export function applyMerchant(data) {
 	data: data
   })
 }
+//广告列表
+export function advertList(data) {
+  return request({
+    url: `/v1/otc/advert/list`,
+    method: 'GET',
+	data: data
+  })
+}
 //添加广告
 export function addAdvert(data) {
   return request({

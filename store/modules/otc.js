@@ -8,6 +8,7 @@ import {
 	isMerchant,
 	getMerchant,
 	applyMerchant,
+	advertList,
 	addAdvert,
 	myAdvertList,
 	closeAdvert,
@@ -119,6 +120,17 @@ const otc = {
 		}, data) {
 			return new Promise((resolve, reject) => {
 				applyMerchant(data).then(res => {
+					resolve(res)
+				}).catch(error => {
+					reject(error)
+				})
+			})
+		},
+		advertList({
+			commit
+		}, data) {
+			return new Promise((resolve, reject) => {
+				advertList(data).then(res => {
 					resolve(res)
 				}).catch(error => {
 					reject(error)
