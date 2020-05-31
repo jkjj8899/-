@@ -8,7 +8,10 @@ import {
 	isMerchant,
 	getMerchant,
 	applyMerchant,
-	addAdvert
+	addAdvert,
+	myAdvertList,
+	closeAdvert,
+	pauseAdvert
 } from '@/api/otc'
 import {} from './../mutations_type'
 
@@ -127,6 +130,39 @@ const otc = {
 		}, data) {
 			return new Promise((resolve, reject) => {
 				addAdvert(data).then(res => {
+					resolve(res)
+				}).catch(error => {
+					reject(error)
+				})
+			})
+		},
+		myAdvertList({
+			commit
+		}) {
+			return new Promise((resolve, reject) => {
+				myAdvertList().then(res => {
+					resolve(res)
+				}).catch(error => {
+					reject(error)
+				})
+			})
+		},
+		closeAdvert({
+			commit
+		}, id) {
+			return new Promise((resolve, reject) => {
+				closeAdvert(id).then(res => {
+					resolve(res)
+				}).catch(error => {
+					reject(error)
+				})
+			})
+		},
+		pauseAdvert({
+			commit
+		}, id) {
+			return new Promise((resolve, reject) => {
+				pauseAdvert(id).then(res => {
 					resolve(res)
 				}).catch(error => {
 					reject(error)
