@@ -103,3 +103,11 @@ export function pauseAdvert(id) {
     method: 'PUT'
   })
 }
+//创建订单
+export function createOrder(data) {
+  return request({
+    url: `/v1/otc/order/create`,
+    method: 'POST',
+	data: data
+  })
+}

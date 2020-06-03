@@ -91,6 +91,10 @@
 				this.page.payment = res.payment
 				this.mescroll.resetUpScroll()
 			})
+			uni.$on("refresh", (res) => {
+				this.mescroll.resetUpScroll()
+			})
+			this.$fire.$emit('refreshCoin')
 		},
 		methods: {
 			...mapActions('common', ['fiatList']),

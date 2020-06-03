@@ -23,28 +23,28 @@
 			<view class="box">
 				<view class="coin">
 					<view>
-						<view class="name">购买BTC</view>
-						<view>单价:<text class="price">￥10000</text></view>
+						<view class="name">购买{{data.coin}}</view>
+						<view>单价:<text class="price">￥{{data.price}}</text></view>
 					</view>
-					<view><image class="icon" src="https://s1.bqiapp.com/coin/20181030_72_webp/bitcoin_200_200.webp?v=67"></image></view>
+					<view><image class="icon" :src="coinMap[data.coin].icon"></image></view>
 				</view>
 				<view class="type">
-					<view class="active">按金额购买</view>
-					<view>按数量购买</view>
+					<view @click="changeType(0)" :class="form.type == 0 ? 'active' : ''">按金额购买</view>
+					<view @click="changeType(1)" :class="form.type == 1 ? 'active' : ''">按数量购买</view>
 				</view>
 				<view class="input">
-					<view><input type="number" placeholder="请输入购买金额"/></view>
-					<view><text class="i cny">CNY</text> | <text class="i all">全部买入</text></view>
+					<view><input v-model="form.volume" type="number" :placeholder="placeholder[form.type]"/></view>
+					<view><text class="i cny">{{unit[form.type]}}</text> | <text @click="allBuy" class="i all">全部买入</text></view>
 				</view>
-				<view class="limit">限额：￥1000-￥10000</view>
-				<view class="num">交易数量：0.123 BTC</view>
+				<view class="limit">限额：￥{{data.minTrade}}￥{{data.maxTrade}}</view>
+				<view class="num">交易数量：{{showVolume}} {{data.coin}}</view>
 				<view class="amount">
 					<view class="t-p">实付款</view>
-					<view class="p">￥0.00</view>
+					<view class="p">￥{{showAmount}}</view>
 				</view>
 				<view class="btns">
-					<view class="btn cancel">取消</view>
-					<view class="btn submit">下单</view>
+					<view @click="cancel" class="btn cancel">取消</view>
+					<view @click="submit" class="btn submit">下单</view>
 				</view>
 			</view>
 		</uni-popup>
@@ -56,13 +56,31 @@
 		mapState,
 		mapActions
 	} from 'vuex'
+	import {commonMixin} from '@/common/mixin/mixin.js'
 	import {uniPopup} from '@dcloudio/uni-ui'
 	export default {
+		mixins: [commonMixin],
 		components: {
 			uniPopup
 		},
 		data() {
 			return {
+				form: {
+					type: 0,
+					side: undefined,
+					volume: undefined,
+					advertId: undefined
+				},
+				showVolume: 0,
+				showAmount: 0,
+				placeholder: {
+					0: '请输入购买金额',
+					1: '请输入购买数量'
+				},
+				unit: {
+					0: 'CNY',
+					1: this.data.coin
+				}
 			}
 		},
 		props: {
@@ -82,9 +100,56 @@
 				return `../../static/${v}.png`
 			}
 		},
+		watch: {
+			'form.volume'(v) {
+				if(!v){
+					return
+				}
+				if(this.form.type == 0){
+					this.showVolume = this.form.volume / this.data.price
+					this.showAmount = this.form.volume
+				} else {
+					this.showVolume = this.form.volume
+					this.showAmount = this.form.volume * this.data.price
+				}
+			}
+		},
+		computed: {
+			...mapState('common', ['coinMap'])
+		},
 		methods: {
+			...mapActions('otc', ['createOrder']),
+			submit(){
+				this.form.advertId = this.data.id
+				this.form.side = this.data.side
+				this.createOrder(this.form).then(res =>{
+					this.$refs.popup.close()
+					this.$api.msg('下单成功')
+					uni.$emit("refresh")
+				}).catch(error =>{
+					
+				})
+			},
 			buy(){
-				this.$refs.popup.open()
+				if(this.isLogin()){
+					this.$refs.popup.open()
+				}
+			},
+			changeType(type){
+				this.form.type = type
+				this.form.volume = undefined
+				this.showAmount = 0
+				this.showVolume = 0
+			},
+			allBuy(){
+				if(this.form.type == 0){
+					this.form.volume = this.data.volume * this.data.price
+				} else {
+					this.form.volume = this.data.volume
+				}
+			},
+			cancel(){
+				this.$refs.popup.close()
 			}
 		},
 	}

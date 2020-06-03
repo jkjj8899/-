@@ -11,6 +11,15 @@ export const commonMixin = {
     return { }
   },
   methods: {
+	  isLogin(){
+		  if(!this.loginInfo.hasLogin){
+		  	uni.navigateTo({
+		  		url: '/pages/public/login'
+		  	})
+		  } else {
+		  	return true
+		  }
+	  },
 	  navTo(url, auth){
 		  if(auth && !this.loginInfo.hasLogin){
 			  uni.navigateTo({

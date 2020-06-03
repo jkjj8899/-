@@ -14,13 +14,17 @@ import {
 
 const common = {
 	state: {
-		coins: null
+		coins: null,
+		coinMap: {}
 	},
 
 	mutations: {
 		[COMMON_COIN_LIST](state, payload) {
 			if (payload.code == 200) {
-				state.coins = payload.data
+				state.coins = payload.data,
+				state.coins.forEach((item, i) =>{
+					state.coinMap[item.symbol] = item
+				})
 			}
 		}
 	},
@@ -31,6 +35,7 @@ const common = {
 		}) {
 			return new Promise((resolve, reject) => {
 				coinList().then(res => {
+					commit(COMMON_COIN_LIST, res)
 					resolve(res)
 				}).catch(error => {
 					reject(error)
