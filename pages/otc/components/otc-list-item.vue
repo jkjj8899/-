@@ -18,8 +18,7 @@
 			</view>
 			<view><button class="btn" @click="buy">购买</button></view>
 		</view>
-		
-		<uni-popup ref="popup" type="bottom">
+		<u-keyboard ref="uKeyboard" @confirm="priceCancel" @cancel="priceCancel" @backspace="backspace" @change="priceChange" mode="number" :mask="true" v-model="showKeyboard">
 			<view class="box">
 				<view class="coin">
 					<view>
@@ -33,10 +32,10 @@
 					<view @click="changeType(1)" :class="form.type == 1 ? 'active' : ''">按数量购买</view>
 				</view>
 				<view class="input">
-					<view><input v-model="form.volume" type="number" :placeholder="placeholder[form.type]"/></view>
+					<view><input :disabled="true" readonly="true" @blur="blur" @focus="focus" class="uni-input" cursor-spacing="0" :adjust-position="false" v-model="form.volume" type="number" :placeholder="placeholder[form.type]"/></view>
 					<view><text class="i cny">{{unit[form.type]}}</text> | <text @click="allBuy" class="i all">全部买入</text></view>
 				</view>
-				<view class="limit">限额：￥{{data.minTrade}}￥{{data.maxTrade}}</view>
+				<view class="limit">限额：￥{{data.minTrade}} - ￥{{data.maxTrade}}</view>
 				<view class="num">交易数量：{{showVolume}} {{data.coin}}</view>
 				<view class="amount">
 					<view class="t-p">实付款</view>
@@ -47,7 +46,7 @@
 					<view @click="submit" class="btn submit">下单</view>
 				</view>
 			</view>
-		</uni-popup>
+		</u-keyboard>
 	</view>
 </template> 
 
@@ -57,7 +56,7 @@
 		mapActions
 	} from 'vuex'
 	import {commonMixin} from '@/common/mixin/mixin.js'
-	import {uniPopup} from '@dcloudio/uni-ui'
+	import uniPopup from '@/components/uni-popup.vue'
 	export default {
 		mixins: [commonMixin],
 		components: {
@@ -65,6 +64,8 @@
 		},
 		data() {
 			return {
+				bottom: 0,
+				showKeyboard: false,
 				form: {
 					type: 0,
 					side: undefined,
@@ -100,6 +101,9 @@
 				return `../../static/${v}.png`
 			}
 		},
+		created() {
+				
+		},
 		watch: {
 			'form.volume'(v) {
 				if(!v){
@@ -130,10 +134,25 @@
 					
 				})
 			},
+			focus(e){},
+			blur(){},
 			buy(){
 				if(this.isLogin()){
-					this.$refs.popup.open()
+					this.showKeyboard = true
 				}
+			},
+			priceCancel(){
+				this.form.volume = undefined
+			},
+			priceChange(val){
+				if(!this.form.volume){
+					this.form.volume = val + ''
+				} else {
+					this.form.volume = this.form.volume + val
+				}
+			},
+			backspace() {
+				if(this.form.volume) this.form.volume = this.form.volume.substr(0, this.form.volume.length - 1);
 			},
 			changeType(type){
 				this.form.type = type
@@ -143,13 +162,13 @@
 			},
 			allBuy(){
 				if(this.form.type == 0){
-					this.form.volume = this.data.volume * this.data.price
+					this.form.volume = (this.data.volume - this.data.dealVolume) * this.data.price
 				} else {
-					this.form.volume = this.data.volume
+					this.form.volume = this.data.volume - this.data.dealVolume
 				}
 			},
 			cancel(){
-				this.$refs.popup.close()
+				this.showKeyboard = false
 			}
 		},
 	}
@@ -225,6 +244,7 @@
 		background: #fff;
 		display: flex;
 		flex-direction: column;
+		height: 280px;
 		padding: 30upx 30upx;
 		font-size: $font-base;
 		color: $font-color-light;

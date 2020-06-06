@@ -5,6 +5,9 @@ import global from './utils/global'
 
 import Json from './Json' //测试用数据
 
+import uView from "uview-ui";
+Vue.use(uView);
+
 import MescrollBody from "@/components/mescroll-uni/mescroll-body.vue"
 import MescrollUni from "@/components/mescroll-uni/mescroll-uni.vue"
 Vue.component('mescroll-body', MescrollBody)
