@@ -13,7 +13,8 @@ import {
 	myAdvertList,
 	closeAdvert,
 	pauseAdvert,
-	createOrder
+	createOrder,
+	orderList
 } from '@/api/otc'
 import {} from './../mutations_type'
 
@@ -187,6 +188,17 @@ const otc = {
 		}, data) {
 			return new Promise((resolve, reject) => {
 				createOrder(data).then(res => {
+					resolve(res)
+				}).catch(error => {
+					reject(error)
+				})
+			})
+		},
+		orderList({
+			commit
+		}, data) {
+			return new Promise((resolve, reject) => {
+				orderList(data).then(res => {
 					resolve(res)
 				}).catch(error => {
 					reject(error)

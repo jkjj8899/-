@@ -50,6 +50,7 @@
 			"path": "pages/otc/order/list",
 			"style": {
 				"navigationBarTitleText": "订单记录",
+				"enablePullDownRefresh": true,
 				"app-plus": {
 					"bounce": "none",
 					"titleNView": {

@@ -126,6 +126,7 @@
 			submit(){
 				this.form.advertId = this.data.id
 				this.form.side = this.data.side
+				this.form.volume = parseFloat(this.form.volume)
 				this.createOrder(this.form).then(res =>{
 					this.$refs.popup.close()
 					this.$api.msg('下单成功')

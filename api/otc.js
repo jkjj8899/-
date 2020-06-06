@@ -111,3 +111,11 @@ export function createOrder(data) {
 	data: data
   })
 }
+//订单列表
+export function orderList(data) {
+  return request({
+    url: `/v1/otc/order/list`,
+    method: 'GET',
+	data: data
+  })
+}

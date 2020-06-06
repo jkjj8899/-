@@ -2,14 +2,15 @@
 	<view class="container">
 		<!-- 列表 -->
 		<view class="coin-section m-t">
-			<view class="block little-line" @click="navTo('/pages/otc/order/detail')">
+			<u-empty text="暂无订单记录" :show="empty" mode="data" margin-top="200"></u-empty>
+			<view v-for="(item, i) in list" :key="`row${item.id}`" class="block little-line" @click="navTo('/pages/otc/order/detail')">
 				<view class="s-row">
 					<view class="col">
-						<text class="buy coin">购买</text>
-						<text class="coin">BTC</text>
+						<text class="buy coin">{{item.side | formatSide(item)}}</text>
+						<text class="coin">{{item.coin}}</text>
 					</view>
 					<view class="col r light">
-						<text class="status">已完成</text>
+						<text class="status">{{statusMap[item.status]}}</text>
 						<uni-icons type="forward" size="20" class="gt"></uni-icons>
 					</view>
 				</view>
@@ -19,34 +20,12 @@
 					<view class="col r subtitle row-title">交易总合(CNY)</view>
 				</view>
 				<view class="s-row">
-					<view class="col subtitle row-amount">08:27 03/20</view>
-					<view class="col subtitle row-amount">0.025334</view>
-					<view class="col r subtitle row-amount">100.00</view>
+					<view class="col subtitle row-amount">{{item.ctime | moment('HH:mm MM/DD')}}</view>
+					<view class="col subtitle row-amount">{{item.volume}}</view>
+					<view class="col r subtitle row-amount">{{item.totalPrice}}</view>
 				</view>
 			</view>
-			
-			<view class="block little-line" @click="navTo('/pages/wallet/detail')">
-				<view class="s-row">
-					<view class="col">
-						<text class="sell coin">出售</text>
-						<text class="coin">BTC</text>
-					</view>
-					<view class="col r light">
-						<text class="status">已完成</text>
-						<uni-icons type="forward" size="20" class="gt"></uni-icons>
-					</view>
-				</view>
-				<view class="s-row">
-					<view class="col subtitle row-title">时间</view>
-					<view class="col subtitle row-title">数量(USDT)</view>
-					<view class="col r subtitle row-title">交易总合(CNY)</view>
-				</view>
-				<view class="s-row">
-					<view class="col subtitle row-amount">08:27 03/20</view>
-					<view class="col subtitle row-amount">0.025334</view>
-					<view class="col r subtitle row-amount">100.00</view>
-				</view>
-			</view>
+			<u-loadmore :status="loadingStatus" :margin-top="30" :margin-bottom="30"/>
 			
 		</view>
 		
@@ -80,41 +59,82 @@
 </template>
 
 <script>
-	import {
-		mapState
-	} from 'vuex';
+	import { mapState, mapActions } from 'vuex'
 	import {uniPopup, uniIcons} from '@dcloudio/uni-ui'
+	import {commonMixin, authMixin} from '@/common/mixin/mixin.js'
 	export default {
 		components: {uniPopup, uniIcons},
+		mixins: [commonMixin, authMixin],
 		data() {
 			return {
-				total: 0, //总价格
-				allChecked: false, //全选状态  true|false
-				empty: false, //空白页现实  true|false
-				cartList: [],
+				query: {
+					page: 1,
+					limit: 10,
+					side: undefined,
+					status: undefined
+				},
+				empty: true,
+				list: [],
+				isLastPage: false,
+				loadingStatus: 'loadmore',
+				statusMap: {
+					0: '待支付',
+					1: '已支付',
+					2: '交易成功',
+					3: '取消',
+					4: '申诉',
+					5: '申诉完成',
+					6: '异常订单'
+				}
 			};
 		},
 		onLoad(){
 			this.loadData();
 		},
+		onReachBottom(){
+			if(!this.isLastPage){
+				this.query.page += 1
+				console.log(this.query.page)
+				this.loadData()
+			}
+		},
+		onPullDownRefresh() {
+			this.list = []
+			this.query.page = 1
+			this.loadData();
+		},
+		filters: {
+			formatSide(v, item){
+				if(item.creator == item.buyerId){
+					return '购买'
+				} else {
+					return '出售'
+				}
+			}
+		},
 		onNavigationBarButtonTap(e) {
 			this.$refs.popup.open()
 		},
-		computed:{
-			...mapState(['hasLogin'])
-		},
 		methods: {
-			//请求数据
+			...mapActions('otc', ['orderList']),
 			async loadData(){
-				let list = await this.$api.json('cartList'); 
-				let cartList = list.map(item=>{
-					item.checked = true;
-					return item;
-				});
-			},
-			navTo(url){
-				uni.navigateTo({
-					url: url
+				this.loadingStatus = 'loading '
+				this.orderList(this.query).then(res =>{
+					this.empty = (res.total == 0)
+					this.isLastPage = (this.query.page == res.pages)
+					if(this.isLastPage){
+						this.loadingStatus = 'nomore'
+					} else {
+						this.loadingStatus = 'loadmore'
+					}
+					if(this.empty){
+						this.list = [];
+					} else {
+						this.list = this.list.concat(res.rows)
+					}
+					uni.stopPullDownRefresh();
+				}).catch(error => {
+					uni.stopPullDownRefresh();
 				})
 			}
 		}
