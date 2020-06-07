@@ -36,6 +36,8 @@
 1. 将项目拖入[HbuilderX](http://www.dcloud.io/hbuilderx.html) 
 2. 运行命令 
 
+   npm install uview-ui
+
    npm install @dcloudio/uni-ui
 
    npm install vue-moment
