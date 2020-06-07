@@ -97,6 +97,7 @@
 <style lang='scss'>
 	.container{
 		padding: 0upx 0upx;
+		height: 100%;
 	}
 	.news-section{
 		.block{

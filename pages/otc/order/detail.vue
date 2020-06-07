@@ -1,140 +1,260 @@
 <template>
 	<view class="container">
 		<view class="head-wrapper">
-			<view class="status">
+			<view class="status" v-if="order.status == 0">
 				<view class="s">
 					<text class="iconfont s0"></text>
 					<text class="v">请付款</text>
 				</view>
-				请在<text class="t">14:00</text>内付款给卖家
+				<view v-if="side == 'BUY'">请在<text class="t">14:00</text>内付款给卖家</view>
+				<view v-if="side == 'SELL'">等待对方付款,可以 14:00 后提交申诉</view>
 			</view>
-			<view class="concat">
+			<view class="status" v-if="order.status == 1">
+				<view class="s">
+					<text class="iconfont s0"></text>
+					<text class="v">已付款</text>
+				</view>
+				<view v-if="side == 'BUY'">商家未放币,您可进行申诉</view>
+				<view v-if="side == 'SELL'">对方向你支付了 {{order.totalPrice}}</view>
+			</view>
+			<view class="status" v-if="order.status == 2">
+				<view class="s">
+					<text class="v">已完成</text>
+				</view>
+				您的订单已完成
+			</view>
+			<view class="status" v-if="order.status == 3">
+				<view class="s">
+					<text class="v">交易取消</text>
+				</view>
+				订单取消无法查看支付信息
+			</view>
+			<view class="status" v-if="order.status == 4">
+				<view class="s">
+					<text class="v">申诉中</text>
+				</view>
+				订单正在申诉中
+			</view>
+			<view class="concat" v-if="order.status == 0 || order.status == 1">
 				<text class="iconfont icon-telephone"></text>
 				<view>电话</view>
 			</view>
 		</view>
 		<view class="amount-wrapper">
-			<text class="total">￥100,1000</text>
+			<text class="total">订单金额: ￥{{order.totalPrice}}</text>
 			<view class="info">
 				<view class="price">
-					<view><text class="label">单价</text><text class="num">￥1.00</text></view>
-					<view><text class="label">数量</text><text class="num">100000 HT</text></view>
+					<view><text class="label">单价</text><text class="num">￥{{order.price}}</text></view>
+					<view><text class="label">数量</text><text class="num">{{order.volume}} {{order.coin}}</text></view>
 				</view>
 				<view class="coin">
-					<image src="https://s1.bqiapp.com/coin/20181030_72_webp/bitcoin_200_200.webp?v=67" class="coinLogo"></image>
-					<view>HT</view>
+					<image :src="coinMap[order.coin].icon" class="coinLogo"></image>
+					<view>{{order.coin}}</view>
 				</view>
 			</view>
 		</view>
-		<view class="line"></view>
-		<view class="secrity-tip little-line">请使用本人(***)银行卡向以下帐号自行转账</view>
-		<!-- 列表 -->
-		<view class="transfer-info">
-			<view class="list">
-				<view class="item little-line">
-					<view class="left">银行卡</view>
-					<view class="right"><text class="change" @click="changePay()">切换支付方式</text></view>
-				</view>
-				<view class="item little-line">
-					<view class="left">收款人</view>
-					<view class="right">隔壁老王</view>
-				</view>
-				<view class="item little-line">
-					<view class="left">银行卡号</view>
-					<view class="right">123245345635642342</view>
-				</view>
-				<view class="item little-line">
-					<view class="left">开户银行</view>
-					<view class="right">招商银行</view>
-				</view>
-				<view class="item">
-					<view class="left">开户支行</view>
-					<view class="right">深圳支行</view>
-				</view>
-			</view>
-		</view>
+		
 		<view class="line"></view>
 		<view class="transfer-info">
 			<view class="list">
-				<view class="item little-line">
-					<view class="left">卖家昵称</view>
-					<view class="right">隔壁老王</view>
-				</view>
-				<view class="item little-line">
-					<view class="left">卖家实名</view>
-					<view class="right">隔壁老王</view>
-				</view>
 				<view class="item little-line">
 					<view class="left">订单号</view>
-					<view class="right">029942459830485</view>
-				</view>
-				<view class="item little-line">
-					<view class="left">付款参考号</view>
-					<view class="right">098765</view>
+					<view class="right">{{order.number}}</view>
 				</view>
 				<view class="item">
 					<view class="left">下单时间</view>
-					<view class="right">2020-03-15 12:00:00</view>
+					<view class="right">{{order.ctime | moment('YYYY-MM-DD HH:mm:ss')}}</view>
 				</view>
 			</view>
 		</view>
-		<view class="footer">
+		<view class="line"></view>
+		<view v-if="side == 'BUY' && order.status != 3" class="secrity-tip little-line">请使用本人{{currentPay.name}}向以下帐号自行转账</view>
+		<!-- 列表 -->
+		<view v-if="order.status != 3" class="transfer-info">
+			<view class="list">
+				<view class="item little-line">
+					<view class="left">{{currentPay.name}}</view>
+					<view class="right"><text v-if="side == 'BUY' && order.status == 0" class="change" @click="changePay()">切换支付方式</text></view>
+				</view>
+				<view class="item little-line">
+					<view class="left">收款人</view>
+					<view class="right">{{account.username}}</view>
+				</view>
+				<view class="item little-line">
+					<view class="left">{{currentPay.name}}账号</view>
+					<view class="right">{{account.accountNo}}</view>
+				</view>
+				<view v-show="currentPay.code == 'UnionPay'" class="item little-line">
+					<view class="left">开户银行</view>
+					<view class="right">{{account.bankName}}</view>
+				</view>
+				<view v-show="currentPay.code == 'UnionPay'" class="item">
+					<view class="left">开户支行</view>
+					<view class="right">{{account.subBranch}}</view>
+				</view>
+				<view v-show="currentPay.code == 'UnionPay'" class="item">
+					<view class="left">开户支行</view>
+					<view class="right">{{account.subBranch}}</view>
+				</view>
+			</view>
+		</view>
+		<view class="footer" v-if="side == 'BUY' && order.status == 0">
 			<view class="safe-tip">
 				在转账过程中请勿备注BTC、USDT、交易所等信息,防止汇款被拦截、银行卡被冻结等问题
 			</view>
 			<view class="btns">
-				<button class="cancel">取消订单</button>
-				<button class="pay">我已付款成功</button>
+				<button @click="cancel" class="cancel">取消订单</button>
+				<button @click="pay" class="pay">我已付款成功</button>
+			</view>
+		</view>
+		<view class="footer" v-if="side == 'BUY' && order.status == 1">
+			<view class="btns">
+				<button class="pay">申诉</button>
+			</view>
+		</view>
+		<view class="footer" v-if="side == 'SELL' && order.status == 1">
+			<view class="btns">
+				<button class="pay">申诉</button>
+				<button @click="complete" class="pay">确认收款并放行</button>
 			</view>
 		</view>
 	</view>
 </template>
 
 <script>
-	import {
-		mapState
-	} from 'vuex';
+	import { mapState, mapActions } from 'vuex'
+	import {commonMixin, authMixin} from '@/common/mixin/mixin.js'
 	import {uniIcons,uniList,uniListItem} from '@dcloudio/uni-ui'
 	export default {
 		components: {uniIcons,uniList,uniListItem},
+		mixins: [commonMixin, authMixin],
 		data() {
 			return {
-				total: 0, //总价格
-				allChecked: false, //全选状态  true|false
-				empty: false, //空白页现实  true|false
-				cartList: [],
+				id: undefined,
+				order: {
+					totalPrice: 0,
+					number: '',
+					coin:  ''
+				},
+				nickname: undefined,
+				side: undefined,
+				merchantPays: undefined,
+				payment: undefined,
+				payCodes: [],
+				payLabels: [],
+				currentPay: {
+					code: undefined,
+					name: undefined
+				},
+				account: {}
 			};
 		},
-		onLoad(){
-			this.loadData();
+		onLoad(options){
+			this.currencyList().then(res => {
+				this.payment = res.data.payment
+				this.id = options.id
+				this.loadData();
+			})
+			
 		},
-		computed:{
-			...mapState(['hasLogin'])
+		computed: {
+			...mapState('common', ['coinMap'])
 		},
 		methods: {
-			change(){
-				uni.showActionSheet({
-					title:'支付方式',
-				    itemList: ['银行卡', '微信', '支付宝'],
+			...mapActions('common', ['currencyList']),
+			...mapActions('otc', ['getOrder', 'cancelOrder', 'payOrder', 'completeOrder']),
+			cancel(){
+				let $this = this;
+				uni.showModal({
+				    title: '提示',
+				    content: '是否确认取消订单?',
 				    success: function (res) {
-				        console.log('选中了第' + (res.tapIndex + 1) + '个按钮');
-				    },
-				    fail: function (res) {
-				        console.log(res.errMsg);
+				        if (res.confirm) {
+							uni.showLoading({})
+							$this.cancelOrder($this.id).then(res =>{
+								$this.loadData()
+								uni.hideLoading()
+								$this.$api.msg('取消成功', 1000, false, 'none', function() {})
+							}).catch(error =>{
+								uni.hideLoading()
+							})
+				        }
+				    }
+				});
+				
+			},
+			pay(){
+				let $this = this;
+				uni.showModal({
+				    title: '提示',
+				    content: '是否确认已付款?',
+				    success: function (res) {
+				        if (res.confirm) {
+							uni.showLoading({})
+							$this.payOrder({id: $this.id, payment: $this.currentPay.code}).then(res =>{
+								$this.loadData()
+								uni.hideLoading()
+								$this.$api.msg('标记付款成功', 1000, false, 'none', function() {})
+							}).catch(error =>{
+								uni.hideLoading()
+							})
+				        }
 				    }
 				});
 			},
-			//请求数据
-			async loadData(){
-				let list = await this.$api.json('cartList'); 
-				let cartList = list.map(item=>{
-					item.checked = true;
-					return item;
+			complete(){
+				let $this = this;
+				uni.showModal({
+				    title: '提示',
+				    content: '是否确认放币?',
+				    success: function (res) {
+				        if (res.confirm) {
+							uni.showLoading({})
+							$this.completeOrder($this.id).then(res =>{
+								$this.loadData()
+								uni.hideLoading()
+								$this.$api.msg('放币成功', 1000, false, 'none', function() {})
+							}).catch(error =>{
+								uni.hideLoading()
+							})
+				        }
+				    }
 				});
 			},
-			navTo(url){
-				uni.navigateTo({
-					url: url
+			changePay(){
+				let $this = this
+				uni.showActionSheet({
+					itemList: this.payLabels,
+					success: function (res) {
+						$this.currentPay = {
+							code: $this.payCodes[res.tapIndex],
+							name: $this.payLabels[res.tapIndex]
+						}
+						$this.account = JSON.parse($this.merchantPays[$this.currentPay.code].account)
+					}
+				})
+			},
+			async loadData(){
+				this.getOrder(this.id).then(res =>{
+					this.order = res.data.order
+					this.nickname = res.data.nickname
+					this.side = res.data.side
+					this.merchantPays = res.data.payments
+					for(let key in this.merchantPays){
+						for(let i = 0; i < this.payment.length; i++){
+							if(key === this.payment[i].code){
+								this.payCodes.push(key)
+								this.payLabels.push(this.payment[i].name)
+							}
+						}
+					}
+					this.currentPay = {
+						code: this.payCodes[0],
+						name: this.payLabels[0]
+					}
+					this.account = JSON.parse(this.merchantPays[this.currentPay.code].account)
+				}).catch(error =>{
+					
 				})
 			}
 		}
@@ -218,6 +338,7 @@
 			color: $font-color-blue;
 			padding: 20upx 0 20upx 0;
 			font-weight: bold;
+			font-size: $font-lg;
 		}
 		.info{
 			display: flex;

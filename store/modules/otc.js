@@ -2,6 +2,7 @@ import {
 	payInfoList, 
 	addPayInfo, 
 	getPayInfo, 
+	getUsePayInfo,
 	updatePayInfo, 
 	activePayInfo,
 	deletePayInfo,
@@ -14,7 +15,11 @@ import {
 	closeAdvert,
 	pauseAdvert,
 	createOrder,
-	orderList
+	cancelOrder,
+	payOrder,
+	completeOrder,
+	orderList,
+	getOrder
 } from '@/api/otc'
 import {} from './../mutations_type'
 
@@ -45,6 +50,17 @@ const otc = {
 		}, id) {
 			return new Promise((resolve, reject) => {
 				getPayInfo(id).then(res => {
+					resolve(res)
+				}).catch(error => {
+					reject(error)
+				})
+			})
+		},
+		getUsePayInfo({
+			commit
+		}) {
+			return new Promise((resolve, reject) => {
+				getUsePayInfo().then(res => {
 					resolve(res)
 				}).catch(error => {
 					reject(error)
@@ -199,6 +215,50 @@ const otc = {
 		}, data) {
 			return new Promise((resolve, reject) => {
 				orderList(data).then(res => {
+					resolve(res)
+				}).catch(error => {
+					reject(error)
+				})
+			})
+		},
+		getOrder({
+			commit
+		}, id) {
+			return new Promise((resolve, reject) => {
+				getOrder(id).then(res => {
+					resolve(res)
+				}).catch(error => {
+					reject(error)
+				})
+			})
+		},
+		cancelOrder({
+			commit
+		}, id) {
+			return new Promise((resolve, reject) => {
+				cancelOrder(id).then(res => {
+					resolve(res)
+				}).catch(error => {
+					reject(error)
+				})
+			})
+		},
+		payOrder({
+			commit
+		}, data) {
+			return new Promise((resolve, reject) => {
+				payOrder(data).then(res => {
+					resolve(res)
+				}).catch(error => {
+					reject(error)
+				})
+			})
+		},
+		completeOrder({
+			commit
+		}, id) {
+			return new Promise((resolve, reject) => {
+				completeOrder(id).then(res => {
 					resolve(res)
 				}).catch(error => {
 					reject(error)

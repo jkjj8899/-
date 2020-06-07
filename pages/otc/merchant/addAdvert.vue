@@ -90,22 +90,34 @@
 					payments: []
 				},
 				currencys: [],
-				payments: []
+				payments: [],
+				payTypes: []
 			};
 		},
 		onLoad(){
 			uni.$on('selectCoin', this.selectCoin)
 			this.currencyList().then(res => {
 				this.currencys = res.data.currency
-				this.payments = res.data.payment
+				//this.payments = res.data.payment
+				this.getUsePayInfo().then(pay =>{
+					let p = res.data.payment
+					for(let i = 0; i < p.length; i++){
+						if(pay.data[p[i].code]){
+							this.payments.push(p[i])
+						}
+					}
+				}).catch(error =>{
+					
+				})
 			})
+			
 		},
 		onUnload(){
 			uni.$off('selectCoin', this.selectCoin)
 		},
 		methods:{
 			...mapActions('common', ['currencyList']),
-			...mapActions('otc', ['addAdvert']),
+			...mapActions('otc', ['addAdvert', 'getUsePayInfo']),
 			submit(){
 				if(!this.loginInfo.isCapitalPasswd){
 					uni.showModal({

@@ -78,9 +78,8 @@
 		{
 			"path": "pages/otc/order/detail",
 			"style": {
-				"navigationBarTitleText": "我的资产",
-				"navigationBarBackgroundColor": "#0952C3",
-				"navigationBarTextStyle": "white",
+				"navigationBarTitleText": "",
+				"navigationStyle": "custom",
 				"app-plus": {
 					"titleView":false,
 					"titleNView": {

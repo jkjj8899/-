@@ -18,8 +18,6 @@
 		<!-- 分类 -->
 		<view class="cate-section">
 			<!-- 文字滚动 -->
-			<!-- <uni-notice-bar show-icon="true" scrollable="true" single="true" text="[单行] 这是 NoticeBar 通告栏，这是 NoticeBar 通告栏，这是 NoticeBar 通告栏"></uni-notice-bar>
-			 -->
 			<noticeSwiper :list="notices"></noticeSwiper>
 		</view>
 		<view class="menu">
@@ -33,7 +31,7 @@
 			</view>
 		</view>
 		<view class="advert">
-			<uni-swiper-dot :current="current" :mode="mode" :dotsStyles="dotsStyles">
+			<uni-swiper-dot :current="current" :mode="mode">
 			    <swiper class="swiper-box" autoplay="true">
 			        <swiper-item v-for="(item, index) in ads" :key="index" class="swiper-item">
 			        	<image :src="item.url" mode="widthFix"/>
@@ -88,15 +86,7 @@
 				carousels: [],
 				ads: [],
 				current: 0,
-				mode: 'round',
-				dotsStyles:{  
-					bottom:100,  
-					backgroundColor: 'rgba(255, 255, 255,1)',  
-					border: '1px rgba(255, 255, 255,1) solid',  
-					color: '#fff',  
-					selectedBackgroundColor: 'rgba(255, 90, 95,0.9)',  
-					selectedBorder: '1px rgba(255, 90, 95,0.9) solid'  
-				}  
+				mode: 'round' 
 			};
 		},
 		filters:{

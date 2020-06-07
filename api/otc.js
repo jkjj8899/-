@@ -7,6 +7,13 @@ export function payInfoList() {
     method: 'GET'
   })
 }
+// 获取激活收款信息详情
+export function getUsePayInfo() {
+  return request({
+    url: `/v1/otc/payment/use`,
+    method: 'GET'
+  })
+}
 // 获取收款信息详情
 export function getPayInfo(id) {
   return request({
@@ -111,11 +118,40 @@ export function createOrder(data) {
 	data: data
   })
 }
+//撤消订单
+export function cancelOrder(id) {
+  return request({
+    url: `/v1/otc/order/cancel/${id}`,
+    method: 'GET'
+  })
+}
+//订单支付
+export function payOrder(data) {
+  return request({
+    url: `/v1/otc/order/pay`,
+    method: 'GET',
+	data: data
+  })
+}
+//订单放币
+export function completeOrder(id) {
+  return request({
+    url: `/v1/otc/order/complete/${id}`,
+    method: 'GET'
+  })
+}
 //订单列表
 export function orderList(data) {
   return request({
     url: `/v1/otc/order/list`,
     method: 'GET',
 	data: data
+  })
+}
+//订单列表
+export function getOrder(id) {
+  return request({
+    url: `/v1/otc/order/${id}`,
+    method: 'GET'
   })
 }

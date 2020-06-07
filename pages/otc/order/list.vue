@@ -3,10 +3,10 @@
 		<!-- 列表 -->
 		<view class="coin-section m-t">
 			<u-empty text="暂无订单记录" :show="empty" mode="data" margin-top="200"></u-empty>
-			<view v-for="(item, i) in list" :key="`row${item.id}`" class="block little-line" @click="navTo('/pages/otc/order/detail')">
+			<view v-for="(item, i) in list" :key="`row${item.id}`" class="block little-line" @click="navTo(`/pages/otc/order/detail?id=${item.id}`, true)">
 				<view class="s-row">
 					<view class="col">
-						<text class="buy coin">{{item.side | formatSide(item)}}</text>
+						<text class="coin" :class="item.side | formatSideClass(item)">{{item.side | formatSide(item)}}</text>
 						<text class="coin">{{item.coin}}</text>
 					</view>
 					<view class="col r light">
@@ -34,24 +34,19 @@
 				<view class="filter">
 					<view class="filter-title">交易类型</view>
 					<view class="filter-pay">
-						<text class="filter-pay-item filter-active">购买</text>
-						<text class="filter-pay-item">出售</text>
+						<text @click="filter('BUY', undefined)" class="filter-pay-item" :class="{'filter-active': query.side == 'BUY'}">购买</text>
+						<text @click="filter('SELL', undefined)" class="filter-pay-item" :class="{'filter-active': query.side == 'SELL'}">出售</text>
 						<text class="placeholder"></text>
 					</view>
 					<view class="filter-title">订单状态</view>
 					<view class="filter-pay">
-						<text class="filter-pay-item filter-active">未付款</text>
-						<text class="filter-pay-item">已付款</text>
-						<text class="filter-pay-item">已完成</text>
-						<text class="filter-pay-item">已取消</text>
-						<text class="filter-pay-item">申诉中</text>
-						<text class="filter-pay-item">申诉完成</text>
+						<text class="filter-pay-item" v-for="(v, k) in statusMap" :key="k" @click="filter(undefined, k)" :class="{'filter-active': query.status == k}" >{{v}}</text>
 					</view>
 				</view>
 				
 				<view class="btn-wrapper">
-					<view class="btn">重置</view>
-					<view class="btn submit">筛选</view>
+					<view class="btn" @click="reset">重置</view>
+					<view class="btn submit" @click="search">筛选</view>
 				</view>
 			</view>
 		</uni-popup>
@@ -73,7 +68,7 @@
 					side: undefined,
 					status: undefined
 				},
-				empty: true,
+				empty: false,
 				list: [],
 				isLastPage: false,
 				loadingStatus: 'loadmore',
@@ -88,22 +83,29 @@
 				}
 			};
 		},
-		onLoad(){
+		onShow(){
 			this.loadData();
 		},
 		onReachBottom(){
 			if(!this.isLastPage){
 				this.query.page += 1
-				console.log(this.query.page)
 				this.loadData()
 			}
 		},
 		onPullDownRefresh() {
 			this.list = []
 			this.query.page = 1
+			this.loadingStatus = 'loadmore'
 			this.loadData();
 		},
 		filters: {
+			formatSideClass(v, item){
+				if(item.creator == item.buyerId){
+					return 'buy'
+				} else {
+					return 'sell'
+				}
+			},
 			formatSide(v, item){
 				if(item.creator == item.buyerId){
 					return '购买'
@@ -117,9 +119,29 @@
 		},
 		methods: {
 			...mapActions('otc', ['orderList']),
+			filter(side, status){
+				if(side){
+					this.query.side = side
+				}
+				if(status){
+					this.query.status = status
+				}
+			},
+			reset(){
+				this.query.status = undefined
+				this.query.side = undefined
+			},
+			search(){
+				this.query.page = 1
+				this.list = []
+				this.loadingStatus = 'loadmore'
+				this.loadData()
+				this.$refs.popup.close();
+			},
 			async loadData(){
-				this.loadingStatus = 'loading '
+				this.loadingStatus = 'loading'
 				this.orderList(this.query).then(res =>{
+					uni.stopPullDownRefresh();
 					this.empty = (res.total == 0)
 					this.isLastPage = (this.query.page == res.pages)
 					if(this.isLastPage){
@@ -132,7 +154,6 @@
 					} else {
 						this.list = this.list.concat(res.rows)
 					}
-					uni.stopPullDownRefresh();
 				}).catch(error => {
 					uni.stopPullDownRefresh();
 				})
@@ -176,6 +197,12 @@
 			font-size: $font-md;
 			padding-bottom: 20upx;
 			padding-top: 30upx;
+		}
+		.filter-active{
+			border-width: 2rpx;
+			border-color: $font-color-blue;  
+			border-style: solid;
+			color: $font-color-blue;
 		}
 		.filter-pay{
 			display: flex;

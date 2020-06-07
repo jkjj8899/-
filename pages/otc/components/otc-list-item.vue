@@ -128,7 +128,7 @@
 				this.form.side = this.data.side
 				this.form.volume = parseFloat(this.form.volume)
 				this.createOrder(this.form).then(res =>{
-					this.$refs.popup.close()
+					this.showKeyboard = false
 					this.$api.msg('下单成功')
 					uni.$emit("refresh")
 				}).catch(error =>{
