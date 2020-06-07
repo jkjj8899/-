@@ -3,7 +3,7 @@
 #### 特别声明
 本软件属于技术开源软件, 任何使用本源码从事商业活动，对别人和自己造成损失的，本人概不负责！
 
-### Android测试包下载: [下载](http://47.107.100.112/apk/fexcoin.apk)
+### Android测试包下载: [下载](https://fexcoin.oss-cn-shenzhen.aliyuncs.com/upload/apk/fexcoin.apk)
 
 
 #### 技术交流社区
