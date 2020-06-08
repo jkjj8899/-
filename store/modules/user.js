@@ -1,5 +1,5 @@
 import { USER_LOGIN, USER_UPDATE_PAY_PWD } from './../mutations_type'
-import { register, login, updatePayPwd, updatePwd, encryptBookList, addEncryptBook, deleteEncryptBook } from '@/api/user'
+import { register, login, updatePayPwd, updatePwd, encryptBookList, addEncryptBook, deleteEncryptBook, withdraw } from '@/api/user'
 
 const user = {
   state: {
@@ -94,6 +94,15 @@ const user = {
 	deleteEncryptBook({ commit }, id) {
 	  return new Promise((resolve, reject) => {
 	    deleteEncryptBook(id).then(res => {
+	      resolve(res)
+	    }).catch(error => {
+	      reject(error)
+	    })
+	  })
+	},
+	withdraw({ commit }, data) {
+	  return new Promise((resolve, reject) => {
+	    withdraw(data).then(res => {
 	      resolve(res)
 	    }).catch(error => {
 	      reject(error)

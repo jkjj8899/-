@@ -62,7 +62,8 @@
 				auth: {
 					code: undefined,
 					token: undefined
-				}
+				},
+				timer: undefined
 			}
 		},
 		computed: {
@@ -76,14 +77,15 @@
 					type: this.$g.CAPTCHA_TYPE.COMMON,
 					number: this.loginInfo.mobile
 				}
+				let $this = this
 				this.sendSms(data).then(res => {
 					this.auth.token = res.data
 					var i = 120;
-					let timer = setInterval(() => {
+					this.timer = setInterval(() => {
 						this.interval = i + 's'
 						i = i - 1;
 						if(i == 0){
-							clearInterval(timer);
+							clearInterval($this.timer);
 							this.isSend = false
 						}
 					}, 1000)
@@ -110,8 +112,11 @@
 			},
 			submit(){
 				this.disabled = true
+				if(this.timer){
+					clearInterval(this.timer);
+				}
 				this.$emit('ok', this.auth)
-			},
+			}
 			
 		}
     }

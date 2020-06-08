@@ -55,3 +55,11 @@ export function deleteEncryptBook(id) {
     method: 'DELETE'
   })
 }
+//提币
+export function withdraw(data) {
+  return request({
+    url: '/v1/withdraw',
+    method: 'POST',
+    data: data
+  })
+}
