@@ -6,8 +6,9 @@
   "author": "flex",
   "license": "ISC",
   "dependencies": {
-    "uview-ui": "^1.2.9",
     "@dcloudio/uni-ui": "^1.2.1",
+    "tki-qrcode": "^0.1.6",
+    "uview-ui": "^1.2.9",
     "vue-moment": "^4.1.0"
   }
 }

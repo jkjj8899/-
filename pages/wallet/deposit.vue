@@ -4,20 +4,20 @@
 		<view class="coin-section m-t">
 			<view class="s-row">
 				<view class="col">
-					<image src="https://s1.bqiapp.com/coin/20181030_72_webp/bitcoin_200_200.webp?v=67" class="coinLogo"></image>
-					<text class="coin">BTC</text>
+					<image :src="coin.icon" class="coinLogo"></image>
+					<text class="coin">{{coin.symbol}}</text>
 				</view>
-				<view class="col r light" @click="navToSearch()">
+				<view class="col r light" @click="navTo('/pages/public/coinList')">
 					<text class="subtitle">选择币种</text>
 					<uni-icons type="forward" size="20" class="arrow"></uni-icons>
 				</view>
 			</view>
 			<view class="s-row qrcode">
-				<image src="../../static/qrcode.png" class="img"></image>
-				<view class="save">保存二维码到相册</view>
+				<tki-qrcode ref="qrcode" :size="400" :onval="true" cid="qrcode" :val="qrcode.val" />
+				<view class="save" @click="save">保存二维码到相册</view>
 				<text class="title">充币地址</text>
-				<text class="address">0xe2lsk1323ggdswwwwa2l222123bcbxsaa3ksdlksfdklkmad</text>
-				<view class="copy">复制</view>
+				<text class="address">{{deposit.address}}</text>
+				<view class="copy" @click="paste">复制</view>
 			</view>
 			<view class="desc">
 				<text>请勿向上述地址充值任何非 ERC20_ USDT资产，否则资产将不可找回。</text>
@@ -31,39 +31,66 @@
 </template>
 
 <script>
-	import {
-		mapState
-	} from 'vuex';
-	import {uniIcons} from '@dcloudio/uni-ui'
+	import { mapState, mapActions } from 'vuex'
+	import tkiQrcode from "@/components/tki-qrcode/tki-qrcode.vue"
+	import {commonMixin, authMixin} from '@/common/mixin/mixin.js'
 	export default {
-		components: {uniIcons},
+		components: {tkiQrcode},
+		mixins: [commonMixin, authMixin],
 		data() {
 			return {
-				total: 0, //总价格
-				allChecked: false, //全选状态  true|false
-				empty: false, //空白页现实  true|false
-				cartList: [],
+				coin: {},
+				account: {},
+				coins: [],
+				deposit: {},
+				qrcode: {
+					val: ''
+				}
 			};
 		},
-		onLoad(){
-			this.loadData();
+		onUnload(){
+			uni.$off('selectCoin', this.selectCoin)
 		},
-		computed:{
-			...mapState(['hasLogin'])
+		onLoad(){
+			uni.$on('selectCoin', this.selectCoin)
+			this.coinList().then(res =>{
+				this.coins = res.data
+				this.coin = res.data[0]
+				this.loadData()
+			})
 		},
 		methods: {
-			//请求数据
+			...mapActions('common', ['coinList']),
+			...mapActions('user', ['depositAddress']),
 			async loadData(){
-				let list = await this.$api.json('cartList'); 
-				let cartList = list.map(item=>{
-					item.checked = true;
-					return item;
-				});
-			},
-			navToSearch(){
-				uni.navigateTo({
-					url: '/pages/wallet/search'
+				this.depositAddress(this.coin.symbol).then(res =>{
+					this.deposit = res.data
+					this.qrcode.val = res.data.address
+					console.log(this.qrcode.val)
+					this.$refs.qrcode._makeCode()
 				})
+			},
+			selectCoin(data){
+				for(let i = 0; i < this.coins.length; i++){
+					let item = this.coins[i]
+					if(item.symbol === data.coin.item.name){
+						this.coin = item;
+						break;
+					}
+				}
+				this.loadData()
+			},
+			save(){
+				this.$refs.qrcode._saveCode()
+			},
+			paste() {
+				let $this = this
+				uni.setClipboardData({
+				    data: this.deposit.address,
+				    success: function () {
+				        $this.$api.msg('复制成功')
+				    }
+				});
 			}
 		}
 	}

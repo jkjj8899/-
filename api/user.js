@@ -63,3 +63,10 @@ export function withdraw(data) {
     data: data
   })
 }
+//充币
+export function depositAddress(coin) {
+  return request({
+    url: `/v1/deposit/address/${coin}`,
+    method: 'GET'
+  })
+}

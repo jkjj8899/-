@@ -65,8 +65,9 @@
 			this.coinList().then(res =>{
 				this.coins = res.data
 				this.coin = res.data[0]
+				
+				this.loadData()
 			})
-			this.loadData()
 		},
 		methods: {
 			...mapActions('common', ['coinList']),
@@ -102,22 +103,24 @@
 					this.$api.msg('请输入数量')
 					return;
 				}
-				this.$refs.validPopup.open('mobile')
+				this.$refs.validPopup.open('capitalPasswd')
 				
 			},
 			ok(data){
 				if(!data.code){
-					this.$api.msg('请输入验证码')
+					this.$api.msg('请输入资金密码')
 					return;
 				}
-				this.form.authCode = data.token + ':' + data.code
-				console.log(this.form.authCode)
+				
+				this.form.capitalPasswd = data.code
 				uni.showLoading();
 				this.withdraw(this.form).then(res =>{
 					uni.hideLoading()
+					this.$refs.validPopup.close()
 					this.$api.msg('提币成功', 1000, false, 'none', function() {})
 				}).catch(error => {
 					uni.hideLoading()
+					this.$refs.validPopup.enable()
 				})
 			},
 			all(){
