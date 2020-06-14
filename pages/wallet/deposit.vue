@@ -19,29 +19,24 @@
 				<text class="address">{{deposit.address}}</text>
 				<view class="copy" @click="paste">复制</view>
 			</view>
-			<view class="desc">
-				<text>请勿向上述地址充值任何非 ERC20_ USDT资产，否则资产将不可找回。</text>
-				<text>您充值至上述地址后，需要整个网络节点的确认，12次网络确认后到账，12次网络确认后可提币。</text>
-				<text>最小充值金额：1 USDT，小于最小金额的充值将不会上账且无法退回。</text>
-				<text>您的充值地址不会经常改变，可以重复充值；如有更改，我们会尽量通过网站公告或邮件通知您。</text>
-				<text>请务必确认电脑及浏览器安全，防止信息被篡改或泄露。</text>
-			</view>
+			<view class="desc" v-html="tips[1] ? tips[1].content : ''"></view>
 		</view>
 	</view>
 </template>
-
 <script>
 	import { mapState, mapActions } from 'vuex'
 	import tkiQrcode from "@/components/tki-qrcode/tki-qrcode.vue"
+	import {uniIcons} from '@dcloudio/uni-ui'
 	import {commonMixin, authMixin} from '@/common/mixin/mixin.js'
 	export default {
-		components: {tkiQrcode},
+		components: {tkiQrcode, uniIcons},
 		mixins: [commonMixin, authMixin],
 		data() {
 			return {
 				coin: {},
 				account: {},
 				coins: [],
+				tips: {},
 				deposit: {},
 				qrcode: {
 					val: ''
@@ -60,14 +55,16 @@
 			})
 		},
 		methods: {
-			...mapActions('common', ['coinList']),
+			...mapActions('common', ['coinList', 'coinTips']),
 			...mapActions('user', ['depositAddress']),
 			async loadData(){
 				this.depositAddress(this.coin.symbol).then(res =>{
 					this.deposit = res.data
 					this.qrcode.val = res.data.address
-					console.log(this.qrcode.val)
 					this.$refs.qrcode._makeCode()
+				})
+				this.coinTips(this.coin.symbol).then(res =>{
+					this.tips = res.data
 				})
 			},
 			selectCoin(data){

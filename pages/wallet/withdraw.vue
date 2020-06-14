@@ -26,11 +26,7 @@
 				<text class="label">手续费 {{coin.withdrawFee}} {{coin.symbol}}</text>
 			</view>
 			<button class="submit" @click="handleSubmit">确认</button>
-			<view class="desc">
-				<text>最小提币数量为：2 USDT (ERC20)。</text>
-				<text>为保障资金安全，当您账户安全策略变更、密码修改、我们会对提币进行人工审核，请耐心等待工作人员电话或邮件联系。</text>
-				<text>请务必确认电脑及浏览器安全，防止信息被篡改或泄露。</text>
-			</view>
+			<view class="desc" v-html="tips[0] ? tips[0].content : ''"></view>
 		</view>
 		<uni-valid-popup ref="validPopup" @ok="ok"></uni-valid-popup>
 	</view>
@@ -40,15 +36,16 @@
 	import { mapState, mapActions } from 'vuex'
 	import uniValidPopup from '@/components/uni-valid-popup.vue';
 	import {uniIcons} from '@dcloudio/uni-ui'
-	import {commonMixin} from '@/common/mixin/mixin.js'
+	import {commonMixin, authMixin} from '@/common/mixin/mixin.js'
 	export default {
 		components: {uniIcons, uniValidPopup},
-		mixins: [commonMixin],
+		mixins: [commonMixin, authMixin],
 		data() {
 			return {
 				coin: {},
 				account: {},
 				coins: [],
+				tips: {},
 				form: {
 					symbol: undefined,
 					amount: undefined,
@@ -70,13 +67,16 @@
 			})
 		},
 		methods: {
-			...mapActions('common', ['coinList']),
+			...mapActions('common', ['coinList', 'coinTips']),
 			...mapActions('account', ['getAccount']),
 			...mapActions('user', ['withdraw']),
 			//请求数据
 			async loadData(){
 				this.getAccount(this.coin.symbol).then(res =>{
 					this.account = res.data
+				})
+				this.coinTips(this.coin.symbol).then(res =>{
+					this.tips = res.data
 				})
 			},
 			selectCoin(data){

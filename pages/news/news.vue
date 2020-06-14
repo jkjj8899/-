@@ -55,6 +55,8 @@
 			}
 		},
 		onPullDownRefresh() {
+			this.list = []
+			this.query.page = 1
 			this.loadData();
 		},
 		methods: {

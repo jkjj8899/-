@@ -60,7 +60,9 @@
 			};
 		},
 		onShow(){
-			this.loadData();
+			if(this.loginInfo.hasLogin){
+				this.loadData();
+			}
 		},
 		onPullDownRefresh() {
 			this.loadData();

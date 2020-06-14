@@ -7,12 +7,12 @@
 					<text class="name">{{exItem.base}}</text>
 					<image src="../../static/tri.png" class="tri"></image>
 				</view>
-				<view class="quote item">
+				<view class="quote item" @click="changeCoin()">
 					<image :src="exItem.quoteCoinIcon" class="coinLogo"></image>
 					<text class="name">{{exItem.quote}}</text>
 					<image src="../../static/tri.png" class="tri"></image>
 				</view>
-				<view class="transform"><image src="../../static/exc.png" class="exc"></image></view>
+				<view @click="transform" class="transform"><image src="../../static/exc.png" class="exc"></image></view>
 			</view>
 			<view class="amount little-line">
 				<input type="number" v-model="form.amount" placeholder="转出数量" class="out"/>
@@ -47,10 +47,11 @@
 		<uni-popup ref="popup" type="bottom">
 			<view class="coin-box">
 				<view class="coin-search">
-					<uni-search-bar placeholder="搜索token" @confirm="search"></uni-search-bar>
+					<uni-search-bar placeholder="搜索token" @input="search"></uni-search-bar>
 				</view>
 				<view class="item-wrapper">
-					<view class="coin-item little-line" v-for="(item, i) in coinList" :key="item.id">
+					<u-empty text="暂无数据" mode="data" :show="coinEmpty" img-width="140"></u-empty>
+					<view class="coin-item little-line" @click="select(item)" v-for="(item, i) in coinList" :key="item.id">
 						<view class="col">
 							<image :src="item.baseCoinIcon"/>
 							<text>{{item.base}}</text>
@@ -90,9 +91,11 @@
 				total: 0, //总价格
 				allChecked: false, //全选状态  true|false
 				empty: false, //空白页现实  true|false
+				coinEmpty: false,
 				scrollY: true,
 				enableBackToTop: true,
 				indicatorStyle: 'height:90upx; line-height:90upx;',
+				coinCacheList: [],
 				coinList: [],
 				exItem: {},
 				account: {},
@@ -165,9 +168,12 @@
 				this.form.to = this.exItem.quote
 				this.form.capitalPasswd = data.code
 				this.addExchange(this.form).then(res =>{
-					this.loadMore()
+					this.records = [];
+					this.query.page = 1
+					this.getExchangeRecordList()
 					this.$refs.popup.close()
 					this.$refs.validPopup.close()
+					this.resetAmount()
 					this.$api.msg('兑换成功')
 				}).catch(error => {
 					this.$refs.validPopup.enable()
@@ -192,6 +198,30 @@
 					}
 				})
 			},
+			transform(){
+				let list = this.coinList
+				let item = null
+				for(let i = 0; i < list.length; i++){
+					if(list[i].base == this.exItem.quote && list[i].quote == this.exItem.base){
+						item = list[i]
+						break
+					}
+				}
+				if(item == null){
+					this.$api.msg('该交易对不能互转')
+					return
+				}
+				this.exItem = item
+				this.loadAccount(this.exItem.base)
+				this.resetAmount()
+			},
+			select(symbol){
+				this.exItem = symbol
+				this.loadAccount(this.exItem.base)
+				this.getExchangeRecordList()
+				this.resetAmount()
+				this.$refs.popup.close()
+			},
 			loadMore(){
 				if(!this.isLastPage){
 					this.loadingStatus = 'loading'
@@ -203,6 +233,7 @@
 			async loadData(){
 				this.exchangeList().then(res =>{
 					this.coinList = res.data
+					this.coinCacheList = res.data
 					this.exItem = this.coinList[0]
 					this.loadAccount(this.exItem.base)
 				})
@@ -213,10 +244,32 @@
 					this.account = res.data
 				})
 			},
-			navToDetail(){
-				uni.navigateTo({
-					url: '/pages/wallet/detail'
-				})
+			resetAmount(){
+				this.form.amount = undefined
+				this.inAmount = undefined
+			},
+			search(data){
+				if(data.value){
+					let newList = []
+					let list = this.coinCacheList
+					let v = data.value.toLowerCase()
+					for(let i = 0; i < list.length; i++){
+						let base = list[i].base.toLowerCase()
+						let quote = list[i].quote.toLowerCase()
+						if(base.indexOf(v) >= 0 || quote.indexOf(v) >= 0){
+							newList.push(list[i])
+						}
+					}
+					if(newList == undefined || newList.length <= 0){
+						this.coinEmpty = true
+					} else {
+						this.coinEmpty = false
+					}
+					this.coinList = newList
+				} else {
+					this.coinEmpty = false
+					this.coinList = this.coinCacheList
+				}
 			}
 		}
 	}

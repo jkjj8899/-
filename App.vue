@@ -15,6 +15,7 @@
 			this.$fire.$on("refreshCoin", () => {
 				$this.coinList()
 			});
+			this.$store.dispatch('WEBSOCKET_INIT', 'wss://api.hadax.com/ws')
 		},
 		onShow: function() {
 			console.log('App Show')
@@ -597,5 +598,11 @@
 		width: 100%;
 		height: 20upx;
 		background: #EEF2F5;
+	 }
+	 .upper-text{
+		 color: $uni-color-upper
+	 }
+	 .lower-text{
+	 	 color: $uni-color-lower
 	 }
 </style>

@@ -221,7 +221,16 @@
 			"style": {
 				"navigationBarTitleText": "修改资料"
 			}
-		}, {
+		},
+		{
+			"path": "pages/public/kline",
+			"style": {
+				"navigationBarTitleText": "行情",
+				"navigationBarTextStyle": "white",
+				"navigationBarBackgroundColor": "#181B2A"
+			}
+		},
+		{
 			"path": "pages/public/login",
 			"style": {
 				"navigationBarTitleText": "",

@@ -1,6 +1,7 @@
 import {
 	sendSms,
 	coinList,
+	coinTips,
 	marketList,
 	adList,
 	noticeList,
@@ -36,6 +37,17 @@ const common = {
 			return new Promise((resolve, reject) => {
 				coinList().then(res => {
 					commit(COMMON_COIN_LIST, res)
+					resolve(res)
+				}).catch(error => {
+					reject(error)
+				})
+			})
+		},
+		coinTips({
+			commit
+		}, coin) {
+			return new Promise((resolve, reject) => {
+				coinTips(coin).then(res => {
 					resolve(res)
 				}).catch(error => {
 					reject(error)

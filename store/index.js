@@ -8,11 +8,13 @@ import common from './modules/common'
 import exchange from './modules/exchange'
 import account from './modules/account'
 import cms from './modules/cms'
+import websocket from './modules/websocket'
 
 Vue.use(Vuex)
 
 const store = new Vuex.Store({
   modules: {
+	websocket: websocket,
 	user: {
 	  namespaced: true,
 	  ...user

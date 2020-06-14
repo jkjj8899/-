@@ -15,11 +15,18 @@
 				<text class="num">{{swiperLength}}</text>
 			</view>
 		</view>
-		<!-- 分类 -->
 		<view class="cate-section">
-			<!-- 文字滚动 -->
 			<noticeSwiper :list="notices"></noticeSwiper>
 		</view>
+		<scroll-view class="scroll-view-market" scroll-x="true">
+			<view class="market-item" v-for="(item, i) in topSymbols" :key="item.symbol" @click="navTo(`/pages/public/kline?symbol=${item.symbol}`)">
+				<view class="item">
+					<view class="t">{{item.title}}<text :class="topMakretMap[`market.${item.symbol}.detail`].change | formatChangeCls">{{topMakretMap[`market.${item.symbol}.detail`].change | formatChange}}</text></view>
+					<text class="c" :class="topMakretMap[`market.${item.symbol}.detail`].change | formatChangeCls">{{topMakretMap[`market.${item.symbol}.detail`].tick ? topMakretMap[`market.${item.symbol}.detail`].tick.close : '0.00'}}</text>
+					<text class="b">≈ {{topMakretMap[`market.${item.symbol}.detail`].cny}} CNY</text>
+				</view>
+			</view>
+		</scroll-view>
 		<view class="menu">
 			<view class="item exchange" @click="navTo('/pages/exchange/index', true)">
 				<image src="../../static/exchange.png"></image>
@@ -86,12 +93,31 @@
 				carousels: [],
 				ads: [],
 				current: 0,
-				mode: 'round' 
+				mode: 'round' ,
+				topSymbols: [
+					{symbol: 'btcusdt', title: 'BTC/USDT'},
+					{symbol: 'ethusdt', title: 'ETH/USDT'},
+					{symbol: 'eosusdt', title: 'EOS/USDT'}
+				],
+				topMakretMap: {
+					'market.btcusdt.detail': {},
+					'market.ethusdt.detail': {},
+					'market.eosusdt.detail': {}
+				}
 			};
 		},
 		filters:{
 			formatChange(v){
-				return parseFloat(v).toFixed(2) + '%'
+				return (v > 0 ? '+' : '') + parseFloat(v).toFixed(2) + '%'
+			},
+			formatChangeCls(v){
+				if(v == 0){
+					return ''
+				} else if(v > 0){
+					return 'upper-text'
+				} else {
+					return 'lower-text'
+				}
 			},
 			formatMarketcap(v){
 				return formatUnit(v);
@@ -101,15 +127,43 @@
 			this.getMaketList()
 		},
 		onLoad() {
+			setTimeout(() =>{
+				this.loadTopMarket()
+			}, 500)
 			this.loadData();
 			this.notices = ["国际站4月1日14:00开放MDC/USDT交易市场", "国际站4月2日10:00上线HKL", "关于国际站即将上线 GCCT（Global Cash Coin)"];
 		},
+		onUnload() {
+			for(let i = 0; i < 3; i++){
+				let ch = `market.${this.topSymbols[i].symbol}.detail`
+				let data = {
+				  "unsub": ch,
+				  "id": Date.now() + ""
+				}
+				this.$store.dispatch('WEBSOCKET_SEND', JSON.stringify(data))
+				uni.$off(ch, (res) => {})
+			}
+		},
 		methods: {
 			...mapActions('common', ['marketList', 'adList', 'noticeList']),
-			/**
-			 * 请求静态数据只是为了代码不那么乱
-			 * 分次请求未作整合
-			 */
+			loadTopMarket(){
+				let $this = this
+				for(let i = 0; i < 3; i++){
+					let ch = `market.${this.topSymbols[i].symbol}.detail`
+					let data = {
+					  "sub": ch,
+					  "id": Date.now() + ""
+					}
+					this.$store.dispatch('WEBSOCKET_SEND', JSON.stringify(data))
+					uni.$on(ch, (res) => {
+						let d = res.data
+						d.tick.close = d.tick.close.toFixed(2)
+						d.change = parseFloat((d.tick.close - d.tick.open) / d.tick.open * 100).toFixed(2);
+						d.cny = parseFloat(d.tick.close * 7.04).toFixed(2)
+						$this.topMakretMap[res.data.ch] = d
+					})
+				}
+			},
 			async loadData() {
 				this.adList().then(res =>{
 					let casrousels = res.data.casrousels
@@ -178,6 +232,34 @@
 			padding: 0;
 			image{
 				width: 100%;
+			}
+		}
+	}
+	.scroll-view-market {
+		width: 100%;
+	}
+	.market-item {
+		display: inline-block;
+		width: 33%;
+		.item{
+			padding: 30upx 0 30upx 0;
+			width: 100%;
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			text-align: center;
+			.t{
+				font-weight: bold;
+				font-size: $font-sm;
+			}
+			.c{
+				padding: 10upx 0 10upx 0;
+				font-size: $font-xl;
+				font-weight: bold;
+			}
+			.b{
+				font-size: $font-sm;
+				color: $font-color-disabled;
 			}
 		}
 	}
