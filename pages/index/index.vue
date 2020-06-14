@@ -124,9 +124,13 @@
 			}
 		},
 		onShow() {
-			this.getMaketList()
+			
 		},
 		onLoad() {
+			this.getMaketList()
+			setInterval(() =>{
+				this.getMaketList()
+			}, 3000)
 			setTimeout(() =>{
 				this.loadTopMarket()
 			}, 500)
