@@ -146,6 +146,7 @@
 			};
 		},
 		onLoad(options){
+			console.log(JSON.stringify(this.coinMap))
 			this.currencyList().then(res => {
 				this.payment = res.data.payment
 				this.id = options.id

@@ -89,6 +89,9 @@
 			this.loadingStatus = 'loadmore'
 			this.loadData();
 		},
+		onLoad() {
+			this.$fire.$emit('refreshCoin')
+		},
 		onReachBottom(){
 			if(!this.isLastPage){
 				this.query.page += 1
