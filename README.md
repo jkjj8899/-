@@ -23,8 +23,7 @@
 
 #### 版本更新
 ##### 2020-06-14: 接入火币K线行情
-![Image text](doc/10.jpg) 
-![Image text](doc/11.jpg) 
+![Image text](doc/12.jpg) 
 
 ![Image text](doc/fexcoin.jpg) 
 
