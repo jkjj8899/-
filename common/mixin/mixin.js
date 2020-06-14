@@ -10,6 +10,17 @@ export const commonMixin = {
   data() {
     return { }
   },
+  filters: {
+	  fixed(v, scale){
+		  if(v){
+			  if(!scale){
+				  scale = 2
+			  }
+			  return parseFloat(v).toFixed(scale)
+		  }
+		  return v
+	  }
+  },
   methods: {
 	  isLogin(){
 		  if(!this.loginInfo.hasLogin){

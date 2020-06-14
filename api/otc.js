@@ -65,6 +65,13 @@ export function getMerchant() {
     method: 'GET'
   })
 }
+// 商家详情
+export function merchantDetail(id) {
+  return request({
+    url: `/v1/otc/advert/merchant/${id}`,
+    method: 'GET'
+  })
+}
 // 申请商家
 export function applyMerchant(data) {
   return request({

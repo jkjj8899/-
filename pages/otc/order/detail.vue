@@ -6,16 +6,16 @@
 					<text class="iconfont s0"></text>
 					<text class="v">请付款</text>
 				</view>
-				<view v-if="side == 'BUY'">请在<text class="t">14:00</text>内付款给卖家</view>
-				<view v-if="side == 'SELL'">等待对方付款,可以 14:00 后提交申诉</view>
+				<view v-if="side == 'BUY'">请在<text class="t">{{order.limitTime}}分钟</text>内付款给卖家</view>
+				<view v-if="side == 'SELL'">等待对方付款,可以 {{order.limitTime}}分钟 后提交申诉</view>
 			</view>
 			<view class="status" v-if="order.status == 1">
 				<view class="s">
 					<text class="iconfont s0"></text>
 					<text class="v">已付款</text>
 				</view>
-				<view v-if="side == 'BUY'">商家未放币,您可进行申诉</view>
-				<view v-if="side == 'SELL'">对方向你支付了 {{order.totalPrice}}</view>
+				<view v-if="side == 'BUY'">卖家未放币,您可进行申诉</view>
+				<view v-if="side == 'SELL'">对方向你支付了 {{order.totalPrice | fixed(2)}}</view>
 			</view>
 			<view class="status" v-if="order.status == 2">
 				<view class="s">
@@ -41,11 +41,11 @@
 			</view>
 		</view>
 		<view class="amount-wrapper">
-			<text class="total">订单金额: ￥{{order.totalPrice}}</text>
+			<text class="total">订单金额: ￥{{order.totalPrice | fixed(2)}}</text>
 			<view class="info">
 				<view class="price">
-					<view><text class="label">单价</text><text class="num">￥{{order.price}}</text></view>
-					<view><text class="label">数量</text><text class="num">{{order.volume}} {{order.coin}}</text></view>
+					<view><text class="label">单价</text><text class="num">￥{{order.price | fixed(2)}}</text></view>
+					<view><text class="label">数量</text><text class="num">{{order.volume | fixed(2)}} {{order.coin}}</text></view>
 				</view>
 				<view class="coin">
 					<image :src="coinMap[order.coin].icon" class="coinLogo"></image>
@@ -92,10 +92,6 @@
 					<view class="left">开户支行</view>
 					<view class="right">{{account.subBranch}}</view>
 				</view>
-				<view v-show="currentPay.code == 'UnionPay'" class="item">
-					<view class="left">开户支行</view>
-					<view class="right">{{account.subBranch}}</view>
-				</view>
 			</view>
 		</view>
 		<view class="footer" v-if="side == 'BUY' && order.status == 0">
@@ -109,12 +105,12 @@
 		</view>
 		<view class="footer" v-if="side == 'BUY' && order.status == 1">
 			<view class="btns">
-				<button class="pay">申诉</button>
+				<button class="pay appy">申诉</button>
 			</view>
 		</view>
 		<view class="footer" v-if="side == 'SELL' && order.status == 1">
 			<view class="btns">
-				<button class="pay">申诉</button>
+				<button class="pay appy">申诉</button>
 				<button @click="complete" class="pay">确认收款并放行</button>
 			</view>
 		</view>
@@ -252,7 +248,7 @@
 						code: this.payCodes[0],
 						name: this.payLabels[0]
 					}
-					this.account = JSON.parse(this.merchantPays[this.currentPay.code].account)
+					this.account = JSON.parse(this.merchantPays[this.currentPay.code])
 				}).catch(error =>{
 					
 				})
@@ -404,6 +400,10 @@
 			.cancel{
 				width: 35%;
 				font-size: $font-base;
+			}
+			.appy{
+				background: $uni-color-warning !important;
+				width: 35% !important;
 			}
 			.pay{
 				width: 55%;

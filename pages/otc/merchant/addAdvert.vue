@@ -2,12 +2,12 @@
 	<view class="container">
 		<view class="list-cell b-b" hover-class="cell-hover" :hover-stay-time="50">
 			<text class="cell-tit">{{form.coin == null ? '币种' : form.coin}}</text>
-			<text class="cell-more" @click="navTo('/pages/public/coinList')">请选择</text>
+			<text class="cell-more" @click="selectCoin">请选择</text>
 		</view>
-		<view class="list-cell b-b" hover-class="cell-hover" :hover-stay-time="50">
+		<!-- <view class="list-cell b-b" hover-class="cell-hover" :hover-stay-time="50">
 			<text class="cell-tit">{{lable.paycoin == null ? '法币' : lable.paycoin}}</text>
 			<text class="cell-more" @click="selectCurrency">请选择</text>
-		</view>
+		</view> -->
 		<view class="list-cell b-b" hover-class="cell-hover" :hover-stay-time="50">
 			<text class="cell-tit">{{lable.payment == null ? '支付方式' : lable.payment}}</text>
 			<checkbox-group @change="selectPayment">
@@ -20,10 +20,10 @@
 			<text class="cell-tit">订单类型</text>
 			<radio-group name="side" @change="selectSide">
 				<label>
-					<radio value="SELL" :checked="form.side == 'SELL'"/><text class="cell-side">出售</text>
+					<radio value="BUY" :checked="form.side == 'BUY'"/><text class="cell-side">出售</text>
 				</label>
 				<label>
-					<radio value="BUY" :checked="form.side == 'BUY'"/><text class="cell-side">购买</text>
+					<radio value="SELL" :checked="form.side == 'SELL'"/><text class="cell-side">购买</text>
 				</label>
 			</radio-group>
 		</view>
@@ -74,7 +74,7 @@
 				form: {
 					coin: undefined,
 					side: 'SELL',
-					paycoin: undefined,
+					paycoin: 'CNY',
 					payment: undefined,
 					price: undefined,
 					volume: undefined,
@@ -83,7 +83,7 @@
 					limitTime: undefined,
 					description: undefined,
 					capitalPasswd: undefined,
-					endDate: '2020-05-26 22:04:00'
+					endDate: undefined
 				},
 				lable: {
 					paycoin: undefined,
@@ -91,11 +91,11 @@
 				},
 				currencys: [],
 				payments: [],
-				payTypes: []
+				payTypes: [],
+				fiatCoins: []
 			};
 		},
 		onLoad(){
-			uni.$on('selectCoin', this.selectCoin)
 			this.currencyList().then(res => {
 				this.currencys = res.data.currency
 				//this.payments = res.data.payment
@@ -106,17 +106,25 @@
 							this.payments.push(p[i])
 						}
 					}
+					if(!this.payments){
+						this.navTo('/pages/user/payType')
+						return
+					}
 				}).catch(error =>{
 					
 				})
 			})
 			
+			this.fiatList().then(res =>{
+				this.fiatCoins = res.data
+			})
+			
 		},
 		onUnload(){
-			uni.$off('selectCoin', this.selectCoin)
+			
 		},
 		methods:{
-			...mapActions('common', ['currencyList']),
+			...mapActions('common', ['currencyList', 'fiatList']),
 			...mapActions('otc', ['addAdvert', 'getUsePayInfo']),
 			submit(){
 				if(!this.loginInfo.isCapitalPasswd){
@@ -159,6 +167,10 @@
 					this.$api.msg('请输入限额')
 					return;
 				}
+				if(this.form.minTrade > this.form.maxTrade){
+					this.$api.msg('最小限额不能大于最大限额')
+					return;
+				}
 				if(!this.form.limitTime){
 					this.$api.msg('请选择超时时间')
 					return;
@@ -184,7 +196,7 @@
 				this.form = {
 					coin: undefined,
 					side: 'SELL',
-					paycoin: undefined,
+					paycoin: 'CNY',
 					payment: undefined,
 					price: undefined,
 					volume: undefined,
@@ -207,8 +219,14 @@
 					this.form.payment = undefined
 				}
 			},
-			selectCoin(data){
-				this.form.coin = data.coin.item.name
+			selectCoin(){
+				let $this = this
+				uni.showActionSheet({
+					itemList: $this.fiatCoins,
+					success: function (res) {
+						$this.form.coin = $this.fiatCoins[res.tapIndex]
+					}
+				})
 			},
 			selectlimitTime(){
 				let form = this.form

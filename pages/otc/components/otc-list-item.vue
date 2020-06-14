@@ -1,11 +1,11 @@
 <template>
 	<view class="order-item little-line">
-		<view class="row user-info" @click="navTo('/pages/otc/business/business')">
+		<view class="row user-info" @click="navTo(`/pages/otc/business/business?merchantId=${data.uid}`)">
 			<view class="name"><view class="profile">{{data.nickname | sub}}</view>{{data.nickname}}</view>
 			<view class="nomarl">1091 | 99%</view>
 		</view>
 		<view class="row">
-			<view class="nomarl">数量 {{data.volume - data.dealVolume}} {{data.coin}}</view>
+			<view class="nomarl">数量 {{(data.volume - data.dealVolume) | fixed(2)}} {{data.coin}}</view>
 			<view class="nomarl">单价</view>
 		</view>
 		<view class="row">
@@ -14,26 +14,29 @@
 		</view>
 		<view class="row opt">
 			<view class="pay">
-				<image v-for="(t, index) in JSON.parse(data.payment)" :key="index" :src="t | formatIconUrl"></image>
+				<i v-for="(t, index) in JSON.parse(data.payment)" :key="index" :class="`fexfont icon-${t}`"></i>
 			</view>
-			<view><button class="btn" @click="buy">购买</button></view>
+			<view>
+				<button class="btn buy" v-if="data.side == 'BUY'" @click="buy">购买</button>
+				<button class="btn sell" v-if="data.side == 'SELL'" @click="buy">出售</button>
+			</view>
 		</view>
 		<u-keyboard ref="uKeyboard" @confirm="priceCancel" @cancel="priceCancel" @backspace="backspace" @change="priceChange" mode="number" :mask="true" v-model="showKeyboard">
 			<view class="box">
 				<view class="coin">
 					<view>
-						<view class="name">购买{{data.coin}}</view>
+						<view class="name">{{sideMap[data.side]}}{{data.coin}}</view>
 						<view>单价:<text class="price">￥{{data.price}}</text></view>
 					</view>
 					<view><image class="icon" :src="coinMap[data.coin].icon"></image></view>
 				</view>
 				<view class="type">
-					<view @click="changeType(0)" :class="form.type == 0 ? 'active' : ''">按金额购买</view>
-					<view @click="changeType(1)" :class="form.type == 1 ? 'active' : ''">按数量购买</view>
+					<view @click="changeType(0)" :class="form.type == 0 ? 'active' : ''">按金额{{sideMap[data.side]}}</view>
+					<view @click="changeType(1)" :class="form.type == 1 ? 'active' : ''">按数量{{sideMap[data.side]}}</view>
 				</view>
 				<view class="input">
 					<view><input :disabled="true" readonly="true" @blur="blur" @focus="focus" class="uni-input" cursor-spacing="0" :adjust-position="false" v-model="form.volume" type="number" :placeholder="placeholder[form.type]"/></view>
-					<view><text class="i cny">{{unit[form.type]}}</text> | <text @click="allBuy" class="i all">全部买入</text></view>
+					<view><text class="i cny">{{unit[form.type]}}</text> | <text @click="allBuy" class="i all">全部{{sideMap[data.side]}}</text></view>
 				</view>
 				<view class="limit">限额：￥{{data.minTrade}} - ￥{{data.maxTrade}}</view>
 				<view class="num">交易数量：{{showVolume}} {{data.coin}}</view>
@@ -81,6 +84,10 @@
 				unit: {
 					0: 'CNY',
 					1: this.data.coin
+				},
+				sideMap: {
+					'BUY': '购买',
+					'SELL': '出售'
 				}
 			}
 		},
@@ -98,7 +105,7 @@
 				return '';
 			},
 			formatIconUrl(v){
-				return `../../static/${v}.png`
+				return `../../../static/${v}.png`
 			}
 		},
 		created() {
@@ -110,7 +117,7 @@
 					return
 				}
 				if(this.form.type == 0){
-					this.showVolume = this.form.volume / this.data.price
+					this.showVolume = (this.form.volume / this.data.price).toFixed(2)
 					this.showAmount = this.form.volume
 				} else {
 					this.showVolume = this.form.volume
@@ -230,9 +237,14 @@
 					height: 25px;
 				}
 			}
+			.buy{
+				background: $uni-color-blue;
+			}
+			.sell{
+				background: #475F78;
+			}
 			.btn{
 				border: 0;
-				background: $uni-color-blue;
 				color: #fff;
 				font-size: $font-sm;
 				height: 60upx;

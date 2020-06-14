@@ -19,7 +19,7 @@
 				<input type="number" v-model="inAmount" placeholder="收到数量" class="in"/>
 			</view>
 			<view class="params">
-				<view class="rate">余额: {{account.normalBalance}} {{exItem.base}}</view>
+				<view class="rate">余额: {{account.normalBalance | fixed(2)}} {{exItem.base}}</view>
 				<view class="fee">手续费:{{exItem.fee * 100}}%</view>
 			</view>
 			<view class="rate-amount">汇率: 1{{exItem.base}} = {{1 * exItem.scale}}{{exItem.quote}}</view>
@@ -34,14 +34,14 @@
 				<view class="col r">手续费/时间</view>
 			</view>
 			<scroll-view class="uni-list" :enableBackToTop="enableBackToTop" :scroll-y="scrollY" @scrolltolower="loadMore">
-				<empty v-if="empty"></empty>
+				<u-empty text="暂无数据" mode="data" :show="empty" img-width="140"></u-empty>
 				<view class="uni-row little-line" v-for="(item, i) in records" :key="item.id">
 					<view class="col">
 						{{item.baseAmount}} {{item.base}} / {{item.quoteAmount}} {{item.quote}}
 					 </view>
 					<view class="col r">{{item.fee}} {{item.quote}} / {{item.ctime | moment('HH:mm MM/DD')}}</view>
 				</view>
-				<uni-load-more :status="loadingStatus"></uni-load-more>
+				<uni-load-more v-if="!empty" :status="loadingStatus"></uni-load-more>
 			</scroll-view>
 		</view>
 		<uni-popup ref="popup" type="bottom">
@@ -81,10 +81,10 @@
 	import empty from '../../components/empty.vue'
 	import uniValidPopup from '@/components/uni-valid-popup.vue';
 	import uniLoadMore from '@/components/uni-load-more/uni-load-more.vue';
-	import {authMixin} from '@/common/mixin/mixin.js'
+	import {authMixin, commonMixin} from '@/common/mixin/mixin.js'
 	export default {
 		components: {uniIcons, uniPopup, uniSearchBar, empty, uniList, uniCell, uniRefresh, uniLoadMore, uniValidPopup},
-		mixins: [authMixin],
+		mixins: [authMixin, commonMixin],
 		data() {
 			return {
 				bottom: 0,

@@ -344,7 +344,30 @@
 	  -webkit-font-smoothing: antialiased;
 	  -moz-osx-font-smoothing: grayscale;
 	}
-	
+	.icon-UnionPay{
+		font-size: 26px;
+		margin-right: 8px;
+		color: #f5a623;
+	}
+	.icon-UnionPay:before {
+	  content: "\e612";
+	}
+	.icon-Wechat{
+		font-size: 26px;
+		margin-right: 8px;
+		color: #0caf91;
+	}
+	.icon-Wechat:before {
+	  content: "\e6d8";
+	}
+	.icon-Alipay{
+		font-size: 26px;
+		margin-right: 8px;
+		color: #1296db;
+	}
+	.icon-Alipay:before {
+	  content: "\e760";
+	}
 	.icon-list-1-copy:before {
 	  content: "\e605";
 	}

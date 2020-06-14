@@ -107,6 +107,12 @@
 			}
 		},
 		{
+			"path": "pages/otc/merchant/orderList",
+			"style": {
+				"navigationBarTitleText": "订单列表"
+			}
+		},
+		{
 			"path": "pages/otc/merchant/advertList",
 			"style": {
 				"navigationBarTitleText": "广告列表"

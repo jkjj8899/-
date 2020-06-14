@@ -4,12 +4,16 @@
 			<text class="cell-tit">修改资料</text>
 			<text class="cell-more yticon icon-you"></text>
 		</view>
-		<view class="list-cell b-b m-t" @click="navTo('/pages/otc/merchant/advertList', true)" hover-class="cell-hover" :hover-stay-time="50">
+		<view class="list-cell b-b" @click="navTo('/pages/otc/merchant/addAdvert', true)" hover-class="cell-hover" :hover-stay-time="50">
+			<text class="cell-tit">发币广告</text>
+			<text class="cell-more yticon icon-you"></text>
+		</view>
+		<view class="list-cell b-b" @click="navTo('/pages/otc/merchant/advertList', true)" hover-class="cell-hover" :hover-stay-time="50">
 			<text class="cell-tit">广告列表</text>
 			<text class="cell-more yticon icon-you"></text>
 		</view>
-		<view class="list-cell" @click="navTo('/pages/otc/merchant/addAdvert', true)" hover-class="cell-hover" :hover-stay-time="50">
-			<text class="cell-tit">发币广告</text>
+		<view class="list-cell b-b" @click="navTo('/pages/otc/merchant/orderList', true)" hover-class="cell-hover" :hover-stay-time="50">
+			<text class="cell-tit">订单列表</text>
 			<text class="cell-more yticon icon-you"></text>
 		</view>
 		<view class="list-cell log-out-btn" @click="toLogout">

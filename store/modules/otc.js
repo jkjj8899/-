@@ -9,6 +9,7 @@ import {
 	isMerchant,
 	getMerchant,
 	applyMerchant,
+	merchantDetail,
 	advertList,
 	addAdvert,
 	myAdvertList,
@@ -127,6 +128,17 @@ const otc = {
 		}) {
 			return new Promise((resolve, reject) => {
 				getMerchant().then(res => {
+					resolve(res)
+				}).catch(error => {
+					reject(error)
+				})
+			})
+		},
+		merchantDetail({
+			commit
+		}, id) {
+			return new Promise((resolve, reject) => {
+				merchantDetail(id).then(res => {
 					resolve(res)
 				}).catch(error => {
 					reject(error)

@@ -6,10 +6,10 @@
 				<empty v-if="list == null || list.length <= 0"></empty>
 				<view v-for="(item, index) in list" :key="item.id" class="order-item little-line">
 					<view class="row user-info">
-						<view class="name"><view class="profile">{{item.nickname | sub}}</view>{{item.coin}}</view>
+						<view class="name"><view class="profile">{{item.coin | sub}}</view>{{item.coin}}</view>
 					</view>
 					<view class="row">
-						<view class="nomarl">数量 {{item.volume - item.dealVolume}} BTC</view>
+						<view class="nomarl">数量 {{item.volume - item.dealVolume}} {{item.coin}}</view>
 						<view class="nomarl">单价</view>
 					</view>
 					<view class="row">

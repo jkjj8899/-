@@ -86,12 +86,19 @@
 				this.mescroll.resetUpScroll()
 			}).catch(error =>{
 			})
+			uni.$on("refresh", (res) => {
+				this.mescroll.resetUpScroll()
+			})
 			uni.$on("filter", (res) => {
 				this.page.price = res.price
 				this.page.payment = res.payment
 				this.mescroll.resetUpScroll()
 			})
 			this.$fire.$emit('refreshCoin')
+		},
+		onUnload() {
+			uni.$off("refresh", (res) => {})
+			uni.$off("filter", (res) => {})
 		},
 		methods: {
 			...mapActions('common', ['fiatList']),

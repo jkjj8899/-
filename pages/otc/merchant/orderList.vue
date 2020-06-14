@@ -66,7 +66,8 @@
 					page: 1,
 					limit: 10,
 					side: undefined,
-					status: undefined
+					status: undefined,
+					isMerchant: true
 				},
 				empty: false,
 				list: [],
