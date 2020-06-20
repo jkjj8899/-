@@ -63,10 +63,26 @@ export function withdraw(data) {
     data: data
   })
 }
+//提币列表
+export function withdrawList(data) {
+  return request({
+    url: '/v1/withdraw/list',
+    method: 'GET',
+    data: data
+  })
+}
 //充币
 export function depositAddress(coin) {
   return request({
     url: `/v1/deposit/address/${coin}`,
     method: 'GET'
+  })
+}
+//充币列表
+export function depositList(data) {
+  return request({
+    url: '/v1/deposit/list',
+    method: 'GET',
+    data: data
   })
 }

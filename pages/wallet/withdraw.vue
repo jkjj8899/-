@@ -22,7 +22,7 @@
 					<input type="number" v-model="form.amount" :placeholder="`最小提币数量${coin.minWithdraw}`" class="address"/>
 					<view class="all" @click="all">全部</view>
 				</view>
-				<view class="balance">可用 {{account.normalBalance}} ETH</view>
+				<view class="balance">可用 {{account.normalBalance}} {{account.symbol}}</view>
 				<text class="label">手续费 {{coin.withdrawFee}} {{coin.symbol}}</text>
 			</view>
 			<button class="submit" @click="handleSubmit">确认</button>

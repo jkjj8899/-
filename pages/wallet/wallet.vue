@@ -3,8 +3,8 @@
 		<view class="total-box">
 			<view class="title">总资产折合(USDT)</view>
 			<view class="asset">
-				<text class="amount">{{data.totalUsdAmount}}</text>
-				<text class="cny">≈￥{{data.totalCnyAmount}}</text>
+				<text class="amount">{{data.totalUsdAmount | fixed(2)}}</text>
+				<text class="cny">≈￥{{data.totalCnyAmount | fixed(2)}}</text>
 			</view>
 			<view class="operat">
 				<view class="btn" @click="navTo('/pages/wallet/deposit')">充币</view>
@@ -30,9 +30,9 @@
 					<view class="col r subtitle row-title">折合(CNY)</view>
 				</view>
 				<view class="s-row">
-					<view class="col subtitle row-amount">{{item.normalBalance}}</view>
-					<view class="col subtitle row-amount">{{item.frozenBalance}}</view>
-					<view class="col r subtitle row-amount">{{item.priceCny}}</view>
+					<view class="col subtitle row-amount">{{item.normalBalance | fixed(item.showPrecision)}}</view>
+					<view class="col subtitle row-amount">{{item.frozenBalance | fixed(item.showPrecision)}}</view>
+					<view class="col r subtitle row-amount">{{item.priceCny | fixed(2)}}</view>
 				</view>
 			</view>
 			
@@ -83,7 +83,7 @@
 	}
 </script>
 
-<style lang='scss'>
+<style lang='scss' scoped>
 	.container{
 		padding: 0upx 0upx;
 	}

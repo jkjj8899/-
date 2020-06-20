@@ -25,7 +25,7 @@ const websocket = {
 				
 			})
 			state.socketTask.onMessage((res) => {
-				console.log("收到服务器内容：" + res.data);
+				//console.log("收到服务器内容：" + res.data);
 				let ploydata = new Uint8Array(res.data);
 				let msg = pako.inflate(ploydata, {to: 'string'});
 				let result = JSON.parse(msg)
