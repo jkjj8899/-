@@ -86,3 +86,10 @@ export function depositList(data) {
     data: data
   })
 }
+//邀请排行
+export function invitRank() {
+  return request({
+    url: `/v1/user/invit/rank`,
+    method: 'GET'
+  })
+}

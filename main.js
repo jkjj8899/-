@@ -56,12 +56,56 @@ const prePage = ()=>{
 	return prePage.$vm;
 }
 
+const upload = (successCallback, progressCallback)=>{
+	uni.chooseImage({
+		success: function (chooseImageRes) {
+			const tempFilePaths = chooseImageRes.tempFilePaths;
+			uni.showLoading({
+			    title: '正在上传中...'
+			});
+			let token = uni.getStorageSync('token')
+			const uploadTask = uni.uploadFile({
+				url: global.REQUEST_URL + '/v1/common/upload', //仅为示例，非真实的接口地址
+				filePath: tempFilePaths[0],
+				name: 'file',
+				header: {'Authorization': token},
+				success: function (response) {
+					uni.hideLoading()
+					let res = JSON.parse(response.data)
+					if(res.code === 200){
+						uni.showToast({title: '上传成功', duration: 2000, icon: 'none'});
+					} else {
+						uni.showToast({title: res.msg, duration: 2000, icon: 'none'});
+					}
+					if(successCallback){
+						successCallback(res)
+					}
+				},
+				fail: function(error){
+					uni.hideLoading()
+					uni.showToast({title: '上传失败', duration: 2000, icon: 'none'});
+				}
+			});
+		
+			uploadTask.onProgressUpdate(function (res) {
+				if(progressCallback){
+					progressCallback(res)
+				}
+				//console.log('上传进度' + res.progress);
+				//console.log('已经上传的数据长度' + res.totalBytesSent);
+				//console.log('预期需要上传的数据总长度' + res.totalBytesExpectedToSend);
+			});
+		}
+	})
+}
+
 
 Vue.config.productionTip = false
 Vue.prototype.$fire = new Vue();
 Vue.prototype.$store = store;
 Vue.prototype.$api = {msg, json, prePage, navTo};
 Vue.prototype.$g = global;
+Vue.prototype.$upload = upload;
 
 App.mpType = 'app'
 

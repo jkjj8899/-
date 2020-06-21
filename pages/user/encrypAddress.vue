@@ -1,6 +1,6 @@
 <template>  
     <view class="container">  
-		<empty v-if="empty"></empty>
+		<u-empty text="暂无地址" :show="empty" mode="data" margin-top="160"></u-empty>
 		<view class="addr-item" v-for="(item, i) in list" :key="item.id">
 			<view class="t">
 				<text class="coin">{{item.coin}}<text class="name">{{item.remark}}</text></text>
@@ -8,7 +8,7 @@
 			</view>
 			<text>{{item.address}}</text>
 		</view>
-		<uni-load-more :status="loadingStatus"></uni-load-more>
+		<u-loadmore v-if="!empty" :status="loadingStatus" :margin-top="30" :margin-bottom="20"/>
 		<mpvue-picker
 			:themeColor="themeColor"
 			ref="mpvuePicker"
@@ -26,15 +26,13 @@
     	mapActions
     } from 'vuex'
 	import mpvuePicker from '../../components/mpvuePicker.vue'
-	import empty from '../../components/empty.vue'
-	import uniLoadMore from '@/components/uni-load-more/uni-load-more.vue';
+	import {authMixin, commonMixin} from '@/common/mixin/mixin.js'
 	let startY = 0, moveY = 0, pageAtTop = true;
     export default {
 		components: {
-			mpvuePicker,
-			empty,
-			uniLoadMore
+			mpvuePicker
 		},
+		mixins: [authMixin, commonMixin],
 		data(){
 			return {
 				pickerValueArray: [],
@@ -45,7 +43,7 @@
 				empty: false,
 				list: [],
 				isLastPage: false,
-				loadingStatus: 'more',
+				loadingStatus: 'loadmore',
 				query: {
 					page: 1,
 					limit: 10,
@@ -89,9 +87,9 @@
 					this.empty = (res.total == 0)
 					this.isLastPage = (this.query.page == res.pages)
 					if(this.isLastPage){
-						this.loadingStatus = 'noMore'
+						this.loadingStatus = 'nomore'
 					} else {
-						this.loadingStatus = 'more'
+						this.loadingStatus = 'loadmore'
 					}
 					if(this.empty){
 						this.list = [];
@@ -99,7 +97,7 @@
 						this.list = this.list.concat(res.rows)
 					}
 				}).catch(error => {
-					this.loadingStatus = 'more'
+					this.loadingStatus = 'loadmore'
 				})
 			},
 			handleDelete(id, i){

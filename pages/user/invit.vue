@@ -6,12 +6,12 @@
 				<view class="info">
 					<image class="portrait" src="/static/missing-face.png"></image>
 					<view class="detail">
-						<text class="mobile">135****4345</text>
-						<text class="sub">注册时间: 2019-09-23</text>
+						<text class="mobile">{{loginInfo.mobile}}</text>
+						<text class="sub">注册时间: {{loginInfo.registerTime | moment('YYYY-MM-DD')}}</text>
 					</view>
 				</view>
 				<view class="invit">
-					<text class="code">FKGOXS</text>
+					<text class="code">{{loginInfo.invitCode}}</text>
 					<text class="sub">我的邀请码</text>
 				</view>
 			</view>
@@ -37,11 +37,13 @@
 		
 		<view class="rank">
 			<view class="title">排行榜</view>
-			<view class="item">
-				<image src="../../static/icon-rank1.jpg"></image>
-				<text>老王</text>
-				<text>1人</text>
+			<u-empty text="暂无排行" :show="records.length <= 0" mode="data" margin-top="10"></u-empty>
+			<view class="item" v-for="(item, i) in records" :key="item.uid">
+				<image :src="`../../static/icon-rank${i + 1}.jpg`"></image>
+				<text>{{item.username}}</text>
+				<text>{{item.invitUid1}}人</text>
 			</view>
+			<!-- 
 			<view class="item">
 				<image src="../../static/icon-rank2.jpg"></image>
 				<text>老王</text>
@@ -51,24 +53,34 @@
 				<image src="../../static/icon-rank3.jpg"></image>
 				<text>老王</text>
 				<text>1人</text>
-			</view>
+			</view> -->
 		</view>
 	</view>
 </template>
 
 <script>
+	import {
+		mapState,
+		mapActions
+	} from 'vuex'
+	import {commonMixin, authMixin} from '@/common/mixin/mixin.js'
 	export default {
+		mixins: [commonMixin, authMixin],
 		data() {
 			return {
-				
+				records: []
 			};
 		},
+		computed: {
+			...mapState('user', ['loginInfo'])
+		},
+		onLoad() {
+			this.invitRank().then(res =>{
+				this.records = res.data
+			})
+		},
 		methods:{
-			navTo(url){
-				uni.navigateTo({
-					url: url
-				})
-			}
+			...mapActions('user', ['invitRank'])
 		}
 	}
 </script>
@@ -123,9 +135,14 @@
 			display: flex;
 			flex-direction: row;
 		}
-		.detail, .invit{
+		.detail{
 			display: flex;
 			flex-direction: column;
+		}
+		.invit{
+			display: flex;
+			flex-direction: column;
+			text-align: right;
 		}
 		.mobile{
 			font-size: $font-md;
@@ -137,6 +154,7 @@
 			font-size: $font-xl;
 			font-weight: 600;
 			color: $font-color-red;
+			padding-bottom: 6upx;
 		}
 		.sub{
 			color: $font-color-light;

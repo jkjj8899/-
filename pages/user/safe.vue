@@ -37,10 +37,13 @@
 </template>
 
 <script>
-	import {  
-	    mapMutations  
-	} from 'vuex';
+	import {
+		mapState,
+		mapActions
+	} from 'vuex'
+	import {authMixin, commonMixin} from '@/common/mixin/mixin.js'
 	export default {
+		mixins: [authMixin, commonMixin],
 		data() {
 			return {
 				isFingerprint: false
@@ -52,22 +55,17 @@
 			}
 		},
 		methods:{
-			...mapMutations(['logout']),
-
-			navTo(url){
-				uni.navigateTo({
-					url: url
-				})
-			},
+			...mapActions('user', ['logout']),
 			//退出登录
 			toLogout(){
+				let $this = this
 				uni.showModal({
 				    content: '确定要退出登录么',
 				    success: (e)=>{
 				    	if(e.confirm){
 				    		this.logout();
 				    		setTimeout(()=>{
-				    			uni.navigateBack();
+				    			$this.navTo('/pages/public/login')
 				    		}, 200)
 				    	}
 				    }

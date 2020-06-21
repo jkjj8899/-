@@ -37,7 +37,7 @@
 						<view class="col r subtitle row-title">时间</view>
 					</view>
 					<scroll-view class="s-list" :enableBackToTop="enableBackToTop" :scroll-y="scrollY" @scrolltolower="loadMore">
-						<u-empty text="暂无订单记录" :show="empty" mode="data" margin-top="10"></u-empty>
+						<u-empty text="暂无记录" :show="empty" mode="data" margin-top="10"></u-empty>
 						<view class="s-row little-line" v-for="(item, i) in records" :key="item.id">
 							<view class="col subtitle row-amount">{{item.amount | fixed(account.showPrecision)}}</view>
 							<view class="col subtitle row-amount">{{currentStatusMap[item.status]}}</view>

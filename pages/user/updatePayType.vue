@@ -29,7 +29,10 @@
 			</view>
 			<view class="list-cell b-b" hover-class="cell-hover" :hover-stay-time="50">
 				<text class="cell-tit">二维码</text>
-				<view class="upload">
+				<view class="placeholder" v-show="form.payQrcode != undefined">
+					<image :src="form.payQrcode"></image>
+				</view>
+				<view class="upload" @click="handleUpload" v-show="form.payQrcode == undefined">
 					<image src="../../static/icon-upload.png"></image>
 					<view class="tip">
 						请上传你的收款码图片(jpg/jpeg/png格式,大小不超过2M)
@@ -76,6 +79,15 @@
 		},
 		methods:{
 			...mapActions('otc', ['addPayInfo', 'getPayInfo', 'updatePayInfo']),
+			handleUpload(){
+				this.$upload(this.uploadSuccess, this.uploadProgress)
+			},
+			uploadSuccess(res){
+				this.form.payQrcode = res.url
+			},
+			uploadProgress(res){
+				console.log("上传进度:", res)
+			},
 			handleSubmit(){
 				if(!this.form.username){
 					this.$api.msg('请输入姓名')
@@ -140,7 +152,7 @@
 	.list-cell{
 		display:flex;
 		flex-direction: row;
-		align-items:baseline;
+		align-items: center;
 		padding: 30upx $page-row-spacing;
 		line-height:80upx;
 		position:relative;
@@ -176,6 +188,13 @@
 		.cell-tip{
 			font-size: $font-base;
 			color: $font-color-light;
+		}
+		.placeholder{
+			display: flex;
+			image{
+				width: 150upx;
+				height: 150upx;
+			}
 		}
 		.upload{
 			width: 75%;

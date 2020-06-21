@@ -1,18 +1,22 @@
 <template>
 	<view class="container">
-		<view class="list-cell b-b m-t"  @click="navTo('交易密码')" hover-class="cell-hover" :hover-stay-time="50">
+		<view class="list-cell b-b m-t"  hover-class="cell-hover" :hover-stay-time="50">
 			<text class="cell-tit">手机号</text>
 			<text class="cell-more">{{loginInfo.mobile}}</text>
 		</view>
 		<view class="list-cell b-b" hover-class="cell-hover" :hover-stay-time="50">
 			<input class="cell-input" v-model="authCode.captchaCode" placeholder="请输入验证码"/>
-			<button :class="[isDisableCode?'cell-btn btn-disabled':'cell-btn']" :disabled="isDisableCode" @click="toSendSms">{{captchaTxt}}</button>
+			<view>
+				<u-verification-code :seconds="seconds" @end="end" @start="start" ref="uCode" @change="codeChange"></u-verification-code>
+				<u-button @tap="getCode" class="code-btn">{{tips}}</u-button>
+			</view>
+			<!-- <button :class="[isDisableCode?'cell-btn btn-disabled':'cell-btn']" :disabled="isDisableCode" @click="toSendSms">{{captchaTxt}}</button> -->
 		</view>
 		<view class="list-cell b-b" hover-class="cell-hover" :hover-stay-time="50">
-			<input class="cell-input" v-model="form.newPwd" placeholder="请输入新密码"/>
+			<input class="cell-input" type="password" v-model="form.newPwd" placeholder="请输入新密码"/>
 		</view>
 		<view class="list-cell" hover-class="cell-hover" :hover-stay-time="50">
-			<input class="cell-input" v-model="form.againPwd" placeholder="请重新输入密码"/>
+			<input class="cell-input" type="password" v-model="form.againPwd" placeholder="请重新输入密码"/>
 		</view>
 		<view class="list-cell tip" hover-class="cell-hover" :hover-stay-time="50">
 			<text>登录密码由8-18位不含特殊字符的数字、字母组合</text>
@@ -31,8 +35,8 @@
 		data() {
 			return {
 				loading: false,
-				isDisableCode: false,
-				captchaTxt: '获取验证码',
+				seconds: 60,
+				tips: '',
 				authCode: {
 					captchaCode: undefined,
 					token: undefined
@@ -48,28 +52,33 @@
 		methods:{
 			...mapActions('common', ['sendSms']),
 			...mapActions('user', ['updatePwd']),
-			toSendSms(){
-				let data = {
-					type: this.$g.CAPTCHA_TYPE.COMMON,
-					number: this.loginInfo.mobile
-				}
-				this.isDisableCode = true
-				this.sendSms(data).then(res => {
-					this.authCode.token = res.data
-					let i = 120;
-					let timer = setInterval(() => {
-						this.captchaTxt = i + 's'
-						i = i - 1;
-						if(i == 0){
-							clearInterval(timer);
-							this.isDisableCode = false
-							this.captchaTxt = '获取验证码'
-						}
-					}, 1000)
-				}).catch(error => {
-					this.isDisableCode = false
-				})
+			codeChange(text) {
+				this.tips = text;
 			},
+			getCode() {
+				if(this.$refs.uCode.canGetCode) {
+					// 模拟向后端请求验证码
+					uni.showLoading({
+						title: '正在获取验证码'
+					})
+					let data = {
+						type: this.$g.CAPTCHA_TYPE.COMMON,
+						number: this.loginInfo.mobile
+					}
+					this.sendSms(data).then(res => {
+						this.authCode.token = res.data
+						uni.hideLoading();
+						// 这里此提示会被this.start()方法中的提示覆盖
+						this.$u.toast('验证码已发送');
+						// 通知验证码组件内部开始倒计时
+						this.$refs.uCode.start();
+					}).catch(error => {
+					})
+				} else {
+				}
+			},
+			end() {},
+			start() {},
 			submit(){
 				if(!this.authCode.captchaCode){
 					this.$api.msg('请输入验证码')
@@ -113,6 +122,9 @@
 <style lang='scss' scoped>
 	page{
 		background: $page-color-base;
+	}
+	.u-code-wrap{
+		font-size: 20upx;
 	}
 	.list-cell{
 		display:flex;
@@ -174,6 +186,9 @@
 		.btn-disabled{
 			border: 0upx;
 			color: $font-color-disabled;
+		}
+		.code-btn{
+			font-size: $font-sm;
 		}
 	}
 	.tip{

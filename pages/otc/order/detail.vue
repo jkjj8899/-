@@ -84,6 +84,10 @@
 					<view class="left">{{currentPay.name}}账号</view>
 					<view class="right">{{account.accountNo}}</view>
 				</view>
+				<view class="item little-line" v-if="currentPay.payQrcode != null">
+					<view class="left">{{currentPay.name}}收款码</view>
+					<view class="right"><image class="qrcode" :src="currentPay.payQrcode" /></view>
+				</view>
 				<view v-show="currentPay.code == 'UnionPay'" class="item little-line">
 					<view class="left">开户银行</view>
 					<view class="right">{{account.bankName}}</view>
@@ -373,12 +377,17 @@
 			display: flex;
 			flex-direction: row;
 			justify-content: space-between;
+			align-items: center;
 			padding: 30upx 0 30upx 0;
 			.left{
 				font-size: $font-base;
 			}
 			.right{
 				font-size: $font-base;
+			}
+			.qrcode{
+				width: 160upx;
+				height: 160upx;
 			}
 		}
 	}

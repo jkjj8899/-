@@ -1,5 +1,5 @@
-import { USER_LOGIN, USER_UPDATE_PAY_PWD } from './../mutations_type'
-import { register, login, updatePayPwd, updatePwd, encryptBookList, addEncryptBook, deleteEncryptBook, withdraw, depositAddress, withdrawList, depositList } from '@/api/user'
+import { USER_LOGIN, USER_LOGOUT, USER_UPDATE_PAY_PWD } from './../mutations_type'
+import { register, login, updatePayPwd, updatePwd, encryptBookList, addEncryptBook, deleteEncryptBook, withdraw, depositAddress, withdrawList, depositList, invitRank } from '@/api/user'
 
 const user = {
   state: {
@@ -17,6 +17,14 @@ const user = {
 				state.loginInfo.hasLogin = true
 	  			uni.setStorageSync('token', payload.data.token);
 	  		}
+	  },
+	  [USER_LOGOUT](state, payload) {
+	  		uni.setStorageSync('token', '');
+			state.loginInfo = {
+				  nickname: null,
+				  profile: null,
+				  hasLogin: false
+			  }
 	  },
 	  [USER_UPDATE_PAY_PWD](state, payload) {
 	  		if(payload.code == 200){
@@ -53,6 +61,9 @@ const user = {
 	      reject(error)
 	    })
 	  })
+	},
+	logout({ commit }){
+		commit(USER_LOGOUT)
 	},
 	updatePwd({ commit }, data) {
 	  return new Promise((resolve, reject) => {
@@ -130,6 +141,15 @@ const user = {
 	depositList({ commit }, data) {
 	  return new Promise((resolve, reject) => {
 	    depositList(data).then(res => {
+	      resolve(res)
+	    }).catch(error => {
+	      reject(error)
+	    })
+	  })
+	},
+	invitRank({ commit }) {
+	  return new Promise((resolve, reject) => {
+	    invitRank().then(res => {
 	      resolve(res)
 	    }).catch(error => {
 	      reject(error)

@@ -29,13 +29,13 @@ const websocket = {
 				let ploydata = new Uint8Array(res.data);
 				let msg = pako.inflate(ploydata, {to: 'string'});
 				let result = JSON.parse(msg)
-				console.log(result)
+				//console.log(result)
 				if(result.ping){
 					let data = {'pong': result.ping}
 					state.socketTask.send({
 						data: JSON.stringify(data),
 						async success() {
-							console.log("pong消息发送成功");
+							//console.log("pong消息发送成功");
 						},
 					});
 					return
@@ -45,11 +45,11 @@ const websocket = {
 		},
 		
 		WEBSOCKET_SEND(state, p) {
-			console.log("ws发送:", p);
+			//console.log("ws发送:", p);
 			state.socketTask.send({
 				data: p,
 				async success() {
-					console.log("消息发送成功");
+					//console.log("消息发送成功");
 				},
 			});
 		}
