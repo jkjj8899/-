@@ -1,6 +1,14 @@
 {
 	"pages": [
-
+		{
+			"path": "pages/index/guide",
+			"style": {
+				"navigationBarTitleText": "启动页",
+				"app-plus": {
+					"titleNView": false
+				}
+			}
+		},
 		{
 			"path": "pages/index/index",
 			"style": {
