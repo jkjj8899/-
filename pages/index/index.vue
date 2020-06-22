@@ -28,13 +28,22 @@
 			</view>
 		</scroll-view>
 		<view class="menu">
-			<view class="item exchange" @click="navTo('/pages/exchange/index', true)">
-				<image src="../../static/exchange.png"></image>
-				<text>快捷闪兑</text>
+			<view class="fiat" @click="navTo('/pages/otc/otc')">
+				<image src="../../static/icon-fiat.png" mode="widthFix"></image>
+				<view class="label">
+					<text>法币交易</text>
+					<text class="sub">支持ETH、USDT</text>
+				</view>
 			</view>
-			<view class="item" @click="navTo('/pages/otc/otc')">
-				<image class="miner" src="../../static/miner.png"></image>
-				<text>法币交易</text>
+			<view class="ex">
+				<view class="item exchange" @click="navTo('/pages/exchange/index', true)">
+					<image src="../../static/exchange.png"></image>
+					<text>快捷闪兑</text>
+				</view>
+				<view class="item shop" @click="navTo('/pages/shop/index')">
+					<image class="miner" src="../../static/icon-shop.png"></image>
+					<text>Fex商城</text>
+				</view>
 			</view>
 		</view>
 		<view class="advert">
@@ -268,30 +277,63 @@
 		}
 	}
 	.menu{
-		padding: 20upx 20upx;
+		padding: 20upx 0upx;
 		display: flex;
+		flex-direction: row;
 		justify-content: space-between;
 		font-size: $font-base;
 		font-weight: bold;
 		background: $uni-color-gap;
-		.item{
-			width: 49%;
-			height: 100upx;
-			line-height: 100upx;
-			background: #ffffff;
+		.fiat{
+			display: flex;
+			flex-direction: row;
+			flex: 1;
 			align-items: center;
-			text-align: center;
-			vertical-align: middle;
+			background: #ffffff;
+			padding-left: 30upx;
+			margin-right: 10upx;
+			.label{
+				display: flex;
+				flex-direction: column;
+				padding-left: 20upx;
+			}
+			.sub{
+				font-size: $font-sm;
+				font-weight: normal;
+			}
+			image{
+				width: 100upx;
+			}
+			text{
+				font-size: $font-md;
+			}
 		}
-		image{
-			vertical-align: middle;
-			width: 40upx;
-			height: 45upx;
-			margin-right: 20upx;
-		}
-		.miner{
-			width: 35upx;
-			height: 35upx;
+		.ex{
+			display: flex;
+			flex-direction: column;
+			flex: 1;
+			.item{
+				width: 100%;
+				height: 100upx;
+				line-height: 100upx;
+				background: #ffffff;
+				align-items: center;
+				text-align: center;
+				vertical-align: middle;
+			}
+			.shop{
+				margin-top: 10upx;
+			}
+			image{
+				vertical-align: middle;
+				width: 50upx;
+				height: 55upx;
+				margin-right: 20upx;
+			}
+			.miner{
+				width: 45upx;
+				height: 45upx;
+			}
 		}
 	}
 	/* 头部 轮播图 */

@@ -16,12 +16,11 @@
 				"navigationBarTitleText": "FexCoin",
 				// #endif 
 				"navigationStyle": "custom"
-				/* "app-plus": {
-					"titleView":false,
-					"titleNView": {
-						"type": "transparent"
-					}
-				} */
+			}
+		},{
+			"path": "pages/shop/index",
+			"style": {
+				"navigationBarTitleText": "FexCoin"
 			}
 		},{
 			"path": "pages/exchange/index",
