@@ -22,7 +22,7 @@
 				</view>
 			</view>
 		</view>
-		<mescroll-body ref="mescrollRef" @init="mescrollInit" top="180" @down="downCallback" @up="upCallback">
+		<mescroll-body ref="mescrollRef" @init="mescrollInit" :auto="false" top="180" @down="downCallback" @up="upCallback">
 			<!-- 分页的数据列表 -->
 			<view v-for="(item, i) in list" :key="item.id">
 				<otc-list-item :data.sync="item"></otc-list-item>
@@ -64,10 +64,10 @@
 				},
 				list: [], // 数据列表
 				downOption:{
-					auto:false // 不自动加载 (mixin已处理第一个tab触发downCallback)
+					auto: false // 不自动加载 (mixin已处理第一个tab触发downCallback)
 				},
 				upOption:{
-					auto:false, // 不自动加载
+					auto: false, // 不自动加载
 					noMoreSize: 5, //如果列表已无数据,可设置列表的总数量要大于半页才显示无更多数据;避免列表数据过少(比如只有一条数据),显示无更多数据会不好看; 默认5
 					page: {
 						num: 0, // 当前页码,默认0,回调之前会加1,即callback(page)会从1开始
@@ -79,13 +79,16 @@
 				}
 			}
 		},
-		onLoad(options){
+		onLoad() {
 			this.fiatList().then(res =>{
 				this.fiatCoins = res.data
 				this.page.coin = this.fiatCoins[0]
-				this.mescroll.resetUpScroll()
+				//this.mescroll.resetUpScroll()
 			}).catch(error =>{
 			})
+		},
+		onShow(){
+			
 			uni.$on("refresh", (res) => {
 				this.mescroll.resetUpScroll()
 			})
@@ -112,9 +115,14 @@
 			},
 			/*上拉加载的回调: 其中page.num:当前页 从1开始, page.size:每页数据条数,默认10 */
 			upCallback(page) {
-				if(page.num == 1) this.list = [];
+				console.log("========================", page)
+				if(page.num <= 1){
+					console.log("++++++++++++++++", page.num)
+					 this.list = [];
+				}
 				let $this = this
 				this.page.page = page.num
+				console.log("---------------", this.page)
 				this.advertList(this.page).then(res =>{
 					console.log(res.rows);
 					$this.mescroll.endSuccess(res.rows.length)

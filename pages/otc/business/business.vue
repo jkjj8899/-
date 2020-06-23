@@ -25,10 +25,10 @@
 		</view>
 		<view class="line"></view>
 		<!-- 列表 -->
-		<business-list-item title="在线出售" type="0" :list.sync="buyAdverts"></business-list-item>
+		<business-list-item title="在线出售" :type="0" :list.sync="buyAdverts"></business-list-item>
 		<view class="line"></view>
 		<!-- 列表 -->
-		<business-list-item title="在线购买" type="1" :list.sync="sellAdverts"></business-list-item>
+		<business-list-item title="在线购买" :type="1" :list.sync="sellAdverts"></business-list-item>
 	
 	</view>
 	
@@ -39,16 +39,16 @@
 		mapState,
 		mapActions
 	} from 'vuex'
-	import {authMixin, commonMixin} from '@/common/mixin/mixin.js'
+	import {commonMixin} from '@/common/mixin/mixin.js'
 	import businessListItem from "../components/business-list-item.vue";
 	export default {
 		components: {businessListItem},
-		mixins: [authMixin, commonMixin],
+		mixins: [ commonMixin],
 		data() {
 			return {
 				merchantId: undefined,
-				merchant: undefined,
-				indicator: undefined,
+				merchant: {},
+				indicator: {},
 				buyAdverts: [],
 				sellAdverts: []
 			};
@@ -74,13 +74,10 @@
 			//请求数据
 			async loadData(){
 				this.merchantDetail(this.merchantId).then(res =>{
-					console.log(res)
 					this.merchant = res.data.merchant
 					this.buyAdverts = res.data.buys
 					this.sellAdverts = res.data.sells
 					this.indicator = res.data.indicator
-					
-					console.log(this.buyAdverts, this.sellAdverts)
 				})
 			}
 		}
