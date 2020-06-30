@@ -55,7 +55,7 @@
 				<list-cell v-if="!isMer" icon="icon-shoucang2" iconColor="#9789f7" @eventClick="navTo('/pages/otc/merchant/apply', true)" title="承兑商申请"></list-cell>
 				<list-cell v-if="isMer" icon="icon-tuandui" iconColor="#543632" @eventClick="navTo('/pages/otc/merchant/merchant', true)" title="承兑商管理"></list-cell>
 				<list-cell icon="icon-bangzhu1" iconColor="#ee883b" title="帮助中心"></list-cell>
-				<list-cell icon="icon-pinglun-copy" iconColor="#54b4ef" title="问题反馈"></list-cell>
+				<!-- <list-cell icon="icon-pinglun-copy" iconColor="#54b4ef" title="问题反馈"></list-cell> -->
 				<list-cell icon="icon-shezhi1" iconColor="#e07472" title="设置" border="" @eventClick="navTo('/pages/set/set')"></list-cell>
 			</view>
 		</view>

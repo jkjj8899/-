@@ -115,14 +115,11 @@
 			},
 			/*上拉加载的回调: 其中page.num:当前页 从1开始, page.size:每页数据条数,默认10 */
 			upCallback(page) {
-				console.log("========================", page)
 				if(page.num <= 1){
-					console.log("++++++++++++++++", page.num)
 					 this.list = [];
 				}
 				let $this = this
 				this.page.page = page.num
-				console.log("---------------", this.page)
 				this.advertList(this.page).then(res =>{
 					console.log(res.rows);
 					$this.mescroll.endSuccess(res.rows.length)

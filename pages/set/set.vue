@@ -3,10 +3,10 @@
 		
 		<view class="list-cell m-t">
 			<text class="cell-tit">消息推送</text>
-			<switch checked color="#fa436a" @change="switchChange" />
+			<switch checked color="#fa436a" />
 		</view>
-		<view class="list-cell m-t b-b" @click="navTo('清除缓存')" hover-class="cell-hover" :hover-stay-time="50">
-			<text class="cell-tit">清除缓存</text>
+		<view class="list-cell m-t b-b" @click="navTo('/pages/set/help')" hover-class="cell-hover" :hover-stay-time="50">
+			<text class="cell-tit">帮助中心</text>
 			<text class="cell-more yticon icon-you"></text>
 		</view>
 		<view class="list-cell b-b" @click="navTo('关于Dcloud')" hover-class="cell-hover" :hover-stay-time="50">
@@ -22,40 +22,15 @@
 </template>
 
 <script>
-	import {  
-	    mapMutations  
-	} from 'vuex';
+	import {commonMixin} from '@/common/mixin/mixin.js'
 	export default {
+		mixins: [commonMixin],
 		data() {
 			return {
 				
 			};
 		},
 		methods:{
-			...mapMutations(['logout']),
-
-			navTo(url){
-				this.$api.msg(`跳转到${url}`);
-			},
-			//退出登录
-			toLogout(){
-				uni.showModal({
-				    content: '确定要退出登录么',
-				    success: (e)=>{
-				    	if(e.confirm){
-				    		this.logout();
-				    		setTimeout(()=>{
-				    			uni.navigateBack();
-				    		}, 200)
-				    	}
-				    }
-				});
-			},
-			//switch
-			switchChange(e){
-				let statusTip = e.detail.value ? '打开': '关闭';
-				this.$api.msg(`${statusTip}消息推送`);
-			},
 
 		}
 	}
