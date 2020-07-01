@@ -8,10 +8,10 @@
 			<text class="cell-tit">交易密码</text>
 			<text class="cell-more yticon icon-you"></text>
 		</view>
-		<!-- <view class="list-cell b-b" @click="navTo('/pages/user/updateEmail')" hover-class="cell-hover" :hover-stay-time="50">
-			<text class="cell-tit">绑定/修改邮箱</text>
+		<view class="list-cell b-b" @click="navTo('/pages/user/googleSetting')" hover-class="cell-hover" :hover-stay-time="50">
+			<text class="cell-tit">谷歌设置</text>
 			<text class="cell-more yticon icon-you"></text>
-		</view> -->
+		</view>
 		<view class="list-cell b-b" hover-class="cell-hover" :hover-stay-time="50">
 			<text class="cell-tit">手势密码</text>
 			<switch color="#fa436a" @change="switchChange" />

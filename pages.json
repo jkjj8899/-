@@ -321,6 +321,16 @@
 				"navigationBarTitleText": "邀请攻略"
 			}
 		},{
+			"path": "pages/user/googleSetting",
+			"style": {
+				"navigationBarTitleText": "谷歌验证器设置"
+			}
+		},{
+			"path": "pages/user/googleBind",
+			"style": {
+				"navigationBarTitleText": "绑定谷歌身份验证器"
+			}
+		},{
 			"path": "pages/user/safe",
 			"style": {
 				"navigationBarTitleText": "账户与安全"
