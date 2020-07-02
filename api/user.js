@@ -93,3 +93,26 @@ export function invitRank() {
     method: 'GET'
   })
 }
+//获取GoogleKey
+export function getGoogleKey() {
+  return request({
+    url: `/v1/user/google/key`,
+    method: 'GET'
+  })
+}
+//绑定Google
+export function bindGoogle(data) {
+  return request({
+    url: '/v1/user/bind/google',
+    method: 'POST',
+    data: data
+  })
+}
+//解绑Google
+export function unbindGoogle(data) {
+  return request({
+    url: '/v1/user/unbind/google',
+    method: 'POST',
+    data: data
+  })
+}

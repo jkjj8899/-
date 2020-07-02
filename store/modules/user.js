@@ -1,12 +1,13 @@
-import { USER_LOGIN, USER_LOGOUT, USER_UPDATE_PAY_PWD } from './../mutations_type'
-import { register, login, updatePayPwd, updatePwd, encryptBookList, addEncryptBook, deleteEncryptBook, withdraw, depositAddress, withdrawList, depositList, invitRank } from '@/api/user'
+import { USER_LOGIN, USER_LOGOUT, USER_UPDATE_PAY_PWD, USER_ENABLE_GOOGLE, USER_DISABLE_GOOGLE } from './../mutations_type'
+import { register, login, updatePayPwd, updatePwd, encryptBookList, addEncryptBook, deleteEncryptBook, withdraw, depositAddress, withdrawList, depositList, invitRank, getGoogleKey, bindGoogle, unbindGoogle } from '@/api/user'
 
 const user = {
   state: {
 	  loginInfo: {
 		  nickname: null,
 		  profile: null,
-		  hasLogin: false
+		  hasLogin: false,
+		  isGoogle: false
 	  }
   },
 
@@ -32,6 +33,17 @@ const user = {
 	  			
 	  		}
 	  },
+	  [USER_ENABLE_GOOGLE](state, payload) {
+	  		if(payload.code == 200){
+	  			state.loginInfo.isGoogle = true
+	  		}
+	  }
+	  ,
+	  [USER_DISABLE_GOOGLE](state, payload) {
+	  		if(payload.code == 200){
+	  			state.loginInfo.isGoogle = false
+	  		}
+	  }
   },
 
   actions: {
@@ -150,6 +162,35 @@ const user = {
 	invitRank({ commit }) {
 	  return new Promise((resolve, reject) => {
 	    invitRank().then(res => {
+	      resolve(res)
+	    }).catch(error => {
+	      reject(error)
+	    })
+	  })
+	},
+	getGoogleKey({ commit }) {
+	  return new Promise((resolve, reject) => {
+	    getGoogleKey().then(res => {
+	      resolve(res)
+	    }).catch(error => {
+	      reject(error)
+	    })
+	  })
+	},
+	bindGoogle({ commit }, data) {
+	  return new Promise((resolve, reject) => {
+	    bindGoogle(data).then(res => {
+			commit(USER_ENABLE_GOOGLE, res)
+	      resolve(res)
+	    }).catch(error => {
+	      reject(error)
+	    })
+	  })
+	},
+	unbindGoogle({ commit }, data) {
+	  return new Promise((resolve, reject) => {
+	    unbindGoogle(data).then(res => {
+			commit(USER_DISABLE_GOOGLE, res)
 	      resolve(res)
 	    }).catch(error => {
 	      reject(error)

@@ -6,13 +6,15 @@
 		</view>
 		<view class="row center">
 			<text class="s">请务必将下述秘钥备份保存</text>
-			<tki-qrcode ref="qrcode" :size="300" :onval="true" cid="qrcode" :val="qrcode.val" />
+			<tki-qrcode ref="qrcode" :size="300" :onval="true" cid="qrcode" :val="form.googleKey" />
 		</view>
 		<view class="row center">
-			<text class="m">秘钥: FFSDFSFGSFGDGHSDGDGHS</text>
+			<text class="m">秘钥: {{form.googleKey}}</text>
 			<text class="copy m" @click="paste">复制</text>
-			<button class="btn">我已备份并添加到验证器</button>
+			<button class="btn" @click="bind">我已备份并添加到验证器</button>
 		</view>
+		
+		<uni-valid-popup ref="validPopup" @ok="ok"></uni-valid-popup>
 	</view>
 </template>
 
@@ -22,27 +24,56 @@
 		mapActions
 	} from 'vuex'
 	import tkiQrcode from "@/components/tki-qrcode/tki-qrcode.vue"
+	import uniValidPopup from '@/components/uni-valid-popup.vue';
 	import {authMixin, commonMixin} from '@/common/mixin/mixin.js'
 	export default {
 		mixins: [authMixin, commonMixin],
-		components: {tkiQrcode},
+		components: {tkiQrcode, uniValidPopup},
 		data() {
 			return {
-				qrcode: {
-					val: 'FFSDFSFGSFGDGHSDGDGHS'
+				form: {
+					googleKey: '',
+					authCode: '',
+					googleCode: ''
+					
 				}
 			};
 		},
 		onLoad() {
-			setTimeout(() =>{
-				this.$refs.qrcode._makeCode()
-			}, 3000)
+			this.getGoogleKey().then(res =>{
+				this.form.googleKey = res.msg;
+			})
 		},
 		methods:{
+			...mapActions('user', ['getGoogleKey', 'bindGoogle']),
+			bind(){
+				this.$refs.validPopup.open('mobile')
+			},
+			ok(data){
+				if(data.type == 'mobile'){
+					if(!data.code){
+						this.$api.msg('请输入手机验证码')
+						return;
+					}
+					this.form.authCode = data.token + ":" + data.code
+					this.$refs.validPopup.open('google')
+				} else {
+					if(!data.code){
+						this.$api.msg('请输入Google验证码')
+						return;
+					}
+					this.form.googleCode = data.code
+					this.bindGoogle(this.form).then(res =>{
+						this.$api.msg('绑定Google验证成功')
+						uni.navigateBack({})
+					}).catch(error =>{
+					})
+				}
+			},
 			paste() {
 				let $this = this
 				uni.setClipboardData({
-				    data: this.qrcode.val,
+				    data: this.form.googleKey,
 				    success: function () {
 				        $this.$api.msg('复制成功')
 				    }

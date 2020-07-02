@@ -12,6 +12,9 @@
 				<view class="captcha" v-show="isSend">重新发送({{interval}})</view>
 				<view @click="toSend" class="captcha send" v-show="!isSend">发送验证码</view>
 			</view>
+			<view class="input-wrap" v-if="type == 'google'">
+				<input type="number" v-model="auth.code" class="input"  :placeholder="placeholders[type]"/>
+			</view>
 			<view class="input-wrap" v-if="type == 'password' || type == 'capitalPasswd'">
 				<input type="password" v-model="auth.code" class="input"  :placeholder="placeholders[type]"/>
 			</view>
@@ -61,7 +64,8 @@
 				interval: 0,
 				auth: {
 					code: undefined,
-					token: undefined
+					token: undefined,
+					type: undefined
 				},
 				timer: undefined
 			}
@@ -94,7 +98,10 @@
 				})
 			},
 			open(type) {
+				this.disabled = false
 				this.showPopup = true
+				this.auth.code = undefined
+				this.auth.token = undefined
 				if(type){
 					this.type = type
 				}
@@ -115,6 +122,7 @@
 				if(this.timer){
 					clearInterval(this.timer);
 				}
+				this.auth.type = this.type
 				this.$emit('ok', this.auth)
 			}
 			
