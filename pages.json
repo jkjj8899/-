@@ -244,6 +244,12 @@
 			}
 		},
 		{
+			"path": "pages/set/about",
+			"style": {
+				"navigationBarTitleText": "关于Fex"
+			}
+		},
+		{
 			"path": "pages/userinfo/userinfo",
 			"style": {
 				"navigationBarTitleText": "修改资料"

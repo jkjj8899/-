@@ -113,9 +113,11 @@
 <style lang='scss'>
 	.app {
 		width: 100%;
-		font-size: $font-lg;
+		font-size: $font-lg - 2upx;
 	}
 	.bg{
+		background-color: #466EE8;
+		padding-top: 100upx;
 		width: 100%;
 		image{
 			width: 100%;
@@ -154,8 +156,8 @@
 				padding: 10upx 0;
 			}
 			.circle{
-				width: 25upx;
-				height: 25upx;
+				width: 20upx;
+				height: 20upx;
 				background: #d8d8d8;
 				border-radius: 50%;
 				margin-right: 16upx;
