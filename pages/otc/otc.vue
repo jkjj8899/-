@@ -22,7 +22,7 @@
 				</view>
 			</view>
 		</view>
-		<mescroll-body ref="mescrollRef" @init="mescrollInit" :auto="false" top="180" @down="downCallback" @up="upCallback">
+		<mescroll-body ref="mescrollRef" :down="downOption" :up="upOption" @init="mescrollInit" :auto="false" top="180" @down="downCallback" @up="upCallback">
 			<!-- 分页的数据列表 -->
 			<view v-for="(item, i) in list" :key="item.id">
 				<otc-list-item :data.sync="item"></otc-list-item>
@@ -83,12 +83,11 @@
 			this.fiatList().then(res =>{
 				this.fiatCoins = res.data
 				this.page.coin = this.fiatCoins[0]
-				//this.mescroll.resetUpScroll()
+				this.mescroll.resetUpScroll()
 			}).catch(error =>{
 			})
 		},
 		onShow(){
-			
 			uni.$on("refresh", (res) => {
 				this.mescroll.resetUpScroll()
 			})
@@ -106,8 +105,12 @@
 		methods: {
 			...mapActions('common', ['fiatList']),
 			...mapActions('otc', ['advertList']),
+			mescrollInit(){
+				
+			},
 			/*下拉刷新的回调 */
 			downCallback() {
+				console.log(222222222)
 				// 这里加载你想下拉刷新的数据, 比如刷新轮播数据
 				// loadSwiper();
 				// 下拉刷新的回调,默认重置上拉加载列表为第一页 (自动执行 page.num=1, 再触发upCallback方法 )
@@ -115,13 +118,15 @@
 			},
 			/*上拉加载的回调: 其中page.num:当前页 从1开始, page.size:每页数据条数,默认10 */
 			upCallback(page) {
+				console.log(page.num)
 				if(page.num <= 1){
 					 this.list = [];
 				}
 				let $this = this
 				this.page.page = page.num
+				console.log(this.page.page)
 				this.advertList(this.page).then(res =>{
-					console.log(res.rows);
+					console.log(this.page, res.rows);
 					$this.mescroll.endSuccess(res.rows.length)
 					if(res.total == 0){
 						$this.list = [];

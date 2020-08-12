@@ -6,10 +6,10 @@
   "author": "flex",
   "license": "ISC",
   "dependencies": {
-    "@dcloudio/uni-ui": "^1.2.1",
+    "@dcloudio/uni-ui": "^1.2.4",
     "pako": "^1.0.11",
     "tki-qrcode": "^0.1.6",
-    "uview-ui": "^1.2.9",
+    "uview-ui": "^1.6.0",
     "vue-moment": "^4.1.0"
   }
 }
