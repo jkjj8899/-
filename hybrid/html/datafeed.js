@@ -12,9 +12,12 @@ var detafeed_lastResolution = null
 var detafeed_lastSymbol = null
 
 
-function FeedBase() {}
+function FeedBase() {
+	console.log("init FeedBase")
+}
 
 FeedBase.prototype.onReady = function(callback) {
+	console.log("FeedBase onReady")
 	callback(this._configuration)
 }
 
@@ -87,8 +90,8 @@ const resolutionFormat = (resolution, name, to) => {
 		to,
 	};
 };
-
 FeedBase.prototype.getBars = function(symbolInfo, resolution, rangeStartDate, rangeEndDate, onResult, onError) {
+	console.log("FeedBase.prototype.getBars")
 	// 切换产品周期 或者 切换产品 会执行这个函数
 	let reso = resolutionFormat(resolution, symbolInfo.name, rangeEndDate > detafeed_historyTime ? rangeEndDate :
 		detafeed_historyTime)

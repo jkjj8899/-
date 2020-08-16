@@ -15,6 +15,7 @@ if(symbol){
 	index_market = symbol
 }
 document.title = symbol.toUpperCase()
+//console.log(symbol)
 
 Event.on('market-detail', data => {
 	document.getElementById('close').innerText = data.close.toFixed(2)
@@ -34,9 +35,10 @@ Event.on('market-detail', data => {
 	document.getElementById('close').style.color= color
 	document.getElementById('change').style.color= color
 })
-
+console.log(window.TradingView)
 // window.TradingView.onready 确保在html的dom加载完成后在调用
-window.TradingView.onready(function () {
+
+function initOnReady () {
   // chartConfig 在chartConfig.js里面
   // 给chartConfig添加展示周期
   chartConfig.interval = index_activeCycle
@@ -45,7 +47,7 @@ window.TradingView.onready(function () {
 
   // 初始化 TradingView
   widget = new window.TradingView.widget(chartConfig)
-
+  //console.log("widget", widget)
   widget && widget.onChartReady && widget.onChartReady(function () {
     // 这是k线图 展示的 7日均线和30日均线。
     widget.chart().createStudy('Moving Average', false, false, [7], null, {'Plot.linewidth': 2, 'Plot.color': '#2ba7d6'})
@@ -54,8 +56,9 @@ window.TradingView.onready(function () {
 			widget.chart().resetData()
 		}, 1000)
 	})
-})
+}
 
+window.addEventListener('DOMContentLoaded', initOnReady, false);
 
 var intervalDom = document.getElementById('interval')
 
