@@ -18,9 +18,9 @@
             "Fingerprint" : {},
             "UIWebview" : {}
         },
-		"kernel": {  
-			"ios": "UIWebview"    //或者 "WKWebview"  
-		},
+        "kernel" : {
+            "ios" : "UIWebview" //或者 "WKWebview"  
+        },
         /* 模块配置 */
         "distribute" : {
             /* 应用发布信息 */
@@ -91,9 +91,9 @@
             },
             "splashscreen" : {
                 "android" : {
-                    "hdpi" : "C:/Users/Kivi.Liao/Desktop/Fexcoin/hdpi.png",
-                    "xhdpi" : "C:/Users/Kivi.Liao/Desktop/Fexcoin/xhdpi.png",
-                    "xxhdpi" : "C:/Users/Kivi.Liao/Desktop/Fexcoin/xxhdpi.png"
+                    "hdpi" : "/Users/fex/work/workspace/hbuilder/Fexcoin-img/hdpi.png",
+                    "xhdpi" : "/Users/fex/work/workspace/hbuilder/Fexcoin-img/xhdpi.png",
+                    "xxhdpi" : "/Users/fex/work/workspace/hbuilder/Fexcoin-img/xxhdpi.png"
                 }
             }
         }

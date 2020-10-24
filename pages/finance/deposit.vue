@@ -6,11 +6,11 @@
 				<view><text class="cny">{{profit}}</text>CNY</view>
 			</view>
 			<view class="operat">
-				<view class="col">
+				<view class="col" @click="navTo('/pages/finance/historyOrder')">
 					<image src="../../static/icon-deposit-history.png" mode="widthFix"></image>
 					<text>理财记录</text>
 				</view>
-				<view class="col">
+				<view class="col" @click="navTo('/pages/finance/myOrder')">
 					<image src="../../static/icon-deposit-ing.png" mode="widthFix"></image>
 					<text>我的理财</text>
 				</view>
@@ -156,10 +156,13 @@
 		padding: 0;
 		margin: 0;
 		background: #EEF2F5;
+		height: 100%;
 	}
 	.container{
 		padding: 0;
 		margin: 0;
+		background: #EEF2F5;
+		height: 100%;
 	}
 	.total-box{
 		background: #5E7EEE;
