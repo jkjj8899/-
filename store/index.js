@@ -9,6 +9,7 @@ import exchange from './modules/exchange'
 import account from './modules/account'
 import cms from './modules/cms'
 import websocket from './modules/websocket'
+import finance from './modules/finance'
 
 Vue.use(Vuex)
 
@@ -38,6 +39,10 @@ const store = new Vuex.Store({
 	cms: {
 	  namespaced: true,
 	  ...cms
+	},
+	finance: {
+	  namespaced: true,
+	  ...finance
 	}
   }
 })

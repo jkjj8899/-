@@ -22,7 +22,38 @@
 			"style": {
 				"navigationBarTitleText": "FexCoin"
 			}
-		},{
+		},
+		{
+			"path": "pages/finance/deposit",
+			"style": {
+				"navigationBarTitleText": "存币理财",
+				"navigationBarBackgroundColor": "#5E7EEE",
+				"navigationBarTextStyle": "white",
+				"enablePullDownRefresh": true
+			}
+		},
+		{
+			"path": "pages/finance/depositDetail",
+			"style": {
+				"navigationBarTitleText": "活动详情",
+				"enablePullDownRefresh": true
+			}
+		},
+		{
+			"path": "pages/finance/myOrder",
+			"style": {
+				"navigationBarTitleText": "我的理财",
+				"enablePullDownRefresh": true
+			}
+		},
+		{
+			"path": "pages/finance/historyOrder",
+			"style": {
+				"navigationBarTitleText": "理财记录",
+				"enablePullDownRefresh": true
+			}
+		},
+		{
 			"path": "pages/exchange/index",
 			"style": {
 				"navigationBarTitleText": "闪兑",

@@ -40,9 +40,13 @@
 					<image src="../../static/exchange.png"></image>
 					<text>快捷闪兑</text>
 				</view>
-				<view class="item shop" @click="navTo('/pages/shop/index')">
+				<!-- <view class="item shop" @click="navTo('/pages/shop/index')">
 					<image class="miner" src="../../static/icon-shop.png"></image>
 					<text>Fex商城</text>
+				</view> -->
+				<view class="item shop" @click="navTo('/pages/finance/deposit')">
+					<image class="miner" src="../../static/icon-shop.png"></image>
+					<text>存币理财</text>
 				</view>
 			</view>
 		</view>
