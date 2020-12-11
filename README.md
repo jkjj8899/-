@@ -4,9 +4,9 @@
 本软件属于技术开源软件, 任何使用本源码从事商业活动，对别人和自己造成损失的，本人概不负责！
 
 #### 开源不易,请作者喝杯奶茶! ≧◠◡◠≦
-BTC: 3Ja4bHgk5G8wURrerd7yMdYBuLe7fkDRFU
-ETH: 0xA2E83704f917c7514Bc8B438217F697B41663578
-EOS: fexcoin54321
+##### BTC: 3Ja4bHgk5G8wURrerd7yMdYBuLe7fkDRFU
+##### ETH: 0xA2E83704f917c7514Bc8B438217F697B41663578
+##### EOS: fexcoin54321
 
 ### Android测试包下载: [下载](https://fexcoin.oss-cn-shenzhen.aliyuncs.com/upload/apk/fexcoin.apk)
 
