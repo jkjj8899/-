@@ -352,6 +352,20 @@
 					}
 				}
 			}
+		},{
+			"path": "pages/user/signin",
+			"style": {
+				"navigationBarTitleText": "签到",
+				// #ifdef MP
+				"navigationStyle": "custom",
+				// #endif
+				"app-plus": {
+					"bounce": "none",
+					"titleNView": {
+						"type": "transparent"
+					}
+				}
+			}
 		}, {
 			"path": "pages/user/invit",
 			"style": {

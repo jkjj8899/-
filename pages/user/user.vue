@@ -13,8 +13,8 @@
 				</view>
 			</view>
 			<view class="vip-card-box">
-				<view class="b-btn">
-					暂未开通
+				<view class="b-btn" @click="navTo('/pages/user/signin', true)">
+					签到
 				</view>
 				<view class="tit">
 					<text class="yticon icon-iLinkapp-"></text>

@@ -116,3 +116,17 @@ export function unbindGoogle(data) {
     data: data
   })
 }
+//签到详情
+export function signinDetail() {
+  return request({
+    url: `/v1/user/signin/detail`,
+    method: 'GET'
+  })
+}
+//签到
+export function signin() {
+  return request({
+    url: `/v1/user/signin`,
+    method: 'GET'
+  })
+}

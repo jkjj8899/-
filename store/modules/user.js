@@ -1,5 +1,5 @@
 import { USER_LOGIN, USER_LOGOUT, USER_UPDATE_PAY_PWD, USER_ENABLE_GOOGLE, USER_DISABLE_GOOGLE } from './../mutations_type'
-import { register, login, updatePayPwd, updatePwd, encryptBookList, addEncryptBook, deleteEncryptBook, withdraw, depositAddress, withdrawList, depositList, invitRank, getGoogleKey, bindGoogle, unbindGoogle } from '@/api/user'
+import { register, login, updatePayPwd, updatePwd, encryptBookList, addEncryptBook, deleteEncryptBook, withdraw, depositAddress, withdrawList, depositList, invitRank, getGoogleKey, bindGoogle, unbindGoogle, signinDetail, signin } from '@/api/user'
 
 const user = {
   state: {
@@ -191,6 +191,24 @@ const user = {
 	  return new Promise((resolve, reject) => {
 	    unbindGoogle(data).then(res => {
 			commit(USER_DISABLE_GOOGLE, res)
+	      resolve(res)
+	    }).catch(error => {
+	      reject(error)
+	    })
+	  })
+	},
+	signinDetail({ commit }) {
+	  return new Promise((resolve, reject) => {
+	    signinDetail().then(res => {
+	      resolve(res)
+	    }).catch(error => {
+	      reject(error)
+	    })
+	  })
+	},
+	signin({ commit }) {
+	  return new Promise((resolve, reject) => {
+	    signin().then(res => {
 	      resolve(res)
 	    }).catch(error => {
 	      reject(error)
