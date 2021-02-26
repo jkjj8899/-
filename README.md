@@ -8,7 +8,7 @@
 ##### ETH: 0xA2E83704f917c7514Bc8B438217F697B41663578
 ##### EOS: fexcoin54321
 
-### Android测试包下载: [下载](https://fexcoin.oss-cn-shenzhen.aliyuncs.com/upload/apk/fexcoin.apk)
+### Android测试包下载: [点击下载](https://fexcoin.oss-cn-shenzhen.aliyuncs.com/upload/apk/fexcoin.apk)
 
 
 #### 技术交流社区
