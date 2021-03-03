@@ -62,6 +62,8 @@
    npm install @dcloudio/uni-ui
 
    npm install vue-moment
+   
+   npm install uni-luck-draw
 3. [uni-app教程](https://uniapp.dcloud.io) 
 
 #### 参与贡献
