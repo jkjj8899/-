@@ -22,6 +22,20 @@
 			"style": {
 				"navigationBarTitleText": "FexCoin"
 			}
+		},{
+			"path": "pages/lottery/index",
+			"style": {
+				"navigationBarTitleText": "抽奖",
+				// #ifdef MP
+				"navigationStyle": "custom",
+				// #endif
+				"app-plus": {
+					"bounce": "none",
+					"titleNView": {
+						"type": "transparent"
+					}
+				}
+			}
 		},
 		{
 			"path": "pages/finance/deposit",

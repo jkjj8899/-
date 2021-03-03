@@ -80,7 +80,9 @@
 			</view>
 		</view>
 		
-		
+		<view class="lottery-icon" @click="navTo('/pages/lottery/index')">
+			<image src="../../static/lottery_icon.png"></image>
+		</view>
 	</view>
 </template>
 
@@ -553,5 +555,17 @@
 		}
 	}
 	
+	.lottery-icon{
+		position: fixed;
+		bottom: 300upx;
+		right: 20upx;
+		z-index: 99999999;
+		width: 100upx;
+		height: 100upx;
+		image{
+			width: 100upx;
+			height: 100upx;
+		}
+	}
 
 </style>

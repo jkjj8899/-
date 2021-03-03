@@ -9,6 +9,7 @@
     "@dcloudio/uni-ui": "^1.2.4",
     "pako": "^1.0.11",
     "tki-qrcode": "^0.1.6",
+    "uni-luck-draw": "^1.3.4",
     "uview-ui": "^1.6.0",
     "vue-moment": "^4.1.0"
   }

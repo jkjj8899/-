@@ -10,6 +10,7 @@ import account from './modules/account'
 import cms from './modules/cms'
 import websocket from './modules/websocket'
 import finance from './modules/finance'
+import lottery from './modules/lottery'
 
 Vue.use(Vuex)
 
@@ -43,6 +44,10 @@ const store = new Vuex.Store({
 	finance: {
 	  namespaced: true,
 	  ...finance
+	},
+	lottery: {
+	  namespaced: true,
+	  ...lottery
 	}
   }
 })
