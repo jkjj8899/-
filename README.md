@@ -17,6 +17,9 @@
 ![Image text](doc/wechat_qrcode.jpg) 
 ![Image text](doc/qq_qrcode.jpg) 
 
+#### 相关小程序
+![Image text](doc/appbox.jpg) 
+
 
 #### 功能规划
 1. 资产托管
