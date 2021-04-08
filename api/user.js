@@ -71,10 +71,17 @@ export function withdrawList(data) {
     data: data
   })
 }
-//充币
-export function depositAddress(coin) {
+//提币配置
+export function withdrawConfig(coin) {
   return request({
-    url: `/v1/deposit/address/${coin}`,
+    url: '/v1/withdraw/config/' + coin,
+    method: 'GET'
+  })
+}
+//充币
+export function depositAddress(coin, chain) {
+  return request({
+    url: `/v1/deposit/address/${coin}?chain=${chain}`,
     method: 'GET'
   })
 }

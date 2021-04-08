@@ -12,6 +12,12 @@
 					<uni-icons type="forward" size="20" class="arrow"></uni-icons>
 				</view>
 			</view>
+			<view class="chain" v-show="isChain">
+				<view class="label">链名称</view>
+				<view class="row">
+					<view @click="selectChain(item)" class="item" :class="{'selected': item.tokenBase == deposit.chain}" v-for="(item, i) in deposit.chains">{{item.chain}}</view>
+				</view>
+			</view>
 			<view class="s-row qrcode">
 				<tki-qrcode ref="qrcode" :size="400" :onval="true" cid="qrcode" :val="qrcode.val" />
 				<view class="save" @click="save">保存二维码到相册</view>
@@ -34,6 +40,11 @@
 		data() {
 			return {
 				coin: {},
+				chain: '',
+				isChain: false,
+				fee: 0,
+				showPrecision: 0,
+				chains: [],
 				account: {},
 				coins: [],
 				tips: {},
@@ -58,14 +69,19 @@
 			...mapActions('common', ['coinList', 'coinTips']),
 			...mapActions('user', ['depositAddress']),
 			async loadData(){
-				this.depositAddress(this.coin.symbol).then(res =>{
+				this.depositAddress({coin: this.coin.symbol, chain: this.chain}).then(res =>{
 					this.deposit = res.data
+					this.isChain = (this.deposit.chains && this.deposit.chains.length > 0)
 					this.qrcode.val = res.data.address
-					this.$refs.qrcode._makeCode()
+					this.$refs.qrcode & this.$refs.qrcode._makeCode()
 				})
 				this.coinTips(this.coin.symbol).then(res =>{
 					this.tips = res.data
 				})
+			},
+			selectChain(item){
+				this.chain = item.tokenBase
+				this.loadData()
 			},
 			selectCoin(data){
 				for(let i = 0; i < this.coins.length; i++){
@@ -99,6 +115,27 @@
 	}
 	.coin-section{
 		background: #fff;
+		.chain{
+			padding: 30upx 30upx 10upx 30upx;
+		}
+		.chain .row{
+			display: flex;
+			padding-top: 20upx;
+			.item{
+				width: 160upx;
+				height: 70upx;
+				line-height: 70upx;
+				background-color: $uni-color-subbg;
+				border-radius: 10upx;
+				margin-right: 20upx;
+				text-align: center;
+			}
+			.selected{
+				border: 1upx solid #007AFF;
+				background-color: #ffffff;
+				color: #007AFF;
+			}
+		}
 		.s-row{
 			background-color: $uni-color-subbg;
 			display:flex;

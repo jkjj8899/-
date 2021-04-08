@@ -1,5 +1,5 @@
 import { USER_LOGIN, USER_LOGOUT, USER_UPDATE_PAY_PWD, USER_ENABLE_GOOGLE, USER_DISABLE_GOOGLE } from './../mutations_type'
-import { register, login, updatePayPwd, updatePwd, encryptBookList, addEncryptBook, deleteEncryptBook, withdraw, depositAddress, withdrawList, depositList, invitRank, getGoogleKey, bindGoogle, unbindGoogle, signinDetail, signin } from '@/api/user'
+import { register, login, updatePayPwd, updatePwd, encryptBookList, addEncryptBook, deleteEncryptBook, withdraw, depositAddress, withdrawList, withdrawConfig, depositList, invitRank, getGoogleKey, bindGoogle, unbindGoogle, signinDetail, signin } from '@/api/user'
 
 const user = {
   state: {
@@ -134,7 +134,16 @@ const user = {
 	},
 	depositAddress({ commit }, coin) {
 	  return new Promise((resolve, reject) => {
-	    depositAddress(coin).then(res => {
+	    depositAddress(coin.coin, coin.chain).then(res => {
+	      resolve(res)
+	    }).catch(error => {
+	      reject(error)
+	    })
+	  })
+	},
+	withdrawConfig({ commit }, coin) {
+	  return new Promise((resolve, reject) => {
+	    withdrawConfig(coin).then(res => {
 	      resolve(res)
 	    }).catch(error => {
 	      reject(error)

@@ -12,6 +12,12 @@
 					<uni-icons type="forward" size="20" class="arrow"></uni-icons>
 				</view>
 			</view>
+			<view class="chain" v-show="isChain">
+				<view class="label">链名称</view>
+				<view class="row">
+					<view @click="selectChain(item)" class="item" :class="{'selected': item.tokenBase == chain.tokenBase}" v-for="(item, i) in config.chains">{{item.chain}}</view>
+				</view>
+			</view>
 			<view class="form">
 				<text class="label">提币地址</text>
 				<view class="input little-line">
@@ -19,11 +25,11 @@
 				</view>
 				<text class="label">数量</text>
 				<view class="input little-line">
-					<input type="number" v-model="form.amount" :placeholder="`最小提币数量${coin.minWithdraw}`" class="address"/>
+					<input type="number" v-model="form.amount" :placeholder="`最小提币数量${config.minWithdraw}`" class="volume"/>
 					<view class="all" @click="all">全部</view>
 				</view>
-				<view class="balance">可用 {{account.normalBalance}} {{account.symbol}}</view>
-				<text class="label">手续费 {{coin.withdrawFee}} {{coin.symbol}}</text>
+				<view class="balance">可用 {{account.normalBalance | fixD(config.showPrecision)}} {{account.symbol}}</view>
+				<text class="label">手续费 {{config.fee}} {{coin.symbol}}</text>
 			</view>
 			<button class="submit" @click="handleSubmit">确认</button>
 			<view class="desc" v-html="tips[0] ? tips[0].content : ''"></view>
@@ -46,6 +52,9 @@
 				account: {},
 				coins: [],
 				tips: {},
+				config: {},
+				chain: {},
+				isChain: false,
 				form: {
 					symbol: undefined,
 					amount: undefined,
@@ -69,15 +78,31 @@
 		methods: {
 			...mapActions('common', ['coinList', 'coinTips']),
 			...mapActions('account', ['getAccount']),
-			...mapActions('user', ['withdraw']),
+			...mapActions('user', ['withdraw', 'withdrawConfig']),
 			//请求数据
 			async loadData(){
-				this.getAccount(this.coin.symbol).then(res =>{
-					this.account = res.data
-				})
+				
 				this.coinTips(this.coin.symbol).then(res =>{
 					this.tips = res.data
 				})
+				this.withdrawConfig(this.coin.symbol).then(res =>{
+					this.config = res.data
+					this.isChain = (this.config.chains && this.config.chains.length > 0)
+					if(this.isChain){
+						this.chain = this.config.chains[0]
+					}
+					
+					this.getAccount(this.coin.symbol).then(res =>{
+						this.account = res.data
+					})
+				})
+			},
+			selectChain(item){
+				this.chain = item
+				this.config.fee = item.withdrawFee
+				this.config.minWithdraw = item.minWithdraw
+				this.form.address = undefined
+				this.form.amount = undefined
 			},
 			selectCoin(data){
 				for(let i = 0; i < this.coins.length; i++){
@@ -114,6 +139,7 @@
 				
 				this.form.capitalPasswd = data.code
 				uni.showLoading();
+				this.form.chain = this.chain.tokenBase ? this.chain.tokenBase : ''
 				this.withdraw(this.form).then(res =>{
 					uni.hideLoading()
 					this.$refs.validPopup.close()
@@ -136,6 +162,30 @@
 	}
 	.coin-section{
 		background: #fff;
+		.chain{
+			padding: 30upx 0upx 10upx 0upx;
+		}
+		.chain .label{
+			font-size: $font-sm;
+		}
+		.chain .row{
+			display: flex;
+			padding-top: 20upx;
+			.item{
+				width: 160upx;
+				height: 70upx;
+				line-height: 70upx;
+				background-color: $uni-color-subbg;
+				border-radius: 10upx;
+				margin-right: 20upx;
+				text-align: center;
+			}
+			.selected{
+				border: 1upx solid #007AFF;
+				background-color: #ffffff;
+				color: #007AFF;
+			}
+		}
 		.s-row{
 			background-color: $uni-color-subbg;
 			display:flex;
@@ -193,6 +243,12 @@
 				margin-top: 10upx;
 				color: $font-color-light;
 				font-size: $font-sm;
+			}
+			.address{
+				width: 100%;
+			}
+			.volume{
+				width: 400upx;
 			}
 			.input{
 				padding: 10upx 0;

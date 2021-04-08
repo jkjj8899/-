@@ -14,14 +14,14 @@
 		</view>
 		<!-- 列表 -->
 		<view class="coin-section m-t">
-			<view v-for="(item, i) in data.list" :key="item.symbol" class="block little-line" @click="navTo('/pages/wallet/detail', true)">
+			<view v-for="(item, i) in data.list" :key="item.symbol" class="block little-line" >
 				<view class="s-row">
 					<view class="col">
 						<image :src="item.icon" class="coinLogo"></image>
 						<text class="coin">{{item.symbol}}</text>
 					</view>
 					<view class="col r light">
-						<uni-icons type="forward" size="20" class="gt"></uni-icons>
+						<!--<uni-icons type="forward" size="20" class="gt"></uni-icons>-->
 					</view>
 				</view>
 				<view class="s-row">
