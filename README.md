@@ -20,6 +20,7 @@
 #### 相关小程序
 ![Image text](doc/appbox.jpg) 
 ![Image text](https://shkj1994.oss-cn-shenzhen.aliyuncs.com/gh_1c63fd731ccc_430.jpg) 
+![Image text](https://shkj1994.oss-cn-shenzhen.aliyuncs.com/gh_a79c05053be4_430.jpg) 
 
 
 #### 功能规划
