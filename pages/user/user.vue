@@ -8,7 +8,7 @@
 					<image class="portrait" :src="'/static/missing-face.png'"></image>
 				</view>
 				<view class="info-box" @click="toLogin">
-					<text class="username">{{loginInfo.nickname || '请登录'}}</text>
+					<text class="username">{{loginInfo.mobile || '请登录'}}</text>
 					<view class="tip">欢迎来到FEXCOIN.COM</view>
 				</view>
 			</view>

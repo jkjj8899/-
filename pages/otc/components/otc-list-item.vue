@@ -136,7 +136,10 @@
 				this.form.volume = parseFloat(this.form.volume)
 				this.createOrder(this.form).then(res =>{
 					this.showKeyboard = false
-					this.$api.msg('下单成功')
+					//this.$api.msg('下单成功')
+					uni.navigateTo({
+						url: '/pages/otc/order/detail?id='+res.data
+					})
 					uni.$emit("refresh")
 				}).catch(error =>{
 					

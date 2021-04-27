@@ -20,10 +20,10 @@
 			<text class="cell-tit">指纹登录</text>
 			<switch color="#fa436a" @change="fingerprint" />
 		</view>
-		<view class="list-cell m-t" @click="navTo('实名认证')" hover-class="cell-hover" :hover-stay-time="50">
+		<!-- <view class="list-cell m-t" @click="navTo('实名认证')" hover-class="cell-hover" :hover-stay-time="50">
 			<text class="cell-tit">实名认证</text>
 			<text class="cell-more yticon icon-you"></text>
-		</view>
+		</view> -->
 		
 		<!-- <view class="list-cell" @click="navTo('/pages/user/updateMobile')" hover-class="cell-hover" :hover-stay-time="50">
 			<text class="cell-tit">绑定/修改手机号码</text>

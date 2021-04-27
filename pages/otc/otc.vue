@@ -110,7 +110,7 @@
 			},
 			/*下拉刷新的回调 */
 			downCallback() {
-				console.log(222222222)
+				///console.log(222222222)
 				// 这里加载你想下拉刷新的数据, 比如刷新轮播数据
 				// loadSwiper();
 				// 下拉刷新的回调,默认重置上拉加载列表为第一页 (自动执行 page.num=1, 再触发upCallback方法 )
@@ -124,7 +124,6 @@
 				}
 				let $this = this
 				this.page.page = page.num
-				console.log(this.page.page)
 				this.advertList(this.page).then(res =>{
 					console.log(this.page, res.rows);
 					$this.mescroll.endSuccess(res.rows.length)

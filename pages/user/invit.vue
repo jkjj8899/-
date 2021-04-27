@@ -10,13 +10,13 @@
 						<text class="sub">注册时间: {{loginInfo.registerTime | moment('YYYY-MM-DD')}}</text>
 					</view>
 				</view>
-				<view class="invit">
+				<view class="invit" @click="copy">
 					<text class="code">{{loginInfo.invitCode}}</text>
-					<text class="sub">我的邀请码</text>
+					<text class="sub">我的邀请码(复制)</text>
 				</view>
 			</view>
 			<view class="bottom">
-				<view class="item">
+				<!-- <view class="item">
 					<image src="../../static/icon-invit1.jpg"></image>
 					<text>海报邀请</text>
 				</view>
@@ -31,7 +31,7 @@
 				<view class="item">
 					<image src="../../static/icon-invit4.jpg"></image>
 					<text>面对面</text>
-				</view>
+				</view> -->
 			</view>
 		</view>
 		
@@ -80,7 +80,16 @@
 			})
 		},
 		methods:{
-			...mapActions('user', ['invitRank'])
+			...mapActions('user', ['invitRank']),
+			copy(){
+				let _this = this
+				uni.setClipboardData({
+				    data: _this.loginInfo.invitCode,
+				    success: function () {
+				        _this.$api.msg('复制功能')
+				    }
+				});
+			}
 		}
 	}
 </script>
