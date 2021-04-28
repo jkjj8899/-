@@ -13,7 +13,7 @@
 
 #### 技术交流社区
 
-##### [![微信群:](https://img.shields.io/badge/%E5%BE%AE%E4%BF%A1-fexcoin-green)]()&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[![QQ群:](https://img.shields.io/badge/QQ%E7%BE%A4-731992394-green)](https://jq.qq.com/?_wv=1027&k=mN37oSXN)
+##### 微信群 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;QQ群
 ![Image text](doc/wechat_qrcode.jpg) 
 ![Image text](doc/qq_qrcode.jpg) 
 
