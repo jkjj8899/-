@@ -15,9 +15,9 @@
 			<text class="cell-tit">法律声明</text>
 			<text class="cell-more yticon icon-you"></text>
 		</view>
-		<view class="list-cell b-b" hover-class="cell-hover" :hover-stay-time="50">
+		<view class="list-cell b-b" @click="onAPPUpdate" hover-class="cell-hover" :hover-stay-time="50">
 			<text class="cell-tit">检查新版本</text>
-			<text class="cell-tip">当前版本 1.0.0</text>
+			<text class="cell-tip">当前版本 {{version}}</text>
 			<text class="cell-more yticon icon-you"></text>
 		</view>
 	</view>
@@ -29,16 +29,28 @@
 		mapActions
 	} from 'vuex'
 	import {commonMixin} from '@/common/mixin/mixin.js'
+	import APPUpdate, { getCurrentNo } from '@/uni_modules/zhouWei-APPUpdate/js_sdk/appUpdate';
 	export default {
 		mixins: [commonMixin],
 		data() {
 			return {
+				version: ''
 			};
 		},
 		onLoad() {
-			
+			// #ifdef APP-PLUS
+			getCurrentNo(res => {
+				// 进页面获取当前APP版本号（用于页面显示）
+				this.version = res.versionName;
+			});
+			// #endif
 		},
 		methods:{
+			// 检查APP是否有新版本
+			onAPPUpdate() {
+				// true 没有新版本的时候有提示，默认：false
+				APPUpdate(true);
+			}
 		}
 	}
 </script>

@@ -1,5 +1,13 @@
 import request from '@/utils/request'
 
+// App版本
+export function getAppVersion(data) {
+  return request({
+    url: '/v1/version/app',
+    method: 'GET'
+  })
+}
+
 // 币种列表
 export function coinList(data) {
   return request({

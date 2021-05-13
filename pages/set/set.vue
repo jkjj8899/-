@@ -22,8 +22,11 @@
 		mixins: [commonMixin],
 		data() {
 			return {
-				
+				version: ''
 			};
+		},
+		onLoad() {
+			
 		},
 		methods:{
 

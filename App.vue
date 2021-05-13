@@ -6,9 +6,12 @@
 		mapState,
 		mapActions
 	} from 'vuex'
+	// #ifdef APP-PLUS
+	import APPUpdate from '@/uni_modules/zhouWei-APPUpdate/js_sdk/appUpdate';
+	// #endif
 	export default {
 		methods: {
-			...mapActions('common', ['coinList']),
+			...mapActions('common', ['coinList', 'getAppVersion']),
 		},
 		onLaunch: function() {
 			let $this = this
@@ -16,6 +19,10 @@
 				$this.coinList()
 			});
 			this.$store.dispatch('WEBSOCKET_INIT', 'wss://api.hadax.com/ws')
+			
+			// #ifdef APP-PLUS
+			APPUpdate();
+			// #endif
 		},
 		onShow: function() {
 			console.log('App Show')

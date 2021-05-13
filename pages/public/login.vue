@@ -58,8 +58,8 @@
 		data(){
 			return {
 				form: {
-					username: '13585883231',
-					password: '111111'
+					username: '',
+					password: ''
 				},
 				logining: false
 			}

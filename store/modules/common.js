@@ -6,7 +6,8 @@ import {
 	adList,
 	noticeList,
 	currencyList,
-	fiatList
+	fiatList,
+	getAppVersion
 } from '@/api/common'
 import {
 	COMMON_COIN_LIST
@@ -31,6 +32,17 @@ const common = {
 	},
 
 	actions: {
+		getAppVersion({
+			commit
+		}) {
+			return new Promise((resolve, reject) => {
+				getAppVersion().then(res => {
+					resolve(res)
+				}).catch(error => {
+					reject(error)
+				})
+			})
+		},
 		coinList({
 			commit
 		}) {
