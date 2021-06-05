@@ -9,7 +9,8 @@
 ##### EOS: fexcoin54321
 
 ### Android测试包下载: [点击下载](https://fexcoin.oss-cn-shenzhen.aliyuncs.com/upload/apk/fexcoin.apk)
-
+### 扫一扫体验
+![Image text](https://shkj1994.oss-cn-shenzhen.aliyuncs.com/images/qrcode.png) 
 
 #### 技术交流社区
 
