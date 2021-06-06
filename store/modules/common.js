@@ -3,6 +3,7 @@ import {
 	coinList,
 	coinTips,
 	marketList,
+	marketTicker,
 	adList,
 	noticeList,
 	currencyList,
@@ -71,6 +72,17 @@ const common = {
 		}) {
 			return new Promise((resolve, reject) => {
 				marketList().then(res => {
+					resolve(res)
+				}).catch(error => {
+					reject(error)
+				})
+			})
+		},
+		marketTicker({
+			commit
+		}, data) {
+			return new Promise((resolve, reject) => {
+				marketTicker(data).then(res => {
 					resolve(res)
 				}).catch(error => {
 					reject(error)

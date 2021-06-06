@@ -18,7 +18,7 @@
 			this.$fire.$on("refreshCoin", () => {
 				$this.coinList()
 			});
-			this.$store.dispatch('WEBSOCKET_INIT', 'wss://api.hadax.com/ws')
+			this.$store.dispatch('WEBSOCKET_INIT', 'wss://api.xfilecache.com/ws')
 			
 			// #ifdef APP-PLUS
 			APPUpdate();

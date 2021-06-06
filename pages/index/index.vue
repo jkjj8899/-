@@ -27,12 +27,25 @@
 				</view>
 			</view>
 		</scroll-view>
-		<view class="menu">
+		<view class="line"></view>
+		<view class="otc">
 			<view class="fiat" @click="navTo('/pages/otc/otc')">
 				<image src="../../static/icon-fiat.png" mode="widthFix"></image>
 				<view class="label">
 					<text>法币交易</text>
 					<text class="sub">支持ETH、USDT</text>
+				</view>
+			</view>
+			<view @click="navTo('/pages/otc/otc')" class="r" style="padding-right: 30upx;">
+				<image src="../../static/icon-fiat-r.png" mode="widthFix"></image>
+			</view>
+		</view>
+		<view class="menu">
+			<view class="fiat" @click="navTo('/pages/prediction/prediction')">
+				<image src="../../static/icon-prediction.png" mode="widthFix"></image>
+				<view class="label">
+					<text>行情预言机</text>
+					<text class="sub">Prediction Market</text>
 				</view>
 			</view>
 			<view class="ex">
@@ -279,6 +292,41 @@
 			.b{
 				font-size: $font-sm;
 				color: $font-color-disabled;
+			}
+		}
+	}
+	.otc{
+		padding: 0upx;
+		display: flex;
+		flex-direction: row;
+		justify-content: space-between;
+		align-items: center;
+		font-size: $font-base;
+		font-weight: bold;
+		background: #ffffff;
+		image{
+			width: 100upx;
+		}
+		.fiat{
+			display: flex;
+			flex-direction: row;
+			flex: 1;
+			align-items: center;
+			background: #ffffff;
+			padding-left: 30upx;
+			margin-right: 10upx;
+			padding: 20upx 30upx;
+			.label{
+				display: flex;
+				flex-direction: column;
+				padding-left: 20upx;
+			}
+			.sub{
+				font-size: $font-sm;
+				font-weight: normal;
+			}
+			text{
+				font-size: $font-md;
 			}
 		}
 	}

@@ -11,6 +11,7 @@ import cms from './modules/cms'
 import websocket from './modules/websocket'
 import finance from './modules/finance'
 import lottery from './modules/lottery'
+import prediction from './modules/prediction'
 
 Vue.use(Vuex)
 
@@ -48,6 +49,10 @@ const store = new Vuex.Store({
 	lottery: {
 	  namespaced: true,
 	  ...lottery
+	},
+	prediction: {
+	  namespaced: true,
+	  ...prediction
 	}
   }
 })

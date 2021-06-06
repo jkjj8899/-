@@ -10,7 +10,7 @@ const websocket = {
 			// 创建一个this.socketTask对象【发送、接收、关闭socket都由这个对象操作】
 			console.log('websocket 连接 url: ' + url)
 			state.socketTask = uni.connectSocket({
-				url: 'wss://api.huobiasia.vip/ws',
+				url: 'wss://api.xfilecache.com/ws',
 				// 【非常重要】必须确保你的服务器是成功的,如果是手机测试千万别使用ws://127.0.0.1:9099【特别容易犯的错误】
 				success(data) {
 					console.log("websocket连接成功", data);

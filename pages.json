@@ -77,6 +77,30 @@
 			}
 		},
 		{
+			"path": "pages/prediction/prediction",
+			"style": {
+				"navigationBarTitleText": "预言机",
+				// #ifdef MP
+				"navigationStyle": "custom",
+				// #endif
+				"app-plus": {
+					"bounce": "none",
+					"titleNView": {
+						"type": "transparent"
+					}
+				}
+			}
+		},
+		{
+			"path": "pages/prediction/history",
+			"style": {
+				"navigationBarTitleText": "预测记录",
+				"app-plus" : {
+					"softinputMode": "adjustResize"
+				}
+			}
+		},
+		{
 			"path": "pages/otc/otc",
 			"style": {
 				"navigationBarTitleText": "法币交易",

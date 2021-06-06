@@ -32,6 +32,14 @@ export function marketList() {
   })
 }
 
+export function marketTicker(data) {
+  return request({
+    url: '/v1/market/ticker',
+    method: 'GET',
+	data: data
+  })
+}
+
 // 手机验证码
 export function sendSms(data) {
   return request({

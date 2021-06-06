@@ -42,7 +42,7 @@ var socket = {
 		}
 	},
 	initWs() {
-		this.socket = new WebSocket('ws://api.huobiasia.vip/ws')
+		this.socket = new WebSocket('ws://api.xfilecache.com/ws')
 		this.socket.onopen = () => {
 			this.sendWsRequest(this.historyData)
 			this.sendWsRequest({
