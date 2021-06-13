@@ -42,7 +42,7 @@ var socket = {
 		}
 	},
 	initWs() {
-		this.socket = new WebSocket('ws://api.xfilecache.com/ws')
+		this.socket = new WebSocket('wss://www.huobi.ge/-/s/pro/ws')
 		this.socket.onopen = () => {
 			this.sendWsRequest(this.historyData)
 			this.sendWsRequest({
