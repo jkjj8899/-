@@ -12,6 +12,7 @@ import websocket from './modules/websocket'
 import finance from './modules/finance'
 import lottery from './modules/lottery'
 import prediction from './modules/prediction'
+import mining from './modules/mining'
 
 Vue.use(Vuex)
 
@@ -53,6 +54,10 @@ const store = new Vuex.Store({
 	prediction: {
 	  namespaced: true,
 	  ...prediction
+	},
+	mining: {
+	  namespaced: true,
+	  ...mining
 	}
   }
 })

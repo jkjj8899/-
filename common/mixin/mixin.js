@@ -8,7 +8,8 @@ export const commonMixin = {
   	...mapState('user', ['loginInfo'])
   },
   data() {
-    return { }
+    return { 
+	}
   },
   filters: {
 	  fixed(v, scale){

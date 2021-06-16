@@ -68,6 +68,55 @@
 			}
 		},
 		{
+			"path": "pages/mining/index",
+			"style": {
+				"navigationBarTitleText": "云算力",
+				"navigationBarBackgroundColor": "#ff724a",
+				"navigationBarTextStyle": "white",
+				"enablePullDownRefresh": true,
+				"app-plus": {
+					"bounce": "none",
+					"titleNView": {
+						"buttons": [{
+								"text": "我的算力",
+								"fontSize": "14",
+								"color": "#ffffff",
+								"width": "70px",
+								"background": "rgba(0,0,0,0)"
+							}
+						]
+					}
+				}
+			}
+		},
+		{
+			"path": "pages/mining/detail",
+			"style": {
+				"navigationBarTitleText": "",
+				"navigationBarBackgroundColor": "#ff724a",
+				"navigationBarTextStyle": "white",
+				"enablePullDownRefresh": true
+			}
+		},
+		{
+			"path": "pages/mining/my",
+			"style": {
+				"navigationBarTitleText": "我的算力",
+				"navigationBarBackgroundColor": "#ff724a",
+				"navigationBarTextStyle": "white",
+				"enablePullDownRefresh": true
+			}
+		},
+		{
+			"path": "pages/mining/profit",
+			"style": {
+				"navigationBarTitleText": "产出明细",
+				"navigationBarBackgroundColor": "#ff724a",
+				"navigationBarTextStyle": "white",
+				"enablePullDownRefresh": true
+			}
+		},
+		{
 			"path": "pages/exchange/index",
 			"style": {
 				"navigationBarTitleText": "闪兑",
@@ -545,6 +594,12 @@
 				"iconPath": "static/tabbar/tab-news.png",
 				"selectedIconPath": "static/tabbar/tab-news-active.png",
 				"text": "资讯"
+			},
+			{
+				"pagePath": "pages/mining/index",
+				"iconPath": "static/tabbar/tab-mining.png",
+				"selectedIconPath": "static/tabbar/tab-mining-active.png",
+				"text": "云算力"
 			},
 			{
 				"pagePath": "pages/wallet/wallet",
