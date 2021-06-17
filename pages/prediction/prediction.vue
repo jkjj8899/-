@@ -24,11 +24,11 @@
 								<input type="number" placeholder="0.00" v-model="betForm.volume"/>
 							</view>
 							<view class="silder">
-								<view class="item">10%</view>
-								<view class="item">25%</view>
-								<view class="item">50%</view>
-								<view class="item">75%</view>
-								<view class="item">最大</view>
+								<view class="item" @click="changePer(0.1)">10%</view>
+								<view class="item" @click="changePer(0.25)">25%</view>
+								<view class="item" @click="changePer(0.5)">50%</view>
+								<view class="item" @click="changePer(0.75)">75%</view>
+								<view class="item" @click="changePer(1)">最大</view>
 							</view>
 							<button class="draw-btn" @click="handleBet">下注</button>
 						</view>
@@ -212,6 +212,13 @@
 			...mapActions('common', ['marketTicker']),
 			...mapActions('prediction', ['predictionDetail','predictionRounds','predictionBet','predictionHistory']),
 			...mapActions('account', ['getAccount']),
+			changePer(scale){
+				let balance = this.account.normalBalance;
+				if(balance && balance == 0){
+					return;
+				}
+				this.betForm.volume = (balance * scale).toFixed(this.account.showPrecision)
+			},
 			handleBet(){
 				let _this = this
 				if(!this.betForm.volume){
