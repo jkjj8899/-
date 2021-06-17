@@ -123,7 +123,7 @@
 		height: 100%;
 	}
 	.container{
-		padding-top: 80px;
+		padding-top: 100px;
 		position:relative;
 		overflow: hidden;
 		background: url(../../static/images/public/bg.png);

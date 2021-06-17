@@ -110,15 +110,14 @@
 	}
 </script>
 
-<style lang='scss' scoped>
-	page {
+<style lang='scss'>
+	page{
 		background: #fff;
 		width: 100%;
 		height: 100%;
 	}
-
-	.container {
-		padding-top: 80px;
+	.container{
+		padding-top: 100px;
 		position:relative;
 		overflow: hidden;
 		background: url(../../static/images/public/bg.png);
