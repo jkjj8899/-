@@ -147,7 +147,7 @@
 			return JSON.parse(tags)
 		},
 		percent(item){
-			return (1 - parseInt(item.quantity / item.totalQuantity)) * 100
+			return (1 - (item.quantity / item.totalQuantity).toFixed(2)) * 100
 		},
 		reset(){
 			this.records = []
@@ -217,6 +217,8 @@
 	.container{
 		margin: 0;
 		padding: 0;
+		width: 100%;
+		height: 100%;
 		background-color: #f7f7f7;
 	}
 	.tabs{

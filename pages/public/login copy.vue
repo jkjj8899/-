@@ -1,21 +1,18 @@
 <template>
 	<view class="container">
+		<view class="left-bottom-sign"></view>
 		<view class="back-btn yticon icon-zuojiantou-up" @click="navBack"></view>
+		<view class="right-top-sign"></view>
 		<!-- 设置白色背景防止软键盘把下部绝对定位元素顶上来盖住输入框等 -->
 		<view class="wrapper">
-			<!--
-			<view class="left-top-sign">LOGIN</view>-->
+			<view class="left-top-sign">LOGIN</view>
 			<view class="welcome">
-				<image mode="widthFix" src="../../static/images/public/logo.png" class="logo"></image>
-				<view class="txt">
-					<text class="b">欢迎来到FexCoin</text>
-					<text>Welcome to fexcoin</text>
-				</view>
+				欢迎登录！
 			</view>
 			<view class="input-content">
 				<view class="input-item">
-					<image src="../../static/images/public/icon-mobile.png" class="icon"></image>
-					<input placeholder-style="color: #ffffff"
+					<text class="tit">手机号码</text>
+					<input 
 						type="mobile" 
 						v-model="form.username" 
 						placeholder="请输入手机号码"
@@ -25,8 +22,8 @@
 					/>
 				</view>
 				<view class="input-item">
-					<image src="../../static/images/public/icon-pwd.png" class="icon"></image>
-					<input placeholder-style="color: #ffffff"
+					<text class="tit">密码</text>
+					<input 
 						type="password" 
 						v-model="form.password" 
 						placeholder="8-18位不含特殊字符的数字、字母组合"
@@ -39,12 +36,10 @@
 					/>
 				</view>
 			</view>
-			<view class="link">
-				<view class="forget-section">
-					忘记密码?
-				</view>
-			</view>
 			<button class="confirm-btn" @click="toLogin" :disabled="logining">登录</button>
+			<view class="forget-section">
+				忘记密码?
+			</view>
 		</view>
 		<view class="register-section">
 			还没有账号?
@@ -119,21 +114,19 @@
 <style lang='scss'>
 	page{
 		background: #fff;
-		width: 100%;
-		height: 100%;
 	}
 	.container{
-		padding-top: 80px;
+		padding-top: 115px;
 		position:relative;
+		width: 100vw;
+		height: 100vh;
 		overflow: hidden;
-		background: url(../../static/images/public/bg.png);
-		background-size: 100% 100%;
-		width: 100%;
-		height: 100%;
+		background: #fff;
 	}
 	.wrapper{
 		position:relative;
 		z-index: 90;
+		background: #fff;
 		padding-bottom: 40upx;
 	}
 	.back-btn{
@@ -143,7 +136,7 @@
 		padding-top: var(--status-bar-height);
 		top: 40upx;
 		font-size: 40upx;
-		color: #ffffff;
+		color: $font-color-dark;
 	}
 	.left-top-sign{
 		font-size: 120upx;
@@ -186,43 +179,27 @@
 	}
 	.welcome{
 		position:relative;
-		padding-left: 40upx;
-		padding-bottom: 50upx;
-		.logo{
-			width: 150upx;
-		}
-		.txt{
-			display: flex;
-			flex-direction: column;
-			color: #ffffff;
-			padding-left: 20upx;
-			padding-bottom: 40upx;
-			font-size: 26upx;
-			.b{
-				font-size: 40upx;
-				font-weight: bold;
-			}
-		}
+		left: 50upx;
+		top: -90upx;
+		font-size: 46upx;
+		color: #555;
+		text-shadow: 1px 0px 1px rgba(0,0,0,.3);
 	}
 	.input-content{
 		padding: 0 60upx;
 	}
 	.input-item{
 		display:flex;
-		flex-direction: row;
-		align-items: center;
+		flex-direction: column;
+		align-items:flex-start;
 		justify-content: center;
-		padding: 0 10upx;
-		height: 80upx;
-		line-height: 80upx;
+		padding: 0 30upx;
+		background:$page-color-light;
+		height: 120upx;
+		border-radius: 4px;
 		margin-bottom: 50upx;
-		border-bottom: 1px solid rgba(255,255,255,0.6);
 		&:last-child{
 			margin-bottom: 0;
-		}
-		.icon{
-			width: 13px;
-			height: 17px;
 		}
 		.tit{
 			height: 50upx;
@@ -233,24 +210,19 @@
 		input{
 			height: 60upx;
 			font-size: $font-base + 2upx;
-			color: #ffffff;
+			color: $font-color-dark;
 			width: 100%;
-			padding-left: 20upx;
 		}	
 	}
-	.link{
-		display: flex;
-		padding: 30upx 60upx;
-		color: #ffffff;
-	}
+
 	.confirm-btn{
 		width: 630upx;
 		height: 76upx;
 		line-height: 76upx;
 		border-radius: 50px;
-		margin-top: 40upx;
-		background: #FFFFFF;
-		color: #4E46D2;
+		margin-top: 70upx;
+		background: $uni-color-primary;
+		color: #fff;
 		font-size: $font-lg;
 		&:after{
 			border-radius: 100px;
@@ -268,10 +240,10 @@
 		bottom: 50upx;
 		width: 100%;
 		font-size: $font-sm+2upx;
-		color: #4E46D2;
+		color: $font-color-base;
 		text-align: center;
 		text{
-			color: #ffffff;
+			color: $font-color-spec;
 			margin-left: 10upx;
 		}
 	}
