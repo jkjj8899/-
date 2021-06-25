@@ -79,7 +79,7 @@
 				<view class="col r">全球指数</view>
 				<view class="col r">24小时涨幅</view>
 			</view>
-			<view class="s-row little-line" v-for="(item, i) in markets" :key="item.symbol">
+			<view class="s-row little-line"  @click="navTo(`/pages/market/index?code=${item.symbolCode}`)" v-for="(item, i) in markets" :key="item.symbol">
 				<view class="col light">
 					<image :src="item.icon" class="coinLogo"></image>
 					{{item.symbol}}

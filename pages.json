@@ -257,6 +257,21 @@
 			}
 		},
 		{
+			"path": "pages/market/index",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": true,
+				"navigationStyle": "custom" ,// 隐藏系统导航栏
+				"navigationBarTextStyle": "white"
+			}
+		},
+		{
+			"path": "pages/market/intro",
+			"style": {
+				"navigationBarTitleText": ""
+			}
+		},
+		{
 			"path": "pages/wallet/wallet",
 			"style": {
 				"navigationBarTitleText": "我的资产",
