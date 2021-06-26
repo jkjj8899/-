@@ -1,5 +1,9 @@
 <template>
 	<view class="container">
+		<u-navbar :is-back="false" height="20">
+			<view class="slot-wrap">
+			</view>
+		</u-navbar>
 		<view class="total-box">
 			<view class="title">总资产折合(USDT)</view>
 			<view class="asset">
@@ -85,13 +89,20 @@
 
 <style lang='scss' scoped>
 	.container{
-		padding: 0upx 0upx;
+		padding: 0upx 20upx;
+	}
+	.slot-wrap{
+		padding: 20upx 20upx 0 20upx;
+		font-size: 32upx;
+		font-weight: bold;
 	}
 	.total-box{
-		background: #0952C3;
+		background: url(../../static/images/wallet/wallet-bg.png);
+		background-repeat: no-repeat;
+		background-size: 100% 100%;
 		font-size: $font-base;
-		padding: 100upx 30upx 40upx 30upx;
-		color: $font-color-light;
+		padding: 60upx 30upx 40upx 30upx;
+		color: #8db3fe;
 		.title{
 			padding-bottom: 10upx;
 		}
@@ -108,7 +119,7 @@
 			flex-direction: row;
 			justify-content: space-between;
 			align-items: middle;
-			padding-top: 20upx;
+			padding-top: 40upx;
 			.btn{
 				text-align: center;
 				flex: 0 0 32%;
@@ -126,7 +137,7 @@
 			.s-row{
 				display:flex;
 				align-items:center;
-				padding: 10upx 30upx 0upx 30upx;
+				padding: 10upx 5upx 0upx 5upx;
 				.subtitle{
 					padding: 4upx 0 10upx 0;
 				}

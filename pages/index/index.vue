@@ -4,7 +4,7 @@
 		<view class="carousel-section">
 			<!-- 背景色区域 -->
 			<swiper class="carousel" circular @change="swiperChange" autoplay="true">
-				<swiper-item v-for="(item, index) in carousels" :key="index" class="carousel-item">
+				<swiper-item @click="open(item)" v-for="(item, index) in carousels" :key="index" class="carousel-item">
 					<image :src="item.url" />
 				</swiper-item>
 			</swiper>
@@ -37,7 +37,7 @@
 				</view>
 			</view>
 			<view @click="navTo('/pages/otc/otc')" class="r" style="padding-right: 30upx;">
-				<image src="../../static/icon-fiat-r.png" mode="widthFix"></image>
+				<image src="../../static/images/home/icon-otc-r.png" mode="widthFix"></image>
 			</view>
 		</view>
 		<view class="menu">
@@ -50,7 +50,7 @@
 			</view>
 			<view class="ex">
 				<view class="item exchange" @click="navTo('/pages/exchange/index', true)">
-					<image src="../../static/exchange.png"></image>
+					<image src="../../static/images/home/home-ex-icon.png"></image>
 					<text>快捷闪兑</text>
 				</view>
 				<!-- <view class="item shop" @click="navTo('/pages/shop/index')">
@@ -58,7 +58,7 @@
 					<text>Fex商城</text>
 				</view> -->
 				<view class="item shop" @click="navTo('/pages/finance/deposit')">
-					<image class="miner" src="../../static/icon-shop.png"></image>
+					<image class="miner" src="../../static/images/home/home-stacking-icon.png"></image>
 					<text>存币理财</text>
 				</view>
 			</view>
@@ -66,7 +66,7 @@
 		<view class="advert">
 			<uni-swiper-dot :current="current" :mode="mode">
 			    <swiper class="swiper-box" autoplay="true">
-			        <swiper-item v-for="(item, index) in ads" :key="index" class="swiper-item">
+			        <swiper-item @click="open(item)" v-for="(item, index) in ads" :key="index" class="swiper-item">
 			        	<image :src="item.url" mode="widthFix"/>
 			        </swiper-item>
 			    </swiper>
@@ -154,6 +154,10 @@
 		onShow() {
 			
 		},
+		onPullDownRefresh() {
+			this.loadData()
+			this.getMaketList()
+		},
 		onLoad() {
 			this.getMaketList()
 			setInterval(() =>{
@@ -163,7 +167,7 @@
 				this.loadTopMarket()
 			}, 500)
 			this.loadData();
-			this.notices = ["国际站4月1日14:00开放MDC/USDT交易市场", "国际站4月2日10:00上线HKL", "关于国际站即将上线 GCCT（Global Cash Coin)"];
+			this.notices = [];
 		},
 		onUnload() {
 			for(let i = 0; i < 3; i++){
@@ -202,6 +206,8 @@
 					this.swiperLength = casrousels.length
 					this.carousels = casrousels
 					this.ads = res.data.ads
+					
+					uni.stopPullDownRefresh()
 				})
 				this.noticeList().then(res =>{
 					this.notices = res.rows
@@ -216,6 +222,19 @@
 			swiperChange(e) {
 				const index = e.detail.current;
 				this.swiperCurrent = index;
+			},
+			open(item){
+				if(item.link){
+					if(item.link.indexOf('http://') < 0 && item.link.indexOf('https://') < 0){
+						uni.navigateTo({
+							url: item.link
+						})
+					} else {
+						uni.navigateTo({
+							url: `/pages/public/web?url=${item.link}`
+						})
+					}
+				}
 			}
 		},
 		// #ifndef MP

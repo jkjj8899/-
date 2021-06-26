@@ -1,6 +1,6 @@
 <template>
   <view class="container">
-	<view class="tabs"><u-tabs-swiper activeColor="#ffffff" inactive-color="#ffffff" bg-color="#ff724a" ref="tabs" :current="current" :list="list" :is-scroll="false" @change="change"></u-tabs-swiper></view>
+	<view class="tabs"><u-tabs-swiper activeColor="#ffffff" inactive-color="#ffffff" bg-color="#1866fe" ref="tabs" :current="current" :list="list" :is-scroll="false" @change="change"></u-tabs-swiper></view>
 	<view class="header">
 		<view class="bg"></view>
 		<view class="box">
@@ -53,7 +53,7 @@
 				</view>
 			</view>
 			<view class="remain">
-				<view class="progress"><u-line-progress height="20" activeColor="#ff724a" :show-percent="false" active-color="#2979ff" :percent="percent(item)"></u-line-progress></view>
+				<view class="progress"><u-line-progress height="20" activeColor="#1866fe" :show-percent="false" active-color="#2979ff" :percent="percent(item)"></u-line-progress></view>
 				<view class="label">剩余: {{item.quantity}}</view>
 			</view>
 			<view class="buy">
@@ -242,7 +242,7 @@
 			height: 100upx;
 			line-height: 100upx;
 			.price{
-				color: #ff724a;
+				color: #1866fe;
 			}
 			.price .value{
 				font-size: 34upx;
@@ -253,7 +253,7 @@
 				padding-left: 10upx;
 			}
 			.btn{
-				background-color: #ff724a;
+				background-color: #1866fe;
 				height: 60upx;
 				line-height: 60upx;
 				padding: 0 50upx;
@@ -314,7 +314,7 @@
 		.bg{
 			width: 100%;
 			height: 260upx;
-			background-color: #ff724a;
+			background-color: #1866fe;
 			border-bottom-left-radius: 40upx;
 			border-bottom-right-radius: 40upx;
 		}
@@ -340,7 +340,7 @@
 				width: 200upx;
 				height: 70upx;
 				line-height: 70upx;
-				background-color: #ff724a;
+				background-color: #1866fe;
 				color: #ffffff;
 				border-radius: 10upx;
 			}

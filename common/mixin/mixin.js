@@ -50,7 +50,7 @@ export const authMixin = {
   computed:{
   	...mapState('user', ['loginInfo'])
   },
-  onLoad() {
+  onShow() {
 	  if(!this.loginInfo.hasLogin){
 	  	uni.navigateTo({
 	  		url: '/pages/public/login'

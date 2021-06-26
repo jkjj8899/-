@@ -179,7 +179,7 @@
 		background-color: #ffffff;
 		padding: 0 30upx;
 		.price{
-			color: #ff724a;
+			color: #1866fe;
 		}
 		.price .b{
 			font-size: 34upx;
@@ -187,7 +187,7 @@
 			margin-left: 10upx;
 		}
 		.btn{
-			background-color: #ff724a;
+			background-color: #1866fe;
 			height: 60upx;
 			line-height: 60upx;
 			padding: 0 50upx;
@@ -201,7 +201,7 @@
 		.bg{
 			width: 100%;
 			height: 230upx;
-			background-color: #ff724a;
+			background-color: #1866fe;
 			border-bottom-left-radius: 40upx;
 			border-bottom-right-radius: 40upx;
 		}

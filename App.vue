@@ -38,6 +38,10 @@
 	body{
 		font-family: "Source Han Sans CN";
 	}
+	page{
+		width: 100%;
+		height: 100%;
+	}
 	/*
 		全局公共样式和字体图标
 	*/

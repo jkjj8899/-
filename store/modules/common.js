@@ -6,6 +6,7 @@ import {
 	marketTicker,
 	adList,
 	noticeList,
+	noticeDetail,
 	currencyList,
 	fiatList,
 	getAppVersion
@@ -117,6 +118,17 @@ const common = {
 		}) {
 			return new Promise((resolve, reject) => {
 				noticeList().then(res => {
+					resolve(res)
+				}).catch(error => {
+					reject(error)
+				})
+			})
+		},
+		noticeDetail({
+			commit
+		}, data) {
+			return new Promise((resolve, reject) => {
+				noticeDetail(data).then(res => {
 					resolve(res)
 				}).catch(error => {
 					reject(error)

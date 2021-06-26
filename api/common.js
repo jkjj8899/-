@@ -66,6 +66,15 @@ export function noticeList(data) {
   })
 }
 
+//公告详情
+export function noticeDetail(data) {
+  return request({
+    url: '/v1/notice/detail',
+    method: 'GET',
+	data: data
+  })
+}
+
 // 支付信息列表
 export function currencyList() {
   return request({

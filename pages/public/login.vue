@@ -76,7 +76,9 @@
 				this[key] = e.detail.value;
 			},
 			navBack(){
-				uni.navigateBack();
+				uni.switchTab({
+					url: '/pages/index/index'
+				})
 			},
 			toRegist(){
 				uni.navigateTo({

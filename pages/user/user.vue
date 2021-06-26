@@ -36,27 +36,27 @@
 			
 			<view class="order-section">
 				<view class="order-item" @click="navTo('/pages/notice/notice')" hover-class="common-hover"  :hover-stay-time="50">
-					<text class="yticon icon-shouye"></text>
+					<image class="icon" src="../../static/images/my/icon-notice.png"></image>
 					<text>公告</text>
 				</view>
 				<view class="order-item" @click="navTo('/pages/user/encrypAddress')"  hover-class="common-hover" :hover-stay-time="50">
-					<text class="yticon icon-daifukuan"></text>
+					<image class="icon" src="../../static/images/my/icon-list.png"></image>
 					<text>地址本</text>
 				</view>
 				<view class="order-item" @click="navTo('/pages/user/invit')" hover-class="common-hover"  :hover-stay-time="50">
-					<text class="yticon icon-yishouhuo"></text>
+					<image class="icon" src="../../static/images/my/icon-recomment.png"></image>
 					<text>推荐</text>
 				</view>
 			</view>
 			<!-- 浏览历史 -->
 			<view class="history-section icon">
-				<list-cell icon="icon-iconfontweixin" iconColor="#e07472" @eventClick="navTo('/pages/user/safe', true)" title="账户与安全"></list-cell>
-				<list-cell icon="icon-pingjia" iconColor="#4eb432" @eventClick="navTo('/pages/user/payType', true)" title="收款方式"></list-cell>
-				<list-cell v-if="!isMer" icon="icon-shoucang2" iconColor="#9789f7" @eventClick="navTo('/pages/otc/merchant/apply', true)" title="承兑商申请"></list-cell>
-				<list-cell v-if="isMer" icon="icon-tuandui" iconColor="#543632" @eventClick="navTo('/pages/otc/merchant/merchant', true)" title="承兑商管理"></list-cell>
-				<list-cell icon="icon-bangzhu1" iconColor="#ee883b" title="帮助中心" @eventClick="navTo('/pages/set/help')"></list-cell>
+				<list-cell image="/static/images/my/icon-safe.png" iconColor="#e07472" @eventClick="navTo('/pages/user/safe', true)" title="账户与安全"></list-cell>
+				<list-cell image="/static/images/my/icon-payin.png" iconColor="#4eb432" @eventClick="navTo('/pages/user/payType', true)" title="收款方式"></list-cell>
+				<list-cell v-if="!isMer" image="/static/images/my/icon-merchat.png" iconColor="#9789f7" @eventClick="navTo('/pages/otc/merchant/apply', true)" title="承兑商申请"></list-cell>
+				<list-cell v-if="isMer" image="/static/images/my/icon-merchat.png" iconColor="#543632" @eventClick="navTo('/pages/otc/merchant/merchant', true)" title="承兑商管理"></list-cell>
+				<list-cell image="/static/images/my/icon-help.png" iconColor="#ee883b" title="帮助中心" @eventClick="navTo('/pages/set/help')"></list-cell>
 				<!-- <list-cell icon="icon-pinglun-copy" iconColor="#54b4ef" title="问题反馈"></list-cell> -->
-				<list-cell icon="icon-shezhi1" iconColor="#e07472" title="设置" border="" @eventClick="navTo('/pages/set/set')"></list-cell>
+				<list-cell image="/static/images/my/icon-setting.png" iconColor="#e07472" title="设置" border="" @eventClick="navTo('/pages/set/set')"></list-cell>
 			</view>
 		</view>
 			
@@ -140,6 +140,11 @@
 	  align-content: center;
 	  background: #fff;
 	  border-radius: 10upx;
+	}
+	.container{
+		width: 100%;
+		height: 100%;
+		background-color: $page-color-base;
 	}
 	.user-section{
 		height: 510upx;
@@ -265,13 +270,10 @@
 			font-size: $font-base;
 			color: $font-color-dark;
 		}
-		.yticon{
-			font-size: 58upx;
-			margin-bottom: 18upx;
-			color: #fa436a;
-		}
-		.icon-shouhoutuikuan{
-			font-size:44upx;
+		.icon{
+			width: 58upx;
+			height: 58upx;
+			margin-bottom: 10upx;
 		}
 	}
 	.history-section{

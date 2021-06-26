@@ -15,7 +15,8 @@
 				// #ifdef MP 
 				"navigationBarTitleText": "FexCoin",
 				// #endif 
-				"navigationStyle": "custom"
+				"navigationStyle": "custom",
+				"enablePullDownRefresh": true
 			}
 		},{
 			"path": "pages/shop/index",
@@ -71,7 +72,7 @@
 			"path": "pages/mining/index",
 			"style": {
 				"navigationBarTitleText": "云算力",
-				"navigationBarBackgroundColor": "#ff724a",
+				"navigationBarBackgroundColor": "#1866fe",
 				"navigationBarTextStyle": "white",
 				"enablePullDownRefresh": true,
 				"app-plus": {
@@ -93,7 +94,7 @@
 			"path": "pages/mining/detail",
 			"style": {
 				"navigationBarTitleText": "",
-				"navigationBarBackgroundColor": "#ff724a",
+				"navigationBarBackgroundColor": "#1866fe",
 				"navigationBarTextStyle": "white",
 				"enablePullDownRefresh": true
 			}
@@ -102,7 +103,7 @@
 			"path": "pages/mining/my",
 			"style": {
 				"navigationBarTitleText": "我的算力",
-				"navigationBarBackgroundColor": "#ff724a",
+				"navigationBarBackgroundColor": "#1866fe",
 				"navigationBarTextStyle": "white",
 				"enablePullDownRefresh": true
 			}
@@ -111,7 +112,7 @@
 			"path": "pages/mining/profit",
 			"style": {
 				"navigationBarTitleText": "产出明细",
-				"navigationBarBackgroundColor": "#ff724a",
+				"navigationBarBackgroundColor": "#1866fe",
 				"navigationBarTextStyle": "white",
 				"enablePullDownRefresh": true
 			}
@@ -275,7 +276,7 @@
 			"path": "pages/wallet/wallet",
 			"style": {
 				"navigationBarTitleText": "我的资产",
-				"navigationBarBackgroundColor": "#0952C3",
+				"navigationBarBackgroundColor": "#1866fe",
 				"navigationBarTextStyle": "white",
 				"enablePullDownRefresh": true,
 				"app-plus": {
@@ -579,13 +580,26 @@
 			"style": {
 				"navigationBarTitleText": "意见反馈"
 			}
-		}
-	    ,{
+		},
+		{
             "path" : "pages/notice/notice",
             "style" : {
-				"navigationBarTitleText": "通知"
+				"navigationBarTitleText": "系统公告",
+				"enablePullDownRefresh": true
 			}
-        }
+        },
+		{
+            "path" : "pages/notice/detail",
+            "style" : {
+				"navigationBarTitleText": "公告详情"
+			}
+        },
+		{
+			"path": "pages/public/web",
+			"style": {
+				"navigationBarTitleText": ""
+			}
+		}
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
@@ -595,37 +609,37 @@
 	},
 	"tabBar": {
 		"color": "#C0C4CC",
-		"selectedColor": "#1890ff",
+		"selectedColor": "#1866fe",
 		"borderStyle": "black",
 		"backgroundColor": "#ffffff",
 		"list": [{
 				"pagePath": "pages/index/index",
-				"iconPath": "static/tabbar/tab-coin.png",
-				"selectedIconPath": "static/tabbar/tab-coin-active.png",
+				"iconPath": "static/images/tabbar/tab-coin.png",
+				"selectedIconPath": "static/images/tabbar/tab-coin-active.png",
 				"text": "行情"
 			},
 			{
 				"pagePath": "pages/news/news",
-				"iconPath": "static/tabbar/tab-news.png",
-				"selectedIconPath": "static/tabbar/tab-news-active.png",
+				"iconPath": "static/images/tabbar/tab-news.png",
+				"selectedIconPath": "static/images/tabbar/tab-news-active.png",
 				"text": "资讯"
 			},
 			{
 				"pagePath": "pages/mining/index",
-				"iconPath": "static/tabbar/tab-mining.png",
-				"selectedIconPath": "static/tabbar/tab-mining-active.png",
+				"iconPath": "static/images/tabbar/tab-mining.png",
+				"selectedIconPath": "static/images/tabbar/tab-mining-active.png",
 				"text": "云算力"
 			},
 			{
 				"pagePath": "pages/wallet/wallet",
-				"iconPath": "static/tabbar/tab-wallet.png",
-				"selectedIconPath": "static/tabbar/tab-wallet-active.png",
+				"iconPath": "static/images/tabbar/tab-wallet.png",
+				"selectedIconPath": "static/images/tabbar/tab-wallet-active.png",
 				"text": "钱包"
 			},
 			{
 				"pagePath": "pages/user/user",
-				"iconPath": "static/tabbar/tab-my.png",
-				"selectedIconPath": "static/tabbar/tab-my-active.png",
+				"iconPath": "static/images/tabbar/tab-my.png",
+				"selectedIconPath": "static/images/tabbar/tab-my-active.png",
 				"text": "我的"
 			}
 		]

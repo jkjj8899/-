@@ -2,10 +2,11 @@
 	<view class="uni-swiper-msg">
 		<uni-icons type="sound" size="20" class="notice"></uni-icons>
 		<swiper vertical="true" autoplay="true" circular="true" interval="3000">
-			<swiper-item v-for="(item, index) in list_" :key="index" @click="onClick()">
+			<swiper-item v-for="(item, index) in list_" :key="index" @click="navTo(`/pages/notice/detail?id=${item.noticeId}`)">
 				<navigator>{{item.noticeTitle}}</navigator>
 			</swiper-item>
 		</swiper>
+		<uni-icons type="list" size="20" class="notice" @click="navTo(`/pages/notice/notice`)"></uni-icons>
 	</view>
 </template>
 
@@ -31,6 +32,11 @@
 			}
 		},
 		methods: {
+			navTo(url){
+				uni.navigateTo({
+					url: url
+				})
+			},
 			onClick(e) {
 				console.log("=====================================")
 			}

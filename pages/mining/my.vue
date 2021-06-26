@@ -1,6 +1,6 @@
 <template>
   <view class="container">
-	<view class="tabs"><u-tabs-swiper activeColor="#ffffff" inactive-color="#ffffff" bg-color="#ff724a" ref="tabs" :current="current" :list="list" :is-scroll="false" @change="change"></u-tabs-swiper></view>
+	<view class="tabs"><u-tabs-swiper activeColor="#ffffff" inactive-color="#ffffff" bg-color="#1866fe" ref="tabs" :current="current" :list="list" :is-scroll="false" @change="change"></u-tabs-swiper></view>
 	<view class="header">
 		<view class="bg"></view>
 		<view class="box">
@@ -227,7 +227,7 @@
 		.bg{
 			width: 100%;
 			height: 260upx;
-			background-color: #ff724a;
+			background-color: #1866fe;
 			border-bottom-left-radius: 40upx;
 			border-bottom-right-radius: 40upx;
 		}

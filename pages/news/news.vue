@@ -113,9 +113,9 @@
 				width: 20upx;
 				height: 20upx;
 				border-radius: 100px;
-				background-color: $uni-text-color-grey;
+				background-color: #1866fe;
 				top: 12upx;
-				left: -12upx;
+				left: -11upx;
 			}
 			.time{
 				font-size: $font-base;
