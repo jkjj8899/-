@@ -81,7 +81,7 @@ var socket = {
 			let msg = JSON.parse(pako.ungzip(reader.result, {
 				to: 'string'
 			}))
-			//console.log(msg)
+			console.log(msg)
 			if(msg.ch && msg.ch.indexOf('.detail') > 0){
 				Event.emit('market-detail', msg.tick)
 				return

@@ -2,7 +2,7 @@ import Vue from 'vue'
 import store from './store'
 import App from './App'
 import global from './utils/global'
-import {fixD} from './utils/utils'
+import {fixD, formatD} from './utils/utils'
 import Json from './Json' //测试用数据
 
 import uView from "uview-ui";
@@ -111,6 +111,11 @@ Vue.prototype.$fixD = fixD;
 Vue.filter('fixD', function (value, precision) {
   if (!value) return ''
   return fixD(value, precision)
+})
+
+Vue.filter('formatD', function (value) {
+  if (!value) return ''
+  return formatD(value)
 })
 
 App.mpType = 'app'

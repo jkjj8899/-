@@ -19,7 +19,7 @@
 			<noticeSwiper :list="notices"></noticeSwiper>
 		</view>
 		<scroll-view class="scroll-view-market" scroll-x="true">
-			<view class="market-item" v-for="(item, i) in topSymbols" :key="item.symbol" @click="navTo(`/pages/public/kline?symbol=${item.symbol}`)">
+			<view class="market-item" v-for="(item, i) in topSymbols" :key="item.symbol" @click="navToKline(item)">
 				<view class="item">
 					<view class="t">{{item.title}}<text :class="topMakretMap[`market.${item.symbol}.detail`].change | formatChangeCls">{{topMakretMap[`market.${item.symbol}.detail`].change | formatChange}}</text></view>
 					<text class="c" :class="topMakretMap[`market.${item.symbol}.detail`].change | formatChangeCls">{{topMakretMap[`market.${item.symbol}.detail`].tick ? topMakretMap[`market.${item.symbol}.detail`].tick.close : '0.00'}}</text>
@@ -191,11 +191,11 @@
 					  "id": Date.now() + ""
 					}
 					this.$store.dispatch('WEBSOCKET_SEND', JSON.stringify(data))
-					uni.$on(ch, (res) => {
+					uni.$on('sub.' + ch, (res) => {
 						let d = res.data
 						d.tick.close = d.tick.close.toFixed(2)
 						d.change = parseFloat((d.tick.close - d.tick.open) / d.tick.open * 100).toFixed(2);
-						d.cny = parseFloat(d.tick.close * 7.04).toFixed(2)
+						d.cny = parseFloat(d.tick.close * 6.4).toFixed(2)
 						$this.topMakretMap[res.data.ch] = d
 					})
 				}
@@ -222,6 +222,18 @@
 			swiperChange(e) {
 				const index = e.detail.current;
 				this.swiperCurrent = index;
+			},
+			navToKline(item){
+				// #ifdef H5	
+				uni.navigateTo({
+					url: `/pages/public/h5kline?symbol=${item.symbol}`
+				})
+				// #endif
+				// #ifndef H5
+				uni.navigateTo({
+					url: `/pages/public/kline?symbol=${item.symbol}`
+				})
+				// #endif
 			},
 			open(item){
 				if(item.link){

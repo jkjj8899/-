@@ -29,7 +29,7 @@ const websocket = {
 				let ploydata = new Uint8Array(res.data);
 				let msg = pako.inflate(ploydata, {to: 'string'});
 				let result = JSON.parse(msg)
-				//console.log(result)
+				//console.log("收到服务器内容：", result)
 				if(result.ping){
 					let data = {'pong': result.ping}
 					state.socketTask.send({
@@ -41,7 +41,10 @@ const websocket = {
 					return
 				}
 				if(result && result.ch){
-					uni.$emit(result.ch,{data: result})
+					uni.$emit("sub."+result.ch,{data: result})
+				}
+				if(result && result.rep){
+					uni.$emit("req."+result.rep,{data: result})
 				}
 			});
 		},

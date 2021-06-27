@@ -392,7 +392,15 @@
 		{
 			"path": "pages/public/kline",
 			"style": {
-				"navigationBarTitleText": "行情",
+				"navigationBarTitleText": "",
+				"navigationBarTextStyle": "white",
+				"navigationBarBackgroundColor": "#181B2A"
+			}
+		},
+		{
+			"path": "pages/public/h5kline",
+			"style": {
+				"navigationBarTitleText": "",
 				"navigationBarTextStyle": "white",
 				"navigationBarBackgroundColor": "#181B2A"
 			}
