@@ -44,7 +44,7 @@
 				<uni-load-more v-if="!empty" :status="loadingStatus"></uni-load-more>
 			</scroll-view>
 		</view>
-		<uni-popup ref="popup" type="bottom">
+		<u-popup ref="popup" v-model="showPopup" mode="bottom">
 			<view class="coin-box">
 				<view class="coin-search">
 					<uni-search-bar placeholder="搜索token" @input="search"></uni-search-bar>
@@ -63,7 +63,7 @@
 					</view>
 				</view>
 			</view>
-		</uni-popup>
+		</u-popup>
 		
 		<uni-valid-popup ref="validPopup" @ok="ok"></uni-valid-popup>
 	</view>
@@ -114,7 +114,8 @@
 				totalCount: 0,
 				records: [],
 				loadingStatus: 'more',
-				isLastPage: false
+				isLastPage: false,
+				showPopup: false
 			};
 		},
 		watch: {
@@ -171,7 +172,8 @@
 					this.records = [];
 					this.query.page = 1
 					this.getExchangeRecordList()
-					this.$refs.popup.close()
+					//this.$refs.popup.close()
+					this.showPopup = false
 					this.$refs.validPopup.close()
 					this.resetAmount()
 					this.$api.msg('兑换成功')
@@ -180,7 +182,8 @@
 				})
 			},
 			changeCoin(){
-				this.$refs.popup.open()
+				//this.$refs.popup.open()
+				this.showPopup = true
 			},
 			getExchangeRecordList(){
 				this.exchangeRecordList(this.query).then(res =>{
@@ -220,7 +223,8 @@
 				this.loadAccount(this.exItem.base)
 				this.getExchangeRecordList()
 				this.resetAmount()
-				this.$refs.popup.close()
+				//this.$refs.popup.close()
+				this.showPopup = false
 			},
 			loadMore(){
 				if(!this.isLastPage){
