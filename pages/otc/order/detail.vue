@@ -109,12 +109,12 @@
 		</view>
 		<view class="footer" v-if="side == 'BUY' && order.status == 1">
 			<view class="btns">
-				<button class="pay appy">申诉</button>
+				<!-- <button class="pay appy">申诉</button> -->
 			</view>
 		</view>
 		<view class="footer" v-if="side == 'SELL' && order.status == 1">
 			<view class="btns">
-				<button class="pay appy">申诉</button>
+				<!-- <button class="pay appy">申诉</button> -->
 				<button @click="complete" class="pay">确认收款并放行</button>
 			</view>
 		</view>
