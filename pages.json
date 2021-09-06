@@ -584,8 +584,20 @@
 					}
 				}
 			}
-		}, 
-		{
+		}, {
+			"path": "pages/user/realname",
+			"style": {
+				"navigationBarTitleText": "实名认证",
+				"navigationBarBackgroundColor": "#4574e8",
+				"navigationBarTextStyle": "white",
+				"app-plus": {
+					"titleView":false,
+					"titleNView": {
+						"type": "transparent"
+					}
+				}
+			}
+		}, {
 			"path": "pages/feedback/index",
 			"style": {
 				"navigationBarTitleText": "意见反馈"
