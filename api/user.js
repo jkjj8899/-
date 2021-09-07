@@ -137,3 +137,18 @@ export function signin() {
     method: 'GET'
   })
 }
+//查询认证详情
+export function getAuthInfo() {
+  return request({
+    url: `/v1/user/auth/info`,
+    method: 'GET'
+  })
+}
+//认证申请
+export function authApply(data) {
+  return request({
+    url: '/v1/user/auth',
+    method: 'POST',
+    data: data
+  })
+}

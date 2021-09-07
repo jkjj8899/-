@@ -10,15 +10,27 @@
 				<text class="t">请上传身份证正反面图像</text>
 				<text class="b">请确保照片的内容完整并清晰可见，仅支持jpg、png格式， 图片大小小于5M；</text>
 			</view>
+			<view class="reject" v-if="form.id && form.status == 2">审核拒绝: {{form.remark}}</view>
 			<view class="photo">
-				<image src="../../static/images/auth/auth-zhen.jpg" mode="widthFix"></image>
-				<text class="tip">请上传身份证正面图像</text>
+				<view v-show="!form.frontPhoto" @click="handleUpload(0)">
+					<image class="img" src="../../static/images/auth/auth-zhen.jpg"></image>
+					<text class="tip">请上传身份证正面图像</text>
+				</view>
+				<view v-show="form.frontPhoto">
+					<image class="img" :src="form.frontPhoto"></image>
+				</view>
 			</view>
 			<view class="photo">
-				<image src="../../static/images/auth/auth-fan.jpg" mode="widthFix"></image>
-				<text class="tip">请上传身份证反面图像</text>
+				<view v-show="!form.backPhoto" @click="handleUpload(1)">
+					<image class="img" src="../../static/images/auth/auth-fan.jpg"></image>
+					<text class="tip">请上传身份证反面图像</text>
+				</view>
+				<view v-show="form.backPhoto">
+					<image class="img" :src="form.backPhoto"></image>
+				</view>
 			</view>
-			<button class="btn">确认提交</button>
+			<button class="btn disable" v-if="form.id && form.status == 0">审核中</button>
+			<button class="btn" v-if="!form.id || form.status == 2" @click="submit">确认提交</button>
 		</view>
 	</view>
 </template>
@@ -30,16 +42,66 @@
 	} from 'vuex'
 	import {authMixin, commonMixin} from '@/common/mixin/mixin.js'
 	export default {
-		mixins: [commonMixin],
+		mixins: [authMixin, commonMixin],
 		data() {
 			return {
+				pos: 0,
+				form: {
+					frontPhoto: undefined,
+					backPhoto: undefined
+				}
 			};
 		},
 		onLoad() {
-			
+		},
+		onShow() {
+			this.loadData()
 		},
 		methods:{
-			
+			...mapActions('user', ['getAuthInfo', 'authApply']),
+			handleUpload(pos){
+				this.pos = pos
+				this.$upload(this.uploadSuccess, this.uploadProgress)
+			},
+			uploadSuccess(res){
+				if(this.pos == 0){
+					this.form.frontPhoto = res.url
+				} else {
+					this.form.backPhoto = res.url
+				}
+			},
+			uploadProgress(res){
+				console.log("上传进度:", res)
+			},
+			loadData(){
+				this.getAuthInfo().then(res =>{
+					if(res.data){
+						this.form = res.data
+						if(this.form.status == 2){
+							this.form.frontPhoto = undefined
+							this.form.backPhoto = undefined
+						}
+					}
+				}).catch(error =>{
+				})
+			},
+			submit(){
+				let $this = this
+				uni.showModal({
+				    title: '提示',
+				    content: '是否确认提交?',
+				    success: function (res) {
+				        if (res.confirm) {
+				            $this.authApply($this.form).then(res =>{
+				            	$this.loadData()
+								$this.$api.msg('提交成功')
+				            }).catch(error =>{
+				            })
+				        } else if (res.cancel) {
+				        }
+				    }
+				});
+			}
 		}
 	}
 </script>
@@ -105,6 +167,13 @@
 				bottom: 30upx;
 				transform: translate(-50%, 0%);
 			}
+			.img{
+				height: 390upx;
+			}
+		}
+		.reject{
+			padding: 20upx 30upx;
+			color: red;
 		}
 		.btn{
 			margin: 0upx 30upx;
@@ -112,6 +181,9 @@
 			border-radius: 50upx;
 			background: #3c7bfb;
 			color: #ffffff;
+		}
+		.disable{
+			background: #999999;
 		}
 	}
 </style>
