@@ -18,7 +18,7 @@
 			this.$fire.$on("refreshCoin", () => {
 				$this.coinList()
 			});
-			this.$store.dispatch('WEBSOCKET_INIT', 'wss://www.huobi.do/-/s/pro/ws')
+			this.$store.dispatch('WEBSOCKET_INIT', 'wss://www.huobi.sk/-/s/pro/ws')
 			
 			// #ifdef APP-PLUS
 			APPUpdate();
