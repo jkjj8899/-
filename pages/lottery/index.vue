@@ -3,19 +3,7 @@
 	<view class="head-bg"></view>
 	<view class="count-bg">您还有<text class="count">{{drawCount}}</text>次机会</view>
     <view class="lottery">
-		<LuckyGrid
-		  ref="luckyGrid"
-		  :rows="grid.rows"
-		  :cols="grid.cols"
-		  width="300px"
-		  height="300px"
-		  :blocks="grid.blocks"
-		  :prizes="grid.prizes"
-		  :button="grid.button"
-		  :default-style="grid.defaultStyle"
-		  @start="gridStart"
-		  @end="gridEnd"
-		/>
+		<LotteryDraw  @get_winingIndex='gridStart' :grid_info_arr="list" @luck_draw_finish='luckDrawFinish'></LotteryDraw>
 	</view>
 	<button class="buy" @click="buy">{{buyTip}}</button>
   </view>
@@ -26,49 +14,25 @@
 		mapState,
 		mapActions
 	} from 'vuex'
-  import LuckyGrid from 'uni-luck-draw/lucky-grid' // 九宫格
+  import LotteryDraw from '../../components/SJ-LotteryDraw/SJ-LotteryDraw.vue';
   import {authMixin, commonMixin} from '@/common/mixin/mixin.js'
   export default {
     components: {
-      LuckyGrid
+      LotteryDraw
     },
 	mixins: [commonMixin],
     data () {
       return {
 		  buyTip: '',
-		  prizeData: [
-            { x: 0, y: 0, fonts: [{ text: '', top: '60%' }], imgs: [{ src: null, width: '50%', top: '10%' }]},
-            { x: 1, y: 0, fonts: [{ text: '', top: '60%' }], imgs: [{ src: null, width: '50%', top: '10%' }]},
-            { x: 2, y: 0, fonts: [{ text: '', top: '60%' }], imgs: [{ src: null, width: '50%', top: '10%' }]},
-			{ x: 2, y: 1, fonts: [{ text: '', top: '60%' }], imgs: [{ src: null, width: '50%', top: '10%' }] },
-            { x: 2, y: 2, fonts: [{ text: '', top: '60%' }], imgs: [{ src: null, width: '50%', top: '10%' }] },
-            { x: 1, y: 2, fonts: [{ text: '', top: '60%' }], imgs: [{ src: null, width: '50%', top: '10%' }] },
-            { x: 0, y: 2, fonts: [{ text: '', top: '60%' }], imgs: [{ src: null, width: '50%', top: '10%' }] },
-			{ x: 0, y: 1, fonts: [{ text: '', top: '60%' }], imgs: [{ src: null, width: '50%', top: '10%' }] }
-          ],
+		  list: [],
 		  drawCount: 0,
 		  drawResult: {},
-        grid: {
-          rows: 3,
-          cols: 3,
-          blocks: [{ padding: '5px', background: '#ff4a4c', borderRadius: 10 }],
-          prizes: [],
-          button: { x: 1, y: 1, col: 1, background: '#ff4a4c', shadow: '0 5 1 #ff4a4c',imgs: [{
-				src: 'http://cdn.choujiangle.cn/themes/marquee/lottery-btn.png',
-				width: '90%',
-				top: '5%'
-			}],
-		  },
-		  defaultStyle: {
-			borderRadius: 8,
-			fontColor: '#DF424B',
-			fontSize: '14px',
-			fontStyle: 'sans-serif',
-			textAlign: 'center',
-			background: 'pink',
-			shadow: '0 5 1 #ebf1f4'
-		  }
-        }
+		  lottery_draw_param: {
+			startIndex: 0, //开始抽奖位置，从0开始
+			totalCount: 6, //一共要转的圈数
+			winingIndex: 0, //中奖的位置，从0开始
+			speed: 50 //抽奖动画的速度 [数字越大越慢,默认100]
+		}
       }
     },
 	onLoad() {
@@ -76,29 +40,32 @@
 	},
 	onShow() {
 		if(this.loginInfo.hasLogin){
-			this.lotteryCount().then(res =>{
-				console.log(res.data)
-				this.drawCount = res.data
-			})
+			this.getCount()
 		}
 	},
     methods: {
 		...mapActions('lottery', ['lotteryConfig', 'lotteryDraw', 'lotteryCount', 'lotteryBuyCount']),
+		getCount(){
+			this.lotteryCount().then(res =>{
+				this.drawCount = res.data
+			})
+		},
       getConfig(){
 		  let $this = this
 		  this.lotteryConfig().then(res =>{
-			let prizes = $this.prizeData
-			for(let i = 0; i < prizes.length; i++){
+			let prizes = []
+			for(let i = 0; i < res.data.prizes.length; i++){
 				let prize = res.data.prizes[i]
+				let item = {}
 				if(prize.type == 0){
-					prizes[i].fonts[0].text = prize.name
+					item.text = prize.name
 				} else {
-					prizes[i].fonts[0].text = prize.num + prize.name
+					item.text = prize.num + prize.name
 				}
-				prizes[i].imgs[0].src = prize.icon
+				item.logo = prize.icon
+				prizes.push(item)
 			}
-			$this.grid.prizes = prizes
-			
+			$this.list = prizes
 			$this.buyTip = '花' + res.data.buyPrice + res.data.buyCoin + '购买' + res.data.buyCount + '次抽奖'
 		  })
 	  },
@@ -119,25 +86,26 @@
 			  });
 		  }
 	  },
-	  gridStart () {
-		  this.$refs.luckyGrid.play()
+	  gridStart (callback) {
 		  let $this = this
 		  if(this.isLogin()){
 			  this.lotteryDraw().then(res =>{
-				  console.log(res)
-				  this.$refs.luckyGrid.stop(res.data.lotteryIndex)
+				  this.lottery_draw_param.winingIndex = res.data.lotteryIndex;
+				  //props修改在小程序和APP端不成功，所以在这里使用回调函数传参，
+				  callback(this.lottery_draw_param);
 				  this.drawResult = res.data
+				  this.getCount()
 			  })
 			  
 		  }
       },
-      gridEnd (prize) {
-        if(this.drawResult.type == 0){
-        	this.$api.msg('抱歉,您没抽中奖品')
-        } else if(this.drawResult.type== 2){
-        	this.$api.msg('恭喜!您获得了' + this.drawResult.num + this.drawResult.name)
-        }
-      },
+	  luckDrawFinish(param){
+		  if(this.drawResult.type == 0){
+		  	this.$api.msg('抱歉,您没抽中奖品')
+		  } else if(this.drawResult.type== 2){
+		  	this.$api.msg('恭喜!您获得了' + this.drawResult.num + this.drawResult.name)
+		  }
+	  }
     }
   }
 </script>
@@ -188,6 +156,6 @@
 		font-size: 30upx;
 		color: #ffffff;
 		width: 300px;
-		margin-top: 50upx;
+		margin-top: 100upx;
 	}
 </style>

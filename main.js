@@ -4,6 +4,7 @@ import App from './App'
 import global from './utils/global'
 import {fixD, formatD} from './utils/utils'
 import Json from './Json' //测试用数据
+import lottery from './utils/lottery.js'
 
 import uView from "uview-ui";
 Vue.use(uView);
