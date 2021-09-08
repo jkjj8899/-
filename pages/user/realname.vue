@@ -113,7 +113,7 @@
 		height: 100%;
 		background: url(../../static/images/auth/auth-bg.jpg);
 		background-size: 100% 100%;
-		padding: 0 30upx 30upx 30upx;
+		padding: 80upx 30upx 30upx 30upx;
 		overflow: auto;
 	}
 	.header{
