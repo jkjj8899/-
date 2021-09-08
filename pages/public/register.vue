@@ -30,7 +30,7 @@
 					<input placeholder-style="color: #ffffff" type="text" v-model="form.invitCode" placeholder="请填写邀请码" placeholder-class="input-empty" maxlength="20" />
 				</view>
 			</view>
-			<button class="confirm-btn" @click="toRegist" :disabled="logining">登录</button>
+			<button class="confirm-btn" @click="toRegist" :disabled="logining">注册</button>
 		</view>
 		<view class="register-section">
 			已有账号?
@@ -97,7 +97,7 @@
 						setTimeout(function() {
 							this.logining = false
 							uni.navigateTo({
-								url: '/pages/public/login'
+								url: '/pages/public/login?redirect=register'
 							})
 						}, 1000)
 					})

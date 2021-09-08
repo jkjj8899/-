@@ -66,8 +66,12 @@
 					username: '13999999999',
 					password: 'Aa123456'
 				},
-				logining: false
+				logining: false,
+				redirect: undefined
 			}
+		},
+		onLoad(options) {
+			this.redirect = options.redirect
 		},
 		methods: {
 			...mapActions('user', ['login']),
@@ -102,11 +106,19 @@
 					this.logining = false
 					return;
 				}
+				let $this = this
 				this.login(this.form).then(res => {
+					
 					this.$api.msg('登录成功', 1000, false, 'none', function() {
 						setTimeout(function() {
-							this.logining = false
-							uni.navigateBack({})
+							$this.logining = false
+							if($this.redirect && $this.redirect == 'register'){
+								uni.switchTab({
+									url: '/pages/index/index'
+								})
+							} else {
+								uni.navigateBack({})
+							}
 						}, 1000)
 					})
 				}).catch(error => {
