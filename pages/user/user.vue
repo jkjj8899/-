@@ -39,6 +39,10 @@
 					<image class="icon" src="../../static/images/my/icon-notice.png"></image>
 					<text>公告</text>
 				</view>
+				<view class="order-item" @click="navTo('/pages/lottery/index')" hover-class="common-hover"  :hover-stay-time="50">
+					<image class="icon" src="../../static/images/my/icon-lottery.png"></image>
+					<text>抽奖</text>
+				</view>
 				<view class="order-item" @click="navTo('/pages/user/encrypAddress')"  hover-class="common-hover" :hover-stay-time="50">
 					<image class="icon" src="../../static/images/my/icon-list.png"></image>
 					<text>地址本</text>

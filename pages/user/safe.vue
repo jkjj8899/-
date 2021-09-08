@@ -46,9 +46,11 @@
 			};
 		},
 		onLoad() {
+			// #ifdef APP-PLUS
 			if(plus.fingerprint && plus.fingerprint.isSupport()) {
 				this.isFingerprint = true
 			}
+			// #endif
 		},
 		methods:{
 			...mapActions('user', ['logout']),

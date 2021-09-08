@@ -93,9 +93,9 @@
 			</view>
 		</view>
 		
-		<view class="lottery-icon" @click="navTo('/pages/lottery/index')">
+		<!-- <view class="lottery-icon" @click="navTo('/pages/lottery/index')">
 			<image src="../../static/lottery_icon.png"></image>
-		</view>
+		</view> -->
 	</view>
 </template>
 
