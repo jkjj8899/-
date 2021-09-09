@@ -482,7 +482,9 @@
 		}, {
 			"path": "pages/user/invit",
 			"style": {
-				"navigationBarTitleText": "邀请攻略"
+				"navigationBarTitleText": "邀请攻略",
+				"navigationBarTextStyle": "white",
+				"navigationBarBackgroundColor": "#1866fe"
 			}
 		},{
 			"path": "pages/user/googleSetting",

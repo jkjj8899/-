@@ -55,7 +55,7 @@
 			<!-- 浏览历史 -->
 			<view class="history-section icon">
 				<list-cell image="/static/images/my/icon-safe.png" iconColor="#e07472" @eventClick="navTo('/pages/user/safe', true)" title="账户与安全"></list-cell>
-				<list-cell image="/static/images/my/icon-auth.png" iconColor="#4eb432" @eventClick="navTo('/pages/user/realname', true)" title="身份认证"></list-cell>
+				<list-cell image="/static/images/my/icon-auth.png" iconColor="#4eb432" @eventClick="navTo('/pages/user/realname', true)" :tips="authStatusMap[authStatus]" title="身份认证"></list-cell>
 				<list-cell image="/static/images/my/icon-payin.png" iconColor="#4eb432" @eventClick="navTo('/pages/user/payType', true)" title="收款方式"></list-cell>
 				<list-cell v-if="!isMer" image="/static/images/my/icon-merchat.png" iconColor="#9789f7" @eventClick="navTo('/pages/otc/merchant/apply', true)" title="承兑商申请"></list-cell>
 				<list-cell v-if="isMer" image="/static/images/my/icon-merchat.png" iconColor="#543632" @eventClick="navTo('/pages/otc/merchant/merchant', true)" title="承兑商管理"></list-cell>
@@ -87,7 +87,14 @@
 				coverTransform: 'translateY(0px)',
 				coverTransition: '0s',
 				moving: false,
-				isMer: false
+				isMer: false,
+				authStatus: undefined,
+				authStatusMap: {
+					'': '未认证',
+					'0': '审核中',
+					'1': '已认证',
+					'2': '审核拒绝'
+				}
 			}
 		},
 		onShow(){
@@ -95,6 +102,7 @@
 				this.isMerchant().then(res => {
 					this.isMer = res.data
 				})
+				this.loadAuthInfo()
 			}
 		},
 		// #ifndef MP
@@ -122,12 +130,18 @@
 		},
         methods: {
 			...mapActions('otc', ['isMerchant']),
+			...mapActions('user', ['getAuthInfo']),
 			toLogin(){
 				if(!this.loginInfo.hasLogin){
 					uni.navigateTo({
 						url: '/pages/public/login'
 					})
 				}
+			},
+			loadAuthInfo(){
+				this.getAuthInfo().then(res => {
+					this.authStatus = res.data ? res.data.status + '' : '';
+				})
 			}
         }  
     }  
