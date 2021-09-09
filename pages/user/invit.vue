@@ -286,8 +286,8 @@
 			shareFace(){
 				this.showFace = !this.showFace
 				setTimeout(() => {
-					this.$refs.qrcode & this.$refs.qrcode._makeCode()
-				}, 10)
+					this.$refs.qrcode._makeCode()
+				}, 100)
 			},
 			shareLink(){
 				let _this = this
