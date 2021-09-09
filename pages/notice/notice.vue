@@ -33,7 +33,7 @@
 			}
 		},
 		onShow(){
-			uni.startPullDownRefresh();
+			this.getNoticeList()
 		},
 		onReachBottom(){
 			if(!this.isLastPage){
