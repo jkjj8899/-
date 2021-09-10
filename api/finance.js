@@ -46,3 +46,11 @@ export function getProfit() {
     method: 'POST'
   })
 }
+
+// 获取待领取数量
+export function getDrawCount() {
+  return request({
+    url: '/v1/finance/deposit/count',
+    method: 'GET'
+  })
+}

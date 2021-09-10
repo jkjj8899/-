@@ -4,7 +4,8 @@ import {
 	productBuy,
 	productDraw,
 	orderList,
-	getProfit
+	getProfit,
+	getDrawCount
 } from '@/api/finance'
 
 
@@ -83,6 +84,17 @@ const finance = {
 				})
 			})
 		},
+		getDrawCount({
+			commit
+		}) {
+			return new Promise((resolve, reject) => {
+				getDrawCount().then(res => {
+					resolve(res)
+				}).catch(error => {
+					reject(error)
+				})
+			})
+		}
 	}
 }
 

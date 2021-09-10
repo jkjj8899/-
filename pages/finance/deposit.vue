@@ -17,6 +17,7 @@
 				<view class="col" @click="handleDraw">
 					<image src="../../static/icon-deposit-draw.png" mode="widthFix"></image>
 					<text>领取收益</text>
+					<view class="badge" v-show="drawCount > 0">{{drawCount}}</view>
 				</view>
 			</view>
 		</view>
@@ -109,8 +110,8 @@
 				data: {
 					totalUsdAmount: 0,
 					totalCnyAmount: 0,
-					
-				}
+				},
+				drawCount: 0,
 			};
 		},
 		onShow(){
@@ -124,7 +125,7 @@
 			this.loadData();
 		},
 		methods: {
-			...mapActions('finance', ['productList', 'productDraw', 'getProfit']),
+			...mapActions('finance', ['productList', 'productDraw', 'getProfit', 'getDrawCount']),
 			//请求数据
 			loadData(){
 				this.getProfit().then(res =>{
@@ -137,7 +138,11 @@
 					this.historyList = res.data.historyList
 					uni.stopPullDownRefresh();
 				}).catch(error =>{
-					
+				})
+				this.getDrawCount().then(res => {
+					if(res.data){
+						this.drawCount = res.data
+					}
 				})
 			},
 			handleDraw(){
@@ -163,6 +168,16 @@
 		margin: 0;
 		background: #EEF2F5;
 		height: 100%;
+	}
+	.badge {
+		background-color: red;
+		border-radius: 50upx;
+		padding: 0 10upx;
+		color: white;
+		font-size: 16upx;
+		position: absolute;
+		top: 0;
+		right: 15upx;
 	}
 	.total-box{
 		background: #5E7EEE;
@@ -191,6 +206,7 @@
 			align-content: center;
 			align-items: center;
 			.col{
+				position: relative;
 				image{
 					width: 80upx;
 				}

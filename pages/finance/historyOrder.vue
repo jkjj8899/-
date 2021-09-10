@@ -1,7 +1,7 @@
 <template>
 	<view class="container">
 		<u-empty text="暂无记录" :show="empty" mode="data" margin-top="200"></u-empty>
-		<view class="list-item little-line" v-for="(item, i) in list" :key="i" @click="navTo(`/pages/finance/depositDetail?id=${item.id}`)">
+		<view class="list-item little-line" v-for="(item, i) in list" :key="i" @click="navTo(`/pages/finance/depositDetail?id=${item.productId}`)">
 			<view class="title">
 				<view class="tl">
 					<view class="period">第{{item.productNum}}期</view>
