@@ -15,9 +15,9 @@
 					<view class="col r subtitle row-title">折合(CNY)</view>
 				</view>
 				<view class="s-row">
-					<view class="col subtitle row-amount">{{account.normalBalance | fixD(account.showPrecision)}}</view>
-					<view class="col subtitle row-amount">{{account.frozenBalance | fixD(account.showPrecision)}}</view>
-					<view class="col r subtitle row-amount">{{account.priceCny | fixD(2)}}</view>
+					<view class="col subtitle row-amount">{{account.normalBalance | fixed(account.showPrecision)}}</view>
+					<view class="col subtitle row-amount">{{account.frozenBalance | fixed(account.showPrecision)}}</view>
+					<view class="col r subtitle row-amount">{{account.priceCny | fixed(2)}}</view>
 				</view>
 			</view>
 		</view>
@@ -39,7 +39,7 @@
 					<scroll-view class="s-list" :enableBackToTop="enableBackToTop" :scroll-y="scrollY" @scrolltolower="loadMore">
 						<u-empty text="暂无记录" :show="empty" mode="data" margin-top="10"></u-empty>
 						<view class="s-row little-line" v-for="(item, i) in records" :key="item.id">
-							<view class="col subtitle row-amount">{{item.amount | fixD(account.showPrecision)}}</view>
+							<view class="col subtitle row-amount">{{item.amount | fixed(account.showPrecision)}}</view>
 							<view class="col subtitle row-amount">{{currentStatusMap[item.status]}}</view>
 							<view class="col r subtitle row-amount">{{item.ctime | moment('HH:mm MM/DD')}}</view>
 						</view>
@@ -98,10 +98,9 @@
 				}
 			};
 		},
-		onLoad(options){
-			this.coin = options.coin
-			this.query.symbol = options.coin
-			this.filterIndex = options.filterIndex ? options.filterIndex : 0
+		onShow(){
+			this.coin = 'ETH'
+			this.query.symbol = 'ETH'
 			this.loadData()
 			this.initStatuMap()
 			this.records = []

@@ -65,6 +65,9 @@
 				this.loadData()
 			})
 		},
+		onNavigationBarButtonTap(e) {
+			this.navTo(`/pages/wallet/detail?coin=${this.coin.symbol}&filterIndex=1`);
+		},
 		methods: {
 			...mapActions('common', ['coinList', 'coinTips']),
 			...mapActions('user', ['depositAddress']),

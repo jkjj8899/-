@@ -63,6 +63,9 @@
 				}
 			};
 		},
+		onNavigationBarButtonTap(e) {
+			this.navTo(`/pages/wallet/detail?coin=${this.coin.symbol}&filterIndex=0`);
+		},
 		onUnload(){
 			uni.$off('selectCoin', this.selectCoin)
 		},

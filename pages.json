@@ -320,7 +320,18 @@
 			"style": {
 				"navigationBarTitleText": "充币",
 				"app-plus": {
-					"bounce": "none"
+					"bounce": "none",
+					"titleNView": {
+						"buttons": [{
+								"fontSrc": "/static/font/fexfont.ttf",
+								"text": "\ue605",
+								"fontSize": "20",
+								"color": "#303133",
+								"width": "40px",
+								"background": "rgba(0,0,0,0)"
+							}
+						]
+					}
 				}
 			}
 		},{
@@ -328,7 +339,18 @@
 			"style": {
 				"navigationBarTitleText": "提币",
 				"app-plus": {
-					"bounce": "none"
+					"bounce": "none",
+					"titleNView": {
+						"buttons": [{
+								"fontSrc": "/static/font/fexfont.ttf",
+								"text": "\ue605",
+								"fontSize": "20",
+								"color": "#303133",
+								"width": "40px",
+								"background": "rgba(0,0,0,0)"
+							}
+						]
+					}
 				}
 			}
 		}, {

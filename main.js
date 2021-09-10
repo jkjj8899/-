@@ -113,7 +113,9 @@ Vue.prototype.$upload = upload;
 Vue.prototype.$fixD = fixD;
 
 Vue.filter('fixD', function (value, precision) {
-  if (!value) return ''
+  if (!value) {
+	  value = 0
+  }
   return fixD(value, precision)
 })
 
