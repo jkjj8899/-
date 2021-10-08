@@ -23,7 +23,7 @@
 		},
 		methods: {
 			getInfo(){
-				this.$u.post('https://dncapi.bqrank.net/api/coin/web-coininfo', {"webp":1,"code":this.code}).then(res => {
+				this.$u.post('https://dncapi.fxhapp.com/api/coin/web-coininfo', {"webp":1,"code":this.code}).then(res => {
 					this.info = res.data
 					uni.setNavigationBarTitle({
 						title: res.data.name_zh + (res.data.name)

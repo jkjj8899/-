@@ -42,7 +42,7 @@ var socket = {
 		}
 	},
 	initWs() {
-		this.socket = new WebSocket('wss://www.huobi.sk/-/s/pro/ws')
+		this.socket = new WebSocket('wss://www.huobi.do/-/s/pro/ws')
 		this.socket.onopen = () => {
 			this.sendWsRequest(this.historyData)
 			this.sendWsRequest({

@@ -377,23 +377,23 @@
 				this.getLongshort()
 			},
 			getInfo(){
-				this.$u.post('https://dncapi.bqrank.net/api/coin/web-coininfo', {"webp":1,"code":this.code}).then(res => {
+				this.$u.post('https://dncapi.fxhapp.com/api/coin/web-coininfo', {"webp":1,"code":this.code}).then(res => {
 					this.info = res.data
 					uni.stopPullDownRefresh();
 				});
 			},
 			getTeam(){
-				this.$u.get(`https://dncapi.bqrank.net/api/v3/coin/team?webp=1&code=${this.code}`).then(res => {
+				this.$u.get(`https://dncapi.fxhapp.com/api/v3/coin/team?webp=1&code=${this.code}`).then(res => {
 					this.teams = res.data
 				});
 			},
 			getBigEvent(){
-				this.$u.get(`https://dncapi.bqrank.net/api/v2/coin/bigevent?webp=1&coincode=${this.code}`).then(res => {
+				this.$u.get(`https://dncapi.fxhapp.com/api/v2/coin/bigevent?webp=1&coincode=${this.code}`).then(res => {
 					this.event = res.data
 				});
 			},
 			getLongshort(){
-				this.$u.get(`https://dncapi.bqrank.net/api/v2/coin/longshort?code=${this.code}&webp=1`).then(res => {
+				this.$u.get(`https://dncapi.fxhapp.com/api/v2/coin/longshort?code=${this.code}&webp=1`).then(res => {
 					this.longsort = res.data
 				});
 			},
