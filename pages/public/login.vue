@@ -44,12 +44,18 @@
 					忘记密码?
 				</view>
 			</view>
-			<button class="confirm-btn" @click="toLogin" :disabled="logining">登录</button>
+			<button class="confirm-btn" @click="useVerify" :disabled="logining">登录</button>
 		</view>
 		<view class="register-section">
 			还没有账号?
 			<text @click="toRegist">马上注册</text>
 		</view>
+		<Verify
+				@success="success"
+				:mode="'pop'"
+				:captchaType="'blockPuzzle'"
+				:imgSize="{ width: '300px', height: '155px' }"
+				ref="verify"></Verify>
 	</view>
 </template>
 
@@ -59,12 +65,17 @@
 		mapActions
 	} from 'vuex'
 	import {isMobile, isPassword} from '../../utils/validate'
+	import Verify from "../../components/verifition/verify/verify";
 	export default{
+		components: {
+			Verify
+		},
 		data(){
 			return {
 				form: {
 					username: '13999999999',
-					password: 'Aa123456'
+					password: 'Aa123456',
+					captchaVerify: ''
 				},
 				logining: false,
 				redirect: undefined
@@ -75,21 +86,12 @@
 		},
 		methods: {
 			...mapActions('user', ['login']),
-			inputChange(e){
-				const key = e.currentTarget.dataset.key;
-				this[key] = e.detail.value;
+			success(params){
+				this.form.captchaVerify = params.captchaVerification
+				console.log("success: ", params)
+				this.toLogin()
 			},
-			navBack(){
-				uni.switchTab({
-					url: '/pages/index/index'
-				})
-			},
-			toRegist(){
-				uni.navigateTo({
-					url: '/pages/public/register'
-				})
-			},
-			toLogin(){
+			useVerify(){
 				this.logining = true;
 				if(this.form.username == ''){
 					this.$api.msg('请输入手机号')
@@ -106,10 +108,28 @@
 					this.logining = false
 					return;
 				}
+				this.$refs.verify.show()
+			},
+			inputChange(e){
+				const key = e.currentTarget.dataset.key;
+				this[key] = e.detail.value;
+			},
+			navBack(){
+				uni.switchTab({
+					url: '/pages/index/index'
+				})
+			},
+			toRegist(){
+				uni.navigateTo({
+					url: '/pages/public/register'
+				})
+			},
+			toLogin(){
 				let $this = this
 				this.login(this.form).then(res => {
 					
 					this.$api.msg('登录成功', 1000, false, 'none', function() {
+						$this.$refs.verify.hiddle()
 						setTimeout(function() {
 							$this.logining = false
 							if($this.redirect && $this.redirect == 'register'){

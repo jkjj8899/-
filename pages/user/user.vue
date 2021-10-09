@@ -12,7 +12,7 @@
 					<view class="tip">欢迎来到FEXCOIN.COM</view>
 				</view>
 			</view>
-			<view class="vip-card-box">
+			<!-- <view class="vip-card-box">
 				<view class="b-btn" @click="navTo('/pages/user/signin', true)">
 					签到
 				</view>
@@ -20,9 +20,9 @@
 					<text class="yticon icon-iLinkapp-"></text>
 					Fex 会员
 				</view>
-				<text class="e-m">DCloud Union</text>
-				<text class="e-b">开通会员</text>
-			</view>
+				<text class="e-m"></text>
+				<text class="e-b"></text>
+			</view> -->
 		</view>
 		
 		<view 
@@ -43,9 +43,9 @@
 					<image class="icon" src="../../static/images/my/icon-lottery.png"></image>
 					<text>抽奖</text>
 				</view>
-				<view class="order-item" @click="navTo('/pages/user/encrypAddress')"  hover-class="common-hover" :hover-stay-time="50">
-					<image class="icon" src="../../static/images/my/icon-list.png"></image>
-					<text>地址本</text>
+				<view class="order-item" @click="navTo('/pages/user/signin')"  hover-class="common-hover" :hover-stay-time="50">
+					<image class="icon" src="../../static/images/my/icon-sign.png"></image>
+					<text>签到</text>
 				</view>
 				<view class="order-item" @click="navTo('/pages/user/invit')" hover-class="common-hover"  :hover-stay-time="50">
 					<image class="icon" src="../../static/images/my/icon-recomment.png"></image>
@@ -56,6 +56,7 @@
 			<view class="history-section icon">
 				<list-cell image="/static/images/my/icon-safe.png" iconColor="#e07472" @eventClick="navTo('/pages/user/safe', true)" title="账户与安全"></list-cell>
 				<list-cell image="/static/images/my/icon-auth.png" iconColor="#4eb432" @eventClick="navTo('/pages/user/realname', true)" :tips="authStatusMap[authStatus]" title="身份认证"></list-cell>
+				<list-cell image="/static/images/my/icon-addr.png" iconColor="#4eb432" @eventClick="navTo('/pages/user/encrypAddress', true)" title="地址本"></list-cell>
 				<list-cell image="/static/images/my/icon-payin.png" iconColor="#4eb432" @eventClick="navTo('/pages/user/payType', true)" title="收款方式"></list-cell>
 				<list-cell v-if="!isMer" image="/static/images/my/icon-merchat.png" iconColor="#9789f7" @eventClick="navTo('/pages/otc/merchant/apply', true)" title="承兑商申请"></list-cell>
 				<list-cell v-if="isMer" image="/static/images/my/icon-merchat.png" iconColor="#543632" @eventClick="navTo('/pages/otc/merchant/merchant', true)" title="承兑商管理"></list-cell>
