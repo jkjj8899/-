@@ -152,13 +152,6 @@
 			}
 		},
 		onShow() {
-			
-		},
-		onPullDownRefresh() {
-			this.loadData()
-			this.getMaketList()
-		},
-		onLoad() {
 			this.getMaketList()
 			setInterval(() =>{
 				this.getMaketList()
@@ -169,7 +162,13 @@
 			this.loadData();
 			this.notices = [];
 		},
-		onUnload() {
+		onPullDownRefresh() {
+			this.loadData()
+			this.getMaketList()
+		},
+		onLoad() {
+		},
+		onHide() {
 			for(let i = 0; i < 3; i++){
 				let ch = `market.${this.topSymbols[i].symbol}.kline.1day`
 				let data = {
@@ -179,6 +178,8 @@
 				this.$store.dispatch('WEBSOCKET_SEND', JSON.stringify(data))
 				uni.$off(ch, (res) => {})
 			}
+		},
+		onUnload() {
 		},
 		methods: {
 			...mapActions('common', ['marketList', 'adList', 'noticeList']),
