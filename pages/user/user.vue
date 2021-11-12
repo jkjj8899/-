@@ -8,21 +8,10 @@
 					<image class="portrait" :src="'/static/missing-face.png'"></image>
 				</view>
 				<view class="info-box" @click="toLogin">
-					<text class="username">{{loginInfo.mobile || '请登录'}}</text>
-					<view class="tip">欢迎来到FEXCOIN.COM</view>
+					<text class="username">{{loginInfo.mobile || i18n.my.login}}</text>
+					<view class="tip">{{i18n.my.sentence}} FEXCOIN.COM</view>
 				</view>
 			</view>
-			<!-- <view class="vip-card-box">
-				<view class="b-btn" @click="navTo('/pages/user/signin', true)">
-					签到
-				</view>
-				<view class="tit">
-					<text class="yticon icon-iLinkapp-"></text>
-					Fex 会员
-				</view>
-				<text class="e-m"></text>
-				<text class="e-b"></text>
-			</view> -->
 		</view>
 		
 		<view 
@@ -37,36 +26,37 @@
 			<view class="order-section">
 				<view class="order-item" @click="navTo('/pages/notice/notice')" hover-class="common-hover"  :hover-stay-time="50">
 					<image class="icon" src="../../static/images/my/icon-notice.png"></image>
-					<text>公告</text>
+					<text>{{i18n.my.notice}}</text>
 				</view>
 				<view class="order-item" @click="navTo('/pages/lottery/index')" hover-class="common-hover"  :hover-stay-time="50">
 					<image class="icon" src="../../static/images/my/icon-lottery.png"></image>
-					<text>抽奖</text>
+					<text>{{i18n.my.reward}}</text>
 				</view>
 				<view class="order-item" @click="navTo('/pages/user/signin')"  hover-class="common-hover" :hover-stay-time="50">
 					<image class="icon" src="../../static/images/my/icon-sign.png"></image>
-					<text>签到</text>
+					<text>{{i18n.my.sign}}</text>
 				</view>
 				<view class="order-item" @click="navTo('/pages/user/invit')" hover-class="common-hover"  :hover-stay-time="50">
 					<image class="icon" src="../../static/images/my/icon-recomment.png"></image>
-					<text>推荐</text>
+					<text>{{i18n.my.recomment}}</text>
 				</view>
 			</view>
 			<!-- 浏览历史 -->
 			<view class="history-section icon">
-				<list-cell image="/static/images/my/icon-safe.png" iconColor="#e07472" @eventClick="navTo('/pages/user/safe', true)" title="账户与安全"></list-cell>
-				<list-cell image="/static/images/my/icon-auth.png" iconColor="#4eb432" @eventClick="navTo('/pages/user/realname', true)" :tips="authStatusMap[authStatus]" title="身份认证"></list-cell>
-				<list-cell image="/static/images/my/icon-addr.png" iconColor="#4eb432" @eventClick="navTo('/pages/user/encrypAddress', true)" title="地址本"></list-cell>
-				<list-cell image="/static/images/my/icon-payin.png" iconColor="#4eb432" @eventClick="navTo('/pages/user/payType', true)" title="收款方式"></list-cell>
-				<list-cell v-if="!isMer" image="/static/images/my/icon-merchat.png" iconColor="#9789f7" @eventClick="navTo('/pages/otc/merchant/apply', true)" title="承兑商申请"></list-cell>
-				<list-cell v-if="isMer" image="/static/images/my/icon-merchat.png" iconColor="#543632" @eventClick="navTo('/pages/otc/merchant/merchant', true)" title="承兑商管理"></list-cell>
-				<list-cell image="/static/images/my/icon-help.png" iconColor="#ee883b" title="帮助中心" @eventClick="navTo('/pages/set/help')"></list-cell>
+				<list-cell image="/static/images/my/icon-safe.png" iconColor="#e07472" @eventClick="navTo('/pages/user/safe', true)" :title="i18n.my.accountsafe"></list-cell>
+				<list-cell image="/static/images/my/icon-auth.png" iconColor="#4eb432" @eventClick="navTo('/pages/user/realname', true)" :tips="authStatusMap[authStatus]" :title="i18n.my.auth"></list-cell>
+				<list-cell image="/static/images/my/icon-addr.png" iconColor="#4eb432" @eventClick="navTo('/pages/user/encrypAddress', true)" :title="i18n.my.addressBook"></list-cell>
+				<list-cell image="/static/images/my/icon-payin.png" iconColor="#4eb432" @eventClick="navTo('/pages/user/payType', true)" :title="i18n.my.payin"></list-cell>
+				<list-cell v-if="!isMer" image="/static/images/my/icon-merchat.png" iconColor="#9789f7" @eventClick="navTo('/pages/otc/merchant/apply', true)" :title="i18n.my.businessapply"></list-cell>
+				<list-cell v-if="isMer" image="/static/images/my/icon-merchat.png" iconColor="#543632" @eventClick="navTo('/pages/otc/merchant/merchant', true)" :title="i18n.my.business"></list-cell>
+				<list-cell image="/static/images/my/icon-help.png" iconColor="#ee883b" :title="i18n.my.help" @eventClick="navTo('/pages/set/help')"></list-cell>
 				<!-- <list-cell icon="icon-pinglun-copy" iconColor="#54b4ef" title="问题反馈"></list-cell> -->
-				<list-cell image="/static/images/my/icon-setting.png" iconColor="#e07472" title="设置" border="" @eventClick="navTo('/pages/set/set')"></list-cell>
+				<list-cell image="/static/images/my/icon-langule.png" iconColor="#e07472" border="" @eventClick="changeLang" :title="i18n.my.lang" ></list-cell>
+				<list-cell image="/static/images/my/icon-setting.png" iconColor="#e07472" :title="i18n.my.set" border="" @eventClick="navTo('/pages/set/set')"></list-cell>
 			</view>
 		</view>
 			
-		
+		<u-action-sheet :cancel-text="i18n.common.cancel" :list="langList" @click="clickLang" v-model="showLang"></u-action-sheet>
     </view>  
 </template>  
 <script>  
@@ -90,21 +80,34 @@
 				moving: false,
 				isMer: false,
 				authStatus: undefined,
-				authStatusMap: {
-					'': '未认证',
-					'0': '审核中',
-					'1': '已认证',
-					'2': '审核拒绝'
-				}
+				authStatusMap: {},
+				showLang: false,
+				langList: []
 			}
 		},
 		onShow(){
+			this.authStatusMap = {
+				'': this.i18n.audit.status.no,
+				'0': this.i18n.audit.status.ing,
+				'1': this.i18n.audit.status.pass,
+				'2': this.i18n.audit.status.reject
+			}
 			if(this.loginInfo.hasLogin){
 				this.isMerchant().then(res => {
 					this.isMer = res.data
 				})
 				this.loadAuthInfo()
 			}
+			this.langList = [{
+				text: this.i18n.common.lang.en,
+				lang: 'en_US'
+			}, {
+				text: this.i18n.common.lang.zh,
+				lang: 'zh_CN'
+			}, {
+				text: this.i18n.common.lang.hk,
+				lang: 'zh_TW'
+			}]
 		},
 		// #ifndef MP
 		onNavigationBarButtonTap(e) {
@@ -143,7 +146,35 @@
 				this.getAuthInfo().then(res => {
 					this.authStatus = res.data ? res.data.status + '' : '';
 				})
-			}
+			},
+			changeLang(){
+				this.showLang = true
+			},
+			clickLang(index){
+				let lang = this.langList[index].lang
+				uni.setStorageSync('language', lang);
+				this._i18n.locale = lang;
+				uni.setTabBarItem({
+					index: 0,
+					text: this.$t('message').tabBar.market
+				})
+				uni.setTabBarItem({
+					index: 1,
+					text: this.$t('message').tabBar.news
+				})
+				uni.setTabBarItem({
+					index: 2,
+					text: this.$t('message').tabBar.miner
+				})
+				uni.setTabBarItem({
+					index: 3,
+					text: this.$t('message').tabBar.wallet
+				})
+				uni.setTabBarItem({
+					index: 4,
+					text: this.$t('message').tabBar.me
+				})
+			},
         }  
     }  
 </script>  

@@ -32,8 +32,8 @@
 			<view class="fiat" @click="navTo('/pages/otc/otc')">
 				<image src="../../static/icon-fiat.png" mode="widthFix"></image>
 				<view class="label">
-					<text>法币交易</text>
-					<text class="sub">支持ETH、USDT</text>
+					<text>{{ i18n.index.otc.title }}</text>
+					<text class="sub">{{ i18n.index.otc.support }}ETH、USDT</text>
 				</view>
 			</view>
 			<view @click="navTo('/pages/otc/otc')" class="r" style="padding-right: 30upx;">
@@ -44,14 +44,14 @@
 			<view class="fiat" @click="navTo('/pages/prediction/prediction')">
 				<image src="../../static/icon-prediction.png" mode="widthFix"></image>
 				<view class="label">
-					<text>行情预言机</text>
+					<text>{{ i18n.index.prediction.title }}</text>
 					<text class="sub">Prediction Market</text>
 				</view>
 			</view>
 			<view class="ex">
 				<view class="item exchange" @click="navTo('/pages/exchange/index', true)">
 					<image src="../../static/images/home/home-ex-icon.png"></image>
-					<text>快捷闪兑</text>
+					<text>{{ i18n.index.exchange.title }}</text>
 				</view>
 				<!-- <view class="item shop" @click="navTo('/pages/shop/index')">
 					<image class="miner" src="../../static/icon-shop.png"></image>
@@ -59,7 +59,7 @@
 				</view> -->
 				<view class="item shop" @click="navTo('/pages/finance/deposit')">
 					<image class="miner" src="../../static/images/home/home-stacking-icon.png"></image>
-					<text>存币理财</text>
+					<text>{{ i18n.index.stacking.title }}</text>
 				</view>
 			</view>
 		</view>
@@ -75,9 +75,9 @@
 		<!-- 市值排行 -->
 		<view class="coin-section m-t">
 			<view class="s-header">
-				<view class="col">币种/流通市值</view>
-				<view class="col r">全球指数</view>
-				<view class="col r">24小时涨幅</view>
+				<view class="col">{{ i18n.index.market.title1 }}</view>
+				<view class="col r">{{ i18n.index.market.title2 }}</view>
+				<view class="col r">24{{ i18n.index.market.title3 }}</view>
 			</view>
 			<view class="s-row little-line"  @click="navTo(`/pages/market/index?code=${item.symbolCode}`)" v-for="(item, i) in markets" :key="item.symbol">
 				<view class="col light">

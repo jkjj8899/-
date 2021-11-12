@@ -25,10 +25,12 @@
 	import {uniIcons} from '@dcloudio/uni-ui'
 	import uniLoadMore from '@/components/uni-load-more/uni-load-more.vue';
 	import empty from '../../components/empty.vue'
+	import {commonMixin} from '@/common/mixin/mixin.js'
 	export default {
 		components: {
 			uniIcons, uniLoadMore, empty
 		},
+		mixins: [commonMixin],
 		data() {
 			return {
 				total: 0, //总价格
@@ -47,6 +49,9 @@
 		onLoad(){
 			//this.loadData();
 			uni.startPullDownRefresh();
+			uni.setNavigationBarTitle({
+				title: this.i18n.tabBar.news
+			})
 		},
 		onReachBottom(){
 			if(!this.isLastPage){

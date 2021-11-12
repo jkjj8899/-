@@ -1,7 +1,7 @@
 <template>
   <view class="container">
 	<view class="head-bg"></view>
-	<view class="count-bg">您还有<text class="count">{{drawCount}}</text>次机会</view>
+	<view class="count-bg">{{i18n.lottery.tip1}} <text class="count"> {{drawCount}} </text> {{i18n.lottery.tip2}}</view>
     <view class="lottery">
 		<LotteryDraw  @get_winingIndex='gridStart' :grid_info_arr="list" @luck_draw_finish='luckDrawFinish'></LotteryDraw>
 	</view>
@@ -66,20 +66,20 @@
 				prizes.push(item)
 			}
 			$this.list = prizes
-			$this.buyTip = '花' + res.data.buyPrice + res.data.buyCoin + '购买' + res.data.buyCount + '次抽奖'
+			$this.buyTip = this.i18n.lottery.tip3 + ' ' + res.data.buyPrice + res.data.buyCoin + ' ' + this.i18n.lottery.tip4  + ' ' + res.data.buyCount + ' ' + this.i18n.lottery.tip5
 		  })
 	  },
 	  buy(){
 		  let $this = this
 		  if(this.isLogin()){
 			  uni.showModal({
-			      title: '提示',
-			      content: '是否确定购买?',
+			      title: this.i18n.popup.tips,
+			      content: this.i18n.popup.buytext,
 			      success: function (res) {
 			          if (res.confirm) {
 			              $this.lotteryBuyCount().then(res =>{
 							  $this.drawCount = res.data
-							  $this.$api.msg('购买成功')
+							  $this.$api.msg($this.i18n.toast.submitSuccess)
 						  })
 			          }
 			      }

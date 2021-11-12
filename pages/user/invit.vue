@@ -8,50 +8,50 @@
 			<view class="item"><image class="step" src="../../static/images/invit/icon-invit-step3.png" mode="widthFix"/></view>
 		</view>
 		<view class="tips">
-			<view class="item"><text class="desc">发送邀请给好友</text></view>
+			<view class="item"><text class="desc">{{i18n.invit.tip1}}</text></view>
 			<view class="item"></view>
-			<view class="item"><text class="desc">完成注册进行交易</text></view>
+			<view class="item"><text class="desc">{{i18n.invit.tip2}}</text></view>
 			<view class="item"></view>
-			<view class="item"><text class="desc">获得相应比例返佣</text></view>
+			<view class="item"><text class="desc">{{i18n.invit.tip3}}</text></view>
 		</view>
 		<view class="user-info">
 			<view class="top">
 				<view class="item">
 					<text class="mobile">{{loginInfo.mobile}}</text>
-					<text class="sub">注册时间: {{loginInfo.registerTime | moment('YYYY-MM-DD')}}</text>
+					<text class="sub">{{i18n.invit.tip4}}: {{loginInfo.registerTime | moment('YYYY-MM-DD')}}</text>
 				</view>
 				<view class="item" @click="copy">
-					<text class="sub">我的邀请码(复制)</text>
+					<text class="sub">{{i18n.invit.tip5}}</text>
 					<text class="code">{{loginInfo.invitCode}}</text>
 				</view>
 			</view>
 			<view class="bottom">
 				<view class="item" @click="shareImageShare">
 					<image src="../../static/icon-invit1.jpg"></image>
-					<text>海报邀请</text>
+					<text>{{i18n.invit.tip6}}</text>
 				</view>
 				<view class="item" @click="shareLink">
 					<image src="../../static/icon-invit2.jpg"></image>
-					<text>分享链接</text>
+					<text>{{i18n.invit.tip7}}</text>
 				</view>
 				<view class="item" @click="shareWord">
 					<image src="../../static/icon-invit3.jpg"></image>
-					<text>分享口令</text>
+					<text>{{i18n.invit.tip8}}</text>
 				</view>
 				<view class="item" @click="shareFace">
 					<image src="../../static/icon-invit4.jpg"></image>
-					<text>面对面</text>
+					<text>{{i18n.invit.tip9}}</text>
 				</view>
 			</view>
 		</view>
 		
 		<view class="rank">
-			<view class="title">排行榜</view>
-			<u-empty text="暂无排行" :show="records.length <= 0" mode="data" margin-top="10"></u-empty>
+			<view class="title">{{i18n.invit.tip10}}</view>
+			<u-empty :text="i18n.invit.tip11" :show="records.length <= 0" mode="data" margin-top="10"></u-empty>
 			<view class="item" v-for="(item, i) in records" :key="item.uid">
 				<image :src="`../../static/icon-rank${i + 1}.jpg`"></image>
 				<text>{{item.username}}</text>
-				<text>{{item.invitUid1}}人</text>
+				<text>{{item.invitUid1}} {{i18n.invit.tip14}}</text>
 			</view>
 			<!-- 
 			<view class="item">
@@ -75,8 +75,8 @@
 			<view class="img">
 				<lPainter :board="posterObj" ref="painter"></lPainter>
 				<view class="footer-btn">
-					<view class="" @click="shareImageShare">返回</view>
-					<view class="save" @click="toSave">保存</view>
+					<view class="" @click="shareImageShare">{{i18n.invit.tip12}}</view>
+					<view class="save" @click="toSave">{{i18n.invit.tip13}}</view>
 				</view>
 			</view>
 		</view>
@@ -117,6 +117,9 @@
 			...mapState('user', ['loginInfo'])
 		},
 		onLoad() {
+			uni.setNavigationBarTitle({
+				title: this.i18n.invit.title
+			})
 			this.invitRank().then(res =>{
 				this.records = res.data
 			})

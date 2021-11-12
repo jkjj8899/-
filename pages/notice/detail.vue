@@ -19,6 +19,9 @@
 			}
 		},
 		onLoad(options){
+			uni.setNavigationBarTitle({
+				title: this.i18n.notice.detail
+			})
 			this.id = options.id
 			this.getNoticeDetail()
 		},

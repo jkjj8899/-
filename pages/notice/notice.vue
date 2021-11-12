@@ -33,6 +33,9 @@
 			}
 		},
 		onShow(){
+			uni.setNavigationBarTitle({
+				title: this.i18n.notice.title
+			})
 			this.getNoticeList()
 		},
 		onReachBottom(){

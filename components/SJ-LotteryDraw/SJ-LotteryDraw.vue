@@ -7,7 +7,7 @@
 						<image class="grid_img" mode='aspectFit' :src="item.logo" />
 						<view class="weizhongj">{{item.text}}</view>
 					</li>
-					<view class="luckDraw" @tap="luck_draw">抽奖</view>
+					<view class="luckDraw" @tap="luck_draw">{{i18n.lottery.tip6}}</view>
 				</ul>
 				
 			</view>
@@ -22,7 +22,9 @@
 
 <script>
 	import LotteryDraw from './SJ-LotteryDraw.js';
+	import {commonMixin} from '@/common/mixin/mixin.js'
 	export default {
+		mixins: [commonMixin],
 		data() {
 			return {
 				current_index: -1,

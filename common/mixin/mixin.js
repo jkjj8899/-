@@ -5,7 +5,10 @@ import {
 
 export const commonMixin = {
   computed:{
-  	...mapState('user', ['loginInfo'])
+  	...mapState('user', ['loginInfo']),
+	i18n() {
+		return this.$t('message');
+	}
   },
   data() {
     return { 

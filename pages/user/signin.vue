@@ -1,33 +1,33 @@
 <template>  
     <view class="container">  
 		<view class="bg-section">
-			<view class="title">每日签到</view>
+			<view class="title">{{i18n.sigin.title}}</view>
 		</view>
 		<view class="cover-container">
 			<view class="box position">
-				<view class="tip">连续签到7天领取换大奖</view>
+				<view class="tip">{{i18n.sigin.tip1}}</view>
 				<view class="days">
 					<view v-for="(item, index) in signInfo.rewards" class="col circle" :class="{'active':index < signInfo.signCount}">+{{item}}</view>
 				</view>
 				<view class="days">
-					<view class="col" v-for="(item, index) in signInfo.rewards">{{index + 1}}天</view>
+					<view class="col" v-for="(item, index) in signInfo.rewards">{{index + 1}}{{i18n.sigin.tip2}}</view>
 				</view>
-				<view class="intro">连续7天及以上,第次签到7{{signInfo.coin}}</view>
-				<view class="signin" @click="handleSign" :class="{'signActive':signInfo.isSignin}">{{signInfo.isSignin ? '今日已签到' : '签到'}}</view>
+				<view class="intro">{{i18n.sigin.tip3}}{{signInfo.coin}}</view>
+				<view class="signin" @click="handleSign" :class="{'signActive':signInfo.isSignin}">{{signInfo.isSignin ? i18n.sigin.tip10 : i18n.sigin.tip11}}</view>
 			</view>
 			<view class="box position rule">
-				<view class="tip">-活动规则-</view>
+				<view class="tip">-{{i18n.sigin.tip4}}-</view>
 				<view class="sub">
-					1.用户参与签到活动可获得{{signInfo.coin}},前7天为阶梯式计算,分别为1,2,3,4,5,6,7,第7天之后皆7{{signInfo.coin}};
+					1.{{i18n.sigin.tip5}}{{signInfo.coin}},{{i18n.sigin.tip6}}{{signInfo.coin}};
 				</view>
 				<view class="sub">
-					2.若签到中断则重新计算;
+					2.{{i18n.sigin.tip7}};
 				</view>
 				<view class="sub">
-					3.每日更新签到时间为新加坡时间0:00;
+					3.{{i18n.sigin.tip8}} 0:00;
 				</view>
 				<view class="sub">
-					4.最终发放数量以平台最终发放为准,最终解释权归属FEXCOIN所有;
+					4.{{i18n.sigin.tip9}};
 				</view>
 			</view>
 		</view>

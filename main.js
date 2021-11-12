@@ -17,6 +17,27 @@ import MescrollUni from "@/components/mescroll-uni/mescroll-uni.vue"
 Vue.component('mescroll-body', MescrollBody)
 Vue.component('mescroll-uni', MescrollUni)
 Vue.use(require('vue-moment'));
+
+let Chinese = require('./static/locales/zh-CN.js')
+let English = require('./static/locales/en-US.js')
+let Tradition = require('./static/locales/zh-HK.js')
+
+// VueI18n
+import VueI18n from 'vue-i18n'
+// VueI18n
+Vue.use(VueI18n)
+// VueI18n
+// 注意下述代码务必放在代码 "Vue.prototype._i18n = i18n" 上方
+const i18n = new VueI18n({
+	// 默认语言
+	locale: 'zh_CN',
+	// 引入语言文件
+	messages: {
+		'zh_CN': Chinese,
+		'en_US': English,
+        'zh_TW': Tradition
+	}
+})
 /**
  *  因工具函数属于公司资产, 所以直接在Vue实例挂载几个常用的函数
  *  所有测试用数据均存放于根目录json.js
@@ -124,9 +145,13 @@ Vue.filter('formatD', function (value) {
   return formatD(value)
 })
 
+// VueI18n
+Vue.prototype._i18n = i18n
+
 App.mpType = 'app'
 
 const app = new Vue({
+	i18n,
     ...App
 })
 app.$mount()
