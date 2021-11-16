@@ -4,51 +4,51 @@
 			<view class="status" v-if="order.status == 0">
 				<view class="s">
 					<text class="iconfont s0"></text>
-					<text class="v">请付款</text>
+					<text class="v">{{i18n.otc.order.plzPay}}</text>
 				</view>
-				<view v-if="side == 'BUY'">请在<text class="t">{{order.limitTime}}分钟</text>内付款给卖家</view>
-				<view v-if="side == 'SELL'">等待对方付款,可以 {{order.limitTime}}分钟 后提交申诉</view>
+				<view v-if="side == 'BUY'">{{i18n.otc.order.tip1}} <text class="t">{{order.limitTime}} {{i18n.otc.order.tip2}}</text> {{i18n.otc.order.tip3}}</view>
+				<view v-if="side == 'SELL'">{{i18n.otc.order.tip4}} {{order.limitTime}}{{i18n.otc.order.tip5}}</view>
 			</view>
 			<view class="status" v-if="order.status == 1">
 				<view class="s">
 					<text class="iconfont s0"></text>
-					<text class="v">已付款</text>
+					<text class="v">{{i18n.otc.order.payed}}</text>
 				</view>
-				<view v-if="side == 'BUY'">卖家未放币,您可进行申诉</view>
-				<view v-if="side == 'SELL'">对方向你支付了 {{order.totalPrice | fixed(2)}}</view>
+				<view v-if="side == 'BUY'">{{i18n.otc.order.tip6}}</view>
+				<view v-if="side == 'SELL'">{{i18n.otc.order.tip7}} {{order.totalPrice | fixed(2)}}</view>
 			</view>
 			<view class="status" v-if="order.status == 2">
 				<view class="s">
-					<text class="v">已完成</text>
+					<text class="v">{{i18n.otc.order.done}}</text>
 				</view>
-				您的订单已完成
+				{{i18n.otc.order.tip8}}
 			</view>
 			<view class="status" v-if="order.status == 3">
 				<view class="s">
-					<text class="v">交易取消</text>
+					<text class="v">{{i18n.otc.order.cancel}}</text>
 				</view>
-				订单取消无法查看支付信息
+				{{i18n.otc.order.tip9}}
 			</view>
 			<view class="status" v-if="order.status == 4">
 				<view class="s">
-					<text class="v">申诉中</text>
+					<text class="v">{{i18n.otc.order.appeal}}</text>
 				</view>
-				订单正在申诉中
+				{{i18n.otc.order.tip10}}
 			</view>
 			<view class="concat" v-if="order.status == 0 || order.status == 1">
 				<text class="iconfont icon-telephone"></text>
-				<view>电话</view>
+				<view>{{i18n.otc.order.phone}}</view>
 			</view>
 		</view>
 		<view class="amount-wrapper">
-			<text class="total">订单金额: ￥{{order.totalPrice | fixed(2)}}</text>
+			<text class="total">{{i18n.otc.order.orderAmount}}: ￥{{order.totalPrice | fixed(2)}}</text>
 			<view class="info">
 				<view class="price">
-					<view><text class="label">单价</text><text class="num">￥{{order.price | fixed(2)}}</text></view>
-					<view><text class="label">数量</text><text class="num">{{order.volume | fixed(2)}} {{order.coin}}</text></view>
+					<view><text class="label">{{i18n.otc.price}}</text><text class="num">￥{{order.price | fixed(2)}}</text></view>
+					<view><text class="label">{{i18n.otc.vol}}</text><text class="num">{{order.volume | fixed(2)}} {{order.coin}}</text></view>
 				</view>
 				<view class="coin">
-					<image :src="coinMap[order.coin].icon" class="coinLogo"></image>
+					<image :src="coinMap[order.coin] ? coinMap[order.coin].icon : ''" class="coinLogo"></image>
 					<view>{{order.coin}}</view>
 				</view>
 			</view>
@@ -58,53 +58,53 @@
 		<view class="transfer-info">
 			<view class="list">
 				<view class="item little-line">
-					<view class="left">订单号</view>
+					<view class="left">{{i18n.otc.order.orderNo}}</view>
 					<view class="right">{{order.number}}</view>
 				</view>
 				<view class="item">
-					<view class="left">下单时间</view>
+					<view class="left">{{i18n.otc.order.orderTime}}</view>
 					<view class="right">{{order.ctime | moment('YYYY-MM-DD HH:mm:ss')}}</view>
 				</view>
 			</view>
 		</view>
 		<view class="line"></view>
-		<view v-if="side == 'BUY' && order.status != 3" class="secrity-tip little-line">请使用本人{{currentPay.name}}向以下帐号自行转账</view>
+		<view v-if="side == 'BUY' && order.status != 3" class="secrity-tip little-line">{{i18n.otc.order.tip11}} {{currentPay.name}} {{i18n.otc.order.tip12}}</view>
 		<!-- 列表 -->
 		<view v-if="order.status != 3" class="transfer-info">
 			<view class="list">
 				<view class="item little-line">
 					<view class="left">{{currentPay.name}}</view>
-					<view class="right"><text v-if="side == 'BUY' && order.status == 0" class="change" @click="changePay()">切换支付方式</text></view>
+					<view class="right"><text v-if="side == 'BUY' && order.status == 0" class="change" @click="changePay()">{{i18n.otc.order.tip13}}</text></view>
 				</view>
 				<view class="item little-line">
-					<view class="left">收款人</view>
+					<view class="left">{{i18n.otc.order.username}}</view>
 					<view class="right">{{account.username}}</view>
 				</view>
 				<view class="item little-line">
-					<view class="left">{{currentPay.name}}账号</view>
+					<view class="left">{{currentPay.name}} {{i18n.otc.order.account}}</view>
 					<view class="right">{{account.accountNo}}</view>
 				</view>
 				<view class="item little-line" v-if="currentPay.payQrcode != null">
-					<view class="left">{{currentPay.name}}收款码</view>
+					<view class="left">{{currentPay.name}}{{i18n.otc.order.qrcode}}</view>
 					<view class="right"><image class="qrcode" :src="currentPay.payQrcode" /></view>
 				</view>
 				<view v-show="currentPay.code == 'UnionPay'" class="item little-line">
-					<view class="left">开户银行</view>
+					<view class="left">{{i18n.otc.order.bank}}</view>
 					<view class="right">{{account.bankName}}</view>
 				</view>
 				<view v-show="currentPay.code == 'UnionPay'" class="item">
-					<view class="left">开户支行</view>
+					<view class="left">{{i18n.otc.order.branch}}</view>
 					<view class="right">{{account.subBranch}}</view>
 				</view>
 			</view>
 		</view>
 		<view class="footer" v-if="side == 'BUY' && order.status == 0">
 			<view class="safe-tip">
-				在转账过程中请勿备注BTC、USDT、交易所等信息,防止汇款被拦截、银行卡被冻结等问题
+				{{i18n.otc.order.tip14}}
 			</view>
 			<view class="btns">
-				<button @click="cancel" class="cancel">取消订单</button>
-				<button @click="pay" class="pay">我已付款成功</button>
+				<button @click="cancel" class="cancel">{{i18n.otc.order.cancelOrder}}</button>
+				<button @click="pay" class="pay">{{i18n.otc.order.tip15}}</button>
 			</view>
 		</view>
 		<view class="footer" v-if="side == 'BUY' && order.status == 1">
@@ -115,7 +115,7 @@
 		<view class="footer" v-if="side == 'SELL' && order.status == 1">
 			<view class="btns">
 				<!-- <button class="pay appy">申诉</button> -->
-				<button @click="complete" class="pay">确认收款并放行</button>
+				<button @click="complete" class="pay">{{i18n.otc.order.tip16}}</button>
 			</view>
 		</view>
 	</view>
@@ -149,8 +149,10 @@
 				account: {}
 			};
 		},
+		onShow() {
+			this.$fire.$emit('refreshCoin')
+		},
 		onLoad(options){
-			console.log(JSON.stringify(this.coinMap))
 			this.currencyList().then(res => {
 				this.payment = res.data.payment
 				this.id = options.id
@@ -167,15 +169,15 @@
 			cancel(){
 				let $this = this;
 				uni.showModal({
-				    title: '提示',
-				    content: '是否确认取消订单?',
+				    title: $this.i18n.common.tip,
+				    content: $this.i18n.otc.order.confirmCannel,
 				    success: function (res) {
 				        if (res.confirm) {
 							uni.showLoading({})
 							$this.cancelOrder($this.id).then(res =>{
 								$this.loadData()
 								uni.hideLoading()
-								$this.$api.msg('取消成功', 1000, false, 'none', function() {})
+								$this.$api.msg($this.i18n.otc.order.cannelSuccess, 1000, false, 'none', function() {})
 							}).catch(error =>{
 								uni.hideLoading()
 							})
@@ -187,15 +189,15 @@
 			pay(){
 				let $this = this;
 				uni.showModal({
-				    title: '提示',
-				    content: '是否确认已付款?',
+				    title: $this.i18n.common.tip,
+				    content: $this.i18n.otc.order.confirmPay,
 				    success: function (res) {
 				        if (res.confirm) {
 							uni.showLoading({})
 							$this.payOrder({id: $this.id, payment: $this.currentPay.code}).then(res =>{
 								$this.loadData()
 								uni.hideLoading()
-								$this.$api.msg('标记付款成功', 1000, false, 'none', function() {})
+								$this.$api.msg($this.i18n.otc.order.paySuccess, 1000, false, 'none', function() {})
 							}).catch(error =>{
 								uni.hideLoading()
 							})
@@ -206,15 +208,15 @@
 			complete(){
 				let $this = this;
 				uni.showModal({
-				    title: '提示',
-				    content: '是否确认放币?',
+				    title: $this.i18n.common.tip,
+				    content: $this.i18n.otc.order.confirmComplete,
 				    success: function (res) {
 				        if (res.confirm) {
 							uni.showLoading({})
 							$this.completeOrder($this.id).then(res =>{
 								$this.loadData()
 								uni.hideLoading()
-								$this.$api.msg('放币成功', 1000, false, 'none', function() {})
+								$this.$api.msg($this.i18n.otc.order.doneSuccess, 1000, false, 'none', function() {})
 							}).catch(error =>{
 								uni.hideLoading()
 							})

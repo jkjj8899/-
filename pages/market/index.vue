@@ -22,59 +22,59 @@
 			</view>
 			<view class="r">
 				<text class="no" v-if="info.isrank == 1">NO.{{info.rank}}</text>
-				<text class="f-two marketcap">流通市值 ￥{{info.marketcap}}</text>
+				<text class="f-two marketcap">{{i18n.market.ltsz}} ￥{{info.marketcap}}</text>
 			</view>
 		</view>
 		<view class="market">
 			<view class="col lr">
 				<view class="row">
-					<text class="label">24H高</text>
+					<text class="label">24H{{i18n.market.high}}</text>
 					<text class="val">￥{{info.high}}</text>
 				</view>
 				<view class="row">
-					<text class="label">24H低</text>
+					<text class="label">24H{{i18n.market.low}}</text>
 					<text class="val">￥{{info.low}}</text>
 				</view>
 				<view class="row">
-					<text class="label">24H波幅</text>
+					<text class="label">24H{{i18n.market.chg}}</text>
 					<text class="val">{{info| bofu}}</text>
 				</view>
 				<view class="row">
-					<text class="label">总市值</text>
+					<text class="label">{{i18n.market.sz}}</text>
 					<text class="val">￥{{info.marketcap_total_usd}}</text>
 				</view>
 				<view class="row">
-					<text class="label">初始价格</text>
+					<text class="label">{{i18n.market.price}}</text>
 					<text class="val">${{info.openprice}}</text>
 				</view>
 				<view class="row">
-					<text class="label">历史最高</text>
+					<text class="label">{{i18n.market.historyHigh}}</text>
 					<text class="val">${{info.his_highest_usd}}</text>
 				</view>
 			</view>
 			<view class="col">
 				<view class="row">
-					<text class="label">24H量</text>
+					<text class="label">24H{{i18n.market.vol}}</text>
 					<text class="val">{{info.amount_day}}</text>
 				</view>
 				<view class="row">
-					<text class="label">24H额</text>
+					<text class="label">24H{{i18n.market.amount}}</text>
 					<text class="val">￥{{info.vol}}</text>
 				</view>
 				<view class="row">
-					<text class="label">24H换手</text>
+					<text class="label">24H{{i18n.market.hs}}</text>
 					<text class="val">{{info.turn_over}}%</text>
 				</view>
 				<view class="row">
-					<text class="label">量比</text>
+					<text class="label">{{i18n.market.lb}}</text>
 					<text class="val">{{info.ratio}}</text>
 				</view>
 				<view class="row">
-					<text class="label">BTC相关性</text>
+					<text class="label">BTC{{i18n.market.relation}}</text>
 					<text class="val">{{info.btccorrelation}}</text>
 				</view>
 				<view class="row">
-					<text class="label">历史最低调</text>
+					<text class="label">{{i18n.market.historyLow}}</text>
 					<text class="val">${{info.his_lowest_usd}}</text>
 				</view>
 			</view>
@@ -90,7 +90,7 @@
 						</view>
 					</u-circle-progress>
 				</view>
-				<text class="lable">占全球总市值</text>
+				<text class="lable">{{i18n.market.globalSz}}</text>
 			</view>
 			<view class="item">
 				<view class="chart">
@@ -101,7 +101,7 @@
 						</view>
 					</u-circle-progress>
 				</view>
-				<text class="lable">流通率</text>
+				<text class="lable">{{i18n.market.ltl}}</text>
 			</view>
 			<view class="item">
 				<view class="chart">
@@ -112,12 +112,12 @@
 						</view>
 					</u-circle-progress>
 				</view>
-				<text class="lable">换手率</text>
+				<text class="lable">{{i18n.market.hsl}}</text>
 			</view>
 		</view>
 		<view class="box">
-			<text class="tip f-two">请根据您对该币种未来24小时内的行情判断来选择您支持的方向</text>
-			<text class="tip f-two">*每日凌晨3:00(北京时间)重置计票</text>
+			<text class="tip f-two">{{i18n.market.tip1}}</text>
+			<text class="tip f-two">{{i18n.market.tip2}}</text>
 			<view class="long_short_box">
 				<view class="left_box">{{longsort.long_percent}}%</view> 
 				<view class="right_box">{{longsort.short_percent}}%</view> 
@@ -129,73 +129,73 @@
 		</view>
 		<view class="info">
 			<view class="tabs">
-				<view @click="changeTab(0)" class="item" :class="{active: tabIndex == 0}">币种概况</view>
-				<view @click="changeTab(1)" class="item" :class="{active: tabIndex == 1}">项目动态</view>
-				<view @click="changeTab(2)" class="item" :class="{active: tabIndex == 2}">团队信息</view>
+				<view @click="changeTab(0)" class="item" :class="{active: tabIndex == 0}">{{i18n.market.tab1}}</view>
+				<view @click="changeTab(1)" class="item" :class="{active: tabIndex == 1}">{{i18n.market.tab2}}</view>
+				<view @click="changeTab(2)" class="item" :class="{active: tabIndex == 2}">{{i18n.market.tab3}}</view>
 			</view>
 			<view v-show="tabIndex == 0" class="content">
 				<view class="block">
-					<view class="title">基本信息</view>
+					<view class="title">{{i18n.market.baseInfo}}</view>
 					<view class="base f-two"  @click="navTo(`/pages/market/intro?code=${code}`)">
 						<u-parse :html="info.coindesc"></u-parse>
 					</view>
 				</view>
 				<view class="line"></view>
 				<view class="block">
-					<view class="title">发行信息</view>
+					<view class="title">{{i18n.market.releaseInfo}}</view>
 					<view class="row f-two">
 						<view class="item">
-							<text class="label">首次发行时间</text>
+							<text class="label">{{i18n.market.srfxsj}}</text>
 							<text class="val">{{info.online_time}}</text>
 						</view>
 						<view class="item">
-							<text class="label">首日开盘价</text>
+							<text class="label">{{i18n.market.kpjg}}</text>
 							<text class="val">${{info.openprice}}</text>
 						</view>
 						<view class="item">
-							<text class="label">历史最高</text>
+							<text class="label">{{i18n.market.lszg}}</text>
 							<text class="val">${{info.his_highest_usd}}</text>
 						</view>
 						<view class="item">
-							<text class="label">历史最低</text>
+							<text class="label">{{i18n.market.lszd}}</text>
 							<text class="val">${{info.his_lowest_usd}}</text>
 						</view>
 						<view class="item">
-							<text class="label">所属公链</text>
+							<text class="label">{{i18n.market.ssgl}}</text>
 							<text class="val">{{info.publicchain}}</text>
 						</view>
 						<view class="item">
-							<text class="label">首次发行方式</text>
+							<text class="label">{{i18n.market.fxfs}}</text>
 							<text class="val">{{info.issuemode}}</text>
 						</view>
 						<view class="item">
-							<text class="label">流通市值</text>
+							<text class="label">{{i18n.market.ltsz}}</text>
 							<text class="val">￥{{info.marketcap}}</text>
 						</view>
 						<view class="item" v-if="info.isrank == 1">
-							<text class="label">排行</text>
+							<text class="label">{{i18n.market.ph}}</text>
 							<text class="val">NO.{{info.rank}}</text>
 						</view>
 						<view class="item">
-							<text class="label">上架交易所</text>
+							<text class="label">{{i18n.market.sjjys}}</text>
 							<text class="val">{{info.exchange_listcount}}</text>
 						</view>
 						<view class="item">
-							<text class="label">持币地址数</text>
+							<text class="label">{{i18n.market.cbdzs}}</text>
 							<text class="val">{{info.holders}}</text>
 						</view>
 					</view>
 				</view>
 				<view class="line"></view>
 				<view class="block">
-					<view class="title">供应量信息</view>
+					<view class="title">{{i18n.market.vouerInfo}}</view>
 					<view class="row f-two">
 						<view class="item">
-							<text class="label">最大供应量</text>
+							<text class="label">{{i18n.market.zdgyl}}</text>
 							<text class="val">{{info.maxsupply}}{{info.symbol}}</text>
 						</view>
 						<view class="item">
-							<text class="label">总供应量</text>
+							<text class="label">{{i18n.market.zgyl}}</text>
 							<text class="val">{{info.totalSupply}}{{info.symbol}}</text>
 						</view>
 						<!--<view class="item">
@@ -211,60 +211,60 @@
 							<text class="val">￥4.61万亿</text>
 						</view>-->
 						<view class="item">
-							<text class="label">流通总量</text>
+							<text class="label">{{i18n.market.ltzl}}<</text>
 							<text class="val">{{info.supply}}{{info.symbol}}</text>
 						</view>
 						<view class="item">
-							<text class="label">流通市值</text>
+							<text class="label">{{i18n.market.ltsz}}</text>
 							<text class="val">￥{{info.marketcap}}</text>
 						</view>
 						<view class="item">
-							<text class="label">流通率</text>
+							<text class="label">{{i18n.market.ltl}}</text>
 							<text class="val">{{info.circulationRate}}%</text>
 						</view>
 						<view class="item">
-							<text class="label">全球总市值占比</text>
+							<text class="label">{{i18n.market.qqzxyzb}}</text>
 							<text class="val">{{info.marketcappercent ? info.marketcappercent.toFixed(2) : '0.00'}}%</text>
 						</view>
 					</view>
 				</view>
 				<view class="line"></view>
 				<view class="block">
-					<view class="title">挖矿信息</view>
+					<view class="title">{{i18n.market.minerInfo}}</view>
 					<view class="row f-two">
 						<view class="item">
-							<text class="label">创世区块时间</text>
+							<text class="label">{{i18n.market.csqksj}}</text>
 							<text class="val">{{info.firstblocktime | moment('YYYY-MM-DD HH:mm:ss')}}</text>
 						</view>
 						<view class="item">
-							<text class="label">挖矿状态</text>
+							<text class="label">{{i18n.market.wkzt}}</text>
 							<text class="val">{{info.miningstate}}</text>
 						</view>
 						<view class="item">
-							<text class="label">激励机制</text>
+							<text class="label">{{i18n.market.zlzj}}</text>
 							<text class="val">{{info.prooftype}}</text>
 						</view>
 						<view class="item">
-							<text class="label">出块速度</text>
+							<text class="label">{{i18n.market.cksd}}</text>
 							<text class="val">{{info.blockspleed}}</text>
 						</view>
 						<view class="item">
-							<text class="label">核心算法</text>
+							<text class="label">{{i18n.market.hxsf}}</text>
 							<text class="val">{{info.algorithm}}</text>
 						</view>
 						<view class="item">
-							<text class="label">减半后奖励</text>
+							<text class="label">{{i18n.market.jbjl}}</text>
 							<text class="val">{{info.blockreward/2}}{{info.symbol}}</text>
 						</view>
 						<view class="item">
-							<text class="label">区块奖励</text>
+							<text class="label">{{i18n.market.qkjl}}</text>
 							<text class="val">{{info.blockreward}}{{info.symbol}}</text>
 						</view>
 					</view>
 				</view>
 				<view class="line"></view>
 				<view class="block">
-					<view class="title">投资机构</view>
+					<view class="title">{{i18n.market.introInfo}}</view>
 					<view class="row f-two">
 						<view class="item" v-for="(item, index) in teams.agency">
 							<view class="intr">
@@ -276,16 +276,16 @@
 				</view>
 				<view class="line"></view>
 				<view class="block">
-					<view class="title">相关链接</view>
+					<view class="title">{{i18n.market.linkInfo}}</view>
 					<view class="row f-two">
 						<view class="links">
 							<view class="col" v-if="info.siteurl" @click="open(info.siteurl)">
 								<image class="logo" src="https://s3.feixiaoquan.com/m/v1.0.62/static/images/currency_ic_website.svg?v=4997335"></image>
-								<text class="name">官网</text>
+								<text class="name">{{i18n.market.website}}</text>
 							</view>
 							<view class="col" v-if="info.white_paper" @click="open(info.white_paper)">
 								<image class="logo" src="https://s3.feixiaoquan.com/m/v1.0.62/static/images/currency_ic_WriteBook.svg?v=7b08d56"></image>
-								<text class="name">白皮书</text>
+								<text class="name">{{i18n.market.whitepager}}</text>
 							</view>
 							<view class="col" v-if="info.facebook" @click="open(info.facebook)">
 								<image class="logo" src="https://s3.feixiaoquan.com/m/v1.0.62/static/images/currency_ic_facebook.svg?v=4ec86ce"></image>
@@ -301,7 +301,7 @@
 							</view>
 							<view class="col" v-if="info.explorer" @click="open(info.explorer)">
 								<image class="logo" src="https://s3.feixiaoquan.com/m/v1.0.62/static/images/currency_ic_browser.svg?v=b1bded2"></image>
-								<text class="name">区块站</text>
+								<text class="name">{{i18n.market.blocksite}}</text>
 							</view>
 						</view>
 					</view>

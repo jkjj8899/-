@@ -1,15 +1,15 @@
 <template>
 	<view class="container">
 		<view class="list-cell b-b" hover-class="cell-hover" :hover-stay-time="50">
-			<text class="cell-tit">{{form.coin == null ? '币种' : form.coin}}</text>
-			<text class="cell-more" @click="selectCoin">请选择</text>
+			<text class="cell-tit">{{form.coin == null ? i18n.otc.advert.coin : form.coin}}</text>
+			<text class="cell-more" @click="selectCoin">{{i18n.common.select}}</text>
 		</view>
 		<!-- <view class="list-cell b-b" hover-class="cell-hover" :hover-stay-time="50">
 			<text class="cell-tit">{{lable.paycoin == null ? '法币' : lable.paycoin}}</text>
 			<text class="cell-more" @click="selectCurrency">请选择</text>
 		</view> -->
 		<view class="list-cell b-b" hover-class="cell-hover" :hover-stay-time="50">
-			<text class="cell-tit">{{lable.payment == null ? '支付方式' : lable.payment}}</text>
+			<text class="cell-tit">{{lable.payment == null ? i18n.otc.advert.payMethod : lable.payment}}</text>
 			<checkbox-group @change="selectPayment">
 				<label v-for="(item, i) in payments" :key="item.code">
 					<checkbox :value="item.code" style="transform:scale(0.7)" /><text class="cell-side">{{item.name}}</text>
@@ -17,43 +17,43 @@
 			</checkbox-group>
 		</view>
 		<view class="list-cell b-b" hover-class="cell-hover" :hover-stay-time="50">
-			<text class="cell-tit">订单类型</text>
+			<text class="cell-tit">{{i18n.otc.advert.orderType}}</text>
 			<radio-group name="side" @change="selectSide">
 				<label>
-					<radio value="BUY" :checked="form.side == 'BUY'"/><text class="cell-side">出售</text>
+					<radio value="BUY" :checked="form.side == 'BUY'"/><text class="cell-side">{{i18n.otc.sell}}</text>
 				</label>
 				<label>
-					<radio value="SELL" :checked="form.side == 'SELL'"/><text class="cell-side">购买</text>
+					<radio value="SELL" :checked="form.side == 'SELL'"/><text class="cell-side">{{i18n.otc.buy}}</text>
 				</label>
 			</radio-group>
 		</view>
 		<view class="safe-tip">
-			提示：出售广告等于用户购买,购买广告等于用户出售
+			{{i18n.otc.advert.safeTip}}
 		</view>
 		<view class="list-cell b-b" hover-class="cell-hover" :hover-stay-time="50">
-			<text class="cell-tit">单价</text>
-			<input v-model="form.price" type="number" class="cell-input" placeholder="请输入单价"/>
+			<text class="cell-tit">{{i18n.otc.price}}</text>
+			<input v-model="form.price" type="number" class="cell-input" :placeholder="i18n.otc.advert.inputPrice"/>
 		</view>
 		<view class="list-cell b-b" hover-class="cell-hover" :hover-stay-time="50">
-			<text class="cell-tit">数量</text>
-			<input v-model="form.volume" type="number" class="cell-input" placeholder="请输入数量"/>
+			<text class="cell-tit">{{i18n.otc.vol}}</text>
+			<input v-model="form.volume" type="number" class="cell-input" :placeholder="i18n.otc.advert.inputVol"/>
 		</view>
 		<view class="list-cell b-b" hover-class="cell-hover" :hover-stay-time="50">
-			<text class="cell-tit">限额</text>
+			<text class="cell-tit">{{i18n.otc.limit}}</text>
 			<view class="cell-cust">
-				<input v-model="form.minTrade" type="number" class="cell-input limit-l" placeholder="最小数量"/>
+				<input v-model="form.minTrade" type="number" class="cell-input limit-l" :placeholder="i18n.otc.advert.minAmount"/>
 				<text class="gap">-</text>
-				<input v-model="form.maxTrade" type="number" class="cell-input limit-r" placeholder="最大数量"/>
+				<input v-model="form.maxTrade" type="number" class="cell-input limit-r" :placeholder="i18n.otc.advert.maxAmount"/>
 			</view>
 		</view>
 		<view class="list-cell b-b" hover-class="cell-hover" :hover-stay-time="50">
-			<text class="cell-tit">{{form.limitTime==null ? '超时时间' : form.limitTime}}</text>
-			<text @click="selectlimitTime" class="cell-more">请选择</text>
+			<text class="cell-tit">{{form.limitTime==null ? i18n.otc.advert.overtime : form.limitTime}}</text>
+			<text @click="selectlimitTime" class="cell-more">{{i18n.common.select}}</text>
 		</view>
 		<view class="list-cell" hover-class="cell-hover" :hover-stay-time="50">
-			<textarea placeholder="请输入留言" style="width: 100%; font-size: 28upx;"></textarea>
+			<textarea :placeholder="i18n.otc.advert.inputRemark" style="width: 100%; font-size: 28upx;"></textarea>
 		</view>
-		<button class="submit" @click="submit">确认</button>
+		<button class="submit" @click="submit">{{i18n.common.ok}}</button>
 		
 		<uni-valid-popup ref="validPopup" @ok="ok"></uni-valid-popup>
 	</view>
@@ -95,6 +95,11 @@
 				fiatCoins: []
 			};
 		},
+		onShow() {
+			uni.setNavigationBarTitle({
+				title: this.i18n.otc.advert.addAdvert
+			})
+		},
 		onLoad(){
 			this.currencyList().then(res => {
 				this.currencys = res.data.currency
@@ -129,10 +134,10 @@
 			submit(){
 				if(!this.loginInfo.isCapitalPasswd){
 					uni.showModal({
-					    title: '提示',
-					    content: '请设置资金密码',
-						confirmText: '设置',
-						cancelText: '取消',
+					    title: this.i18n.common.tip,
+					    content: this.i18n.popup.setpaypwdtext,
+						confirmText: this.i18n.common.set,
+						cancelText: this.i18n.common.cancel,
 					    success: function (res) {
 					        if (res.confirm) {
 					            uni.navigateTo({
@@ -144,35 +149,35 @@
 					return
 				}
 				if(!this.form.coin){
-					this.$api.msg('请选择币种')
+					this.$api.msg(this.i18n.otc.advert.selectCoin)
 					return;
 				}
 				if(!this.form.paycoin){
-					this.$api.msg('请选择法币')
+					this.$api.msg(this.i18n.otc.advert.selectFiat)
 					return;
 				}
 				if(!this.form.payment){
-					this.$api.msg('请选择支付方式')
+					this.$api.msg(this.i18n.otc.advert.selectPayType)
 					return;
 				}
 				if(!this.form.price){
-					this.$api.msg('请输入单价')
+					this.$api.msg(this.i18n.otc.advert.inputPrice)
 					return;
 				}
 				if(!this.form.volume){
-					this.$api.msg('请输入数量')
+					this.$api.msg(this.i18n.otc.advert.inputVol)
 					return;
 				}
 				if(!this.form.minTrade || !this.form.maxTrade){
-					this.$api.msg('请输入限额')
+					this.$api.msg(this.i18n.otc.advert.inputLimit)
 					return;
 				}
 				if(this.form.minTrade > this.form.maxTrade){
-					this.$api.msg('最小限额不能大于最大限额')
+					this.$api.msg(this.i18n.otc.advert.limitError)
 					return;
 				}
 				if(!this.form.limitTime){
-					this.$api.msg('请选择超时时间')
+					this.$api.msg(this.i18n.otc.advert.selectOvertime)
 					return;
 				}
 				this.$refs.validPopup.open('capitalPasswd')
@@ -180,13 +185,13 @@
 			},
 			ok(data){
 				if(!data.code){
-					this.$api.msg('请输入资金密码')
+					this.$api.msg(this.i18n.toast.inputCapthError)
 					return;
 				}
 				this.form.capitalPasswd = data.code
 				this.addAdvert(this.form).then(res =>{
 					this.$refs.validPopup.close()
-					this.$api.msg('添加成功')
+					this.$api.msg(this.i18n.toast.addSuccess)
 					this.formReset()
 				}).catch(error => {
 					this.$refs.validPopup.enable()

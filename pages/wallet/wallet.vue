@@ -5,15 +5,15 @@
 			</view>
 		</u-navbar>
 		<view class="total-box">
-			<view class="title">总资产折合(USDT)</view>
+			<view class="title">{{i18n.wallet.total}}(USDT)</view>
 			<view class="asset">
 				<text class="amount">{{data.totalUsdAmount | fixed(2)}}</text>
 				<text class="cny">≈￥{{data.totalCnyAmount | fixed(2)}}</text>
 			</view>
 			<view class="operat">
-				<view class="btn" @click="navTo('/pages/wallet/deposit')">充币</view>
-				<view class="btn" @click="navTo('/pages/wallet/withdraw')">提币</view>
-				<view class="btn" @click="navTo('/pages/exchange/index')">兑换</view>
+				<view class="btn" @click="navTo('/pages/wallet/deposit')">{{i18n.wallet.recharge}}</view>
+				<view class="btn" @click="navTo('/pages/wallet/withdraw')">{{i18n.wallet.withdraw}}</view>
+				<view class="btn" @click="navTo('/pages/exchange/index')">{{i18n.wallet.exchange}}</view>
 			</view>
 		</view>
 		<!-- 列表 -->
@@ -29,9 +29,9 @@
 					</view>
 				</view>
 				<view class="s-row">
-					<view class="col subtitle row-title">可用</view>
-					<view class="col subtitle row-title">冻结</view>
-					<view class="col r subtitle row-title">折合(CNY)</view>
+					<view class="col subtitle row-title">{{i18n.wallet.avalible}}</view>
+					<view class="col subtitle row-title">{{i18n.wallet.frozen}}</view>
+					<view class="col r subtitle row-title">{{i18n.wallet.amount}}(CNY)</view>
 				</view>
 				<view class="s-row">
 					<view class="col subtitle row-amount">{{item.normalBalance | fixed(item.showPrecision)}}</view>
@@ -67,6 +67,9 @@
 			if(this.loginInfo.hasLogin){
 				this.loadData();
 			}
+			uni.setNavigationBarTitle({
+				title: this.i18n.wallet.title
+			})
 		},
 		onPullDownRefresh() {
 			this.loadData();

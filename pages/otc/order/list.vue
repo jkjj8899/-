@@ -2,11 +2,11 @@
 	<view class="container">
 		<!-- 列表 -->
 		<view class="coin-section m-t">
-			<u-empty text="暂无订单记录" :show="empty" mode="data" margin-top="200"></u-empty>
+			<u-empty :text="i18n.common.noData" :show="empty" mode="data" margin-top="200"></u-empty>
 			<view v-for="(item, i) in list" :key="`row${item.id}`" class="block little-line" @click="navTo(`/pages/otc/order/detail?id=${item.id}`, true)">
 				<view class="s-row">
 					<view class="col">
-						<text class="coin" :class="item.side | formatSideClass(item)">{{item.side | formatSide(item)}}</text>
+						<text class="coin" :class="item.side | formatSideClass(item)">{{item.side | formatSide(item, i18n.otc.buy, i18n.otc.sell)}}</text>
 						<text class="coin">{{item.coin}}</text>
 					</view>
 					<view class="col r light">
@@ -15,9 +15,9 @@
 					</view>
 				</view>
 				<view class="s-row">
-					<view class="col subtitle row-title">时间</view>
-					<view class="col subtitle row-title">数量(USDT)</view>
-					<view class="col r subtitle row-title">交易总合(CNY)</view>
+					<view class="col subtitle row-title">{{i18n.common.time}}</view>
+					<view class="col subtitle row-title">{{i18n.common.vol}}(USDT)</view>
+					<view class="col r subtitle row-title">{{i18n.common.amount}}(CNY)</view>
 				</view>
 				<view class="s-row">
 					<view class="col subtitle row-amount">{{item.ctime | moment('HH:mm MM/DD')}}</view>
@@ -32,21 +32,21 @@
 		<uni-popup ref="popup" type="top">
 			<view class="filter-wrapper">
 				<view class="filter">
-					<view class="filter-title">交易类型</view>
+					<view class="filter-title">{{i18n.otc.order.typeLabel}}</view>
 					<view class="filter-pay">
-						<text @click="filter('BUY', undefined)" class="filter-pay-item" :class="{'filter-active': query.side == 'BUY'}">购买</text>
-						<text @click="filter('SELL', undefined)" class="filter-pay-item" :class="{'filter-active': query.side == 'SELL'}">出售</text>
+						<text @click="filter('BUY', undefined)" class="filter-pay-item" :class="{'filter-active': query.side == 'BUY'}">{{i18n.otc.buy}}</text>
+						<text @click="filter('SELL', undefined)" class="filter-pay-item" :class="{'filter-active': query.side == 'SELL'}">{{i18n.otc.sell}}</text>
 						<text class="placeholder"></text>
 					</view>
-					<view class="filter-title">订单状态</view>
+					<view class="filter-title">{{i18n.otc.order.statusLabel}}</view>
 					<view class="filter-pay">
 						<text class="filter-pay-item" v-for="(v, k) in statusMap" :key="k" @click="filter(undefined, k)" :class="{'filter-active': query.status == k}" >{{v}}</text>
 					</view>
 				</view>
 				
 				<view class="btn-wrapper">
-					<view class="btn" @click="reset">重置</view>
-					<view class="btn submit" @click="search">筛选</view>
+					<view class="btn" @click="reset">{{i18n.common.reset}}</view>
+					<view class="btn submit" @click="search">{{i18n.common.filter}}</view>
 				</view>
 			</view>
 		</uni-popup>
@@ -84,6 +84,18 @@
 			};
 		},
 		onShow(){
+			uni.setNavigationBarTitle({
+				title: this.i18n.otc.order.orderRecord
+			})
+			this.statusMap = {
+				0: this.i18n.otc.order.status.pedding,
+				1: this.i18n.otc.order.status.payed,
+				2: this.i18n.otc.order.status.success,
+				3: this.i18n.otc.order.status.cancel,
+				4: this.i18n.otc.order.status.appeal,
+				5: this.i18n.otc.order.status.appealDone,
+				6: this.i18n.otc.order.status.except
+			}
 			this.list = []
 			this.query.page = 1
 			this.loadingStatus = 'loadmore'
@@ -112,11 +124,11 @@
 					return 'sell'
 				}
 			},
-			formatSide(v, item){
+			formatSide(v, item, buy, sell){
 				if(item.creator == item.buyerId){
-					return '购买'
+					return buy
 				} else {
-					return '出售'
+					return sell
 				}
 			}
 		},

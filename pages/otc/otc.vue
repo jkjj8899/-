@@ -7,8 +7,8 @@
 				<view class="header">
 					<view class="side">
 						<view class="navbar">
-							<view class="nav-item" :class="{current: sideIndex === 0}" @click="sideTabClick('BUY', 0)">我要买</view>
-							<view class="nav-item" :class="{current: sideIndex === 1}" @click="sideTabClick('SELL', 1)">我要卖</view>
+							<view class="nav-item" :class="{current: sideIndex === 0}" @click="sideTabClick('BUY', 0)">{{i18n.otc.buyTab}}</view>
+							<view class="nav-item" :class="{current: sideIndex === 1}" @click="sideTabClick('SELL', 1)">{{i18n.otc.sellTab}}</view>
 						</view>
 						<view class="order"><u-icon size="40" name="order" color="#ffffff" @click="navTo('/pages/otc/order/list', true)"></u-icon></view>
 					</view>
@@ -34,11 +34,11 @@
 								<view class="nomarl"></view>
 							</view>
 							<view class="row">
-								<view class="nomarl">数量 {{(item.volume - item.dealVolume) | fixed(2)}} {{item.coin}}</view>
-								<view class="nomarl">单价</view>
+								<view class="nomarl">{{i18n.otc.vol}} {{(item.volume - item.dealVolume) | fixed(2)}} {{item.coin}}</view>
+								<view class="nomarl">{{i18n.otc.price}}</view>
 							</view>
 							<view class="row">
-								<view class="nomarl">限额￥{{item.minTrade}}-￥{{item.maxTrade}}</view>
+								<view class="nomarl">{{i18n.otc.limit}}￥{{item.minTrade}}-￥{{item.maxTrade}}</view>
 								<view class="price">￥{{item.price}}</view>
 							</view>
 							<view class="row opt">
@@ -46,8 +46,8 @@
 									<i v-for="(t, index) in JSON.parse(item.payment)" :key="index" :class="`fexfont icon-${t}`"></i>
 								</view>
 								<view>
-									<button class="btn buy" v-if="item.side == 'BUY'" @click="create(item)">购买</button>
-									<button class="btn sell" v-if="item.side == 'SELL'" @click="create(item)">出售</button>
+									<button class="btn buy" v-if="item.side == 'BUY'" @click="create(item)">{{i18n.otc.buy}}</button>
+									<button class="btn sell" v-if="item.side == 'SELL'" @click="create(item)">{{i18n.otc.sell}}</button>
 								</view>
 							</view>
 						</view>
@@ -60,27 +60,27 @@
 				<view class="coin">
 					<view>
 						<view class="name">{{sideMap[ad.side]}}{{ad.coin}}</view>
-						<view>单价:<text class="price">￥{{ad.price}}</text></view>
+						<view>{{i18n.otc.price}}:<text class="price">￥{{ad.price}}</text></view>
 					</view>
 					<view><image class="icon" :src="coinMap[ad.coin].icon"></image></view>
 				</view>
 				<view class="type">
-					<view @click="changeType(0)" :class="form.type == 0 ? 'active' : ''">按金额{{sideMap[ad.side]}}</view>
-					<view @click="changeType(1)" :class="form.type == 1 ? 'active' : ''">按数量{{sideMap[ad.side]}}</view>
+					<view @click="changeType(0)" :class="form.type == 0 ? 'active' : ''">{{i18n.otc.byAmount}}{{sideMap[ad.side]}}</view>
+					<view @click="changeType(1)" :class="form.type == 1 ? 'active' : ''">{{i18n.otc.byVol}}{{sideMap[ad.side]}}</view>
 				</view>
 				<view class="input">
 					<view><input @blur="blur" @focus="focus" class="uni-input" cursor-spacing="0" :adjust-position="false" v-model="form.volume" type="number" :placeholder="placeholder[form.type]"/></view>
-					<view><text class="i cny">{{unit[form.type]}}</text> | <text @click="allBuy" class="i all">全部{{sideMap[ad.side]}}</text></view>
+					<view><text class="i cny">{{unit[form.type]}}</text> | <text @click="allBuy" class="i all">{{i18n.otc.all}}{{sideMap[ad.side]}}</text></view>
 				</view>
-				<view class="limit">限额：￥{{ad.minTrade}} - ￥{{ad.maxTrade}}</view>
-				<view class="num">交易数量：{{showVolume}} {{ad.coin}}</view>
+				<view class="limit">{{i18n.otc.limit}}：￥{{ad.minTrade}} - ￥{{ad.maxTrade}}</view>
+				<view class="num">{{i18n.otc.tradeVol}}：{{showVolume}} {{ad.coin}}</view>
 				<view class="amount">
-					<view class="t-p">实付款</view>
+					<view class="t-p">{{i18n.otc.payAmount}}</view>
 					<view class="p">￥{{showAmount}}</view>
 				</view>
 				<view class="btns">
-					<view @click="cancel" class="btn cancel">取消</view>
-					<view @click="submit" class="btn" :class="form.volume ? 'submit' : 'cancel'">下单</view>
+					<view @click="cancel" class="btn cancel">{{i18n.common.cancel}}</view>
+					<view @click="submit" class="btn" :class="form.volume ? 'submit' : 'cancel'">{{i18n.otc.submit}}</view>
 				</view>
 			</view>
 		</view>
@@ -94,6 +94,7 @@
 		mixins: [commonMixin], // 使用mixin (在main.js注册全局组件)
 		components: {},
 		data() {
+			let _this = this;
 			return {
 				dataList: [],
 				tabIndex: 0,
@@ -156,6 +157,14 @@
 			})
 		},
 		onShow(){
+			this.placeholder = {
+				0: this.i18n.otc.inputAmount,
+				1: this.i18n.otc.inputVol
+			},
+			this.sideMap = {
+				'BUY': this.i18n.otc.buy,
+				'SELL': this.i18n.otc.sell
+			}
 			this.$fire.$emit('refreshCoin')
 		},
 		onUnload() {
