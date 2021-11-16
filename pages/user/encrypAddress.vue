@@ -1,10 +1,10 @@
 <template>  
     <view class="container">  
-		<u-empty text="暂无地址" :show="empty" mode="data" margin-top="160"></u-empty>
+		<u-empty :text="i18n.common.noData" :show="empty" mode="data" margin-top="60"></u-empty>
 		<view class="addr-item" v-for="(item, i) in list" :key="item.id">
 			<view class="t">
 				<text class="coin">{{item.coin}}<text class="name">{{item.remark}}</text></text>
-				<text class="del" @click="handleDelete(item.id, i)">删除</text>
+				<text class="del" @click="handleDelete(item.id, i)">{{i18n.common.delete}}</text>
 			</view>
 			<text>{{item.address}}</text>
 		</view>
@@ -58,6 +58,9 @@
 			}
 		},
 		onShow() {
+			uni.setNavigationBarTitle({
+				title: this.i18n.my.payinaddress
+			})
 			this.list = []
 			this.getList()
 		},
@@ -103,12 +106,12 @@
 			handleDelete(id, i){
 				let $this = this;
 				uni.showModal({
-				    title: '提示',
-				    content: '是否确认删除?',
+				    title: $this.i18n.common.tip,
+				    content: $this.i18n.popup.deletetext,
 				    success: function (res) {
 				        if (res.confirm) {
 				            $this.deleteEncryptBook(id).then(res =>{
-				            	$this.$api.msg('删除成功', 1000, false, 'none', function() {})
+				            	$this.$api.msg($this.i18n.toast.deleteSuccess, 1000, false, 'none', function() {})
 								$this.list.splice(i, 1)
 							})
 				        }
@@ -129,6 +132,7 @@
 			},
 			onConfirm(item){
 				this.query.coin = item.value[0]
+				this.list = []
 				this.getList()
 			}
         }  
@@ -141,7 +145,7 @@
 	}
 	.addr-item{
 		font-size: $font-base;
-		background: linear-gradient(right, #3783D9, #53A6EA);
+		background: linear-gradient(45deg, #3783D9, #53A6EA);
 		padding: 20upx 20upx;
 		margin: 10upx 0;
 		border-radius: 10upx;

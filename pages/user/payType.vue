@@ -25,7 +25,7 @@
 				</view>
 			</view>
 			<view class="empty" v-if="item.payInfos.length <= 0">
-				暂无{{item.configPaymentInfo.name}}
+				{{i18n.common.noData}}
 			</view>
 		</view>
     </view>  
@@ -35,7 +35,9 @@
     	mapState,
     	mapActions
     } from 'vuex'  
+	import {commonMixin} from '@/common/mixin/mixin.js'
     export default {
+		mixins: [commonMixin],
 		data(){
 			return {
 				list: [],
@@ -43,6 +45,9 @@
 			}
 		},
 		onShow(){
+			uni.setNavigationBarTitle({
+				title: this.i18n.my.payin
+			})
 			this.getList()
 		},
 		// #ifndef MP
@@ -153,13 +158,13 @@
 			font-size: $font-md;
 		}
 		.item-bg-Alipay{
-			background: linear-gradient(left, rgba(55, 131, 217,0.7), rgba(55, 131, 217,1));
+			background: linear-gradient(50deg, rgba(55, 131, 217,0.7), rgba(55, 131, 217,1));
 		}
 		.item-bg-UnionPay{
-			background: linear-gradient(left, rgba(255,0,0,0.7), rgba(255,0,0,1));
+			background: linear-gradient(50deg, rgba(255,0,0,0.7), rgba(255,0,0,1));
 		}
 		.item-bg-Wechat{
-			background: linear-gradient(left, rgba(42, 189, 119,0.7), rgba(42, 189, 119,1));
+			background: linear-gradient(50deg, rgba(42, 189, 119,0.7), rgba(42, 189, 119,1));
 		}
 		.item{
 			margin: 20upx 0upx;

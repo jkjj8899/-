@@ -1,32 +1,32 @@
 <template>
 	<view class="container">
 		<view class="list-cell b-b m-t" @click="navTo('/pages/user/updateLoginPwd')" hover-class="cell-hover" :hover-stay-time="50">
-			<text class="cell-tit">登录密码</text>
+			<text class="cell-tit">{{i18n.accountsafe.loginpwd.title}}</text>
 			<text class="cell-more yticon icon-you"></text>
 		</view>
 		<view class="list-cell b-b" @click="navTo('/pages/user/updatePayPwd')" hover-class="cell-hover" :hover-stay-time="50">
-			<text class="cell-tit">交易密码</text>
+			<text class="cell-tit">{{i18n.accountsafe.tradepwd.title}}</text>
 			<text class="cell-more yticon icon-you"></text>
 		</view>
 		<view class="list-cell b-b" @click="navTo('/pages/user/googleSetting')" hover-class="cell-hover" :hover-stay-time="50">
-			<text class="cell-tit">谷歌设置</text>
+			<text class="cell-tit">{{i18n.accountsafe.googleset.title}}</text>
 			<text class="cell-more yticon icon-you"></text>
 		</view>
 		<!--<view class="list-cell b-b" hover-class="cell-hover" :hover-stay-time="50">
 			<text class="cell-tit">手势密码</text>
 			<switch color="#fa436a" @change="switchChange" />
-		</view>-->
+		</view>
 		<view v-show="isFingerprint" class="list-cell b-b" hover-class="cell-hover" :hover-stay-time="50">
 			<text class="cell-tit">指纹登录</text>
 			<switch color="#fa436a" @change="fingerprint" />
-		</view>
+		</view>-->
 		
 		<!-- <view class="list-cell" @click="navTo('/pages/user/updateMobile')" hover-class="cell-hover" :hover-stay-time="50">
 			<text class="cell-tit">绑定/修改手机号码</text>
 			<text class="cell-more yticon icon-you"></text>
 		</view> -->
 		<view class="list-cell log-out-btn" @click="toLogout">
-			<text class="cell-tit">退出登录</text>
+			<text class="cell-tit">{{i18n.my.exit}}</text>
 		</view>
 		
 	</view>
@@ -45,6 +45,11 @@
 				isFingerprint: false
 			};
 		},
+		onShow() {
+			uni.setNavigationBarTitle({
+				title: this.i18n.accountsafe.title
+			})
+		},
 		onLoad() {
 			// #ifdef APP-PLUS
 			if(plus.fingerprint && plus.fingerprint.isSupport()) {
@@ -58,7 +63,9 @@
 			toLogout(){
 				let $this = this
 				uni.showModal({
-				    content: '确定要退出登录么',
+				    content: $this.i18n.popup.exittext,
+					cancelText: $this.i18n.popup.cancel,
+					confirmText: $this.i18n.popup.confirm,
 				    success: (e)=>{
 				    	if(e.confirm){
 				    		this.logout();

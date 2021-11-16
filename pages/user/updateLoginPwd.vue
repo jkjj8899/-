@@ -1,27 +1,27 @@
 <template>
 	<view class="container">
 		<view class="list-cell b-b m-t"  hover-class="cell-hover" :hover-stay-time="50">
-			<text class="cell-tit">手机号</text>
+			<text class="cell-tit">{{i18n.accountsafe.loginpwd.mobile}}</text>
 			<text class="cell-more">{{loginInfo.mobile}}</text>
 		</view>
 		<view class="list-cell b-b" hover-class="cell-hover" :hover-stay-time="50">
-			<input class="cell-input" v-model="authCode.captchaCode" placeholder="请输入验证码"/>
+			<input class="cell-input" v-model="authCode.captchaCode" :placeholder="i18n.accountsafe.loginpwd.validPlacehold"/>
 			<view>
-				<u-verification-code :seconds="seconds" @end="end" @start="start" ref="uCode" @change="codeChange"></u-verification-code>
+				<u-verification-code :seconds="seconds" @end="end" @start="start" ref="uCode" @change="codeChange" :start-text="i18n.common.getCode" :change-text="i18n.common.retryCode" :end-text="i18n.common.overCode"></u-verification-code>
 				<u-button @tap="getCode" class="code-btn">{{tips}}</u-button>
 			</view>
 			<!-- <button :class="[isDisableCode?'cell-btn btn-disabled':'cell-btn']" :disabled="isDisableCode" @click="toSendSms">{{captchaTxt}}</button> -->
 		</view>
 		<view class="list-cell b-b" hover-class="cell-hover" :hover-stay-time="50">
-			<input class="cell-input" type="password" v-model="form.newPwd" placeholder="请输入新密码"/>
+			<input class="cell-input" type="password" v-model="form.newPwd" :placeholder="i18n.accountsafe.loginpwd.pwdPlacehold"/>
 		</view>
 		<view class="list-cell" hover-class="cell-hover" :hover-stay-time="50">
-			<input class="cell-input" type="password" v-model="form.againPwd" placeholder="请重新输入密码"/>
+			<input class="cell-input" type="password" v-model="form.againPwd" :placeholder="i18n.accountsafe.loginpwd.againPlacehold"/>
 		</view>
 		<view class="list-cell tip" hover-class="cell-hover" :hover-stay-time="50">
-			<text>登录密码由8-18位不含特殊字符的数字、字母组合</text>
+			<text>{{i18n.accountsafe.loginpwd.tip}}</text>
 		</view>
-		<button :disabled="loading" class="submit" @click="submit">确认</button>
+		<button :disabled="loading" class="submit" @click="submit">{{i18n.common.ok}}</button>
 	</view>
 </template>
 
@@ -31,7 +31,9 @@
 		mapActions
 	} from 'vuex'
 	import {isPassword} from '../../utils/validate'
+	import {commonMixin} from '@/common/mixin/mixin.js'
 	export default {
+		mixins: [commonMixin],
 		data() {
 			return {
 				loading: false,
@@ -49,6 +51,11 @@
 		computed: {
 			...mapState('user', ['loginInfo'])
 		},
+		onShow() {
+			uni.setNavigationBarTitle({
+				title: this.i18n.common.update + this.i18n.accountsafe.loginpwd.title
+			})
+		},
 		methods:{
 			...mapActions('common', ['sendSms']),
 			...mapActions('user', ['updatePwd']),
@@ -59,17 +66,18 @@
 				if(this.$refs.uCode.canGetCode) {
 					// 模拟向后端请求验证码
 					uni.showLoading({
-						title: '正在获取验证码'
+						title: this.i18n.toast.coding
 					})
 					let data = {
 						type: this.$g.CAPTCHA_TYPE.COMMON,
-						number: this.loginInfo.mobile
+						number: this.loginInfo.mobile,
+						countryCode: this.loginInfo.countryCode
 					}
 					this.sendSms(data).then(res => {
 						this.authCode.token = res.data
 						uni.hideLoading();
 						// 这里此提示会被this.start()方法中的提示覆盖
-						this.$u.toast('验证码已发送');
+						this.$u.toast(this.i18n.toast.codeSend);
 						// 通知验证码组件内部开始倒计时
 						this.$refs.uCode.start();
 					}).catch(error => {
@@ -81,30 +89,30 @@
 			start() {},
 			submit(){
 				if(!this.authCode.captchaCode){
-					this.$api.msg('请输入验证码')
+					this.$api.msg(this.i18n.toast.inputCode)
 					return;
 				}
 				if(!this.form.newPwd){
-					this.$api.msg('请输入密码')
+					this.$api.msg(this.i18n.toast.inputPwd)
 					return;
 				}
 				if(!isPassword(this.form.newPwd)){
-					this.$api.msg('登录密码不正确')
+					this.$api.msg(this.i18n.toast.pwdError)
 					return;
 				}
 				if(!this.form.againPwd){
-					this.$api.msg('请输入密码')
+					this.$api.msg(this.i18n.toast.inputPwd)
 					return;
 				}
 				if(this.form.againPwd !== this.form.newPwd){
-					this.$api.msg('两次密码输入不一致')
+					this.$api.msg(this.i18n.toast.againPwdError)
 					return;
 				}
 				this.loading = true
 				this.form.authCode = this.authCode.token + ":" + this.authCode.captchaCode
 				console.log(this.form)
 				this.updatePwd(this.form).then(res => {
-					this.$api.msg('登录密码修改成功', 1000, false, 'none', function() {
+					this.$api.msg(this.i18n.toast.updatePwdSuccess, 1000, false, 'none', function() {
 						setTimeout(function() {
 							this.logining = false
 							uni.navigateBack({})

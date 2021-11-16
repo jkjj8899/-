@@ -97,7 +97,8 @@ module.exports = {
 			select: '請選擇',
 			open: '開啟',
 			stop: '暫停',
-			close: '關閉'
+			close: '關閉',
+			request: '請求中...'
 		},
 		miner: {
 			navTitle: '雲算力',
@@ -201,6 +202,12 @@ module.exports = {
 				sj: '時間',
 				zcje: '轉出金額',
 				zchje: '轉出後餘額'
+			},
+			address: {
+				addAddress: '添加地址',
+				selectCoin: '請選擇幣種',
+				inputAddr: '請輸入地址',
+				inputName: '請輸入地址名稱'
 			}
 		},
 		market: {
@@ -555,7 +562,8 @@ module.exports = {
 			inputRemakr: '請輸入留言',
 			applySuccess: '申請成功',
 			submitSuccess: '提交成功',
-			addSuccess: '添加成功'
+			addSuccess: '添加成功',
+			deleteSuccess: '删除成功'
 		},
 		popup: {
 			open: '暫未開放！',
@@ -572,7 +580,8 @@ module.exports = {
 			payedtext: '是否確認已付款？',
 			canceltext: '是否確認取消訂單？',
 			setaddresstext: '未設定收款地址，請設定？',
-			setpaypwdtext: '請設定資金密碼'
+			setpaypwdtext: '請設定資金密碼',
+			deletetext: '是否确认删除?',
 		}
 	}
 }

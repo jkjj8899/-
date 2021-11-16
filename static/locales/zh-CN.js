@@ -97,7 +97,8 @@ module.exports = {
 			select: '请选择',
 			open: '开启',
 			stop: '暂停',
-			close: '关闭'
+			close: '关闭',
+			request: '请求中...'
 		},
 		miner: {
 			navTitle: '云算力',
@@ -201,6 +202,12 @@ module.exports = {
 				sj: '时间',
 				zcje: '转出金额',
 				zchje: '转出后余额'
+			},
+			address: {
+				addAddress: '添加地址',
+				selectCoin: '请选择币种',
+				inputAddr: '请输入地址',
+				inputName: '请输入地址名称'
 			}
 		},
 		market: {
@@ -555,7 +562,8 @@ module.exports = {
 			inputRemakr: '请输入留言',
 			applySuccess: '申请成功',
 			submitSuccess: '提交成功',
-			addSuccess: '添加成功'
+			addSuccess: '添加成功',
+			deleteSuccess: '删除成功'
 		},
 		popup: {
 			open: '暂未开放!',
@@ -565,14 +573,15 @@ module.exports = {
 			cancel: '取消',
 			loading: '加载中...',
 			exit: '退出',
-			exittext: '确定退出登录？',
+			exittext: '确定退出登录?',
 			version: '版本升级',
-			vertext: '确定版本升级？',
+			vertext: '确定版本升级?',
 			buytext: '是否确认购买?',
 			payedtext: '是否确认已付款?',
 			canceltext: '是否确认取消订单?',
 			setaddresstext: '未设置收款地址,请设置?',
-			setpaypwdtext: '请设置资金密码'
+			setpaypwdtext: '请设置资金密码',
+			deletetext: '是否确认删除?',
 		}
 	}
 }

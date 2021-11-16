@@ -1,9 +1,9 @@
 <template>
 	<view class="container">
 		<view class="row">
-			<text @click="open">Android谷歌验证器下载</text>
-			<button v-if="!loginInfo.isGoogle" class="btn" @click="navTo('/pages/user/googleBind')">您暂未绑定,现在绑定</button>
-			<button v-if="loginInfo.isGoogle" class="btn" @click="unbind">您已绑定,取消绑定</button>
+			<text @click="open">{{i18n.accountsafe.googleset.downloadTip}}</text>
+			<button v-if="!loginInfo.isGoogle" class="btn" @click="navTo('/pages/user/googleBind')">{{i18n.accountsafe.googleset.bindTip}}</button>
+			<button v-if="loginInfo.isGoogle" class="btn" @click="unbind">{{i18n.accountsafe.googleset.unbindTip}}</button>
 		</view>
 		
 		<uni-valid-popup ref="validPopup" @ok="ok"></uni-valid-popup>
@@ -27,6 +27,11 @@
 				}
 			};
 		},
+		onShow() {
+			uni.setNavigationBarTitle({
+				title: this.i18n.accountsafe.googleset.navTitle
+			})
+		},
 		onLoad() {
 			
 		},
@@ -40,12 +45,12 @@
 			},
 			ok(data){
 				if(!data.code){
-					this.$api.msg('请输入手机验证码')
+					this.$api.msg(this.i18n.toast.inputCode)
 					return;
 				}
 				this.form.authCode = data.token + ":" + data.code
 				this.unbindGoogle(this.form).then(res =>{
-					this.$api.msg('解绑Google验证成功')
+					this.$api.msg(this.i18n.toast.unbindGoodsSuccess)
 				}).catch(error =>{
 				})
 			},

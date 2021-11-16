@@ -1,17 +1,17 @@
 <template>
 	<view class="container">
 		<view class="row">
-			<text class="m">在谷歌验证器中添加秘钥并备份</text>
-			<text class="s">打开谷歌验证器,扫描下方二维码或手动输入下述秘钥添加验证令牌</text>
+			<text class="m">{{i18n.accountsafe.googleset.bindTip1}}</text>
+			<text class="s">{{i18n.accountsafe.googleset.bindTip2}}</text>
 		</view>
 		<view class="row center">
-			<text class="s">请务必将下述秘钥备份保存</text>
+			<text class="s">{{i18n.accountsafe.googleset.bindTip3}}</text>
 			<tki-qrcode ref="qrcode" :size="300" :onval="true" cid="qrcode" :val="form.googleKey" />
 		</view>
 		<view class="row center">
-			<text class="m">秘钥: {{form.googleKey}}</text>
-			<text class="copy m" @click="paste">复制</text>
-			<button class="btn" @click="bind">我已备份并添加到验证器</button>
+			<text class="m">{{i18n.common.secritKey}}: {{form.googleKey}}</text>
+			<text class="copy m" @click="paste">{{i18n.common.copy}}</text>
+			<button class="btn" @click="bind">{{i18n.accountsafe.googleset.bindBtn}}</button>
 		</view>
 		
 		<uni-valid-popup ref="validPopup" @ok="ok"></uni-valid-popup>
@@ -39,6 +39,11 @@
 				}
 			};
 		},
+		onShow() {
+			uni.setNavigationBarTitle({
+				title: this.i18n.accountsafe.googleset.bindNavTitle
+			})
+		},
 		onLoad() {
 			this.getGoogleKey().then(res =>{
 				this.form.googleKey = res.msg;
@@ -52,19 +57,19 @@
 			ok(data){
 				if(data.type == 'mobile'){
 					if(!data.code){
-						this.$api.msg('请输入手机验证码')
+						this.$api.msg(this.i18n.toast.inputCode)
 						return;
 					}
 					this.form.authCode = data.token + ":" + data.code
 					this.$refs.validPopup.open('google')
 				} else {
 					if(!data.code){
-						this.$api.msg('请输入Google验证码')
+						this.$api.msg(this.i18n.toast.inputGoogleCode)
 						return;
 					}
 					this.form.googleCode = data.code
 					this.bindGoogle(this.form).then(res =>{
-						this.$api.msg('绑定Google验证成功')
+						this.$api.msg(this.i18n.toast.bindGoodsSuccess)
 						uni.navigateBack({})
 					}).catch(error =>{
 					})
@@ -75,7 +80,7 @@
 				uni.setClipboardData({
 				    data: this.form.googleKey,
 				    success: function () {
-				        $this.$api.msg('复制成功')
+				        $this.$api.msg(this.i18n.toast.copySuccess)
 				    }
 				});
 			}

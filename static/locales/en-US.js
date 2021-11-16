@@ -97,7 +97,8 @@ module.exports = {
 			select: 'Please select',
 			open: 'Open',
 			stop: 'Stop',
-			close: 'Close'
+			close: 'Close',
+			request: 'Loading...'
 		},
 		miner: {
 			navTitle: 'Cloud Computing Power',
@@ -194,16 +195,7 @@ module.exports = {
 				zxtb: 'Min Amount',
 				all: 'All',
 				ky: 'Available',
-				sxf: 'Fee'
-			},
-			withdrawList: {
-				navTitle: 'Withdrawal Record',
-				sj: 'Time',
-				zcje: 'Amount',
-				zchje: 'Balance'
-			},
-			withdraw: {
-				navTitle: 'Withdraw Record',
+				sxf: 'Fee',
 				sj: 'Time',
 				amount: 'Amount',
 				status: 'Status',
@@ -211,6 +203,18 @@ module.exports = {
 				pedding: 'Pedding',
 				pass: 'Pass',
 				reject: 'Reject'
+			},
+			withdrawList: {
+				navTitle: 'Withdrawal Record',
+				sj: 'Time',
+				zcje: 'Amount',
+				zchje: 'Balance'
+			},
+			address: {
+				addAddress: 'Add Address',
+				selectCoin: 'Please select a coin',
+				inputAddr: 'Please enter the address',
+				inputName: 'Please enter address name'
 			}
 		},
 		market: {
@@ -563,7 +567,8 @@ module.exports = {
 			inputRemakr: 'Please input remark',
 			applySuccess: 'Apply Success',
 			submitSuccess: 'Submit Success',
-			addSuccess: 'Add Success'
+			addSuccess: 'Add Success',
+			deleteSuccess: 'Delete Success'
 		},
 		popup: {
 			open: 'Not yet open!',
@@ -580,7 +585,8 @@ module.exports = {
 			payedtext: 'Confirm payment?',
 			canceltext: 'Are you sure you want to cancel the order?',
 			setaddresstext: 'Collection address is not set, please set?',
-			setpaypwdtext: 'Please set the fund password'
+			setpaypwdtext: 'Please set the fund password',
+			deletetext: 'Are you sure you want to delete?',
 		}
 	}
 }
