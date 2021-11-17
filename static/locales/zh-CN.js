@@ -182,7 +182,13 @@ module.exports = {
 				ing: '审核中',
 				pass: '已认证',
 				reject: '审核拒绝'
-			}
+			},
+			tip1: '请上传身份证正反面图像',
+			tip2: '请确保照片的内容完整并清晰可见，仅支持jpg、png格式， 图片大小小于5M',
+			tip3: '请上传身份证正面图像',
+			tip4: '请上传身份证反面图像',
+			submit: '确认提交',
+			
 		},
 		my: {
 			login: '请登录',
@@ -355,8 +361,20 @@ module.exports = {
 		help: {
 			title: '常见问题',
 			account: '帐号相关',
-			miner: '矿机相关'
-			
+			miner: '矿机相关',
+			tip1: '忘记密码',
+			tip2: '如何绑定谷歌验证器',
+			tip3: '如何实名认证',
+			exchange: '闪电兑换',
+			tip4: '如何兑换',
+			tip5: '兑换手续费',
+			otc: '法币交易',
+			tip6: '如何购买',
+			tip7: '如何卖',
+			tip8: '如何成为承兑商',
+			wc: '充提相关',
+			tip9: '如何充币',
+			tip10: '如何提币',
 		},
 		about: {
 			protocol: '服务协议',
@@ -364,6 +382,11 @@ module.exports = {
 			law: '法律声明',
 			checkVer: '检查新版本',
 			currentVer: '当前版本',
+		},
+		set: {
+			push: '消息推送',
+			help: '帮助中心',
+			about: '关于Fex'
 		},
 		agent: {
 			status: {
@@ -704,6 +727,7 @@ module.exports = {
 			setaddresstext: '未设置收款地址,请设置?',
 			setpaypwdtext: '请设置资金密码',
 			deletetext: '是否确认删除?',
+			submittext: '是否确认提交?'
 		}
 	}
 }

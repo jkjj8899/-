@@ -2,15 +2,15 @@
 	<view class="container">
 		
 		<view class="list-cell m-t">
-			<text class="cell-tit">消息推送</text>
+			<text class="cell-tit">{{i18n.set.push}}</text>
 			<switch checked color="#fa436a" />
 		</view>
 		<view class="list-cell m-t b-b" @click="navTo('/pages/set/help')" hover-class="cell-hover" :hover-stay-time="50">
-			<text class="cell-tit">帮助中心</text>
+			<text class="cell-tit">{{i18n.set.help}}</text>
 			<text class="cell-more yticon icon-you"></text>
 		</view>
 		<view class="list-cell b-b" @click="navTo('/pages/set/about')" hover-class="cell-hover" :hover-stay-time="50">
-			<text class="cell-tit">关于Fex</text>
+			<text class="cell-tit">{{i18n.set.about}}</text>
 			<text class="cell-more yticon icon-you"></text>
 		</view>
 	</view>
@@ -25,8 +25,10 @@
 				version: ''
 			};
 		},
-		onLoad() {
-			
+		onShow() {
+			uni.setNavigationBarTitle({
+				title: this.i18n.my.set
+			})
 		},
 		methods:{
 

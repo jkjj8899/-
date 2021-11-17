@@ -182,7 +182,12 @@ module.exports = {
 				ing: 'Auditing',
 				pass: 'Pass',
 				reject: 'Reject'
-			}
+			},
+			tip1: 'Please upload the front and back images of your ID card',
+			tip2: 'Please ensure that the content of the photo is complete and clearly visible. Only JPG and PNG formats are supported, and the picture size is less than 5m',
+			tip3: 'Please upload the front image of your ID card',
+			tip4: 'Please upload the image on the back of your ID card',
+			submit: 'Submit',
 		},
 		my: {
 			login: 'Please Login',
@@ -362,8 +367,20 @@ module.exports = {
 		help: {
 			title: 'Common Problem',
 			account: 'Account Related',
-			miner: 'Miner Related'
-			
+			miner: 'Miner Related',
+			tip1: 'Forget password',
+			tip2: 'How to bind Google',
+			tip3: 'How to real name',
+			exchange: 'Exchange',
+			tip4: 'How to exchange',
+			tip5: 'Exchange fee',
+			otc: 'OTC',
+			tip6: 'How to buy',
+			tip7: 'How to sell',
+			tip8: 'How to become an acceptor',
+			wc: 'Full extraction correlation',
+			tip9: 'How to charge',
+			tip10: 'How to withdraw',
 		},
 		about: {
 			protocol: 'Service agreement',
@@ -371,6 +388,11 @@ module.exports = {
 			law: 'Legal declaration',
 			checkVer: 'Check for new version',
 			currentVer: 'Current version',
+		},
+		set: {
+			push: 'Message Push',
+			help: 'Help Center',
+			about: 'About Fex'
 		},
 		agent: {
 			status: {
@@ -709,6 +731,7 @@ module.exports = {
 			setaddresstext: 'Collection address is not set, please set?',
 			setpaypwdtext: 'Please set the fund password',
 			deletetext: 'Are you sure you want to delete?',
+			submittext: 'Are you sure you want to submit?'
 		}
 	}
 }

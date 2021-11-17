@@ -4,78 +4,78 @@
 			<image src="../../static/help_bg.jpg" mode="widthFix"></image>
 		</view>
 		<view class="title little-line">
-			常见问题
+			{{i18n.help.title}}
 		</view>
 		<view class="list">
 			<view class="row little-line">
 				<view class="left">
 					<image src="../../static/icon-help-safe.png" mode="widthFix"></image>
-					<text class="label">帐号相关</text>
+					<text class="label">{{i18n.help.account}}</text>
 				</view>
 				<view class="right">
 					<view class="col">
 						<view class="circle"></view>
-						<text>忘记密码</text>
+						<text>{{i18n.help.tip1}}</text>
 					</view>
 					<view class="col">
 						<view class="circle"></view>
-						<text>如何绑定谷歌验证器</text>
+						<text>{{i18n.help.tip2}}</text>
 					</view>
 					<view class="col">
 						<view class="circle"></view>
-						<text>如何实名认证</text>
+						<text>{{i18n.help.tip3}}</text>
 					</view>
 				</view>
 			</view>
 			<view class="row little-line">
 				<view class="left">
 					<image src="../../static/icon-help-ex.png" mode="widthFix"></image>
-					<text class="label">闪电兑换</text>
+					<text class="label">{{i18n.help.exchange}}</text>
 				</view>
 				<view class="right">
 					<view class="col">
 						<view class="circle"></view>
-						<text>如何兑换</text>
+						<text>{{i18n.help.tip4}}</text>
 					</view>
 					<view class="col">
 						<view class="circle"></view>
-						<text>兑换手续费</text>
+						<text>{{i18n.help.tip5}}</text>
 					</view>
 				</view>
 			</view>
 			<view class="row little-line">
 				<view class="left">
 					<image src="../../static/icon-help-fiat.png" mode="widthFix"></image>
-					<text class="label">法币交易</text>
+					<text class="label">{{i18n.help.otc}}</text>
 				</view>
 				<view class="right">
 					<view class="col">
 						<view class="circle"></view>
-						<text>如何购买USDT</text>
+						<text>{{i18n.help.tip6}}USDT</text>
 					</view>
 					<view class="col">
 						<view class="circle"></view>
-						<text>如何卖USDT</text>
+						<text>{{i18n.help.tip7}}USDT</text>
 					</view>
 					<view class="col">
 						<view class="circle"></view>
-						<text>如何成为承兑商</text>
+						<text>{{i18n.help.tip8}}</text>
 					</view>
 				</view>
 			</view>
 			<view class="row little-line">
 				<view class="left">
 					<image src="../../static/icon-help-wc.png" mode="widthFix"></image>
-					<text class="label">充提相关</text>
+					<text class="label">{{i18n.help.wc}}</text>
 				</view>
 				<view class="right">
 					<view class="col">
 						<view class="circle"></view>
-						<text>如何充币</text>
+						<text>{{i18n.help.tip9}}</text>
 					</view>
 					<view class="col">
 						<view class="circle"></view>
-						<text>如何提币</text>
+						<text>{{i18n.help.tip10}}</text>
 					</view>
 				</view>
 			</view>
@@ -84,8 +84,9 @@
 </template>
 
 <script>
-
+	import {commonMixin} from '@/common/mixin/mixin.js'
 	export default {
+		mixins: [commonMixin],
 		data() {
 			return {
 				payType: 1,
@@ -95,18 +96,12 @@
 		computed: {
 		
 		},
-		onLoad(options) {
-			
+		onShow(options) {
+			uni.setNavigationBarTitle({
+				title: this.i18n.my.help
+			})
 		},
-
-		methods: {
-			//确认支付
-			confirm: async function() {
-				uni.redirectTo({
-					url: '/pages/money/paySuccess'
-				})
-			},
-		}
+		methods: {}
 	}
 </script>
 

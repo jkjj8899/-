@@ -4,20 +4,20 @@
 			<image src="../../static/about_logo.png" mode="widthFix"></image>
 		</view>
 		<view class="list-cell b-b m-t"  hover-class="cell-hover" :hover-stay-time="50">
-			<text class="cell-tit">服务协议</text>
+			<text class="cell-tit">{{i18n.about.protocol}}</text>
 			<text class="cell-more yticon icon-you"></text>
 		</view>
 		<view class="list-cell b-b"  hover-class="cell-hover" :hover-stay-time="50">
-			<text class="cell-tit">隐私条款</text>
+			<text class="cell-tit">{{i18n.about.privacy}}</text>
 			<text class="cell-more yticon icon-you"></text>
 		</view>
 		<view class="list-cell b-b"  hover-class="cell-hover" :hover-stay-time="50">
-			<text class="cell-tit">法律声明</text>
+			<text class="cell-tit">{{i18n.about.law}}</text>
 			<text class="cell-more yticon icon-you"></text>
 		</view>
 		<view class="list-cell b-b" @click="onAPPUpdate" hover-class="cell-hover" :hover-stay-time="50">
-			<text class="cell-tit">检查新版本</text>
-			<text class="cell-tip">当前版本 {{version}}</text>
+			<text class="cell-tit">{{i18n.about.checkVer}}</text>
+			<text class="cell-tip">{{i18n.about.currentVer}} {{version}}</text>
 			<text class="cell-more yticon icon-you"></text>
 		</view>
 	</view>
@@ -36,6 +36,11 @@
 			return {
 				version: ''
 			};
+		},
+		onShow() {
+			uni.setNavigationBarTitle({
+				title: this.i18n.my.about
+			})
 		},
 		onLoad() {
 			// #ifdef APP-PLUS

@@ -174,6 +174,12 @@
 					index: 4,
 					text: this.$t('message').tabBar.me
 				})
+				this.authStatusMap = {
+					'': this.i18n.audit.status.no,
+					'0': this.i18n.audit.status.ing,
+					'1': this.i18n.audit.status.pass,
+					'2': this.i18n.audit.status.reject
+				}
 			},
         }  
     }  

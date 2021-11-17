@@ -7,14 +7,14 @@
 		<view class="box">
 			<image src="../../static/images/auth/icon-zheng.png" class="icon" mode="widthFix"></image>
 			<view class="title">
-				<text class="t">请上传身份证正反面图像</text>
-				<text class="b">请确保照片的内容完整并清晰可见，仅支持jpg、png格式， 图片大小小于5M；</text>
+				<text class="t">{{i18n.audit.tip1}}</text>
+				<text class="b">{{i18n.audit.tip2}}；</text>
 			</view>
-			<view class="reject" v-if="form.id && form.status == 2">审核拒绝: {{form.remark}}</view>
+			<view class="reject" v-if="form.id && form.status == 2">{{i18n.audit.status.reject}}: {{form.remark}}</view>
 			<view class="photo">
 				<view v-show="!form.frontPhoto" @click="handleUpload(0)">
 					<image class="img" src="../../static/images/auth/auth-zhen.jpg"></image>
-					<text class="tip">请上传身份证正面图像</text>
+					<text class="tip">{{i18n.audit.tip3}}</text>
 				</view>
 				<view v-show="form.frontPhoto">
 					<image class="img" :src="form.frontPhoto"></image>
@@ -23,14 +23,14 @@
 			<view class="photo">
 				<view v-show="!form.backPhoto" @click="handleUpload(1)">
 					<image class="img" src="../../static/images/auth/auth-fan.jpg"></image>
-					<text class="tip">请上传身份证反面图像</text>
+					<text class="tip">{{i18n.audit.tip4}}</text>
 				</view>
 				<view v-show="form.backPhoto">
 					<image class="img" :src="form.backPhoto"></image>
 				</view>
 			</view>
-			<button class="btn disable" v-if="form.id && form.status == 0">审核中</button>
-			<button class="btn" v-if="!form.id || form.status == 2" @click="submit">确认提交</button>
+			<button class="btn disable" v-if="form.id && form.status == 0">{{i18n.audit.status.ing}}</button>
+			<button class="btn" v-if="!form.id || form.status == 2" @click="submit">{{i18n.audit.submit}}</button>
 		</view>
 	</view>
 </template>
@@ -49,7 +49,8 @@
 				form: {
 					frontPhoto: undefined,
 					backPhoto: undefined
-				}
+				},
+				authStatusMap: {},
 			};
 		},
 		onLoad() {
@@ -88,13 +89,13 @@
 			submit(){
 				let $this = this
 				uni.showModal({
-				    title: '提示',
-				    content: '是否确认提交?',
+				    title: $this.i18n.common.tip,
+				    content: $this.i18n.popup.submittext,
 				    success: function (res) {
 				        if (res.confirm) {
 				            $this.authApply($this.form).then(res =>{
 				            	$this.loadData()
-								$this.$api.msg('提交成功')
+								$this.$api.msg($this.i18n.toast.submitSuccess)
 				            }).catch(error =>{
 				            })
 				        } else if (res.cancel) {

@@ -183,6 +183,11 @@ module.exports = {
 				pass: '已認證',
 				reject: '稽核拒絕'
 			},
+			tip1: '請上傳身份證正反面影像',
+			tip2: '請確保照片的內容完整並清晰可見，僅支持jpg、png格式，圖片大小小於5M',
+			tip3: '請上傳身份證正面影像',
+			tip4: '請上傳身份證反面影像',
+			submit: '確認提交',
 		},
 		my: {
 			login: '請登入',
@@ -355,7 +360,20 @@ module.exports = {
 		help: {
 			title: '常見問題',
 			account: '帳號相關',
-			miner: '礦機相關'
+			miner: '礦機相關',
+			tip1: '忘記密碼',
+			tip2: '如何綁定穀歌驗證器',
+			tip3: '如何實名認證',
+			exchange: '閃電兌換',
+			tip4: '如何兌換',
+			tip5: '兌換手續費',
+			otc: '法幣交易',
+			tip6: '如何購買',
+			tip7: '如何賣',
+			tip8: '如何成為承兌商',
+			wc: '充提相關',
+			tip9: '如何充幣',
+			tip10: '如何提幣',
 			
 		},
 		about: {
@@ -364,6 +382,11 @@ module.exports = {
 			law: '法律聲明',
 			checkVer: '檢查新版本',
 			currentVer: '當前版本',
+		},
+		set: {
+			push: '消息推送',
+			help: '幫助中心',
+			about: '關於Fex'
 		},
 		agent: {
 			status: {
@@ -704,6 +727,7 @@ module.exports = {
 			setaddresstext: '未設定收款地址，請設定？',
 			setpaypwdtext: '請設定資金密碼',
 			deletetext: '是否确认删除?',
+			submittext: '是否确认提交?'
 		}
 	}
 }
