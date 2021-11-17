@@ -10,17 +10,17 @@
 						</view>
 					</view>
 					<view class="tr">
-						<view class="period">第{{item.number}}期</view>
+						<view class="period">{{i18n.financial.the}} {{item.number}} {{i18n.financial.phase}}</view>
 					</view>
 				</view>
 				<view class="info">
 					<view class="col">
-						<text class="sub">年化收益率</text>
+						<text class="sub">{{i18n.financial.rate}}</text>
 						<text class="rate t">{{item.profitRate * 100}}%</text>
 					</view>
 					<view class="col">
-						<text class="sub">年化收益率</text>
-						<text class="period t">{{item.period}}天</text>
+						<text class="sub">{{i18n.financial.period}}</text>
+						<text class="period t">{{item.period}} {{i18n.financial.day}}</text>
 					</view>
 					<view class="col">
 						<text class="t"></text>
@@ -28,23 +28,23 @@
 				</view>
 				<view class="amount">
 					<view class="row">
-						<view class="tt">起投数量</view>
+						<view class="tt">{{i18n.financial.startVol}}</view>
 						<text>{{item.minAmount}} USDT</text>
 					</view>
 					<view class="row">
-						<view class="tt">剩余可投数量</view>
+						<view class="tt">{{i18n.financial.avalibleVol}}</view>
 						<text>{{item.totalAmount - item.buyAmount}} USDT</text>
 					</view>
 				</view>
 			</view>
 		</view>
 		<view class="timeline">
-			<view class="title little-line">时间轴</view>
+			<view class="title little-line">{{i18n.financial.timeline}}</view>
 			<view class="time">
 				<view class="row">
-					<view class="text">购买</view>
-					<view class="text">开启收益时间</view>
-					<view class="text r">收益结算时间</view>
+					<view class="text">{{i18n.financial.buy}}</view>
+					<view class="text">{{i18n.financial.startTime}}</view>
+					<view class="text r">{{i18n.financial.endTime}}</view>
 				</view>
 				<view class="row line">
 					<view class="text"><view class="circle"></view></view>
@@ -59,67 +59,67 @@
 			</view>
 		</view>
 		<view class="timeline">
-			<view class="title little-line">规则说明</view>
+			<view class="title little-line">{{i18n.financial.rule}}</view>
 			<view class="content">
 				<view class="row">
 					<view class="question">
 						<view class="q">Q</view>
-						<view class="t">什么是存币理财？</view>
+						<view class="t">{{i18n.financial.tip1}}</view>
 					</view>
 					<view class="question">
 						<view class="a">A</view>
-						<view class="c">存币理财是FEXCOIN平台推出的数字资产固定周期理财产品,每个理财产品项目锁定一定周期和不同的预期年化收益,你可以自由选择认购数量,购买后将进行锁定,由约定时间开始计算收益,到期后本金和收益将自动转入账户,获取本息收益。</view>
+						<view class="c">{{i18n.financial.tip2}}。</view>
 					</view>
 				</view>
 				<view class="row">
 					<view class="question">
 						<view class="q">Q</view>
-						<view class="t">如果参与？</view>
+						<view class="t">{{i18n.financial.tip3}}</view>
 					</view>
 					<view class="question">
 						<view class="a">A</view>
-						<view class="c">登录FEXCOIN平台点击存币理财,依据您自身的情况选择需要的产品,输入币数量,点击立即存入,即可参与理财计划。</view>
+						<view class="c">{{i18n.financial.tip4}}。</view>
 					</view>
 				</view>
 				<view class="row">
 					<view class="question">
 						<view class="q">Q</view>
-						<view class="t">锁定期未结束可以提前解锁吗？</view>
+						<view class="t">{{i18n.financial.tip5}}</view>
 					</view>
 					<view class="question">
 						<view class="a">A</view>
-						<view class="c">理财计划暂时不支持提前解锁,必须等锁定期结束后才会自动解锁,后续我们将会推出活期理财。</view>
+						<view class="c">{{i18n.financial.tip6}}。</view>
 					</view>
 				</view>
 				<view class="row">
 					<view class="question">
 						<view class="q">Q</view>
-						<view class="t">如何获得收益？</view>
+						<view class="t">{{i18n.financial.tip7}}</view>
 					</view>
 					<view class="question">
 						<view class="a">A</view>
-						<view class="c">在锁定期结束后,点击存币理财中的领取收益按钮,您的本金和利息立即发放到您的帐户中,可以在我的资产中查看。</view>
+						<view class="c">{{i18n.financial.tip8}}。</view>
 					</view>
 				</view>
 				<view class="row">
 					<view class="question">
 						<view class="q">Q</view>
-						<view class="t">资金用途？</view>
+						<view class="t">{{i18n.financial.tip9}}</view>
 					</view>
 					<view class="question">
 						<view class="a">A</view>
-						<view class="c">FEXCOIN平台推出的数字资产固定周期理财产品。资金主要用于数字资产的质押的放贷,资金用途透明。</view>
+						<view class="c">{{i18n.financial.tip10}}。</view>
 					</view>
 				</view>
 			</view>
 		</view>
 		<view class="bt">
-			<button disabled="true" v-if="item.status == 2">已完成</button>
-			<button disabled="true" v-if="item.status == 1">锁定期</button>
-			<button type="primary" v-if="item.status == 0" @click="handleBuy">立即存入</button>
+			<button disabled="true" v-if="item.status == 2">{{i18n.financial.status.done}}</button>
+			<button disabled="true" v-if="item.status == 1">{{i18n.financial.status.lock}}</button>
+			<button type="primary" v-if="item.status == 0" @click="handleBuy">{{i18n.financial.deposit}}</button>
 		</view>
-		<u-modal title="认购数量" v-model="showBuy" @confirm="confirm" ref="uModal" :show-cancel-button="true" :async-close="true">
-			<view style="margin: 20upx 30upx;"><u-input v-model="amount" placeholder="输入认购数量" type="number" :border="false" /></view>
+		<u-modal :title="i18n.financial.subscribeVol" v-model="showBuy" @confirm="confirm" ref="uModal" :show-cancel-button="true" :async-close="true">
+			<view style="margin: 20upx 30upx;"><u-input v-model="amount" :placeholder="i18n.financial.inputVol" type="number" :border="false" /></view>
 		</u-modal>
 		<uni-valid-popup ref="validPopup" @ok="ok"></uni-valid-popup>
 	</view>
@@ -156,6 +156,17 @@
 				}
 			};
 		},
+		onShow() {
+			uni.setNavigationBarTitle({
+				title: this.i18n.financial.activity
+			})
+			this.statusMap = {
+				0: this.i18n.financial.status.ing,
+				1: this.i18n.financial.status.lock,
+				2: this.i18n.financial.status.done,
+				3: this.i18n.financial.status.stop
+			}
+		},
 		onLoad(options){
 			this.id = options.id
 			this.loadData();
@@ -181,12 +192,12 @@
 			},
 			confirm(){
 				if(!this.amount){
-					this.$api.msg('请输入认购数量')
+					this.$api.msg(this.i18n.financial.inputVol)
 					this.$refs.uModal.clearLoading()
 					return;
 				}
 				if(this.amount <= 0){
-					this.$api.msg('认购数量输入错误')
+					this.$api.msg(this.i18n.financial.volError)
 					this.$refs.uModal.clearLoading()
 					return;
 				}
@@ -195,7 +206,7 @@
 			},
 			ok(data){
 				if(!data.code){
-					this.$api.msg('请输入资金密码')
+					this.$api.msg(this.i18n.toast.inputCapthError)
 					return;
 				}
 				let form = {id: this.id, amount: this.amount, capitalPasswd: data.code}
@@ -203,7 +214,7 @@
 				this.productBuy(form).then(res =>{
 					this.$refs.validPopup.close()
 					this.loadData()
-					this.$api.msg('认购成功')
+					this.$api.msg(this.i18n.financial.subscribeSuccess)
 				}).catch(error => {
 					this.$refs.validPopup.enable()
 				})

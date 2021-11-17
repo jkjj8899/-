@@ -1,30 +1,30 @@
 <template>
 	<view class="container">
 		<view class="total-box">
-			<view class="title">总收益</view>
+			<view class="title">{{i18n.financial.totalProfit}}</view>
 			<view class="asset">
 				<view><text class="cny">{{profit}}</text>CNY</view>
 			</view>
 			<view class="operat">
 				<view class="col" @click="navTo('/pages/finance/historyOrder')">
 					<image src="../../static/icon-deposit-history.png" mode="widthFix"></image>
-					<text>理财记录</text>
+					<text>{{i18n.financial.record}}</text>
 				</view>
 				<view class="col" @click="navTo('/pages/finance/myOrder')">
 					<image src="../../static/icon-deposit-ing.png" mode="widthFix"></image>
-					<text>我的理财</text>
+					<text>{{i18n.financial.myFinance}}</text>
 				</view>
 				<view class="col" @click="handleDraw">
 					<image src="../../static/icon-deposit-draw.png" mode="widthFix"></image>
-					<text>领取收益</text>
+					<text>{{i18n.financial.receive}}</text>
 					<view class="badge" v-show="drawCount > 0">{{drawCount}}</view>
 				</view>
 			</view>
 		</view>
 		<view class="ing-box">
-			<view class="title">定时开抢</view>
+			<view class="title">{{i18n.financial.regular}}</view>
 			<view class="no-data" v-if="ingList.length <= 0">
-				敬请期待
+				{{i18n.financial.soon}}
 			</view>
 			<view class="list-item" v-for="(item, i) in ingList" :key="i" @click="navTo(`/pages/finance/depositDetail?id=${item.id}`)">
 				<view class="title little-line">
@@ -35,17 +35,17 @@
 						</view>
 					</view>
 					<view class="tr">
-						<view class="period">第{{item.number}}期</view>
+						<view class="period">{{i18n.financial.the}} {{item.number}} {{i18n.financial.phase}}</view>
 					</view>
 				</view>
 				<view class="info">
 					<view class="col">
 						<text class="rate t">{{item.profitRate * 100}}%</text>
-						<text class="sub">年化收益率</text>
+						<text class="sub">{{i18n.financial.rate}}</text>
 					</view>
 					<view class="col">
-						<text class="period t">{{item.period}}天</text>
-						<text class="sub">年化收益率</text>
+						<text class="period t">{{item.period}} {{i18n.financial.day}}</text>
+						<text class="sub">{{i18n.financial.period}}</text>
 					</view>
 					<view class="col">
 						<text class="t">{{statusMap[item.status]}}</text>
@@ -54,9 +54,9 @@
 			</view>
 		</view>
 		<view class="history-box">
-			<view class="tt">----历史活动----</view>
+			<view class="tt">----{{i18n.financial.history}}----</view>
 			<view class="no-data" v-if="historyList.length <= 0">
-				敬请期待
+				{{i18n.financial.soon}}
 			</view>
 			<view class="list-item" v-for="(item, i) in historyList" :ket="i" @click="navTo(`/pages/finance/depositDetail?id=${item.id}`)">
 				<view class="title little-line">
@@ -67,17 +67,17 @@
 						</view>
 					</view>
 					<view class="tr">
-						<view class="period">第{{item.number}}期</view>
+						<view class="period">{{i18n.financial.the}} {{item.number}} {{i18n.financial.phase}}</view>
 					</view>
 				</view>
 				<view class="info">
 					<view class="col">
 						<text class="rate t">{{item.profitRate * 100}}%</text>
-						<text class="sub">年化收益率</text>
+						<text class="sub">{{i18n.financial.rate}}</text>
 					</view>
 					<view class="col">
-						<text class="period t">{{item.period}}天</text>
-						<text class="sub">年化收益率</text>
+						<text class="period t">{{item.period}} {{i18n.financial.day}}</text>
+						<text class="sub">{{i18n.financial.period}}</text>
 					</view>
 					<view class="col">
 						<text class="t">{{statusMap[item.status]}}</text>
@@ -115,6 +115,15 @@
 			};
 		},
 		onShow(){
+			uni.setNavigationBarTitle({
+				title: this.i18n.financial.title
+			})
+			this.statusMap = {
+				0: this.i18n.financial.status.ing,
+				1: this.i18n.financial.status.lock,
+				2: this.i18n.financial.status.done,
+				3: this.i18n.financial.status.stop
+			}
 			this.loadData();
 		},
 		onLoad(){
@@ -147,7 +156,7 @@
 			},
 			handleDraw(){
 				this.productDraw().then(res =>{
-					this.$api.msg('领取收益成功')
+					this.$api.msg(this.i18n.financial.receiveSuccess)
 				}).catch(error =>{
 					
 				})

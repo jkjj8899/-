@@ -1,48 +1,48 @@
 <template>
 	<view class="content">
 		<view style="padding: 200upx 0;" v-if="records.length <= 0">
-			<u-empty text="暂无记录" mode="list"></u-empty>
+			<u-empty :text="i18n.common.noData" mode="list"></u-empty>
 		</view>
 		<view class="row" v-for="(item, i) in records">
-			<view class="title">下注记录</view>
+			<view class="title">{{i18n.prediction.betRecord}}</view>
 			<view class="table">
 				<view class="item">
 					<text>RoundID:</text>
 					<text>#{{item.round.id}}</text>
 				</view>
 				<view class="item">
-					<text>下注方向:</text>
-					<text>看{{positionMap[item.position]}}</text>
+					<text>{{i18n.prediction.betSide}}:</text>
+					<text>{{i18n.prediction.guess}} {{positionMap[item.position]}}</text>
 				</view>
 				<view class="item">
-					<text>下注数量:</text>
+					<text>{{i18n.prediction.betVol}}:</text>
 					<text>{{item.amount}}</text>
 				</view>
 				<view class="item">
-					<text>预测奖励:</text>
+					<text>{{i18n.prediction.reward}}:</text>
 					<text>{{item.rewardAmount}}</text>
 				</view>
 			</view>
-			<view class="title">回合记录</view>
+			<view class="title">{{i18n.prediction.roundRecord}}</view>
 			<view class="table">
 				<view class="item">
-					<text>总奖池:</text>
+					<text>{{i18n.prediction.rewardPool}}:</text>
 					<text>{{item.round.bullAmount + item.round.bearAmount}}</text>
 				</view>
 				<view class="item">
-					<text>多头:</text>
+					<text>{{i18n.prediction.bull}}:</text>
 					<text>{{item.round | setPayout('bull')}}x | {{item.round.bullAmount}}</text>
 				</view>
 				<view class="item">
-					<text>空头:</text>
+					<text>{{i18n.prediction.bear}}:</text>
 					<text>{{item.round | setPayout('bear')}}x | {{item.round.bearAmount}}</text>
 				</view>
 				<view class="item">
-					<text>锁定价格:</text>
+					<text>{{i18n.prediction.lockPrice}}:</text>
 					<text>{{item.round.lockPrice}}</text>
 				</view>
 				<view class="item">
-					<text>结束价格:</text>
+					<text>{{i18n.prediction.overPrice}}:</text>
 					<text>{{item.round.closePrice}}</text>
 				</view>
 			</view>
@@ -56,9 +56,9 @@
 		mapState,
 		mapActions
 	} from 'vuex'
-	import {authMixin} from '@/common/mixin/mixin.js'
+	import {authMixin, commonMixin} from '@/common/mixin/mixin.js'
 	export default {
-		mixins: [authMixin],
+		mixins: [authMixin, commonMixin],
 		data() {
 			return {
 				pageForm: {
@@ -85,6 +85,13 @@
 			}
 		},
 		onShow() {
+			uni.setNavigationBarTitle({
+				title: this.i18n.prediction.recordTitle
+			})
+			this.positionMap = {
+				'bull': this.i18n.prediction.up,
+				'bear': this.i18n.prediction.down
+			}
 			this.getHistory()
 		},
 		onReachBottom(){

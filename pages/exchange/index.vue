@@ -15,26 +15,26 @@
 				<view @click="transform" class="transform"><image src="../../static/exc.png" class="exc"></image></view>
 			</view>
 			<view class="amount little-line">
-				<input type="number" v-model="form.amount" placeholder="转出数量" class="out"/>
-				<input type="number" v-model="inAmount" placeholder="收到数量" class="in"/>
+				<input type="number" v-model="form.amount" :placeholder="i18n.convert.outAmount" class="out"/>
+				<input type="number" v-model="inAmount" :placeholder="i18n.convert.inAmount" class="in"/>
 			</view>
 			<view class="params">
-				<view class="rate">余额: {{account.normalBalance | fixed(2)}} {{exItem.base}}</view>
-				<view class="fee">手续费:{{exItem.fee * 100}}%</view>
+				<view class="rate">{{i18n.convert.balance}}: {{account.normalBalance | fixed(2)}} {{exItem.base}}</view>
+				<view class="fee">{{i18n.convert.fee}}:{{exItem.fee * 100}}%</view>
 			</view>
-			<view class="rate-amount">汇率: 1{{exItem.base}} = {{1 * exItem.scale}}{{exItem.quote}}</view>
+			<view class="rate-amount">{{i18n.convert.ratio}}: 1{{exItem.base}} = {{1 * exItem.scale}}{{exItem.quote}}</view>
 		</view>
-		<button type="primary" @click="submit" class="btn">闪电兑换</button>
+		<button type="primary" @click="submit" class="btn">{{i18n.convert.exchangeBtn}}</button>
 		
 		
 		<view class="record">
 			<!-- <view class="tip">兑换记录</view> -->
 			<view class="title">
-				<view class="col">兑出资产/兑入资产</view>
-				<view class="col r">手续费/时间</view>
+				<view class="col">{{i18n.convert.outAsset}}/{{i18n.convert.inAsset}}</view>
+				<view class="col r">{{i18n.convert.fee}}/{{i18n.convert.time}}</view>
 			</view>
 			<scroll-view class="uni-list" :enableBackToTop="enableBackToTop" :scroll-y="scrollY" @scrolltolower="loadMore">
-				<u-empty text="暂无数据" mode="data" :show="empty" img-width="140"></u-empty>
+				<u-empty :text="i18n.common.noData" mode="data" :show="empty" img-width="140"></u-empty>
 				<view class="uni-row little-line" v-for="(item, i) in records" :key="item.id">
 					<view class="col">
 						{{item.baseAmount}} {{item.base}} / {{item.quoteAmount}} {{item.quote}}
@@ -47,10 +47,10 @@
 		<u-popup ref="popup" v-model="showPopup" mode="bottom">
 			<view class="coin-box">
 				<view class="coin-search">
-					<uni-search-bar placeholder="搜索token" @input="search"></uni-search-bar>
+					<uni-search-bar :placeholder="`${i18n.convert.search}token`" @input="search"></uni-search-bar>
 				</view>
 				<view class="item-wrapper">
-					<u-empty text="暂无数据" mode="data" :show="coinEmpty" img-width="140"></u-empty>
+					<u-empty :text="i18n.common.noData" mode="data" :show="coinEmpty" img-width="140"></u-empty>
 					<view class="coin-item little-line" @click="select(item)" v-for="(item, i) in coinList" :key="item.id">
 						<view class="col">
 							<image :src="item.baseCoinIcon"/>
@@ -128,6 +128,9 @@
 		    }
 		},
 		onShow() {
+			uni.setNavigationBarTitle({
+				title: this.i18n.convert.title
+			})
 			this.loadData();
 		},
 		onLoad(){
@@ -138,10 +141,10 @@
 			submit(){
 				if(!this.loginInfo.isCapitalPasswd){
 					uni.showModal({
-					    title: '提示',
-					    content: '请设置资金密码',
-						confirmText: '设置',
-						cancelText: '取消',
+					    title: this.i18n.common.tip,
+					    content: this.i18n.popup.setpaypwdtext,
+						confirmText: this.i18n.common.set,
+						cancelText: this.i18n.common.cancel,
 					    success: function (res) {
 					        if (res.confirm) {
 					            uni.navigateTo({
@@ -153,7 +156,7 @@
 					return
 				}
 				if(!this.form.amount){
-					this.$api.msg('请输入兑换数量')
+					this.$api.msg(this.i18n.convert.inputVol)
 					return;
 				}
 				this.$refs.validPopup.open('capitalPasswd')
@@ -161,7 +164,7 @@
 			},
 			ok(data){
 				if(!data.code){
-					this.$api.msg('请输入资金密码')
+					this.$api.msg(this.i18n.toast.inputCapthError)
 					return;
 				}
 				this.form.id = this.exItem.id
@@ -176,7 +179,7 @@
 					this.showPopup = false
 					this.$refs.validPopup.close()
 					this.resetAmount()
-					this.$api.msg('兑换成功')
+					this.$api.msg(this.i18n.convert.exchangeSuccess)
 				}).catch(error => {
 					this.$refs.validPopup.enable()
 				})
@@ -211,7 +214,7 @@
 					}
 				}
 				if(item == null){
-					this.$api.msg('该交易对不能互转')
+					this.$api.msg(this.i18n.convert.notTrasfer)
 					return
 				}
 				this.exItem = item

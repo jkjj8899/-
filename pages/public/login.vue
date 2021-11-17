@@ -8,8 +8,8 @@
 			<view class="welcome">
 				<image mode="widthFix" src="../../static/images/public/logo.png" class="logo"></image>
 				<view class="txt">
-					<text class="b">欢迎来到FexCoin</text>
-					<text>Welcome to fexcoin</text>
+					<text class="b">{{i18n.login.welcome}} FexCoin</text>
+					<!--<text>Welcome to fexcoin</text>-->
 				</view>
 			</view>
 			<view class="input-content">
@@ -18,7 +18,7 @@
 					<input placeholder-style="color: #ffffff"
 						type="mobile" 
 						v-model="form.username" 
-						placeholder="请输入手机号码"
+						:placeholder="i18n.login.inputUserName"
 						maxlength="11"
 						data-key="username"
 						@input="inputChange"
@@ -29,7 +29,7 @@
 					<input placeholder-style="color: #ffffff"
 						type="password" 
 						v-model="form.password" 
-						placeholder="8-18位不含特殊字符的数字、字母组合"
+						:placeholder="i18n.login.pwdRule"
 						placeholder-class="input-empty"
 						maxlength="20"
 						password 
@@ -47,8 +47,8 @@
 			<button class="confirm-btn" @click="useVerify" :disabled="logining">登录</button>
 		</view>
 		<view class="register-section">
-			还没有账号?
-			<text @click="toRegist">马上注册</text>
+			{{i18n.login.noAccount}}
+			<text @click="toRegist">{{i18n.login.registration}}</text>
 		</view>
 		<Verify
 				@success="success"
@@ -66,10 +66,12 @@
 	} from 'vuex'
 	import {isMobile, isPassword} from '../../utils/validate'
 	import Verify from "../../components/verifition/verify/verify";
+	import {commonMixin} from '@/common/mixin/mixin.js'
 	export default{
 		components: {
 			Verify
 		},
+		mixins: [commonMixin],
 		data(){
 			return {
 				form: {
@@ -94,17 +96,17 @@
 			useVerify(){
 				this.logining = true;
 				if(this.form.username == ''){
-					this.$api.msg('请输入手机号')
+					this.$api.msg(this.i18n.login.inputUserName)
 					this.logining = false
 					return;
 				}
 				if (!isMobile(this.form.username)) {
-					this.$api.msg('手机号不正确')
+					this.$api.msg(this.i18n.login.mobileError)
 					this.logining = false
 					return;
 				}
 				if(this.form.password == ''){
-					this.$api.msg('请输入密码')
+					this.$api.msg(this.i18n.login.password)
 					this.logining = false
 					return;
 				}
@@ -128,7 +130,7 @@
 				let $this = this
 				this.login(this.form).then(res => {
 					
-					this.$api.msg('登录成功', 1000, false, 'none', function() {
+					this.$api.msg(this.i18n.login.loginSuccess, 1000, false, 'none', function() {
 						$this.$refs.verify.hiddle()
 						setTimeout(function() {
 							$this.logining = false

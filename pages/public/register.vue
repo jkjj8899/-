@@ -6,35 +6,35 @@
 			<view class="welcome">
 				<image mode="widthFix" src="../../static/images/public/logo.png" class="logo"></image>
 				<view class="txt">
-					<text class="b">欢迎注册</text>
-					<text>Welcome to fexcoin</text>
+					<text class="b">{{i18n.login.welcome}} Fexcoin</text>
+					<!--<text>Welcome to fexcoin</text>-->
 				</view>
 			</view>
 			<view class="input-content">
 				<view class="input-item">
 					<image src="../../static/images/public/icon-mobile.png" class="icon"></image>
-					<input placeholder-style="color: #ffffff" type="number" v-model="form.username" placeholder="请输入手机号码" maxlength="11" @input="inputChange" />
+					<input placeholder-style="color: #ffffff" type="number" v-model="form.username" :placeholder="i18n.login.inputUserName" maxlength="11" @input="inputChange" />
 				</view>
 				<view class="input-item">
 					<image src="../../static/images/public/icon-pwd.png" class="icon"></image>
-					<input placeholder-style="color: #ffffff" type="mobile" v-model="form.password" placeholder="8-18位不含特殊字符的数字、字母组合" placeholder-class="input-empty"
+					<input placeholder-style="color: #ffffff" type="mobile" v-model="form.password" :placeholder="i18n.login.pwdRule" placeholder-class="input-empty"
 					 maxlength="20" password data-key="password" @input="inputChange" />
 				</view>
 				<view class="input-item">
 					<image src="../../static/images/public/icon-pwd.png" class="icon"></image>
-					<input placeholder-style="color: #ffffff" type="mobile" v-model="form.confirmPassword" placeholder="8-18位不含特殊字符的数字、字母组合" placeholder-class="input-empty"
+					<input placeholder-style="color: #ffffff" type="mobile" v-model="form.confirmPassword" :placeholder="i18n.login.pwdRule" placeholder-class="input-empty"
 					 maxlength="20" password data-key="password" @input="inputChange" />
 				</view>
 				<view class="input-item">
 					<image src="../../static/images/public/icon-invit.png" class="icon"></image>
-					<input placeholder-style="color: #ffffff" type="text" v-model="form.invitCode" placeholder="请填写邀请码" placeholder-class="input-empty" maxlength="20" />
+					<input placeholder-style="color: #ffffff" type="text" v-model="form.invitCode" :placeholder="i18n.login.inputInvitCode" placeholder-class="input-empty" maxlength="20" />
 				</view>
 			</view>
-			<button class="confirm-btn" @click="toRegist" :disabled="logining">注册</button>
+			<button class="confirm-btn" @click="toRegist" :disabled="logining">{{i18n.login.registration}}</button>
 		</view>
 		<view class="register-section">
-			已有账号?
-			<text @click="navToLogin">马上登录</text>
+			{{i18n.login.hasAccount}}
+			<text @click="navToLogin">{{i18n.login.logining}}</text>
 		</view>
 	</view>
 </template>
@@ -45,7 +45,9 @@
 		mapActions
 	} from 'vuex'
 	import {isMobile, isPassword} from '../../utils/validate'
+	import {commonMixin} from '@/common/mixin/mixin.js'
 	export default {
+		mixins: [commonMixin],
 		data() {
 			return {
 				form: {
@@ -53,7 +55,7 @@
 					password: '',
 					confirmPassword: '',
 					invitCode: '',
-					authCode: '1234:abader2sdfsfsdfsafw'
+					authCode: '1234:abc'
 				},
 				mobile: '',
 				password: '',
@@ -79,21 +81,21 @@
 			},
 			toRegist() {
 				if (!isMobile(this.form.username)) {
-					this.$api.msg('手机号不正确')
+					this.$api.msg(this.i18n.login.mobileError)
 					return;
 				}
 				if (!isPassword(this.form.password)) {
-					this.$api.msg('密码格式不正确')
+					this.$api.msg(this.i18n.login.pwdError)
 					return;
 				}
 				if (this.form.password != this.form.confirmPassword) {
-					this.$api.msg('两次密码不一致')
+					this.$api.msg(this.i18n.login.pwdNotMatch)
 					return;
 				}
 
 				this.logining = true;
 				this.register(this.form).then(res => {
-					this.$api.msg('注册成功', 1000, false, 'none', function() {
+					this.$api.msg(this.i18n.login.registSuccess, 1000, false, 'none', function() {
 						setTimeout(function() {
 							this.logining = false
 							uni.navigateTo({

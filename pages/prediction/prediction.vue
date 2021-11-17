@@ -28,16 +28,16 @@
 								<view class="item" @click="changePer(0.25)">25%</view>
 								<view class="item" @click="changePer(0.5)">50%</view>
 								<view class="item" @click="changePer(0.75)">75%</view>
-								<view class="item" @click="changePer(1)">最大</view>
+								<view class="item" @click="changePer(1)">{{i18n.prediction.max}}</view>
 							</view>
-							<button class="draw-btn" @click="handleBet">下注</button>
+							<button class="draw-btn" @click="handleBet">{{i18n.prediction.bet}}</button>
 						</view>
 					</view>
 					<view class="panel" v-if="item.status != 0 || (item.status == 0 && !showPetPanel)">
 						<view class="mask" v-if="item.status == 2"></view>
 						<view class="header">
 							<text class="status">{{statusMap[item.status]}}</text>
-							<text class="time" v-if="item.status == 0">{{betInterval | timer(0)}}</text>
+							<text class="time" v-if="item.status == 0">{{betInterval | timer(0, i18n.prediction.locking, i18n.prediction.settling)}}</text>
 							<text class="time" v-if="item.status == 1">{{lockInterval | timer(1)}}</text>
 							<text class="epo">#{{item.id}}</text>
 						</view>
@@ -45,7 +45,7 @@
 							<view class="item">
 								<image class="img" :src="item | setBg('top')"></image>
 								<view class="txt" :class="{'nomal-color': item.lockPrice >= item.closePrice}">
-									<text class="tag">涨</text>
+									<text class="tag">{{i18n.prediction.up}}</text>
 									<view class="pay">
 										<text class="v">{{item | setPayout('bull')}}x</text>Payout
 									</view>
@@ -54,26 +54,26 @@
 							<view class="body" :class="[item.closePrice > item.lockPrice ? 'up-border-color':'',item.closePrice < item.lockPrice ? 'down-border-color':'',item.closePrice == item.lockPrice ? 'nomal-border-color':'']">
 								<view class="bet" v-if="item.status == 0">
 									<view class="row">
-										<text class="label">奖池:</text>
+										<text class="label">{{i18n.prediction.pool}}:</text>
 										<text class="value">{{item.bullAmount + item.bearAmount}}</text>
 									</view>
 									<view class="row">
-										<view v-if="!round.isBet" class="bet-btn up-bg-color" @click="showBet(item, 'bull')">猜涨</view>
-										<view v-if="!round.isBet" class="bet-btn down-bg-color" @click="showBet(item, 'bear')">猜跌</view>
-										<view v-if="round.isBet" class="bet-btn beted" :class="round.betInfo.position == 'bull' ? 'up-bg-color' : 'down-bg-color'">已下注 看{{positionMap[round.betInfo.position]}}</view>
+										<view v-if="!round.isBet" class="bet-btn up-bg-color" @click="showBet(item, 'bull')">{{i18n.prediction.guessUp}}</view>
+										<view v-if="!round.isBet" class="bet-btn down-bg-color" @click="showBet(item, 'bear')">{{i18n.prediction.guessDown}}</view>
+										<view v-if="round.isBet" class="bet-btn beted" :class="round.betInfo.position == 'bull' ? 'up-bg-color' : 'down-bg-color'">{{i18n.prediction.beted}}{{positionMap[round.betInfo.position]}}</view>
 									</view>
 								</view>
 								<view class="over" v-if="item.status != 0">
 									<view class="row">
-										<text class="label">开始价格:</text>
+										<text class="label">{{i18n.prediction.startPrice}}:</text>
 										<text class="value">{{item.lockPrice}}</text>
 									</view>
 									<view class="row">
-										<text class="label">结束价格:</text>
+										<text class="label">{{i18n.prediction.endPrice}}:</text>
 										<text class="value">{{item.closePrice}}</text>
 									</view>
 									<view class="row">
-										<text class="label">奖池:</text>
+										<text class="label">{{i18n.prediction.pool}}:</text>
 										<text class="value">{{item.bullAmount + item.bearAmount}}</text>
 									</view>
 								</view>
@@ -84,7 +84,7 @@
 									<view class="pay">
 										<text class="v">{{item | setPayout('bear')}}x</text>Payout
 									</view>
-									<text class="tag">跌</text>
+									<text class="tag">{{i18n.prediction.down}}</text>
 								</view>
 							</view>
 						</view>
@@ -192,9 +192,9 @@
 					return bgImg[side].nomal;
 				}
 			},
-			timer: function(interval, status){
+			timer: function(interval, status, locking, settling){
 				if(interval <= 0){
-					return status == 0 ? '正在锁定...' : '正在结算...'
+					return status == 0 ? locking : settling
 				}
 				let m = Math.floor(interval/60);
 				let s = (interval % 60).toFixed(0);
@@ -203,6 +203,17 @@
 				m  = (m.length==1)?'0'+m:m;
 				s  = (s.length==1)?'0'+s:s;
 				return m+':'+s; 
+			}
+		},
+		onShow() {
+			this.statusMap = {
+				0: this.i18n.prediction.status.betting,
+				1: this.i18n.prediction.status.locking,
+				2: this.i18n.prediction.status.over
+			}
+			this.positionMap = {
+				'bull': this.i18n.prediction.up,
+				'bear': this.i18n.prediction.down
 			}
 		},
 		onLoad(option){
@@ -222,16 +233,16 @@
 			handleBet(){
 				let _this = this
 				if(!this.betForm.volume){
-					this.$api.msg('请输入数量')
+					this.$api.msg(this.i18n.prediction.inputVol)
 					return;
 				}
 				uni.showModal({
-				    title: '提示',
-				    content: '是否确认此次看' + this.positionMap[this.betForm.position] + '下注?',
+				    title: this.i18n.common.tip,
+				    content: this.i18n.prediction.tip1 + ' ' + this.positionMap[this.betForm.position] + ' ' + this.i18n.prediction.bet +'?',
 				    success: function (res) {
 				        if (res.confirm) {
 				            _this.predictionBet(_this.betForm).then(res =>{
-				            	_this.$api.msg('下注成功')
+				            	_this.$api.msg(_this.i18n.prediction.betSuccess)
 								_this.showPetPanel = false
 								_this.getRounds()
 				            })

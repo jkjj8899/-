@@ -1,17 +1,17 @@
 <template>
 	<view class="container">
-		<u-empty text="暂无记录" :show="empty" mode="data" margin-top="200"></u-empty>
+		<u-empty :text="i18n.common.noData" :show="empty" mode="data" margin-top="200"></u-empty>
 		<view class="list-item little-line" v-for="(item, i) in list" :key="i" @click="navTo(`/pages/finance/depositDetail?id=${item.productId}`)">
 			<view class="title">
 				<view class="tl">
-					<view class="period">第{{item.productNum}}期</view>
+					<view class="period">{{i18n.financial.the}} {{item.productNum}} {{i18n.financial.phase}}</view>
 					<text class="name">{{item.productName}}</text>
 				</view>
-				<view class="tr">认购：{{item.amount}} {{item.coin}}</view>
+				<view class="tr">{{i18n.financial.suscribe}}：{{item.amount}} {{item.coin}}</view>
 			</view>
 			<view class="info">
 				<view class="time">{{item.ctime | moment('YYYY-MM-DD HH:mm:ss')}}</view>
-				<text class="status">收益：{{item.profit}} {{item.coin}}</text>
+				<text class="status">{{i18n.financial.profit}}：{{item.profit}} {{item.coin}}</text>
 			</view>
 		</view>
 		<u-loadmore v-if="!empty" :status="loadingStatus" :margin-top="30"/>
@@ -46,6 +46,14 @@
 			};
 		},
 		onLoad(){
+			uni.setNavigationBarTitle({
+				title: this.i18n.financial.record
+			})
+			this.statusMap = {
+				0: this.i18n.financial.orderStatus.locking,
+				1: this.i18n.financial.orderStatus.wait,
+				2: this.i18n.financial.orderStatus.done
+			}
 			this.loadData();
 			//uni.startPullDownRefresh();
 		},
