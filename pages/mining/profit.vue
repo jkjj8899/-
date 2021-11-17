@@ -1,7 +1,7 @@
 <template>
   <view class="container">
 	<view class="list">
-		<u-empty v-if="empty" text="暂无数据" mode="list" margin-top="120"></u-empty>
+		<u-empty v-if="empty" :text="i18n.common.noData" mode="list" margin-top="120"></u-empty>
 		<view class="item" v-for="(item, index) in records">
 			<view class="title">
 				<view class="name">{{item.machineName}}</view>
@@ -9,11 +9,11 @@
 			<view class="params">
 				<view class="row">
 					<view class="col">
-						<view class="label">时间</view>
+						<view class="label">{{i18n.miner.sj}}</view>
 						<view class="val">{{item.ctime | moment('YYYY-MM-DD')}}</view>
 					</view>
 					<view class="col">
-						<view class="label">净收益</view>
+						<view class="label">{{i18n.miner.jsy}}</view>
 						<view class="val">{{item.amount}} {{item.coin}}</view>
 					</view>
 				</view>
@@ -54,6 +54,9 @@
       }
     },
 	onLoad(options) {
+		uni.setNavigationBarTitle({
+			title: this.i18n.miner.producerDetail
+		})
 		this.reset()
 		this.query.machineId = options.id
 		this.getMachineFlows()

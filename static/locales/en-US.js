@@ -107,6 +107,20 @@ module.exports = {
 		},
 		miner: {
 			navTitle: 'Cloud Computing Power',
+			power: 'Power',
+			mintTime: 'Dig Time',
+			lifeCycle: 'Period',
+			day: 'day',
+			price: 'Power Price',
+			buyVol: 'Buy Volume',
+			expireTime: 'Expire time',
+			statusTxt: 'Status',
+			orderStatus: {
+				peeding: 'Pedding',
+				ing: 'Ing',
+				invalid: 'Invalid'
+			},
+			producerDetail: 'Output details',
 			tab1: 'Product',
 			tab2: 'Hold',
 			remind: 'Remainder',
@@ -675,7 +689,8 @@ module.exports = {
 			applySuccess: 'Apply Success',
 			submitSuccess: 'Submit Success',
 			addSuccess: 'Add Success',
-			deleteSuccess: 'Delete Success'
+			deleteSuccess: 'Delete Success',
+			buySuccess: 'Buy Success'
 		},
 		popup: {
 			open: 'Not yet open!',

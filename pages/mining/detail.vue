@@ -10,11 +10,11 @@
 			<view class="profit">
 				<view class="l">
 					<view class="vol">{{machine.buyAmount}} <text class="unit">{{machine.buyCoin}}</text></view>
-					<text>算力价格</text>
+					<text>{{i18n.miner.price}}</text>
 				</view>
 				<view class="l">
 					<view class="vol">{{machine.fee * 100}}%</view>
-					<text>管理费</text>
+					<text>{{i18n.miner.glf}}</text>
 				</view>
 			</view>
 		</view>
@@ -23,23 +23,23 @@
 		<view class="item">
 			<view class="params">
 				<view class="row">
-					<view class="label">算力</view>
+					<view class="label">{{i18n.miner.power}}</view>
 					<view class="val">{{machine.powerVol}}{{machine.powerUnit}}</view>
 				</view>
 				<view class="row">
-					<view class="label">预计每日净收益</view>
+					<view class="label">{{i18n.miner.mfjsy}}</view>
 					<view class="val">{{machine.produceAmount}}{{machine.produceCoin}}</view>
 				</view>
 				<view class="row">
-					<view class="label">开挖时间</view>
+					<view class="label">{{i18n.miner.mintTime}}</view>
 					<view class="val">{{machine.effectiveTime | moment('YYYY-MM-DD')}}</view>
 				</view>
 				<view class="row">
-					<view class="label">挖矿周期</view>
-					<view class="val">{{machine.lifeCycle}}天</view>
+					<view class="label">{{i18n.miner.lifeCycle}}</view>
+					<view class="val">{{machine.lifeCycle}}{{i18n.miner.day}}</view>
 				</view>
 				<view class="row">
-					<view class="label">购买数量</view>
+					<view class="label">{{i18n.miner.buyVol}}</view>
 					<view class="val">
 						<u-number-box v-model="form.quantity" :min="1" :max="machine.quantity"></u-number-box>
 					</view>
@@ -47,13 +47,13 @@
 			</view>
 		</view>
 		<view class="item">
-			<view class="tip">-- 更多详情 --</view>
+			<view class="tip">-- {{i18n.miner.gdxq}} --</view>
 			<view class="intro">{{machine.intro ? machine.intro : ""}}</view>
 		</view>
 	</view>
 	<view class="buy">
-		<view class="price">总计: <text class="b">{{machine.buyAmount * form.quantity}}</text></view>
-		<view class="btn" @click="buy">立即买入</view>
+		<view class="price">{{i18n.miner.zj}}: <text class="b">{{machine.buyAmount * form.quantity}}</text></view>
+		<view class="btn" @click="buy">{{i18n.miner.qrgm}}</view>
 	</view>
   </view>
 </template>
@@ -95,16 +95,16 @@
 		buy(){
 			let _this = this
 			uni.showModal({
-			    title: '提示',
-			    content: '是否确认购买?',
+			    title: _this.i18n.common.tip,
+			    content: _this.i18n.popup.buytext,
 			    success: function (res) {
 			        if (res.confirm) {
 			            uni.showLoading({
 			            	mask: true,
-			            	title: '购买中'
+			            	title: _this.i18n.common.request
 			            })
 			            _this.machineBuy(_this.form).then(res =>{
-			            	_this.$api.msg('购买成功')
+			            	_this.$api.msg(_this.i18n.toast.buySuccess)
 			            	uni.hideLoading()
 			            }).catch(error => {
 			            	uni.hideLoading()

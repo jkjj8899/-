@@ -6,12 +6,12 @@
 		<view class="box">
 			<view class="profit">
 				<view class="l">
-					<text class="title">总收益</text>
+					<text class="title">{{i18n.miner.zsy}}</text>
 					<view class="vol">{{profit.totalProfit}} {{query.catelog}}</view>
 					<!--<text>≈￥1000000</text>-->
 				</view>
 				<view class="l">
-					<text class="title">昨日收益</text>
+					<text class="title">{{i18n.miner.zrsy}}</text>
 					<view class="vol">{{profit.yestodayProfit}} {{query.catelog}}</view>
 					<!--<text>≈￥1000000</text>-->
 				</view>
@@ -19,30 +19,30 @@
 		</view>
 	</view>
 	<view class="list">
-		<u-empty v-if="empty" text="暂无数据" mode="list" margin-top="120"></u-empty>
+		<u-empty v-if="empty" :text="i18n.common.noData" mode="list" margin-top="120"></u-empty>
 		<view class="item" v-for="(item, index) in records">
 			<view class="title">
 				<view class="name">{{item.machineName}}</view>
-				<view @click="navTo('/pages/mining/profit?id='+item.id)" class="search">查看收益<u-icon name="arrow-right" size="20"></u-icon></view>
+				<view @click="navTo('/pages/mining/profit?id='+item.id)" class="search">{{i18n.miner.cksy}}<u-icon name="arrow-right" size="20"></u-icon></view>
 			</view>
 			<view class="params">
 				<view class="row">
 					<view class="col">
-						<view class="label">开挖时间</view>
+						<view class="label">{{i18n.miner.mintTime}}</view>
 						<view class="val">{{item.effectiveTime | moment('YYYY-MM-DD')}}</view>
 					</view>
 					<view class="col">
-						<view class="label">预计每日净收益</view>
+						<view class="label">{{i18n.miner.mfjsy}}</view>
 						<view class="val">{{item.produceAmount}} {{item.produceCoin}}</view>
 					</view>
 				</view>
 				<view class="row">
 					<view class="col">
-						<view class="label">过期时间</view>
+						<view class="label">{{i18n.miner.expireTime}}</view>
 						<view class="val">{{item.expireTime | moment('YYYY-MM-DD')}}</view>
 					</view>
 					<view class="col">
-						<view class="label">矿机状态</view>
+						<view class="label">{{i18n.miner.statusTxt}}</view>
 						<view class="val">{{statusMap[item.status]}}</view>
 					</view>
 				</view>
@@ -93,6 +93,14 @@
 	onLoad() {
 	},
 	onShow() {
+		uni.setNavigationBarTitle({
+			title: this.i18n.miner.wdsl
+		})
+		this.statusMap = {
+			  0: this.i18n.miner.orderStatus.peeding,
+			  1: this.i18n.miner.orderStatus.ing,
+			  2: this.i18n.miner.orderStatus.invalid
+		  }
 		this.reset()
 		this.getMachineList()
 	},
@@ -111,7 +119,7 @@
 		...mapActions('mining', ['machineMy', 'machineProfit']),
 		change(index){
 			uni.showLoading({
-				title: "正在加载..."
+				title: this.i18n.common.request
 			})
 			this.current = index
 			this.reset()

@@ -5,15 +5,15 @@
 		<view class="bg"></view>
 		<view class="box">
 			<view class="profit">
-				<view @click="toLogin" v-if="!loginInfo.hasLogin" class="login-btn">请登录</view>
+				<view @click="toLogin" v-if="!loginInfo.hasLogin" class="login-btn">{{i18n.login.logining}}</view>
 				<block v-if="loginInfo.hasLogin">
 					<view class="l">
-						<text class="title">总收益</text>
+						<text class="title">{{i18n.miner.zsy}}</text>
 						<view class="vol">{{profit.totalProfit}} {{query.catelog}}</view>
 						<!--<text>≈￥1000000</text>-->
 					</view>
 					<view class="l">
-						<text class="title">昨日收益</text>
+						<text class="title">{{i18n.miner.zrsy}}</text>
 						<view class="vol">{{profit.yestodayProfit}} {{query.catelog}}</view>
 						<!--<text>≈￥1000000</text>-->
 					</view>
@@ -22,7 +22,7 @@
 		</view>
 	</view>
 	<view class="list">
-		<u-empty v-if="empty" text="暂无数据" mode="list" margin-top="120"></u-empty>
+		<u-empty v-if="empty" :text="i18n.common.noData" mode="list" margin-top="120"></u-empty>
 		<view class="item" v-for="(item, index) in records">
 			<view class="title">
 				<view class="name">{{item.name}}</view>
@@ -33,35 +33,35 @@
 			<view class="params">
 				<view class="row">
 					<view class="col">
-						<view class="label">算力</view>
+						<view class="label">{{i18n.miner.power}}</view>
 						<view class="val">{{item.powerVol}}{{item.powerUnit}}</view>
 					</view>
 					<view class="col">
-						<view class="label">预计每日净收益/T</view>
+						<view class="label">{{i18n.miner.mfjsy}}/T</view>
 						<view class="val">{{item.produceAmount}} {{item.produceCoin}}</view>
 					</view>
 				</view>
 				<view class="row">
 					<view class="col">
-						<view class="label">开挖时间</view>
+						<view class="label">{{i18n.miner.mintTime}}</view>
 						<view class="val">{{item.effectiveTime | moment('YYYY-MM-DD')}}</view>
 					</view>
 					<view class="col">
-						<view class="label">挖矿周期</view>
-						<view class="val">{{item.lifeCycle}}天</view>
+						<view class="label">{{i18n.miner.lifeCycle}}</view>
+						<view class="val">{{item.lifeCycle}}{{i18n.miner.day}}</view>
 					</view>
 				</view>
 			</view>
 			<view class="remain">
 				<view class="progress"><u-line-progress height="20" activeColor="#1866fe" :show-percent="false" active-color="#2979ff" :percent="percent(item)"></u-line-progress></view>
-				<view class="label">剩余: {{item.quantity}}</view>
+				<view class="label">{{i18n.miner.remind}}: {{item.quantity}}</view>
 			</view>
 			<view class="buy">
 				<view class="price">
 					<text class="value">{{item.buyAmount}}</text>
 					<text class="unit">{{item.buyCoin}}</text>
 				</view>
-				<view @click="buy(item)" class="btn">购买</view>
+				<view @click="buy(item)" class="btn">{{i18n.miner.buy}}</view>
 			</view>
 		</view>
 	</view>
@@ -104,6 +104,9 @@
 	onLoad() {
 	},
 	onShow() {
+		uni.setNavigationBarTitle({
+			title: this.i18n.miner.navTitle
+		})
 		this.reset()
 		this.getMachineList()
 	},
@@ -136,7 +139,7 @@
 		},
 		change(index){
 			uni.showLoading({
-				title: "正在加载..."
+				title: this.i18n.common.request
 			})
 			this.current = index
 			this.reset()

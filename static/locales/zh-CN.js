@@ -107,6 +107,20 @@ module.exports = {
 		},
 		miner: {
 			navTitle: '云算力',
+			power: '算力',
+			mintTime: '开挖时间',
+			lifeCycle: '挖矿周期',
+			day: '天',
+			price: '算力价格',
+			buyVol: '购买数量',
+			expireTime: '过期时间',
+			statusTxt: '矿机状态',
+			orderStatus: {
+				peeding: '待生产',
+				ing: '产矿中',
+				invalid: '已失效'
+			},
+			producerDetail: '产出明细',
 			tab1: '产品',
 			tab2: '持有',
 			remind: '剩余',
@@ -670,7 +684,8 @@ module.exports = {
 			applySuccess: '申请成功',
 			submitSuccess: '提交成功',
 			addSuccess: '添加成功',
-			deleteSuccess: '删除成功'
+			deleteSuccess: '删除成功',
+			buySuccess: '购买成功'
 		},
 		popup: {
 			open: '暂未开放!',
