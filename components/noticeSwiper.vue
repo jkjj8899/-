@@ -28,6 +28,7 @@
 		},
 		computed: {
 			list_(){
+				console.log("list_,,,,", this.list)
 				return this.list;
 			}
 		},

@@ -159,8 +159,12 @@
 			setTimeout(() =>{
 				this.loadTopMarket()
 			}, 500)
-			this.loadData();
+			this.swiperCurrent = 0;
+			this.swiperLength = 0;
+			this.carousels = [];
+			this.ads = [];
 			this.notices = [];
+			this.loadData();
 		},
 		onPullDownRefresh() {
 			this.loadData()

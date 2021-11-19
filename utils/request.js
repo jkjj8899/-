@@ -12,6 +12,10 @@ export default function $http(options) {
 	if(token){
 		_config.header.Authorization = token;
 	}
+	
+	const lang = uni.getStorageSync('language');
+	_config.header['Accept-Language'] = lang ? lang : 'zh_CN';
+	
     _config.complete = (response) => {
        // 登录失效这边后台是返回403看情况
 	   if(response.data.code === 403){

@@ -26,11 +26,13 @@ let Tradition = require('./static/locales/zh-HK.js')
 import VueI18n from 'vue-i18n'
 // VueI18n
 Vue.use(VueI18n)
+
+const lang = uni.getStorageSync('language');
 // VueI18n
 // 注意下述代码务必放在代码 "Vue.prototype._i18n = i18n" 上方
 const i18n = new VueI18n({
 	// 默认语言
-	locale: 'zh_CN',
+	locale: lang?lang:'zh_CN',
 	// 引入语言文件
 	messages: {
 		'zh_CN': Chinese,

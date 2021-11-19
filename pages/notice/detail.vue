@@ -11,7 +11,9 @@
 		mapState,
 		mapActions
 	} from 'vuex'
+	import {commonMixin} from '@/common/mixin/mixin.js'
 	export default {
+		mixins: [commonMixin],
 		data() {
 			return {
 				id: 1,
