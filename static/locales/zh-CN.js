@@ -462,6 +462,48 @@ module.exports = {
 			frozen: '冻结',
 			amount: '折合'
 		},
+		withdraw: {
+			selectCoin: '选择币种',
+			chainName: '链名称',
+			withdrawwAddr: '提币地址',
+			inputAddr: '输入或长按粘贴地址',
+			vol: '数量',
+			minWithdrawVol: '最小提币数量',
+			all: '全部',
+			avalible: '可用',
+			fee: '手续费',
+			inputAmount: '请输入数量',
+			tip1: '最小提币数量为',
+			tip2: '为保障资金安全，当您账户安全策略变更、密码修改、我们会对提币进行人工审核，请耐心等待工作人员电话或邮件联系',
+			tip3: '请务必确认电脑及浏览器安全，防止信息被篡改或泄露',
+			status: {
+				no: '未审核',
+				pass: '审核通过',
+				transfer: '转账中',
+				fail: '转账失败',
+				complete: '已完成',
+				reject: '审核拒绝', 
+				cancel: '已撤销'
+			},
+			detail: '币种明细'
+		},
+		recharge: {
+			rechargeAddr: '充币地址',
+			qrcode: '保存二维码到相册',
+			tip1: '请勿向上述地址充值任何非',
+			tip2: '资产，否则资产将不可找回',
+			tip3: '您充值至上述地址后，需要整个网络节点的确认',
+			tip4: '次网络确认后到账',
+			tip5: '最小充值金额',
+			tip6: '小于最小金额的充值将不会上账且无法退回',
+			tip7: '您的充值地址不会经常改变，可以重复充值；如有更改，我们会尽量通过网站公告或邮件通知您',
+			tip8: '请务必确认电脑及浏览器安全，防止信息被篡改或泄露',
+			status: {
+				noConfirm: '未确认',
+				complete: '已完成',
+				exception: '异常'
+			}
+		},
 		otc: {
 			title: '法币交易',
 			buyTab: '我要买',

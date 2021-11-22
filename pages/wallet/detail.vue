@@ -10,9 +10,9 @@
 					</view>
 				</view>
 				<view class="s-row">
-					<view class="col subtitle row-title">可用</view>
-					<view class="col subtitle row-title">冻结</view>
-					<view class="col r subtitle row-title">折合(CNY)</view>
+					<view class="col subtitle row-title">{{i18n.wallet.avalible}}</view>
+					<view class="col subtitle row-title">{{i18n.wallet.frozen}}</view>
+					<view class="col r subtitle row-title">{{i18n.wallet.amount}}(CNY)</view>
 				</view>
 				<view class="s-row">
 					<view class="col subtitle row-amount">{{account.normalBalance | fixD(account.showPrecision)}}</view>
@@ -32,12 +32,12 @@
 						</view>
 					</view>
 					<view class="s-row s-title">
-						<view class="col subtitle row-title">数量</view>
-						<view class="col subtitle row-title">状态</view>
-						<view class="col r subtitle row-title">时间</view>
+						<view class="col subtitle row-title">{{i18n.common.vol}}</view>
+						<view class="col subtitle row-title">{{i18n.common.status}}</view>
+						<view class="col r subtitle row-title">{{i18n.common.time}}</view>
 					</view>
 					<scroll-view class="s-list" :enableBackToTop="enableBackToTop" :scroll-y="scrollY" @scrolltolower="loadMore">
-						<u-empty text="暂无记录" :show="empty" mode="data" margin-top="10"></u-empty>
+						<u-empty :text="i18n.common.noData" :show="empty" mode="data" margin-top="10"></u-empty>
 						<view class="s-row little-line" v-for="(item, i) in records" :key="item.id">
 							<view class="col subtitle row-amount">{{item.amount | fixD(account.showPrecision)}}</view>
 							<view class="col subtitle row-amount">{{currentStatusMap[item.status]}}</view>
@@ -62,7 +62,7 @@
 	import {authMixin, commonMixin} from '@/common/mixin/mixin.js'
 	export default {
 		components: {uniIcons, empty},
-		mixins: [authMixin, commonMixin],
+		mixins: [ authMixin, commonMixin],
 		data() {
 			return {
 				coin: undefined,
@@ -98,6 +98,26 @@
 				}
 			};
 		},
+		onShow() {
+			uni.setNavigationBarTitle({
+				title: this.i18n.withdraw.detail
+			})
+			this.withdrawStatusMap = {
+				0: this.i18n.withdraw.status.no,
+				1: this.i18n.withdraw.status.pass,
+				2: this.i18n.withdraw.status.transfer,
+				3: this.i18n.withdraw.status.fail,
+				4: this.i18n.withdraw.status.complete,
+				5: this.i18n.withdraw.status.reject, 
+				6: this.i18n.withdraw.status.cancel
+			}
+			this.depositStatusMap = {
+				0: this.i18n.recharge.status.noConfirm,
+				1: this.i18n.recharge.status.complete,
+				2: this.i18n.recharge.status.exception
+			}
+			this.filters = [this.i18n.wallet.withdraw, this.i18n.wallet.recharge]
+		},
 		onLoad(options){
 			this.coin = options.coin
 			this.query.symbol = options.coin
@@ -112,7 +132,7 @@
 		},
 		onNavigationBarButtonTap(e) {
 			uni.showActionSheet({
-				title:'全部',
+				title: this.i18n.withdraw.all,
 			    itemList: filters,
 			    success: function (res) {
 					this.filterIndex = res.tapIndex

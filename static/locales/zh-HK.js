@@ -462,6 +462,48 @@ module.exports = {
 			frozen: '凍結',
 			amount: '折合'
 		},
+		withdraw: {
+			selectCoin: '選擇幣種',
+			chainName: '鏈名稱',
+			withdrawwAddr: '提幣地址',
+			inputAddr: '輸入或長按粘貼地址',
+			vol: '數量',
+			minWithdrawVol: '最小提幣數量',
+			all: '全部',
+			avalible: '可用',
+			fee: '手續費',
+			inputAmount: '請輸入數量',
+			tip1: '最小提幣數量為',
+			tip2: '為保障資金安全，當您帳戶安全性原則變更、密碼修改、我們會對提幣進行人工稽核，請耐心等待工作人員電話或郵件聯繫',
+			tip3: '請務必確認電腦及瀏覽器安全，防止資訊被篡改或洩露',
+			status: {
+				no: '未稽核',
+				pass: '稽核通過',
+				transfer: '轉帳中',
+				fail: '轉帳失敗',
+				complete: '已完成',
+				reject: '稽核拒絕', 
+				cancel: '已撤銷'
+			},
+			detail: '幣種明細'
+		},
+		recharge: {
+			rechargeAddr: '充幣地址',
+			qrcode: '保存二維碼到相册',
+			tip1: '請勿向上述地址充值任何非',
+			tip2: '資產，否則資產將不可找回',
+			tip3: '您充值至上述地址後，需要整個網絡節點的確認',
+			tip4: '次網絡確認後到賬',
+			tip5: '最小充值金額',
+			tip6: '小於最小金額的充值將不會上帳且無法退回',
+			tip7: '您的充值地址不會經常改變，可以重複充值； 如有更改，我們會儘量通過網站公告或郵件通知您',
+			tip8: '請務必確認電腦及瀏覽器安全，防止資訊被篡改或洩露',
+			status: {
+				noConfirm: '未確認',
+				complete: '已完成',
+				exception: '异常'
+			}
+		},
 		otc: {
 			title: '法幣交易',
 			buyTab: '我要買',

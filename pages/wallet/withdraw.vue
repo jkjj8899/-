@@ -8,31 +8,35 @@
 					<text class="coin">{{coin.symbol}}</text>
 				</view>
 				<view class="col r light" @click="navTo('/pages/public/coinList')">
-					<text class="subtitle">选择币种</text>
+					<text class="subtitle">{{i18n.withdraw.selectCoin}}</text>
 					<uni-icons type="forward" size="20" class="arrow"></uni-icons>
 				</view>
 			</view>
 			<view class="chain" v-show="isChain">
-				<view class="label">链名称</view>
+				<view class="label">{{i18n.withdraw.chainName}}</view>
 				<view class="row">
 					<view @click="selectChain(item)" class="item" :class="{'selected': item.tokenBase == chain.tokenBase}" v-for="(item, i) in config.chains">{{item.chain}}</view>
 				</view>
 			</view>
 			<view class="form">
-				<text class="label">提币地址</text>
+				<text class="label">{{i18n.withdraw.withdrawwAddr}}</text>
 				<view class="input little-line">
-					<input type="text" v-model="form.address" placeholder="输入或长按粘贴地址" class="address"/>
+					<input type="text" v-model="form.address" :placeholder="i18n.withdraw.inputAddr" class="address"/>
 				</view>
-				<text class="label">数量</text>
+				<text class="label">{{i18n.withdraw.vol}}</text>
 				<view class="input little-line">
-					<input type="number" v-model="form.amount" :placeholder="`最小提币数量${config.minWithdraw}`" class="volume"/>
-					<view class="all" @click="all">全部</view>
+					<input type="number" v-model="form.amount" :placeholder="`${i18n.withdraw.minWithdrawVol}${config.minWithdraw}`" class="volume"/>
+					<view class="all" @click="all">{{i18n.withdraw.all}}</view>
 				</view>
-				<view class="balance">可用 {{account.normalBalance | fixD(config.showPrecision)}} {{account.symbol}}</view>
-				<text class="label">手续费 {{config.fee}} {{coin.symbol}}</text>
+				<view class="balance">{{i18n.withdraw.avalible}} {{account.normalBalance | fixD(config.showPrecision)}} {{account.symbol}}</view>
+				<text class="label">{{i18n.withdraw.fee}} {{config.fee}} {{coin.symbol}}</text>
 			</view>
-			<button class="submit" @click="handleSubmit">确认</button>
-			<view class="desc" v-html="tips[0] ? tips[0].content : ''"></view>
+			<button class="submit" @click="handleSubmit">{{i18n.common.ok}}</button>
+			<view class="desc">
+				{{i18n.withdraw.tip1}}：{{config.minWithdraw}} {{coin.symbol}} <span v-if="isChain">({{chain.chain}})</span>。<br/>
+				{{i18n.withdraw.tip2}}。<br/>
+				{{i18n.withdraw.tip3}}。
+			</view>
 		</view>
 		<uni-valid-popup ref="validPopup" @ok="ok"></uni-valid-popup>
 	</view>
@@ -68,6 +72,11 @@
 		},
 		onUnload(){
 			uni.$off('selectCoin', this.selectCoin)
+		},
+		onShow() {
+			uni.setNavigationBarTitle({
+				title: this.i18n.wallet.withdraw
+			})
 		},
 		onLoad(){
 			uni.$on('selectCoin', this.selectCoin)
@@ -120,15 +129,15 @@
 			handleSubmit(){
 				this.form.symbol = this.coin.symbol
 				if(!this.form.symbol){
-					this.$api.msg('请选择币种')
+					this.$api.msg(this.i18n.withdraw.selectCoin)
 					return;
 				}
 				if(!this.form.address){
-					this.$api.msg('请输入提币地址')
+					this.$api.msg(this.i18n.withdraw.inputAddr)
 					return;
 				}
 				if(!this.form.amount){
-					this.$api.msg('请输入数量')
+					this.$api.msg(this.i18n.withdraw.inputAmount)
 					return;
 				}
 				this.$refs.validPopup.open('capitalPasswd')
@@ -136,7 +145,7 @@
 			},
 			ok(data){
 				if(!data.code){
-					this.$api.msg('请输入资金密码')
+					this.$api.msg(this.i18n.toast.inputCapthError)
 					return;
 				}
 				
@@ -146,7 +155,7 @@
 				this.withdraw(this.form).then(res =>{
 					uni.hideLoading()
 					this.$refs.validPopup.close()
-					this.$api.msg('提币成功', 1000, false, 'none', function() {})
+					this.$api.msg(this.i18n.toast.withdrawSuccess, 1000, false, 'none', function() {})
 				}).catch(error => {
 					uni.hideLoading()
 					this.$refs.validPopup.enable()

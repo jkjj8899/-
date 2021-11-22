@@ -468,6 +468,48 @@ module.exports = {
 			frozen: 'Frozen',
 			amount: 'Equivalent'
 		},
+		withdraw: {
+			selectCoin: 'Select Coin',
+			chainName: 'Chain',
+			withdrawwAddr: 'Withdraw Address',
+			inputAddr: 'Enter or long press the paste address',
+			vol: 'Amount',
+			minWithdrawVol: 'Min',
+			all: 'All',
+			avalible: 'Available',
+			fee: 'Fees',
+			inputAmount: 'Please enter amount',
+			tip1: 'The minimum withdrawal amount is',
+			tip2: 'In order to ensure fund security, when your account security policy is changed or your password is changed, we will manually review the withdrawal. Please wait patiently for the staff to contact by phone or email',
+			tip3: 'Please make sure that the computer and browser are secure to prevent information from being tampered with or disclosed',
+			status: {
+				no: 'No Audit',
+				pass: 'Pass',
+				transfer: 'Transfer',
+				fail: 'Failed',
+				complete: 'Completed',
+				reject: 'Reject', 
+				cancel: 'Cancel'
+			},
+			detail: 'Coin Detail'
+		},
+		recharge: {
+			rechargeAddr: 'Deposit Address',
+			qrcode: 'Save QR code to album',
+			tip1: 'Please do not recharge to the above address whatever none',
+			tip2: 'assets，Otherwise, the asset will not be recovered',
+			tip3: 'After you recharge to the above address, you need to confirm the entire network node',
+			tip4: 'Arrival after network confirmation',
+			tip5: 'Minimum recharge amount',
+			tip6: 'Recharge less than the minimum amount will not be credited and cannot be returned',
+			tip7: 'Your recharge address will not change frequently, and you can recharge repeatedly; If there is any change, we will try our best to notify you through website announcement or email',
+			tip8: 'Please make sure that the computer and browser are secure to prevent information from being tampered with or disclosed',
+			status: {
+				noConfirm: 'Unconfirmed',
+				complete: 'Completed',
+				exception: 'Exception'
+			}
+		},
 		otc: {
 			title: 'OTC',
 			buyTab: 'Buy',

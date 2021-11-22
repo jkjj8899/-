@@ -8,24 +8,30 @@
 					<text class="coin">{{coin.symbol}}</text>
 				</view>
 				<view class="col r light" @click="navTo('/pages/public/coinList')">
-					<text class="subtitle">选择币种</text>
+					<text class="subtitle">{{i18n.withdraw.selectCoin}}</text>
 					<uni-icons type="forward" size="20" class="arrow"></uni-icons>
 				</view>
 			</view>
 			<view class="chain" v-show="isChain">
-				<view class="label">链名称</view>
+				<view class="label">{{i18n.withdraw.chainName}}</view>
 				<view class="row">
 					<view @click="selectChain(item)" class="item" :class="{'selected': item.tokenBase == deposit.chain}" v-for="(item, i) in deposit.chains">{{item.chain}}</view>
 				</view>
 			</view>
 			<view class="s-row qrcode">
 				<tki-qrcode ref="qrcode" :size="400" :onval="true" cid="qrcode" :val="qrcode.val" />
-				<view class="save" @click="save">保存二维码到相册</view>
-				<text class="title">充币地址</text>
+				<view class="save" @click="save">{{i18n.recharge.qrcode}}</view>
+				<text class="title">{{i18n.recharge.rechargeAddr}}</text>
 				<text class="address">{{deposit.address}}</text>
-				<view class="copy" @click="paste">复制</view>
+				<view class="copy" @click="paste">{{i18n.common.copy}}</view>
 			</view>
-			<view class="desc" v-html="tips[1] ? tips[1].content : ''"></view>
+			<view class="desc">
+				{{i18n.recharge.tip1}} {{isChain ? chain.chain+'_'+coin.symbol : coin.symbol}} {{i18n.recharge.tip2}}。<br/><br/>
+				{{i18n.recharge.tip3}}，{{coin.depositConfirm}} {{i18n.recharge.tip4}}。<br/><br/>
+				<!--{{i18n.recharge.tip5}}：{{config.minWithdraw}} {{coin.symbol}}，{{i18n.recharge.tip6}}。<br/><br/>-->
+				{{i18n.recharge.tip7}}。<br/><br/>
+				{{i18n.recharge.tip8}}。<br/>
+			</view>
 		</view>
 	</view>
 </template>
@@ -56,6 +62,11 @@
 		},
 		onUnload(){
 			uni.$off('selectCoin', this.selectCoin)
+		},
+		onShow() {
+			uni.setNavigationBarTitle({
+				title: this.i18n.wallet.recharge
+			})
 		},
 		onLoad(){
 			uni.$on('selectCoin', this.selectCoin)
@@ -104,7 +115,7 @@
 				uni.setClipboardData({
 				    data: this.deposit.address,
 				    success: function () {
-				        $this.$api.msg('复制成功')
+				        $this.$api.msg($this.toast.copySuccess)
 				    }
 				});
 			}
