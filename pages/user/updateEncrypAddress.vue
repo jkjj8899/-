@@ -5,10 +5,10 @@
 			<text class="cell-more" @click="navTo('/pages/public/coinList')">{{i18n.common.select}}</text>
 		</view>
 		<view class="list-cell b-b" hover-class="cell-hover" :hover-stay-time="50">
-			<input v-model="form.address" class="cell-input" :placeholder="i18n.my.address.inputAddr"/>
+			<input v-model="form.address" class="cell-input" style="width: 99%;" :placeholder="i18n.my.address.inputAddr"/>
 		</view>
 		<view class="list-cell b-b" hover-class="cell-hover" :hover-stay-time="50">
-			<input v-model="form.remark" class="cell-input" :placeholder="i18n.my.address.inputName"/>
+			<input v-model="form.remark" class="cell-input" style="width: 99%;" :placeholder="i18n.my.address.inputName"/>
 		</view>
 		<button class="submit" @click="handleSubmit">{{i18n.common.ok}}</button>
 	</view>

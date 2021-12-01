@@ -6,7 +6,7 @@
 				<text class="coin">{{item.coin}}<text class="name">{{item.remark}}</text></text>
 				<text class="del" @click="handleDelete(item.id, i)">{{i18n.common.delete}}</text>
 			</view>
-			<text>{{item.address}}</text>
+			<text class="addr">{{item.address}}</text>
 		</view>
 		<u-loadmore v-if="!empty" :status="loadingStatus" :margin-top="30" :margin-bottom="20"/>
 		<mpvue-picker
@@ -161,6 +161,9 @@
 			.name{
 				margin-left: 20upx;
 			}
+		}
+		.addr{
+			font-size: 26upx;
 		}
 	}
 </style>
