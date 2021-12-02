@@ -2,7 +2,7 @@
 <view :class="mode=='pop'?'mask':''"  v-show="showBox">
     <view :class="mode=='pop'?'verifybox':''" :style="{'max-width':parseInt(imgSize.width)+30+'px'}">
         <view class="verifybox-top" v-if="mode=='pop'">
-            请完成安全验证
+            {{title}}
             <text class="verifybox-close" @click="clickShow = false">
                 <text class="iconfont icon-close"></text>
             </text>
@@ -20,6 +20,8 @@
                     :mode="mode"
                     :vSpace="vSpace"
                     :explain="explain"
+					:verifySuccess="verifySuccess"
+					:verifyFail="verifyFail"
                     :imgSize="imgSize"
                     :blockSize="blockSize"
                     :barSize="barSize"
@@ -37,6 +39,8 @@
                     :mode="mode"
                     :vSpace="vSpace"
                     :explain="explain"
+					:verifySuccess="verifySuccess"
+					:verifyFail="verifyFail"
                     :imgSize="imgSize"
                     :blockSize="blockSize"
                     :barSize="barSize"
@@ -77,10 +81,22 @@
                 type: Number,
                 default:5
             },
+			title: {
+				type: String,
+				default: '请完成安全验证'
+			},
             explain: {
                 type: String,
                 default: '向右滑动完成验证'
             },
+			verifySuccess: {
+			    type: String,
+			    default: '验证成功'
+			},
+			verifyFail: {
+			    type: String,
+			    default: '验证失败'
+			},
             imgSize: {
                 type: Object,
                 default() {

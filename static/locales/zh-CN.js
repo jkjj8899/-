@@ -103,7 +103,11 @@ module.exports = {
 			open: '开启',
 			stop: '暂停',
 			close: '关闭',
-			request: '请求中...'
+			request: '请求中...',
+			verifyTitle: '请完成安全验证',
+			explain: '向右滑动完成验证',
+			verifySuccess: '验证成功',
+			verifyFail: '验证失败'
 		},
 		miner: {
 			navTitle: '云算力',

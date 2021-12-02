@@ -51,6 +51,8 @@
 			<text @click="toRegist">{{i18n.login.registration}}</text>
 		</view>
 		<Verify
+				:title="verifyTitle"
+				:explain="explain"
 				@success="success"
 				:mode="'pop'"
 				:captchaType="'blockPuzzle'"
@@ -80,8 +82,18 @@
 					captchaVerify: ''
 				},
 				logining: false,
-				redirect: undefined
+				redirect: undefined,
+				verifyTitle: '',
+				explain: '',
+				verifySuccess: '',
+				verifyFail: ''
 			}
+		},
+		onShow() {
+			this.verifyTitle = this.i18n.common.verifyTitle;
+			this.explain = this.i18n.common.explain;
+			this.verifySuccess = this.i18n.common.verifySuccess;
+			this.verifyFail = this.i18n.common.verifyFail;
 		},
 		onLoad(options) {
 			this.redirect = options.redirect

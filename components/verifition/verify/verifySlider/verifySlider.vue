@@ -75,6 +75,14 @@
                 type: String,
                 default: '向右滑动完成验证'
             },
+			verifySuccess: {
+			    type: String,
+			    default: '验证成功'
+			},
+			verifyFail: {
+			    type: String,
+			    default: '验证失败'
+			},
             imgSize: {
                 type: Object,
                 default() {
@@ -236,7 +244,7 @@
 									this.refresh();
 								},1500)
 								this.passFalg = true
-								this.tipWords = `${((this.endMovetime-this.startMoveTime)/1000).toFixed(2)}s验证成功`
+								this.tipWords = `${((this.endMovetime-this.startMoveTime)/1000).toFixed(2)}s${this.verifySuccess}`
 								setTimeout(()=>{
 									this.tipWords = ""
 									this.$emit('success', {captchaVerification})
@@ -252,7 +260,7 @@
 									this.refresh();
 								}, 1000);
 								this.$parent.$emit('error',this)
-								this.tipWords = "验证失败"
+								this.tipWords = this.verifyFail
 								setTimeout(()=>{
 									this.tipWords = ""
 								},1000)

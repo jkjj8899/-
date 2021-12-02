@@ -372,16 +372,6 @@
             }
         },
 		{
-			"path": "pages/product/product",
-			"style": {
-				"navigationBarTitleText": "详情展示",
-				"app-plus": {
-					"titleNView": {
-						"type": "transparent"
-					}
-				}
-			}
-		}, {
 			"path": "pages/set/set",
 			"style": {
 				"navigationBarTitleText": "设置"
@@ -406,12 +396,6 @@
 			"path": "pages/set/about",
 			"style": {
 				"navigationBarTitleText": "关于Fex"
-			}
-		},
-		{
-			"path": "pages/userinfo/userinfo",
-			"style": {
-				"navigationBarTitleText": "修改资料"
 			}
 		},
 		{

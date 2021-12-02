@@ -103,7 +103,11 @@ module.exports = {
 			open: '開啟',
 			stop: '暫停',
 			close: '關閉',
-			request: '請求中...'
+			request: '請求中...',
+			verifyTitle: '請完成安全驗證',
+			explain: '向右滑動完成驗證',
+			verifySuccess: '驗證成功',
+			verifyFail: '驗證失敗'
 		},
 		miner: {
 			navTitle: '雲算力',

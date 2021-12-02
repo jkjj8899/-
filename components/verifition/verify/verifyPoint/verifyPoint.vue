@@ -77,6 +77,14 @@
                     }
                 }
             },
+			verifySuccess: {
+			    type: String,
+			    default: '验证成功'
+			},
+			verifyFail: {
+			    type: String,
+			    default: '验证失败'
+			},
             barSize: {
                 type: Object,
                 default() {
@@ -158,7 +166,7 @@
                                     if (res.repCode == "0000") {
                                         this.barAreaColor = '#4cae4c'
                                         this.barAreaBorderColor = '#5cb85c'
-                                        this.text = '验证成功'
+                                        this.text = this.verifySuccess
                                         this.bindingClick = false
 										setTimeout(()=>{
 											if (this.mode=='pop') {
@@ -171,7 +179,7 @@
                                         this.$parent.$emit('error', this)
                                         this.barAreaColor = '#d9534f'
                                         this.barAreaBorderColor = '#d9534f'
-                                        this.text = '验证失败'
+                                        this.text = this.verifyFail
                                         setTimeout(() => {
                                             this.refresh();
                                         }, 700);

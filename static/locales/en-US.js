@@ -103,7 +103,11 @@ module.exports = {
 			open: 'Open',
 			stop: 'Stop',
 			close: 'Close',
-			request: 'Loading...'
+			request: 'Loading...',
+			verifyTitle: 'Please security verification',
+			explain: 'Swipe right to verification',
+			verifySuccess: 'Success',
+			verifyFail: 'Failed'
 		},
 		miner: {
 			navTitle: 'Cloud Computing Power',
