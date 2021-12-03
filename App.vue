@@ -26,6 +26,26 @@
 		},
 		onShow: function() {
 			console.log('App Show')
+			uni.setTabBarItem({
+				index: 0,
+				text: this.$t('message').tabBar.market
+			})
+			uni.setTabBarItem({
+				index: 1,
+				text: this.$t('message').tabBar.news
+			})
+			uni.setTabBarItem({
+				index: 2,
+				text: this.$t('message').tabBar.miner
+			})
+			uni.setTabBarItem({
+				index: 3,
+				text: this.$t('message').tabBar.wallet
+			})
+			uni.setTabBarItem({
+				index: 4,
+				text: this.$t('message').tabBar.me
+			})
 		},
 		onHide: function() {
 			console.log('App Hide')
