@@ -131,6 +131,8 @@
 			uni.setNavigationBarTitle({
 				title: this.i18n.convert.title
 			})
+			this.query.page = 1;
+			this.records = [];
 			this.loadData();
 		},
 		onLoad(){
