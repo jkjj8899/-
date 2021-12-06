@@ -1,4 +1,4 @@
-import { USER_LOGIN, USER_LOGOUT, USER_UPDATE_PAY_PWD, USER_ENABLE_GOOGLE, USER_DISABLE_GOOGLE } from './../mutations_type'
+import { USER_LOGIN, INIT_LOGIN, USER_LOGOUT, USER_UPDATE_PAY_PWD, USER_ENABLE_GOOGLE, USER_DISABLE_GOOGLE } from './../mutations_type'
 import { register, login, getAuthInfo, authApply, updatePayPwd, updatePwd, encryptBookList, addEncryptBook, deleteEncryptBook, withdraw, depositAddress, withdrawList, withdrawConfig, depositList, invitRank, getGoogleKey, bindGoogle, unbindGoogle, signinDetail, signin } from '@/api/user'
 
 const user = {
@@ -17,15 +17,23 @@ const user = {
 	  			state.loginInfo = payload.data
 				state.loginInfo.hasLogin = true
 	  			uni.setStorageSync('token', payload.data.token);
+				uni.setStorageSync('loginInfo', JSON.stringify(state.loginInfo));
 	  		}
+	  },
+	  [INIT_LOGIN](state, payload) {
+		  const loginInfo = uni.getStorageSync('loginInfo');
+		  if(loginInfo){
+		  	state.loginInfo = JSON.parse(loginInfo)	  
+		  }
 	  },
 	  [USER_LOGOUT](state, payload) {
 	  		uni.setStorageSync('token', '');
+			uni.setStorageSync('loginInfo', '');
 			state.loginInfo = {
-				  nickname: null,
-				  profile: null,
-				  hasLogin: false
-			  }
+			  nickname: null,
+			  profile: null,
+			  hasLogin: false
+			}
 	  },
 	  [USER_UPDATE_PAY_PWD](state, payload) {
 	  		if(payload.code == 200){
@@ -47,12 +55,15 @@ const user = {
   },
 
   actions: {
+	  initLogin({ commit }, data){
+		  commit(INIT_LOGIN)
+	  },
 	  hasLogin(){
-	  	const token = uni.getStorageSync('token');
-	  	if(token != undefined && token != null && token != ''){
-	  		return true;
-	  	}
-	  	return false;
+		const token = uni.getStorageSync('token');
+		if(token != undefined && token != null && token != ''){
+			return true;
+		}
+		return false;
 	  },
     // 注册
     register({ commit }, data) {

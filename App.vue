@@ -12,6 +12,7 @@
 	export default {
 		methods: {
 			...mapActions('common', ['coinList', 'getAppVersion']),
+			...mapActions('user', ['initLogin']),
 		},
 		onLaunch: function() {
 			let $this = this
@@ -26,6 +27,7 @@
 		},
 		onShow: function() {
 			console.log('App Show')
+			this.initLogin()
 			uni.setTabBarItem({
 				index: 0,
 				text: this.$t('message').tabBar.market

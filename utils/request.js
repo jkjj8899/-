@@ -19,7 +19,9 @@ export default function $http(options) {
     _config.complete = (response) => {
        // 登录失效这边后台是返回403看情况
 	   if(response.data.code === 403){
-	   //返回登录界面
+		   uni.setStorageSync('token', '');
+		   uni.setStorageSync('loginInfo', '');
+		   //返回登录界面
 	       uni.navigateTo({
 		   	url:'/pages/public/login'
 		   })
