@@ -41,7 +41,7 @@
 					 </view>
 					<view class="col r">{{item.fee}} {{item.quote}} / {{item.ctime | moment('HH:mm MM/DD')}}</view>
 				</view>
-				<uni-load-more v-if="!empty" :status="loadingStatus"></uni-load-more>
+				<uni-load-more v-show="query.page > 1" :contentText="contentText" v-if="!empty" :status="loadingStatus"></uni-load-more>
 			</scroll-view>
 		</view>
 		<u-popup ref="popup" v-model="showPopup" mode="bottom">

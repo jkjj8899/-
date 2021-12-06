@@ -443,7 +443,7 @@
 							"align": "left",
 							"backgroundColor": "rgba(231, 231, 231,.7)",
 							"borderRadius": "16px",
-							"placeholder": "搜索币种",
+							"placeholder": "",
 							"placeholderColor": "#606266"
 						}
 			        }

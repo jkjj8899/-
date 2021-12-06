@@ -86,6 +86,9 @@
 			}
 		},
 		onShow(){
+			uni.setNavigationBarTitle({
+				title: this.i18n.tabBar.me
+			})
 			this.authStatusMap = {
 				'': this.i18n.audit.status.no,
 				'0': this.i18n.audit.status.ing,

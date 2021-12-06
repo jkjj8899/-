@@ -107,7 +107,10 @@ module.exports = {
 			verifyTitle: 'Please security verification',
 			explain: 'Swipe right to verification',
 			verifySuccess: 'Success',
-			verifyFail: 'Failed'
+			verifyFail: 'Failed',
+			nomoreText: 'No more',
+			loadingText: 'Loading...',
+			loadmoreText: 'Load more'
 		},
 		miner: {
 			navTitle: 'Cloud Computing Power',

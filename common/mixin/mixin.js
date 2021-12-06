@@ -11,7 +11,12 @@ export const commonMixin = {
 	}
   },
   data() {
-    return { 
+    return {
+		contentText: {
+			contentdown: "上拉显示更多",
+			contentrefresh: "正在加载...",
+			contentnomore: "没有更多数据了"
+		}
 	}
   },
   filters: {
@@ -23,6 +28,13 @@ export const commonMixin = {
 			  return parseFloat(v).toFixed(scale)
 		  }
 		  return v
+	  }
+  },
+  onShow(){
+	  this.contentText = {
+		  contentdown: this.i18n.common.loadmoreText,
+		  contentrefresh: this.i18n.common.loadingText,
+		  contentnomore: this.i18n.common.nomoreText
 	  }
   },
   methods: {

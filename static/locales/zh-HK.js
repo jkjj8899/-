@@ -107,7 +107,10 @@ module.exports = {
 			verifyTitle: '請完成安全驗證',
 			explain: '向右滑動完成驗證',
 			verifySuccess: '驗證成功',
-			verifyFail: '驗證失敗'
+			verifyFail: '驗證失敗',
+			nomoreText: '沒有更多了',
+			loadingText: '正在加載...',
+			loadmoreText: '加載更多'
 		},
 		miner: {
 			navTitle: '雲算力',
