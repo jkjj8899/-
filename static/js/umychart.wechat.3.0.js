@@ -7149,6 +7149,7 @@ function KLineChartContainer(uielement)
     this.BindIndexData = function (windowIndex, hisData) 
     {
         if (!this.WindowIndex[windowIndex]) return;
+		
         if (typeof (this.WindowIndex[windowIndex].RequestData) == "function")  //数据需要另外下载的.
         {
             this.WindowIndex[windowIndex].RequestData(this, windowIndex, hisData);
@@ -7538,7 +7539,7 @@ function KLineChartContainer(uielement)
         }
         else if (item.Date < realtimeData.Date)   //新增加数据
         {
-            JSConsole.Chart.Log('[KLineChartContainer::RecvRealtimeData] insert kline by minute data', realtimeData);
+            //JSConsole.Chart.Log('[KLineChartContainer::RecvRealtimeData] insert kline by minute data', realtimeData);
             var newItem = new HistoryData();
             newItem.YClose = realtimeData.YClose;
             newItem.Open = realtimeData.Open;
@@ -7581,7 +7582,6 @@ function KLineChartContainer(uielement)
             }
         }
         
-
         //绑定数据
         this.UpdateMainData(bindData, lastDataCount);
         this.Frame.SetSizeChage(true);
@@ -13261,7 +13261,6 @@ function MarketTimingIndex() {
     paint[0].NotSupportMessage = null;
 
     var titleIndex = windowIndex + 1;
-
     for (var i in paint) {
       hqChart.TitlePaint[titleIndex].Data[i] = new DynamicTitleData(paint[i].Data, this.Index[i].Name, this.TitleColor);
       hqChart.TitlePaint[titleIndex].Data[i].StringFormat = STRING_FORMAT_TYPE.THOUSANDS;
@@ -13525,10 +13524,10 @@ function MarketHeatIndex() {
         name = hqChart.Name + this.Index[i].Name;
       else
         name = "MA" + this.Index[i - 1].Param;
-
       hqChart.TitlePaint[titleIndex].Data[i] = new DynamicTitleData(paint[i].Data, name, this.Index[i].LineColor);
       hqChart.TitlePaint[titleIndex].Data[i].StringFormat = STRING_FORMAT_TYPE.DEFAULT;
       hqChart.TitlePaint[titleIndex].Data[i].FloatPrecision = 2;
+	  
     }
 
     hqChart.TitlePaint[titleIndex].Title = this.FormatIndexTitle();
@@ -13678,7 +13677,6 @@ function CustonIndexHeatIndex() {
     for (let i = 1; i < paint.length; ++i) {
       let name = this.Index[i].Name;    //显示的名字特殊处理
       if (name == 'MA') name = "MA" + this.Index[i].Param;
-
       hqChart.TitlePaint[titleIndex].Data[i] = new DynamicTitleData(paint[i].Data, name, this.Index[i].LineColor);
       hqChart.TitlePaint[titleIndex].Data[i].StringFormat = STRING_FORMAT_TYPE.DEFAULT;
       hqChart.TitlePaint[titleIndex].Data[i].FloatPrecision = 2;

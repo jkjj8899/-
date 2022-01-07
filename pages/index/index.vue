@@ -229,16 +229,9 @@
 				this.swiperCurrent = index;
 			},
 			navToKline(item){
-				// #ifdef H5	
-				uni.navigateTo({
-					url: `/pages/public/h5kline?symbol=${item.symbol}`
-				})
-				// #endif
-				// #ifndef H5
 				uni.navigateTo({
 					url: `/pages/public/kline?symbol=${item.symbol}`
 				})
-				// #endif
 			},
 			open(item){
 				if(item.link){

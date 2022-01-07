@@ -58,32 +58,18 @@
 			</view>
 		</view>
 		<view>
-			<!--  #ifdef  H5 -->
-			<div>
-				<div class='kline' id="kline" ref='kline'></div>
-			</div>
-			<!--  #endif -->
-			
-			<!--  #ifndef  H5 -->
 			<view>
 				<canvas id="kline2" canvas-id='kline2' class='kline2' v-bind:style="{width: KLine.Width+'px', height: KLine.Height+'px'}" 
 				  @touchstart="KLineTouchStart" @touchmove='KLineTouchMove' @touchend='KLineTouchEnd' ></canvas>
 			</view>
-			<!--  #endif -->
 		</view>
 	</view>
 
 </template>
 
 <script>
-	// #ifdef H5	
-	import HQChart from '../../static/js/umychart.uniapp.h5.js'
-	// #endif
-	
-	// #ifndef H5
 	import {JSCommon} from '../../static/js/umychart.wechat.3.0.js'
 	import {JSCommonHQStyle} from '../../static/js/umychart.style.wechat.js'
-	// #endif
 	
 	import pako from '../../utils/pako.js'
 	function DefaultData() {}
@@ -295,12 +281,13 @@
 			if(options.symbol){
 				this.Symbol = options.symbol
 			}
+			//this.Symbol = 'ethusdt'
 			//this.syncSubRealtimeKline()
-			this.syncSubMarketTicker()
 			uni.setNavigationBarTitle({
 				title: this.Symbol.toUpperCase()
 			})
 		},
+		
 		//隐藏的时候 停止定时器和清空hqchart的实例
 		onHide() {
 			if (g_KLine.JSChart) {
@@ -316,7 +303,7 @@
 				g_KLine.JSChart = null;
 			}
 			this.syncCancelRealtimeKline();
-			this.syncSubMarketTicker();
+			this.syncCancelMarketTicker();
 		},
 		onReady()
 		{	
@@ -328,16 +315,13 @@
 		},
 		onShow() {
 			let that = this
-			
-			console.log("[KLineChart::onShow]");
-			// #ifndef H5
+			this.syncSubMarketTicker()
 			uni.getSystemInfo({
 				success: function(res) {
 					that.KLine.Width = res.windowWidth
 					that.ChangeKLinePeriod(PERIOD_ID.KLINE_DAY_ID);
 				}
 			});
-			// #endif
 		},
 
 		methods: {
@@ -433,43 +417,12 @@
 				kline.style.height=chartHeight+'px';
 				if (g_KLine.JSChart) g_KLine.JSChart.OnSize();
 			},
-			CreateKLineChart_h5()  //创建K线图
-			{
-				if (g_KLine.JSChart) return;
-				
-				//var blackStyle=HQChart.HQChartStyle.GetStyleConfig(HQChart.STYLE_TYPE_ID.BLACK_ID);
-				//HQChart.JSChart.SetStyle(blackStyle);
-				//this.$refs.kline.style.backgroundColor=blackStyle.BGColor;	//div背景色设置黑色
-				this.$nextTick(function(){
-					this.KLine.Option.Symbol=this.Symbol;
-					this.KLine.Option.NetworkFilter = this.NetworkFilter;
-					this.KLine.Option.Symbol = this.Symbol;
-					this.KLine.Option.IsCorssOnlyDrawKLine = true; //十字光标只能在K线上
-					this.KLine.Option.CorssCursorTouchEnd = true; //手势结束十字光标自动隐藏
-					this.KLine.Option.IsClickShowCorssCursor = true; //手势点击出现十字光标
-					//this.KLine.Option.EnableScrollUpDown = true; //允许手势上下操作滚动页面
-					this.KLine.Option.IsFullDraw = true;
-					this.KLine.Option.IsApiPeriod = true; //一定要设置为true不然会有意想不到的惊喜
-					this.KLine.Option.ExtendChart = [{
-						Name: 'KLineTooltip'
-					}];
-					
-					let chart=HQChart.JSChart.Init(this.$refs.kline);
-					this.KLine.Option.NetworkFilter=this.NetworkFilter;
-					chart.SetOption(this.KLine.Option);
-					g_KLine.JSChart=chart;	
-				})
-				
-			},
-			
 			CreateKLineChart_app()
 			{
 				if (this.KLine.JSChart) return;
 				
 				let element = new JSCommon.JSCanvasElement();
-				// #ifdef APP-PLUS
 				element.IsUniApp = true; //canvas需要指定下 是uniapp的app
-				// #endif
 				element.ID = 'kline2';
 				element.Height = this.KLine.Height; //高度宽度需要手动绑定!!
 				element.Width = this.KLine.Width;
@@ -525,13 +478,7 @@
 			
 			CreateKLineChart()
 			{
-				// #ifdef H5
-				this.CreateKLineChart_h5();
-				// #endif
-				
-				// #ifndef H5
 				this.CreateKLineChart_app();
-				// #endif
 			},
 			OnTitleDraw(event, data, obj) //K线信息
 			{
@@ -602,13 +549,8 @@
 				stock.amount=item.vol;
 	
 				hqChartData.stock.push(stock);
-				// #ifdef H5
-				internalChart.RecvRealtimeData(hqChartData);
-				// #endif
 				
-				// #ifndef H5
 				internalChart.RecvRealtimeData({data: hqChartData});
-				// #endif
 			},
 			RecvMinuteRealtimeData: function(recvData, ch) {
 				//console.log("=========RecvMinuteRealtimeData", ch, recvData)
@@ -637,13 +579,8 @@
 				
 				var newItem = [date, null, item.open, item.high, item.low, item.close, item.amount, item.vol, time];
 				hqChartData.data.push(newItem);
-				// #ifdef H5
-				internalChart.RecvMinuteRealtimeData(hqChartData);
-				// #endif
 				
-				// #ifndef H5
 				internalChart.RecvMinuteRealtimeData({data: hqChartData});
-				// #endif
 				//console.log("=========RecvMinuteRealtimeData", recvData)
 			},
 			periodTabChange(index) {
@@ -693,13 +630,7 @@
 				uni.$on("req." + ch, (res) => {
 					let d = that.transferKlineData(res.data.data, isMuite)
 					
-					// #ifdef H5
-					callback(d);
-					// #endif
-					
-					// #ifndef H5
 					callback({data: d});
-					// #endif
 					this.syncSubRealtimeKline()
 				})
 			},

@@ -2599,6 +2599,7 @@ function JSAlgorithm(errorHandler, symbolData)
         if (dayCount <= 0) return [];
 
         let result = [];
+		
         if (!data || !data.length) return result;
         
         for (var i = 0; i < data.length; ++i) 
@@ -2635,7 +2636,7 @@ function JSAlgorithm(errorHandler, symbolData)
 
             result[i] = sum / dayCount;
         }
-
+        console.log("222222this.MA:", result, dayCount)
         return result;
     }
 

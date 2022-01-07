@@ -208,7 +208,7 @@ IFrameSplitOperator.FormatValueThousandsString=function(value,floatPrecision)
         {
             var nullText='-.';
             for(var i=0;i<floatPrecision;++i)
-                nullText+='-';
+                nullText+='-';	
             return nullText;
         }
 
@@ -623,6 +623,7 @@ function FrameSplitKLinePriceY()
         info.Value = latestItem.Close;
         info.TextColor = g_JSChartResource.FrameLatestPrice.TextColor;
         info.LineType = 2;    //虚线
+		latestItem.Close = parseFloat(latestItem.Close);
         if (option.Position == 'left') info.Message[0] = latestItem.Close.toFixed(floatPrecision);
         else info.Message[1] = latestItem.Close.toFixed(floatPrecision);
         if (latestItem.Close > latestItem.Open) info.LineColor = g_JSChartResource.FrameLatestPrice.UpBarColor;
