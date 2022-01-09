@@ -1,0 +1,114 @@
+<template>
+	
+	<div>
+		<div style='background-color:#101010;'>
+			<HQChartControl ref="HQChartCtrl" DefaultChart="{Type:'KLine'}" :DefaultSymbol="Symbol"> </HQChartControl>
+		</div>
+	
+		<!--   控制图1 !-->
+		<div class="button-sp-area">
+			<button class="mini-btn" type="default" size="mini" @click="ChangeMinutePeriod(1)">分时</button>
+			<button class="mini-btn" type="default" size="mini" @click="ChangeMinutePeriod(5)">5D</button>
+			<button class="mini-btn" type="default" size="mini" @click="ChangeKLinePeriod(0)">D</button>
+			<button class="mini-btn" type="default" size="mini" @click="ChangeKLinePeriod(1)">W</button>
+			<button class="mini-btn" type="default" size="mini" @click="ChangeKLinePeriod(4)">1M</button>
+			<button class="mini-btn" type="default" size="mini" @click="ChangeKLinePeriod(5)">15M</button>
+		</div>
+		
+	
+	</div>
+			
+</template>
+
+<script>
+
+import HQChartControl from '@/uni_modules/hqchart2/js_sdk/HQChartControl.vue'
+
+	
+export default 
+{
+	components: { HQChartControl },
+	
+	data()
+	{
+		let data=
+		{
+			Symbol:'600000.sh',
+			ChartWidth:350,
+			ChartHeight:500,
+		};
+		
+		return data;
+	},
+	
+	onShow()
+	{
+		uni.getSystemInfo({
+		    success:  (res) =>
+			{
+				var width=res.windowWidth;
+				var height=res.windowHeight;
+		        this.ChartWidth=width;
+				this.ChartHeight=height-130;
+				this.$nextTick(()=>
+				{
+					this.CreateHQChart(); 
+				})
+		    }
+		});
+	},
+	
+	onHide()
+	{
+		this.ClearHQChart();
+	},
+	
+	onUnload()
+	{
+		this.ClearHQChart();
+	},
+	
+	methods:
+	{
+		CreateHQChart()
+		{
+			var chartHeight=this.ChartHeight;
+			let hqchartCtrl=this.$refs.HQChartCtrl;
+			//修改option
+			//hqchartCtrl.KLine.Option.
+			hqchartCtrl.NetworkFilter=this.NetworkFilter;
+			hqchartCtrl.SetSize(this.ChartWidth,chartHeight);
+			hqchartCtrl.OnSize();
+			hqchartCtrl.CreateHQChart();
+		},
+		
+		ClearHQChart()
+		{
+			let hqchartCtrl=this.$refs.HQChartCtrl;
+			if (hqchartCtrl) hqchartCtrl.ClearChart();
+		},
+		
+		ChangeMinutePeriod(days)
+		{
+			let hqchartCtrl=this.$refs.HQChartCtrl;
+			
+			hqchartCtrl.ChangeMinutePeriod(days);
+		},
+		
+		ChangeKLinePeriod(period)
+		{
+			let hqchartCtrl=this.$refs.HQChartCtrl;
+			
+			hqchartCtrl.ChangeKLinePeriod(period);
+		},
+		
+		NetworkFilter(data, callback)
+		{
+			console.log(`[App:NetworkFilter] Name=${data.Name} Explain=${data.Explain}` );
+		},
+	}
+}
+</script>
+
+<style>
+</style>
