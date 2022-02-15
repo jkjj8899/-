@@ -44,6 +44,7 @@ const websocket = {
 					uni.$emit("sub."+result.ch,{data: result})
 				}
 				if(result && result.rep){
+					//console.log("req."+result.rep, result)
 					uni.$emit("req."+result.rep,{data: result})
 				}
 			});

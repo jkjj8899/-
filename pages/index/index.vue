@@ -21,9 +21,9 @@
 		<scroll-view class="scroll-view-market" scroll-x="true">
 			<view class="market-item" v-for="(item, i) in topSymbols" :key="item.symbol" @click="navToKline(item)">
 				<view class="item">
-					<view class="t">{{item.title}}<text :class="topMakretMap[`market.${item.symbol}.kline.1day`].change | formatChangeCls">{{topMakretMap[`market.${item.symbol}.kline.1day`].change | formatChange}}</text></view>
-					<text class="c" :class="topMakretMap[`market.${item.symbol}.kline.1day`].change | formatChangeCls">{{topMakretMap[`market.${item.symbol}.kline.1day`].tick ? topMakretMap[`market.${item.symbol}.kline.1day`].tick.close : '0.00'}}</text>
-					<text class="b">≈ {{topMakretMap[`market.${item.symbol}.kline.1day`].cny}} CNY</text>
+					<view class="t">{{item.title}}<text :class="topMakretMap[item.symbol].change | formatChangeCls">{{topMakretMap[item.symbol].change | formatChange}}</text></view>
+					<text class="c" :class="topMakretMap[item.symbol].change | formatChangeCls">{{topMakretMap[item.symbol] ? topMakretMap[item.symbol].close : '0.00'}}</text>
+					<text class="b">≈ {{topMakretMap[item.symbol].cny}} CNY</text>
 				</view>
 			</view>
 		</scroll-view>
@@ -125,12 +125,12 @@
 				topSymbols: [
 					{symbol: 'btcusdt', title: 'BTC/USDT'},
 					{symbol: 'ethusdt', title: 'ETH/USDT'},
-					{symbol: 'eosusdt', title: 'EOS/USDT'}
+					{symbol: 'dotusdt', title: 'DOT/USDT'}
 				],
 				topMakretMap: {
-					'market.btcusdt.kline.1day': {},
-					'market.ethusdt.kline.1day': {},
-					'market.eosusdt.kline.1day': {}
+					'btcusdt': {},
+					'ethusdt': {},
+					'dotusdt': {}
 				}
 			};
 		},
@@ -173,15 +173,13 @@
 		onLoad() {
 		},
 		onHide() {
-			for(let i = 0; i < 3; i++){
-				let ch = `market.${this.topSymbols[i].symbol}.kline.1day`
-				let data = {
-				  "unsub": ch,
-				  "id": Date.now() + ""
-				}
-				this.$store.dispatch('WEBSOCKET_SEND', JSON.stringify(data))
-				uni.$off(ch, (res) => {})
+			let ch = `market.overviewv2`
+			let data = {
+			  "unsub": ch,
+			  "id": Date.now() + ""
 			}
+			this.$store.dispatch('WEBSOCKET_SEND', JSON.stringify(data))
+			uni.$off(ch, (res) => {})
 		},
 		onUnload() {
 		},
@@ -189,21 +187,32 @@
 			...mapActions('common', ['marketList', 'adList', 'noticeList']),
 			loadTopMarket(){
 				let $this = this
-				for(let i = 0; i < 3; i++){
-					let ch = `market.${this.topSymbols[i].symbol}.kline.1day`
-					let data = {
-					  "sub": ch,
-					  "id": Date.now() + ""
-					}
-					this.$store.dispatch('WEBSOCKET_SEND', JSON.stringify(data))
-					uni.$on('sub.' + ch, (res) => {
-						let d = res.data
-						d.tick.close = parseFloat(d.tick.close).toFixed(2)
-						d.change = parseFloat((d.tick.close - d.tick.open) / d.tick.open * 100).toFixed(2);
-						d.cny = parseFloat(d.tick.close * 6.4).toFixed(2)
-						$this.topMakretMap[res.data.ch] = d
-					})
+				let ch = `market.overviewv2`
+				let params = {
+				  "sub": ch
 				}
+				this.$store.dispatch('WEBSOCKET_SEND', JSON.stringify(params))
+				uni.$on("sub."+ch, (res) => {
+					let map = res.data.data
+					for(let i = 0; i < 3; i++){
+						let symbol = this.topSymbols[i].symbol
+						if(map[symbol]){
+							let item = map[symbol]
+							let tick = {
+								open: item.o,
+								close: item.c,
+								low: item.l,
+								high: item.h,
+								vol: item.v,
+								amount: item.a
+							}
+							tick.change = parseFloat((tick.close - tick.open) / tick.open * 100).toFixed(2);
+							tick.cny = parseFloat(tick.close * 6.4).toFixed(2)
+							$this.topMakretMap[symbol] = tick
+						}
+					}
+					
+				})
 			},
 			async loadData() {
 				this.adList().then(res =>{

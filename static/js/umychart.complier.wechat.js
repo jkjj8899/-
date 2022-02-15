@@ -2636,7 +2636,7 @@ function JSAlgorithm(errorHandler, symbolData)
 
             result[i] = sum / dayCount;
         }
-        console.log("222222this.MA:", result, dayCount)
+        //console.log("222222this.MA:", result, dayCount)
         return result;
     }
 

@@ -315,7 +315,9 @@
 		},
 		onShow() {
 			let that = this
-			this.syncSubMarketTicker()
+			setTimeout(() => {
+				that.syncSubMarketTicker()
+			}, 1000)
 			uni.getSystemInfo({
 				success: function(res) {
 					that.KLine.Width = res.windowWidth
@@ -379,6 +381,32 @@
 			},
 			syncSubMarketTicker() {
 				let that = this
+				let ch = "market.overviewv2"
+				let params = {"sub": ch}
+				this.$store.dispatch('WEBSOCKET_SEND', JSON.stringify(params))
+				uni.$on("sub."+ch, (res) => {
+					if(!this.tick.close){
+						let map = res.data.data
+						if(map[this.Symbol]){
+							let item = map[this.Symbol]
+							let tick = {
+								open: item.o,
+								close: item.c,
+								low: item.l,
+								high: item.h,
+								vol: item.v,
+								amount: item.a
+							}
+							tick.change = parseFloat((tick.close - tick.open) / tick.open * 100).toFixed(2);
+							tick.cny = parseFloat(tick.close * 6.4).toFixed(2)
+							this.tick = tick
+							this.syncSubMarketDetail()
+						}
+					}
+				})
+			},
+			syncSubMarketDetail(){
+				let that = this
 				let ch = `market.${this.Symbol}.detail`
 				let params = {
 				  "id": new Date().getTime(),
@@ -386,13 +414,16 @@
 				}
 				this.$store.dispatch('WEBSOCKET_SEND', JSON.stringify(params))
 				uni.$on("sub."+ch, (res) => {
+					let open = this.tick.open
 					let tick = res.data.tick
+					tick.open = open
 					tick.change = parseFloat((tick.close - tick.open) / tick.open * 100).toFixed(2);
 					tick.cny = parseFloat(tick.close * 6.4).toFixed(2)
 					this.tick = tick
 				})
 			},
 			syncCancelMarketTicker() {
+				this.$store.dispatch('WEBSOCKET_SEND', JSON.stringify({"unsub": "market.overviewv2"}))
 				let ch = `market.${this.Symbol}.detail`
 				let params = {
 				  "id": new Date().getTime(),
@@ -435,9 +466,9 @@
 				blackStyle.FrameSplitTextColor='rgb(101,117,138)';  //刻度颜色
 			
 				//K线颜色
-				blackStyle.UpBarColor='rgb(210,73,99)';   			//K线上涨柱子颜色
+				blackStyle.UpBarColor='rgb(37,175,142)';   			//K线上涨柱子颜色
 				blackStyle.UpTextColor= blackStyle.UpBarColor;		//上涨价格颜色
-				blackStyle.DownBarColor='rgb(37,175,142)';			//K线下跌柱子颜色
+				blackStyle.DownBarColor='rgb(210,73,99)';			//K线下跌柱子颜色
 				blackStyle.DownTextColor=blackStyle.DownBarColor;	//下跌价格颜色
 			
 				//指标线段颜色
@@ -446,8 +477,8 @@
 				blackStyle.Index.LineColor[2]='rgb(113,161,164)';
 			
 				//最新价格刻度颜色
-				blackStyle.FrameLatestPrice.UpBarColor='rgb(210,73,99)';
-				blackStyle.FrameLatestPrice.DownBarColor='rgb(37,175,142)';
+				blackStyle.FrameLatestPrice.UpBarColor='rgb(37,175,142)';
+				blackStyle.FrameLatestPrice.DownBarColor='rgb(210,73,99)';
 			
 				//面积图颜色
 				blackStyle.CloseLineColor='rgb(113,121,133)';   //收盘价线颜色
@@ -545,8 +576,8 @@
 				stock.high=item.high;
 				stock.low=item.low;
 				stock.price=item.close;
-				stock.vol=item.amount;
-				stock.amount=item.vol;
+				stock.vol=item.vol;
+				stock.amount=item.amount;
 	
 				hqChartData.stock.push(stock);
 				
@@ -577,7 +608,7 @@
 				var date = dateTime.getFullYear() * 10000 + (dateTime.getMonth() + 1) * 100 + dateTime.getDate();
 				var time = dateTime.getHours() * 100 + dateTime.getMinutes();
 				
-				var newItem = [date, null, item.open, item.high, item.low, item.close, item.amount, item.vol, time];
+				var newItem = [date, null, item.open, item.high, item.low, item.close, item.vol, item.amount, time];
 				hqChartData.data.push(newItem);
 				
 				internalChart.RecvMinuteRealtimeData({data: hqChartData});
@@ -650,7 +681,7 @@
 					dateTime.setTime(timestamp);
 					var date = dateTime.getFullYear() * 10000 + (dateTime.getMonth() + 1) * 100 + dateTime.getDate();
 					var time = dateTime.getHours() * 100 + dateTime.getMinutes();
-					var newItem = [date, yClose, item.open, item.high, item.low, item.close, item.amount, item.vol];
+					var newItem = [date, yClose, item.open, item.high, item.low, item.close, item.vol, item.amount];
 					if (isMin) {
 						newItem[8] = time
 					}
@@ -681,10 +712,10 @@
 		background-color: #101725;
 	}
 	.upText{
-		color: rgb(210,73,99);
+		color: rgb(37,175,142);
 	}
 	.downText{
-		color: rgb(37,175,142);
+		color: rgb(210,73,99);
 	}
 	.klineId {
 
