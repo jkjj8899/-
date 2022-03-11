@@ -14,7 +14,7 @@ export default function $http(options) {
 	}
 	
 	const lang = uni.getStorageSync('language');
-	_config.header['Accept-Language'] = lang ? lang : 'zh_CN';
+	_config.header['Accept-Language'] = lang ? lang.replace("_", "-") : 'zh-CN';
 	
     _config.complete = (response) => {
        // 登录失效这边后台是返回403看情况
