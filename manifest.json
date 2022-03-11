@@ -112,5 +112,11 @@
         "setting" : {
             "urlCheck" : true
         }
+    },
+    "h5" : {
+        "title" : "FexWallet",
+        "router" : {
+            "base" : ""
+        }
     }
 }

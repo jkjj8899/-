@@ -90,3 +90,10 @@ export function fiatList() {
     method: 'GET'
   })
 }
+
+export function getConfig() {
+  return request({
+    url: '/v1/common/config',
+    method: 'GET'
+  })
+}

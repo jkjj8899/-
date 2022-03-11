@@ -147,6 +147,9 @@
 			this.getMachineList()
 		},
 		splitTag(tags){
+			if(!tags){
+				return [];
+			}
 			return JSON.parse(tags)
 		},
 		percent(item){

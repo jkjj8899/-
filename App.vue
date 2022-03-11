@@ -11,15 +11,33 @@
 	// #endif
 	export default {
 		methods: {
-			...mapActions('common', ['coinList', 'getAppVersion']),
+			...mapActions('common', ['coinList', 'getAppVersion', 'getConfig']),
 			...mapActions('user', ['initLogin']),
+			refreshConfig(){
+				this.getConfig()
+				setInterval(() => {
+					this.getConfig()
+				}, 10000)
+			},
+			async connectWs(){
+				let res = await this.getConfig()
+				let ws = 'wss://www.huobi.mw/-/s/pro/ws'
+				if(res.data && res.data.huobiDomain){
+					ws = res.data.huobiDomain
+				}
+				this.$store.dispatch('WEBSOCKET_INIT', ws)
+			}
 		},
 		onLaunch: function() {
 			let $this = this
+			
+			$this.connectWs()
+			
+			$this.coinList()
+			
 			this.$fire.$on("refreshCoin", () => {
 				$this.coinList()
 			});
-			this.$store.dispatch('WEBSOCKET_INIT', 'wss://www.huobi.mw/-/s/pro/ws')
 			
 			// #ifdef APP-PLUS
 			APPUpdate();

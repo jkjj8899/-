@@ -9,17 +9,20 @@ import {
 	noticeDetail,
 	currencyList,
 	fiatList,
-	getAppVersion
+	getAppVersion,
+	getConfig
 } from '@/api/common'
 import {
-	COMMON_COIN_LIST
+	COMMON_COIN_LIST,
+	COMMON_CONFIG_LIST
 } from './../mutations_type'
 
 
 const common = {
 	state: {
 		coins: null,
-		coinMap: {}
+		coinMap: {},
+		commonConfigMap: {}
 	},
 
 	mutations: {
@@ -29,6 +32,11 @@ const common = {
 				state.coins.forEach((item, i) =>{
 					state.coinMap[item.symbol] = item
 				})
+			}
+		},
+		[COMMON_CONFIG_LIST](state, payload) {
+			if (payload.code == 200) {
+				state.commonConfigMap = payload.data
 			}
 		}
 	},
@@ -151,6 +159,18 @@ const common = {
 		}) {
 			return new Promise((resolve, reject) => {
 				fiatList().then(res => {
+					resolve(res)
+				}).catch(error => {
+					reject(error)
+				})
+			})
+		},
+		getConfig({
+			commit
+		}) {
+			return new Promise((resolve, reject) => {
+				getConfig().then(res => {
+					commit(COMMON_CONFIG_LIST, res)
 					resolve(res)
 				}).catch(error => {
 					reject(error)
