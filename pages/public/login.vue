@@ -151,7 +151,14 @@
 									url: '/pages/index/index'
 								})
 							} else {
-								uni.navigateBack({})
+								let pages = getCurrentPages();
+								if(pages && pages.length == 1){
+									uni.switchTab({
+										url: '/pages/index/index'
+									})
+								} else {
+									uni.navigateBack({})
+								}
 							}
 						}, 1000)
 					})
