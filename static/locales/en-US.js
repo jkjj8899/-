@@ -742,7 +742,15 @@ module.exports = {
 				'UnionPay': 'BankCard',
 				'Alipay': 'Alipay',
 				'Wechat': 'WeChat'
-			}
+			},
+			username: 'Name',
+			bankNo: 'Card No',
+			bankName: 'Bank',
+			subBranch: 'Subbranch',
+			account: 'Account',
+			qrcode: 'QR code',
+			tip1: 'Please upload your payment code picture (jpg/jpeg/png format, the size should not exceed 2M)',
+			input: 'please enter '
 		},
 		toast: {
 			codeSend: 'Verification code sent',
@@ -768,7 +776,11 @@ module.exports = {
 			submitSuccess: 'Submit Success',
 			addSuccess: 'Add Success',
 			deleteSuccess: 'Delete Success',
-			buySuccess: 'Buy Success'
+			buySuccess: 'Buy Success',
+			inputBankNo: 'Please enter bank card number',
+			inputAccount: 'Please input Username',
+			inputBank: 'Please enter the account bank',
+			inputSubBank: 'Please enter the account opening branch',
 		},
 		popup: {
 			open: 'Not yet open!',

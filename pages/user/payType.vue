@@ -28,6 +28,7 @@
 				{{i18n.common.noData}}
 			</view>
 		</view>
+		<u-action-sheet @click="onClickSheet" :cancel-text="i18n.common.cancel" :list="payTypeNames" v-model="showSheet"></u-action-sheet>
     </view>  
 </template>  
 <script>  
@@ -41,7 +42,8 @@
 		data(){
 			return {
 				list: [],
-				payTypeNames: []
+				payTypeNames: [],
+				showSheet: false
 			}
 		},
 		onShow(){
@@ -53,17 +55,18 @@
 		// #ifndef MP
 		onNavigationBarButtonTap(e) {
 			let $this = this;
-			uni.showActionSheet({
-			    itemList: this.payTypeNames,
-			    success: function (res) {
-			        let i = res.tapIndex
-					uni.navigateTo({
-						url: "/pages/user/updatePayType?data=" + encodeURIComponent(JSON.stringify($this.list[i].configPaymentInfo))
-					})
-			    },
-			    fail: function (res) {
-			    }
-			});
+			$this.showSheet = true
+			// uni.showActionSheet({
+			//     itemList: this.payTypeNames,
+			//     success: function (res) {
+			//         let i = res.tapIndex
+			// 		uni.navigateTo({
+			// 			url: "/pages/user/updatePayType?data=" + encodeURIComponent(JSON.stringify($this.list[i].configPaymentInfo))
+			// 		})
+			//     },
+			//     fail: function (res) {
+			//     }
+			// });
 		},
 		// #endif
 		filters: {
@@ -76,9 +79,17 @@
 			getList(){
 				this.payInfoList().then(res =>{
 					this.list = res.data
+					let arr = []
 					for(let i = 0; i < this.list.length; i++){
-						this.payTypeNames[i] = this.list[i].configPaymentInfo.name
+						arr.push({text: this.i18n.payType.options[this.list[i].configPaymentInfo.code]})//this.list[i].configPaymentInfo.name
 					}
+					this.payTypeNames = arr
+				})
+			},
+			onClickSheet(index){
+				console.log(index)
+				uni.navigateTo({
+					url: "/pages/user/updatePayType?data=" + encodeURIComponent(JSON.stringify(this.list[index].configPaymentInfo))
 				})
 			},
 			handleView(item, id){

@@ -736,7 +736,15 @@ module.exports = {
 				'UnionPay': '银行卡',
 				'Alipay': '支付宝',
 				'Wechat': '微信'
-			}
+			},
+			username: '姓名',
+			bankNo: '银行卡号',
+			bankName: '开户银行',
+			subBranch: '开户支行',
+			account: '账号',
+			qrcode: '二维码',
+			tip1: '请上传你的收款码图片(jpg/jpeg/png格式,大小不超过2M)',
+			input: '请输入'
 		},
 		toast: {
 			codeSend: '验证码已发送',
@@ -764,7 +772,11 @@ module.exports = {
 			submitSuccess: '提交成功',
 			addSuccess: '添加成功',
 			deleteSuccess: '删除成功',
-			buySuccess: '购买成功'
+			buySuccess: '购买成功',
+			inputBankNo: '请输入银行卡号',
+			inputAccount: '请输入账号',
+			inputBank: '请输入开户银行',
+			inputSubBank: '请输入开户支行',
 		},
 		popup: {
 			open: '暂未开放!',
