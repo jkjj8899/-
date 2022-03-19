@@ -107,7 +107,8 @@
 		uni.setNavigationBarTitle({
 			title: this.i18n.miner.navTitle
 		})
-		this.reset()
+		this.records = []
+		this.query.page = 1
 		this.getMachineList()
 	},
 	onReachBottom(){
