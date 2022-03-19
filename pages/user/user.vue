@@ -51,7 +51,7 @@
 				<list-cell v-if="isMer" image="/static/images/my/icon-merchat.png" iconColor="#543632" @eventClick="navTo('/pages/otc/merchant/merchant', true)" :title="i18n.my.business"></list-cell>
 				<list-cell image="/static/images/my/icon-help.png" iconColor="#ee883b" :title="i18n.my.help" @eventClick="navTo('/pages/set/help')"></list-cell>
 				<!-- <list-cell icon="icon-pinglun-copy" iconColor="#54b4ef" title="问题反馈"></list-cell> -->
-				<list-cell image="/static/images/my/icon-langule.png" iconColor="#e07472" border="" @eventClick="changeLang" :title="i18n.my.lang" ></list-cell>
+				<list-cell image="/static/images/my/icon-langule.png" iconColor="#e07472" @eventClick="changeLang" :title="i18n.my.lang" ></list-cell>
 				<list-cell image="/static/images/my/icon-setting.png" iconColor="#e07472" :title="i18n.my.set" border="" @eventClick="navTo('/pages/set/set')"></list-cell>
 			</view>
 		</view>
@@ -201,6 +201,11 @@
 	  background: #fff;
 	  border-radius: 10upx;
 	}
+	page{
+		// #ifdef H5
+		padding-bottom: 200upx;
+		// #endif
+	}
 	.container{
 		width: 100%;
 		height: 100%;
@@ -339,6 +344,7 @@
 	.history-section{
 		padding: 30upx 0 0;
 		margin-top: 20upx;
+		margin-bottom: 100upx;
 		background: #fff;
 		border-radius:10upx;
 		.sec-header{
