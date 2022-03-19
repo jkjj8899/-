@@ -189,7 +189,7 @@
 			},
 			{
 				type: 'text',
-				text: '邀请您一起扫码体验最便捷的数字资产金融服务平台',
+				text: '',
 				css: {
 					fontSize: '32rpx',
 					color: '#fff',
@@ -235,7 +235,7 @@
 			},
 			{
 				type: 'text',
-				text: '————  由FEXCOIN提供技术支持  ————',
+				text: '————  FEXCOIN  ————',
 				css: {
 					left: '0',
 					top: '863rpx',
@@ -256,7 +256,7 @@
 			toSave(){
 				// #ifdef APP-PLUS
 				uni.showLoading({
-					title:'海报生成中',
+					title: this.i18n.common.request,
 				})
 				// #endif
 				const painter = this.$refs.painter;
@@ -277,7 +277,7 @@
 				uni.setClipboardData({
 				    data: _this.loginInfo.invitCode,
 				    success: function () {
-				        _this.$api.msg('复制成功')
+				        _this.$api.msg(_this.i18n.toast.copySuccess)
 				    }
 				});
 			},
@@ -297,16 +297,16 @@
 				uni.setClipboardData({
 					data: _this.loginInfo.registerUrl,
 					success: function () {
-					    _this.$api.msg('链接复制成功')
+					    _this.$api.msg(_this.i18n.toast.copySuccess)
 					}
 				})
 			},
 			shareWord(){
 				let _this = this
 				uni.setClipboardData({
-					data: `您身边最便捷的数字资产金融服务平台[${_this.loginInfo.registerUrl}] 点击链接，或【复制】整条信息， 打开【Fexcoin APP】使用邀请码【${_this.loginInfo.invitCode}】获取收益`,
+					data: `[${_this.loginInfo.registerUrl}] ${_this.i18n.invit.tip5}【${_this.loginInfo.invitCode}】【FEXCOIN APP】`,
 					success: function () {
-					    _this.$api.msg('口令复制成功')
+					    _this.$api.msg(_this.i18n.toast.copySuccess)
 					}
 				})
 			}

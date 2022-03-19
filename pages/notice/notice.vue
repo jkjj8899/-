@@ -5,7 +5,7 @@
 				<text class="title">{{item.noticeTitle}}</text>
 			</view>
 		</view>
-		<u-loadmore v-show="total > 10" :status="loadingStatus" bg-color="#f8f8f8"/>
+		<u-loadmore v-show="total > 10" :load-text="loadText" :status="loadingStatus" bg-color="#f8f8f8"/>
 	</view>
 </template>
 

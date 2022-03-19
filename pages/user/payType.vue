@@ -2,7 +2,7 @@
     <view class="container">  
 		<view class="pay-group" v-for="(item, i) in list" :key="item.configPaymentInfo.code">
 			<view class="header">
-				<text class="title">{{item.configPaymentInfo.name}}<text class="count">共{{item.payInfos.length}}个</text></text>
+				<text class="title">{{ i18n.payType.options[item.configPaymentInfo.code]}}<text class="count">({{item.payInfos.length}})</text></text>
 				<!-- <text class="add" @click="navTo('/pages/user/updatePayType')">添加</text> -->
 			</view>
 			<view v-for="(info, j) in item.payInfos" :key="info.id" class="item" :class="'item-bg-' + info.type">

@@ -14,7 +14,7 @@
 				<text class="status">{{statusMap[item.status]}}</text>
 			</view>
 		</view>
-		<u-loadmore v-if="!empty" :status="loadingStatus" :margin-top="30"/>
+		<u-loadmore v-if="!empty" :load-text="loadText" :status="loadingStatus" :margin-top="30"/>
 	</view>
 </template>
 

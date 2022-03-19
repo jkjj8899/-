@@ -43,7 +43,7 @@
 							<view class="col subtitle row-amount">{{currentStatusMap[item.status]}}</view>
 							<view class="col r subtitle row-amount">{{item.ctime | moment('HH:mm MM/DD')}}</view>
 						</view>
-						<u-loadmore v-if="!empty" :status="loadingStatus" :margin-top="30" :margin-bottom="20"/>
+						<u-loadmore v-if="!empty" :load-text="loadText" :status="loadingStatus" :margin-top="30" :margin-bottom="20"/>
 					</scroll-view>
 				</view>
 			</view>

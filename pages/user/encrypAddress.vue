@@ -8,7 +8,7 @@
 			</view>
 			<text class="addr">{{item.address}}</text>
 		</view>
-		<u-loadmore v-if="!empty" :status="loadingStatus" :margin-top="30" :margin-bottom="20"/>
+		<u-loadmore v-if="!empty" :load-text="loadText" :status="loadingStatus" :margin-top="30" :margin-bottom="20"/>
 		<mpvue-picker
 			:themeColor="themeColor"
 			ref="mpvuePicker"

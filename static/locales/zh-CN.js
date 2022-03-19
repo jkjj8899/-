@@ -731,6 +731,13 @@ module.exports = {
 				done: '已完成'
 			}
 		},
+		payType: {
+			options: {
+				'UnionPay': '银行卡',
+				'Alipay': '支付宝',
+				'Wechat': '微信'
+			}
+		},
 		toast: {
 			codeSend: '验证码已发送',
 			coding: '正在获取验证码',

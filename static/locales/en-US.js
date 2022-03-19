@@ -316,16 +316,16 @@ module.exports = {
 				tip: 'The payment password is 6 digits'
 			},
 			googleset: {
-				title: '谷歌设置',
-				navTitle: '谷歌验证器设置',
-				downloadTip: 'Android谷歌验证器下载',
-				bindTip: '您暂未绑定,现在绑定',
-				unbindTip: '您已绑定,取消绑定',
-				bindNavTitle: '绑定谷歌身份验证器',
-				bindTip1: '在谷歌验证器中添加秘钥并备份',
-				bindTip2: '打开谷歌验证器,扫描下方二维码或手动输入下述秘钥添加验证令牌',
-				bindTip3: '请务必将下述秘钥备份保存',
-				bindBtn: '我已备份并添加到验证器'
+				title: 'Google settings',
+				navTitle: 'Google Authenticator Settings',
+				downloadTip: 'Android Google Authenticator Download',
+				bindTip: 'You are not bound yet, now bind',
+				unbindTip: 'You are bound, unbind',
+				bindNavTitle: 'Bind Google Authenticator',
+				bindTip1: 'Add the secret key in Google Authenticator and back it up',
+				bindTip2: 'Open Google Authenticator, scan the QR code below or manually enter the following key to add a verification token',
+				bindTip3: 'Be sure to back up the following keys',
+				bindBtn: 'I have backed up and added to the validator'
 			}
 		},
 		notice: {
@@ -364,7 +364,7 @@ module.exports = {
 			tip6: 'Poster',
 			tip7: 'Link',
 			tip8: 'Share',
-			tip9: 'Face to face',
+			tip9: 'Qrcode',
 			tip10: 'Leaderboard',
 			tip11: 'No ranking yet',
 			tip12: 'Return',
@@ -735,6 +735,13 @@ module.exports = {
 				locking: 'Locking',
 				wait: 'Unclaimed',
 				done: 'Completed'
+			}
+		},
+		payType: {
+			options: {
+				'UnionPay': 'BankCard',
+				'Alipay': 'Alipay',
+				'Wechat': 'WeChat'
 			}
 		},
 		toast: {
