@@ -8,7 +8,10 @@
 ##### ETH: 0xA2E83704f917c7514Bc8B438217F697B41663578
 ##### EOS: fexcoin54321
 
+### H5体验: [点击体验](http://8.129.121.67:8899/wallet)
+
 ### Android测试包下载: [点击下载](https://fexcoin.oss-cn-shenzhen.aliyuncs.com/upload/apk/fexcoin.apk)
+
 ### 扫一扫体验
 ![Image text](https://shkj1994.oss-cn-shenzhen.aliyuncs.com/images/qrcode.png) 
 
