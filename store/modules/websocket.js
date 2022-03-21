@@ -2,11 +2,13 @@ import pako from 'pako'
 const websocket = {
 	state: {
 		socketTask: null,
-		is_open_socket: false
+		is_open_socket: false,
+		tasks: []
 	},
 
 	mutations: {
 		WEBSOCKET_INIT(state, url) {
+			let _this = this
 			// 创建一个this.socketTask对象【发送、接收、关闭socket都由这个对象操作】
 			console.log('websocket 连接 url: ' + url)
 			state.socketTask = uni.connectSocket({
@@ -22,7 +24,15 @@ const websocket = {
 				console.log("WebSocket连接正常打开中...！");
 				state.is_open_socket = true;
 				// 注：只有连接正常打开中 ，才能正常收到消息
-				
+				setInterval(() => {
+					if(state.tasks.length > 0){
+						for(let i = 0; i < state.tasks.length; i++){
+							_this.commit('WEBSOCKET_SEND', state.tasks[i])
+							//_this.WEBSOCKET_SEND(state.tasks[i])
+						}
+						state.tasks = []
+					}
+				}, 3000)
 			})
 			state.socketTask.onMessage((res) => {
 				//console.log("收到服务器内容：" + res.data);
@@ -52,6 +62,10 @@ const websocket = {
 		
 		WEBSOCKET_SEND(state, p) {
 			//console.log("ws发送:", p);
+			if(!state.is_open_socket){
+				state.tasks.push(p)
+				return
+			}
 			state.socketTask.send({
 				data: p,
 				async success() {
