@@ -10,7 +10,7 @@
 
 ### Android测试包下载: [点击下载](https://fexcoin.oss-cn-shenzhen.aliyuncs.com/upload/apk/fexcoin.apk)
 
-### 扫一扫体验
+### 扫一扫下载
 ![Image text](https://shkj1994.oss-cn-shenzhen.aliyuncs.com/images/qrcode.png) 
 
 ### H5体验
