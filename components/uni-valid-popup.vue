@@ -3,8 +3,8 @@
 		<view class="mask"></view>
 		<view class="popup">
 			<view class="header little-line">
-				<text class="title">安全验证</text>
-				<text class="cancel" @click="close">取消</text>
+				<text class="title">{{i18n.common.verifyTitle}}</text>
+				<text class="cancel" @click="close">{{i18n.common.cancel}}</text>
 			</view>
 			<text class="tip">{{tips[type]}}</text>
 			<view class="input-wrap" v-if="type == 'mobile'">
@@ -18,7 +18,7 @@
 			<view class="input-wrap" v-if="type == 'password' || type == 'capitalPasswd'">
 				<input type="password" v-model="auth.code" class="input"  :placeholder="placeholders[type]"/>
 			</view>
-			<button type="primary" :disabled="disabled" @click="submit" class="btn">确认</button>
+			<button type="primary" :disabled="disabled" @click="submit" class="btn">{{i18n.common.ok}}</button>
 		</view>
 	</view>
 </template>
@@ -28,8 +28,10 @@
 		mapState,
 		mapActions
 	} from 'vuex'
+	import {authMixin, commonMixin} from '@/common/mixin/mixin.js'
     export default {
         name: 'UniValidPopup',
+		mixins: [commonMixin],
         props: {
         	// 开启动画
         	animation: {
@@ -72,6 +74,10 @@
 		},
 		computed: {
 			...mapState('user', ['loginInfo'])
+		},
+		mounted() {
+			this.tips.capitalPasswd = this.i18n.accountsafe.tradepwd.title
+			this.placeholders.capitalPasswd = this.i18n.accountsafe.tradepwd.title
 		},
 		methods:{
 			...mapActions('common', ['sendSms']),

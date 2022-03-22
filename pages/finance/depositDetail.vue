@@ -29,11 +29,11 @@
 				<view class="amount">
 					<view class="row">
 						<view class="tt">{{i18n.financial.startVol}}</view>
-						<text>{{item.minAmount}} USDT</text>
+						<text>{{item.minAmount}} {{item.coin}}</text>
 					</view>
 					<view class="row">
 						<view class="tt">{{i18n.financial.avalibleVol}}</view>
-						<text>{{item.totalAmount - item.buyAmount}} USDT</text>
+						<text>{{item.totalAmount - item.buyAmount}} {{item.coin}}</text>
 					</view>
 				</view>
 			</view>
@@ -118,7 +118,7 @@
 			<button disabled="true" v-if="item.status == 1">{{i18n.financial.status.lock}}</button>
 			<button type="primary" v-if="item.status == 0" @click="handleBuy">{{i18n.financial.deposit}}</button>
 		</view>
-		<u-modal :title="i18n.financial.subscribeVol" v-model="showBuy" @confirm="confirm" ref="uModal" :show-cancel-button="true" :async-close="true">
+		<u-modal :confirm-text="i18n.common.ok" :cancel-text="i18n.common.cancel" :title="i18n.financial.subscribeVol" v-model="showBuy" @confirm="confirm" ref="uModal" :show-cancel-button="true" :async-close="true">
 			<view style="margin: 20upx 30upx;"><u-input v-model="amount" :placeholder="i18n.financial.inputVol" type="number" :border="false" /></view>
 		</u-modal>
 		<uni-valid-popup ref="validPopup" @ok="ok"></uni-valid-popup>

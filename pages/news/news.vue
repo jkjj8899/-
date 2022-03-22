@@ -12,7 +12,7 @@
 				</text>
 				<view class="content">{{item.content}}</view>
 			</view>
-			<uni-load-more :status="loadingStatus"></uni-load-more>
+			<u-loadmore v-show="total > 10" :load-text="loadText" :status="loadingStatus" bg-color="#f8f8f8"/>
 		</view>
 	</view>
 </template>
@@ -42,7 +42,7 @@
 					classfiy: 0
 				},
 				totalCount: 0,
-				loadingStatus: 'more',
+				loadingStatus: 'loadmore',
 				isLastPage: false
 			};
 		},
@@ -78,9 +78,9 @@
 					this.empty = res.total <= 0
 					this.isLastPage = (this.query.page == res.pages)
 					if(this.isLastPage){
-						this.loadingStatus = 'noMore'
+						this.loadingStatus = 'nomore'
 					} else {
-						this.loadingStatus = 'more'
+						this.loadingStatus = 'loadmore'
 					}
 					if(this.empty){
 						this.list = [];
@@ -88,7 +88,7 @@
 						this.list = this.list.concat(res.rows)
 					}
 				}).catch(error => {
-					this.loadingStatus = 'more'
+					this.loadingStatus = 'loadmore'
 					uni.stopPullDownRefresh();
 				})
 			},

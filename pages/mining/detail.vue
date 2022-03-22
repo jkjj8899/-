@@ -97,6 +97,8 @@
 			uni.showModal({
 			    title: _this.i18n.common.tip,
 			    content: _this.i18n.popup.buytext,
+				cancelText: _this.i18n.common.cancel,
+				confirmText: _this.i18n.common.ok,
 			    success: function (res) {
 			        if (res.confirm) {
 			            uni.showLoading({
