@@ -19,11 +19,6 @@
 				"enablePullDownRefresh": true
 			}
 		},{
-			"path": "pages/shop/index",
-			"style": {
-				"navigationBarTitleText": "FexCoin"
-			}
-		},{
 			"path": "pages/lottery/index",
 			"style": {
 				"navigationBarTitleText": "抽奖",
