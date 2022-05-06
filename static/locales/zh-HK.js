@@ -746,6 +746,34 @@ module.exports = {
 			tip1: '請上傳你的收款碼圖片(jpg/jpeg/png格式,大小不超過2M)',
 			input: '請輸入'
 		},
+		payment: {
+			active: '激活',
+			require: '帶*為必填項',
+			reminder: '溫馨提示',
+			reminder1: '當您出售數位貨幣的時候，您選擇的收款管道將向買方展示。 請確認資訊填寫準確無誤。',
+			method: {
+				alipay: '支付寶',
+				wechat: '微信',
+				bankcard: '銀行卡',
+				paypal: 'PayPal'
+			},
+			toast: {
+				username: '請輸入姓名',
+				qrcode: '請上傳二維碼',
+				account: '請輸入帳號',
+				bank: '請輸入開戶銀行',
+				cardno: '請輸入銀行卡號',
+				subbank: '請輸入開戶地址',
+				email: '請輸入郵箱'
+			},
+			username: '姓名',
+			qrcode: '收款二維碼',
+			account: '帳號',
+			bank: '開戶銀行',
+			cardno: '銀行卡號',
+			subbank: '開戶地址',
+			email: '郵箱'
+		},
 		toast: {
 			codeSend: '驗證碼已發送',
 			coding: '正在獲取驗證碼',

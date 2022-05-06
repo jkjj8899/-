@@ -543,6 +543,32 @@
 				}
 			}
 		},{
+			"path": "pages/user/payment/method",
+			"style": {
+				"navigationBarTitleText": "收款方式",
+				"navigationBarBackgroundColor": "#f8f8f8",
+				"app-plus": {
+					"bounce": "none",
+					"titleNView": {
+						"buttons": [{
+								"fontSrc": "/static/font/font_1078604_w4kpxh0rafi.ttf",
+								"text": "\ue60a",
+								"fontSize": "24",
+								"color": "#303133",
+								"width": "40px",
+								"background": "rgba(0,0,0,0)"
+							}
+						]
+					}
+				}
+			}
+		},{
+			"path": "pages/user/payment/update",
+			"style": {
+				"navigationBarTitleText": "",
+				"navigationBarBackgroundColor": "#f8f8f8"
+			}
+		},{
 			"path": "pages/user/updatePayType",
 			"style": {
 				"navigationBarTitleText": ""

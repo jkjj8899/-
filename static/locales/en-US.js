@@ -752,6 +752,34 @@ module.exports = {
 			tip1: 'Please upload your payment code picture (jpg/jpeg/png format, the size should not exceed 2M)',
 			input: 'please enter '
 		},
+		payment: {
+			active: 'active',
+			require: '* is required',
+			reminder: 'Reminder',
+			reminder1: 'When you sell digital currency, the collection method you choose will be shown to the buyer. Please confirm that the information is filled in correctly.',
+			method: {
+				alipay: 'Alipay',
+				wechat: 'Wechat',
+				bankcard: 'Bank',
+				paypal: 'PayPal'
+			},
+			toast: {
+				username: 'Please enter your name',
+				qrcode: 'Please upload QR code',
+				account: 'Please enter the account number',
+				bank: 'Please enter the Bank of deposit',
+				cardno: 'Please enter the bank card number',
+				subbank: 'Please enter the account opening address',
+				email: 'Please enter email'
+			},
+			username: 'Full Name',
+			qrcode: 'Collection QR code',
+			account: 'Account',
+			bank: 'Bank of deposit',
+			cardno: 'Bank card number',
+			subbank: 'Account opening address',
+			email: 'Email'
+		},
 		toast: {
 			codeSend: 'Verification code sent',
 			coding: 'Getting verification code',

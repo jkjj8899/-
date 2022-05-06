@@ -746,6 +746,34 @@ module.exports = {
 			tip1: '请上传你的收款码图片(jpg/jpeg/png格式,大小不超过2M)',
 			input: '请输入'
 		},
+		payment: {
+			active: '激活',
+			require: '带*为必填荐',
+			reminder: '温馨提示',
+			reminder1: '当您出售数字货币的时候,您选择的收款方式将向买方展示。请确认信息填写准确无误。',
+			method: {
+				alipay: '支付宝',
+				wechat: '微信',
+				bankcard: '银行卡',
+				paypal: 'PayPal'
+			},
+			toast: {
+				username: '请输入姓名',
+				qrcode: '请上传二维码',
+				account: '请输入账号',
+				bank: '请输入开户银行',
+				cardno: '请输入银行卡号',
+				subbank: '请输入开户地址',
+				email: '请输入邮箱'
+			},
+			username: '姓名',
+			qrcode: '收款二维码',
+			account: '账号',
+			bank: '开户银行',
+			cardno: '银行卡号',
+			subbank: '开户地址',
+			email: '邮箱'
+		},
 		toast: {
 			codeSend: '验证码已发送',
 			coding: '正在获取验证码',

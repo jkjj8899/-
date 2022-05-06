@@ -20,7 +20,16 @@ import {
 	payOrder,
 	completeOrder,
 	orderList,
-	getOrder
+	getOrder,
+	getPaymentSetting,
+	getPaymentSettingDetail,
+	getPaymentMethodList,
+	getPaymentMethod,
+	getActivePaymentMethodList,
+	addPaymentMethod,
+	updatePaymentMethod,
+	activePaymentMethod,
+	deletePaymentMethod
 } from '@/api/otc'
 import {} from './../mutations_type'
 
@@ -35,6 +44,110 @@ const otc = {
 	},
 
 	actions: {
+		getPaymentSetting({
+			commit
+		}) {
+			return new Promise((resolve, reject) => {
+				getPaymentSetting().then(res => {
+					resolve(res)
+				}).catch(error => {
+					reject(error)
+				})
+			})
+		},
+		getPaymentSettingDetail({
+			commit
+		}, id) {
+			return new Promise((resolve, reject) => {
+				getPaymentSettingDetail(id).then(res => {
+					resolve(res)
+				}).catch(error => {
+					reject(error)
+				})
+			})
+		},
+		getPaymentMethodList({
+			commit
+		}) {
+			return new Promise((resolve, reject) => {
+				getPaymentMethodList().then(res => {
+					resolve(res)
+				}).catch(error => {
+					reject(error)
+				})
+			})
+		},
+		getActivePaymentMethodList({
+			commit
+		}) {
+			return new Promise((resolve, reject) => {
+				getActivePaymentMethodList().then(res => {
+					resolve(res)
+				}).catch(error => {
+					reject(error)
+				})
+			})
+		},
+		getPaymentMethod({
+			commit
+		}, id) {
+			return new Promise((resolve, reject) => {
+				getPaymentMethod(id).then(res => {
+					resolve(res)
+				}).catch(error => {
+					reject(error)
+				})
+			})
+		},
+		addPaymentMethod({
+			commit
+		}, data) {
+			return new Promise((resolve, reject) => {
+				addPaymentMethod(data).then(res => {
+					resolve(res)
+				}).catch(error => {
+					reject(error)
+				})
+			})
+		},
+		updatePaymentMethod({
+			commit
+		}, data) {
+			return new Promise((resolve, reject) => {
+				updatePaymentMethod(data).then(res => {
+					resolve(res)
+				}).catch(error => {
+					reject(error)
+				})
+			})
+		},
+		activePaymentMethod({
+			commit
+		}, id) {
+			return new Promise((resolve, reject) => {
+				activePaymentMethod(id).then(res => {
+					resolve(res)
+				}).catch(error => {
+					reject(error)
+				})
+			})
+		},
+		deletePaymentMethod({
+			commit
+		}, id) {
+			return new Promise((resolve, reject) => {
+				deletePaymentMethod(id).then(res => {
+					resolve(res)
+				}).catch(error => {
+					reject(error)
+				})
+			})
+		},
+		
+		
+		
+		
+		
 		payInfoList({
 			commit
 		}) {

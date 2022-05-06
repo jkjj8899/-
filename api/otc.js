@@ -51,6 +51,83 @@ export function deletePayInfo(id) {
     method: 'DELETE'
   })
 }
+
+
+// 获取收款方式设置
+export function getPaymentSetting() {
+  return request({
+    url: '/v1/otc/pay/method/setting',
+    method: 'GET'
+  })
+}
+
+// 获取收款方式设置详情
+export function getPaymentSettingDetail(id) {
+  return request({
+    url: '/v1/otc/pay/method/setting/' + id,
+    method: 'GET'
+  })
+}
+
+// 获取收款方式列表
+export function getPaymentMethodList() {
+  return request({
+    url: '/v1/otc/pay/method/list',
+    method: 'GET'
+  })
+}
+
+// 获取激活收款方式列表
+export function getActivePaymentMethodList() {
+  return request({
+    url: '/v1/otc/pay/method/use',
+    method: 'GET'
+  })
+}
+
+// 获取收款信息详情
+export function getPaymentMethod(id) {
+  return request({
+    url: `/v1/otc/pay/method/${id}`,
+    method: 'GET'
+  })
+}
+
+// 添加收款方式
+export function addPaymentMethod(data) {
+  return request({
+    url: '/v1/otc/pay/method/create',
+    method: 'POST',
+	data: data
+  })
+}
+
+// 修改收款方式
+export function updatePaymentMethod(data) {
+  return request({
+    url: '/v1/otc/pay/method/update',
+    method: 'PUT',
+	data: data
+  })
+}
+
+// 激活收款方式
+export function activePaymentMethod(id) {
+  return request({
+    url: `/v1/otc/pay/method/avtive/${id}`,
+    method: 'PUT'
+  })
+}
+
+// 删除收款信息
+export function deletePaymentMethod(id) {
+  return request({
+    url: `/v1/otc/pay/method/${id}`,
+    method: 'DELETE'
+  })
+}
+
+
 //是否是商家
 export function isMerchant() {
   return request({
