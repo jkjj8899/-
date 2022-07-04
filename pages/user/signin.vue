@@ -75,7 +75,7 @@
 				}
 				this.signin().then(res => {
 					this.getSignDetail()
-					this.$api.msg('签到成功', 1000, false, 'none', function() {})
+					this.$api.msg(this.i18n.sigin.qdcg, 1000, false, 'none', function() {})
 				})
 			}
         }  

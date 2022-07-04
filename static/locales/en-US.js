@@ -352,7 +352,8 @@ module.exports = {
 			tip8: 'The check-in time of daily update is Singapore time',
 			tip9: 'The final distribution quantity is subject to the final distribution of the platform, and the final interpretation right belongs to fexcoin',
 			tip10: 'Signed',
-			tip11: 'Check In'
+			tip11: 'Check In',
+			qdcg: 'Sign in successfully'
 		},
 		invit: {
 			title: 'Invitation Introduction',
