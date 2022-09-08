@@ -44,7 +44,7 @@
 					忘记密码?
 				</view>
 			</view>
-			<button class="confirm-btn" @click="useVerify" :disabled="logining">登录</button>
+			<button class="confirm-btn" @click="useVerify" :disabled="logining">{{i18n.login.login}}</button>
 		</view>
 		<view class="register-section">
 			{{i18n.login.noAccount}}
