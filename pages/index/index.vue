@@ -122,6 +122,7 @@
 				ads: [],
 				current: 0,
 				mode: 'round' ,
+				marketTimer: null,
 				topSymbols: [
 					{symbol: 'btcusdt', title: 'BTC/USDT'},
 					{symbol: 'ethusdt', title: 'ETH/USDT'},
@@ -153,7 +154,7 @@
 		},
 		onShow() {
 			this.getMaketList()
-			setInterval(() =>{
+			this.marketTimer =setInterval(() =>{
 				this.getMaketList()
 			}, 3000)
 			setTimeout(() =>{
@@ -173,6 +174,10 @@
 		onLoad() {
 		},
 		onHide() {
+			if(this.marketTimer){
+				clearInterval(this.marketTimer)
+			}
+			
 			let ch = `market.overviewv2`
 			let data = {
 			  "unsub": ch,
