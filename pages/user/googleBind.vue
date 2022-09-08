@@ -6,7 +6,7 @@
 		</view>
 		<view class="row center">
 			<text class="s">{{i18n.accountsafe.googleset.bindTip3}}</text>
-			<tki-qrcode ref="qrcode" :size="300" :onval="true" cid="qrcode" :val="form.googleKey" />
+			<tki-qrcode ref="qrcode" :size="300" :onval="true" cid="qrcode" :val="`otpauth://totp/FexCoin?secret=${form.googleKey}`" />
 		</view>
 		<view class="row center">
 			<text class="m">{{i18n.common.secritKey}}: {{form.googleKey}}</text>
