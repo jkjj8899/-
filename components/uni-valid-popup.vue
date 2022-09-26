@@ -148,6 +148,7 @@
 	}
 	.popup{
 		position: fixed;
+		max-width: 720px;
 		width: 100%;
 		height: 450upx;
 		background-color: #ffffff;

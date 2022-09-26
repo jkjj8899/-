@@ -116,7 +116,7 @@
     "h5" : {
         "title" : "FexWallet",
         "router" : {
-            "base" : ""
+            "base" : "/wallet/"
         }
     }
 }
