@@ -1,8 +1,10 @@
 <template>  
     <view class="container">  
-		
+		<u-navbar :is-back="false" height="20">
+			<view class="slot-wrap">
+			</view>
+		</u-navbar>
 		<view class="user-section">
-			<image mode="widthFix" class="bg" src="../../static/personal-bg.jpg"></image>
 			<view class="user-info-box">
 				<view class="portrait-box">
 					<image class="portrait" :src="'/static/missing-face.png'"></image>
@@ -14,15 +16,7 @@
 			</view>
 		</view>
 		
-		<view 
-			class="cover-container"
-			:style="[{
-				transform: coverTransform,
-				transition: coverTransition
-			}]"
-		>
-			<image class="arc" src="/static/arc.png"></image>
-			
+		<view class="cover-container">
 			<view class="order-section">
 				<view class="order-item" @click="navTo('/pages/notice/notice')" hover-class="common-hover"  :hover-stay-time="50">
 					<image class="icon" src="../../static/images/my/icon-notice.png"></image>
@@ -201,27 +195,19 @@
 	  background: #fff;
 	  border-radius: 10upx;
 	}
-	page{
-		// #ifdef H5
-		padding-bottom: 200upx;
-		// #endif
-	}
 	.container{
 		width: 100%;
-		height: 100%;
 		background-color: $page-color-base;
+		padding-bottom: 100rpx;
 	}
 	.user-section{
-		height: 510upx;
-		padding: 100upx 30upx 0;
+		height: 340upx;
+		padding: 80upx 30upx 0;
 		position:relative;
-		.bg{
-			position:absolute;
-			left: 0;
-			top: 0;
-			width: 100%;
-			height: 100%;
-		}
+		margin: 0rpx 30rpx 0 30rpx;
+		border-radius: 20rpx;
+		background: url(../../static/personal-bg.jpg);
+		background-size: 100% 100%;
 	}
 	.user-info-box{
 		height: 180upx;
@@ -246,82 +232,11 @@
 			margin-left: 20upx;
 		}
 	}
-
-	.vip-card-box{
-		display:flex;
-		flex-direction: column;
-		color: #f7d680;
-		height: 240upx;
-		background: linear-gradient(left, rgba(0,0,0,.7), rgba(0,0,0,.8));
-		border-radius: 16upx 16upx 0 0;
-		overflow: hidden;
-		position: relative;
-		padding: 20upx 24upx;
-		.card-bg{
-			position:absolute;
-			top: 20upx;
-			right: 0;
-			width: 380upx;
-			height: 260upx;
-		}
-		.b-btn{
-			position: absolute;
-			right: 20upx;
-			top: 16upx;
-			width: 132upx;
-			height: 40upx;
-			text-align: center;
-			line-height: 40upx;
-			font-size: 22upx;
-			color: #36343c;
-			border-radius: 20px;
-			background: linear-gradient(left, #f9e6af, #ffd465);
-			z-index: 1;
-		}
-		.tit{
-			font-size: $font-base+2upx;
-			color: #f7d680;
-			margin-bottom: 28upx;
-			.yticon{
-				color: #f6e5a3;
-				margin-right: 16upx;
-			}
-		}
-		.e-b{
-			font-size: $font-sm;
-			color: #d8cba9;
-			margin-top: 10upx;
-		}
-	}
 	.cover-container{
 		background: $page-color-base;
-		margin-top: -150upx;
 		padding: 0 30upx;
 		position:relative;
 		background: #f5f5f5;
-		padding-bottom: 20upx;
-		.arc{
-			position:absolute;
-			left: 0;
-			top: -34upx;
-			width: 100%;
-			height: 36upx;
-		}
-	}
-	.tj-sction{
-		@extend %section;
-		.tj-item{
-			@extend %flex-center;
-			flex-direction: column;
-			height: 140upx;
-			font-size: $font-sm;
-			color: #75787d;
-		}
-		.num{
-			font-size: $font-lg;
-			color: $font-color-dark;
-			margin-bottom: 8upx;
-		}
 	}
 	.order-section{
 		@extend %section;
