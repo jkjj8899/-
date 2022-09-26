@@ -3,13 +3,10 @@
 		<view class="back-btn yticon icon-zuojiantou-up" @click="navBack"></view>
 		<!-- 设置白色背景防止软键盘把下部绝对定位元素顶上来盖住输入框等 -->
 		<view class="wrapper">
-			<!--
-			<view class="left-top-sign">LOGIN</view>-->
 			<view class="welcome">
 				<image mode="widthFix" src="../../static/images/public/logo.png" class="logo"></image>
 				<view class="txt">
 					<text class="b">{{i18n.login.welcome}} {{siteName}}</text>
-					<!--<text>Welcome to fexcoin</text>-->
 				</view>
 			</view>
 			<view class="input-content">
@@ -35,21 +32,27 @@
 						password 
 						data-key="password"
 						@input="inputChange"
-						@confirm="toLogin"
+					/>
+				</view>
+				<view class="input-item">
+					<image src="../../static/images/public/icon-pwd.png" class="icon"></image>
+					<input placeholder-style="color: #ffffff"
+						type="number" 
+						v-model="form.googleCode" 
+						:placeholder="i18n.toast.inputGoogleCode"
+						placeholder-class="input-empty"
+						maxlength="20"
+						@input="inputChange"
 					/>
 				</view>
 			</view>
-			
-			<button class="confirm-btn" @click="useVerify" :disabled="logining">{{i18n.login.login}}</button>
-		</view>
-		
-		<view class="link">
-			<view class="register-section">
-				{{i18n.login.noAccount}}
-				<text @click="toRegist">{{i18n.login.registration}}</text>
-			</view>
-			<view class="forget-section" @click="navTo('/pages/public/forget')">
-				{{i18n.login.forget}}
+			<view class="link"></view>
+			<button class="confirm-btn" @click="useVerify" :disabled="logining">{{i18n.common.update}}</button>
+			<view class="link">
+				<view class="forget-section"></view>
+				<view class="register-section">
+					<text @click="navToLogin">{{i18n.login.logining}}</text>
+				</view>
 			</view>
 		</view>
 		
@@ -61,6 +64,7 @@
 				:captchaType="'blockPuzzle'"
 				:imgSize="{ width: '300px', height: '155px' }"
 				ref="verify"></Verify>
+		
 		<uni-valid-popup ref="validPopup" @ok="ok" type="google"></uni-valid-popup>
 	</view>
 </template>
@@ -70,7 +74,7 @@
 		mapState,
 		mapActions
 	} from 'vuex'
-	import {isAccount, isPassword} from '../../utils/validate'
+	import {isAccount, isMobile, isPassword} from '../../utils/validate'
 	import Verify from "../../components/verifition/verify/verify";
 	import uniValidPopup from '../../components/uni-valid-popup.vue';
 	import {commonMixin} from '@/common/mixin/mixin.js'
@@ -83,9 +87,8 @@
 		data(){
 			return {
 				form: {
-					username: '13999999999',
-					password: 'Aa123456',
-					captchaVerify: '',
+					username: '',
+					password: '',
 					googleCode: ''
 				},
 				logining: false,
@@ -106,29 +109,35 @@
 			this.redirect = options.redirect
 		},
 		methods: {
-			...mapActions('user', ['login']),
+			...mapActions('user', ['forget']),
 			success(params){
 				this.form.captchaVerify = params.captchaVerification
 				console.log("success: ", params)
-				this.$refs.verify.hiddle()
 				this.toLogin()
 			},
 			useVerify(){
-				if(!this.form.username){
+				this.logining = true;
+				if(this.form.username == ''){
 					this.$api.msg(this.i18n.login.inputAccount)
+					this.logining = false
 					return;
 				}
-				// if (!isAccount(this.form.username)) {
-				// 	this.$api.msg(this.i18n.login.accountError)
-				// 	this.logining = false
-				// 	return;
-				// }
+				if (!isAccount(this.form.username)) {
+					this.$api.msg(this.i18n.login.accountError)
+					this.logining = false
+					return;
+				}
 				if(this.form.password == ''){
 					this.$api.msg(this.i18n.login.password)
+					this.logining = false
 					return;
 				}
-				//this.$refs.verify.show()
-				this.toLogin()
+				if(!this.form.googleCode){
+					this.$api.msg(this.i18n.toast.inputGoogleCode)
+					this.logining = false
+					return;
+				}
+				this.toForget()
 			},
 			inputChange(e){
 				const key = e.currentTarget.dataset.key;
@@ -137,6 +146,11 @@
 			navBack(){
 				uni.switchTab({
 					url: '/pages/index/index'
+				})
+			},
+			navToLogin() {
+				uni.navigateTo({
+					url: '/pages/public/login'
 				})
 			},
 			toRegist(){
@@ -150,31 +164,17 @@
 					return;
 				}
 				this.form.googleCode = data.code
-				this.toLogin()
 			},
-			toLogin(){
+			toForget(){
 				let $this = this
-				this.login(this.form).then(res => {
-					
-					this.$api.msg(this.i18n.login.loginSuccess, 1000, false, 'none', function() {
+				this.forget(this.form).then(res => {
+					this.$api.msg(this.i18n.toast.submitSuccess, 1000, false, 'none', function() {
 						$this.$refs.verify.hiddle()
 						setTimeout(function() {
-							$this.logining = false
-							if($this.redirect && $this.redirect == 'register'){
-								uni.switchTab({
-									url: '/pages/index/index'
-								})
-							} else {
-								let pages = getCurrentPages();
-								if(pages && pages.length == 1){
-									uni.switchTab({
-										url: '/pages/index/index'
-									})
-								} else {
-									uni.navigateBack({})
-								}
-							}
-						}, 1000)
+							uni.navigateTo({
+								url: '/pages/public/login'
+							})
+						}, 2000)
 					})
 				}).catch(error => {
 					console.log(error)
@@ -312,7 +312,12 @@
 			padding-left: 20upx;
 		}	
 	}
-	
+	.link{
+		display: flex;
+		justify-content: space-between;
+		padding: 30upx 70upx;
+		color: #ffffff;
+	}
 	.confirm-btn{
 		width: 630upx;
 		height: 76upx;
@@ -326,23 +331,19 @@
 			border-radius: 100px;
 		}
 	}
-	.link{
-		display: flex;
-		justify-content: space-between;
-		padding: 30upx 60upx;
-		color: #ffffff;
-	}
 	.forget-section{
-		font-size: $font-md;
+		font-size: $font-sm+2upx;
+		color: $font-color-spec;
 		text-align: center;
-		color: #4E46D2;
+		color: #ffffff;
+		margin-top: 30rpx;
 	}
 	.register-section{
-		font-size: $font-md;
+		font-size: $font-sm+2upx;
 		color: #4E46D2;
 		text-align: center;
+		margin-top: 30rpx;
 		text{
-			color: #ffffff;
 			margin-left: 10upx;
 		}
 	}

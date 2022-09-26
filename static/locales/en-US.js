@@ -32,7 +32,7 @@ module.exports = {
 			hasAccount: 'Has Account?',
 			inputInvitCode: 'Please enter Invit Code',
 			logining: 'Log in now',
-			accountError: 'The account number must be 6-18 digits and a combination of letters',
+			accountError: 'Account number must be 6-18 digits and letters',
 			mobileError: 'Incorrect mobile phone number',
 			loginSuccess: 'Login succeeded',
 			pwdError: 'The password format is incorrect',

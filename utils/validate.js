@@ -11,7 +11,7 @@ export function isEmail (s) {
  * @param {Object} s
  */
 export function isAccount (s) {
-  return /^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{6,18}$/.test(s)
+  return /^[0-9A-Za-z]{6,18}$/.test(s)
 }
 
 /**

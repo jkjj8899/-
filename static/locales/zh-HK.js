@@ -32,7 +32,7 @@ module.exports = {
 			hasAccount: '已有帳號?',
 			inputInvitCode: '請填寫邀請碼',
 			logining: '立即登入',
-			accountError: '帳號必須6-18位數字、字母組合',
+			accountError: '帳號必須6-18位數字、字母',
 			mobileError: '手機號不正確',
 			loginSuccess: '登入成功',
 			pwdError: '密碼格式不正確',

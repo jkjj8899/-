@@ -16,6 +16,14 @@ export function login(data) {
     data: data
   })
 }
+//忘记密码
+export function forget(data) {
+  return request({
+    url: '/v1/forget',
+    method: 'POST',
+    data: data
+  })
+}
 //修改密码
 export function updatePwd(data) {
   return request({

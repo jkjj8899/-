@@ -32,7 +32,7 @@ module.exports = {
 			hasAccount: '已有账号?',
 			inputInvitCode: '请填写邀请码',
 			logining: '立即登录',
-			accountError: '帐号必须6-18位数字、字母组合',
+			accountError: '帐号必须6-18位数字、字母',
 			mobileError: '手机号不正确',
 			loginSuccess: '登录成功',
 			pwdError: '密码格式不正确',
