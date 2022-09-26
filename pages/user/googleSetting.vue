@@ -1,7 +1,7 @@
 <template>
 	<view class="container">
 		<view class="row">
-			<text @click="open">{{i18n.accountsafe.googleset.downloadTip}}</text>
+			<view @click="open">{{i18n.accountsafe.googleset.downloadTip}}</view>
 			<button v-if="!isGoogle" class="btn" @click="navTo('/pages/user/googleBind')">{{i18n.accountsafe.googleset.bindTip}}</button>
 			<button v-else class="btn" @click="unbind">{{i18n.accountsafe.googleset.unbindTip}}</button>
 		</view>
@@ -65,7 +65,21 @@
 				})
 			},
 			open(){
-				plus.runtime.openURL('https://fexcoin.oss-cn-shenzhen.aliyuncs.com/upload/apk/Gen_Signature_Android2.apk');
+				// #ifdef H5
+				window.open('https://exspot.oss-cn-hongkong.aliyuncs.com/Gen_Signature_Android2.apk', '_blank');
+				// #endif
+				
+				// #ifdef APP-PLUS
+				let port = uni.getSystemInfoSync().platform
+				switch (port) {
+					case 'android':
+						plus.runtime.openURL('https://exspot.oss-cn-hongkong.aliyuncs.com/Gen_Signature_Android2.apk');
+						break;
+					case 'ios':
+						plus.runtime.openURL('https://apps.apple.com/cn/app/google-authenticator/id388497605');
+						break;
+				}
+				// #endif
 			}
 		}
 	}
