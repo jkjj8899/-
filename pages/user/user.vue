@@ -179,7 +179,8 @@
 				}
 			},
         }  
-    }  
+    } 
+	
 </script>  
 <style lang='scss' scoped>
 	%flex-center {
