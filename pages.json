@@ -615,16 +615,6 @@
 				}
 			}
 		},{
-			"path": "pages/detail/detail",
-			"style": {
-				"navigationBarTitleText": "",
-				"app-plus": {
-					"titleNView": {
-						"type": "transparent"
-					}
-				}
-			}
-		}, {
 			"path": "pages/user/realname",
 			"style": {
 				"navigationBarTitleText": "实名认证",
@@ -636,11 +626,6 @@
 						"type": "transparent"
 					}
 				}
-			}
-		}, {
-			"path": "pages/feedback/index",
-			"style": {
-				"navigationBarTitleText": "意见反馈"
 			}
 		},
 		{
