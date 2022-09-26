@@ -2,11 +2,11 @@
 	<view class="container">
 		<view class="row">
 			<text @click="open">{{i18n.accountsafe.googleset.downloadTip}}</text>
-			<button v-if="!loginInfo.isGoogle" class="btn" @click="navTo('/pages/user/googleBind')">{{i18n.accountsafe.googleset.bindTip}}</button>
-			<button v-if="loginInfo.isGoogle" class="btn" @click="unbind">{{i18n.accountsafe.googleset.unbindTip}}</button>
+			<button v-if="!isGoogle" class="btn" @click="navTo('/pages/user/googleBind')">{{i18n.accountsafe.googleset.bindTip}}</button>
+			<button v-else class="btn" @click="unbind">{{i18n.accountsafe.googleset.unbindTip}}</button>
 		</view>
 		
-		<uni-valid-popup ref="validPopup" @ok="ok"></uni-valid-popup>
+		<uni-valid-popup ref="validPopup" @ok="ok" type="google"></uni-valid-popup>
 	</view>
 </template>
 
@@ -23,14 +23,16 @@
 		data() {
 			return {
 				form: {
-					authCode: ''
-				}
+					googleCode: ''
+				},
+				isGoogle: false
 			};
 		},
 		onShow() {
 			uni.setNavigationBarTitle({
 				title: this.i18n.accountsafe.googleset.navTitle
 			})
+			this.load()
 		},
 		onLoad() {
 			
@@ -39,19 +41,27 @@
 			...mapState('user', ['loginInfo'])
 		},
 		methods:{
-			...mapActions('user', ['unbindGoogle']),
+			...mapActions('user', ['unbindGoogle', 'getUserInfo']),
+			load(){
+				this.getUserInfo().then(res => {
+					this.isGoogle = res.data.googleAuthStatus == 1
+				})
+			},
 			unbind(){
-				this.$refs.validPopup.open('mobile')
+				this.$refs.validPopup.open('google')
 			},
 			ok(data){
 				if(!data.code){
-					this.$api.msg(this.i18n.toast.inputCode)
+					this.$api.msg(this.i18n.toast.inputGoogleCode)
 					return;
 				}
-				this.form.authCode = data.token + ":" + data.code
+				this.form.googleCode = data.code
 				this.unbindGoogle(this.form).then(res =>{
 					this.$api.msg(this.i18n.toast.unbindGoodsSuccess)
+					this.load()
+					this.$refs.validPopup.close()
 				}).catch(error =>{
+					this.$refs.validPopup.enable()
 				})
 			},
 			open(){
@@ -70,12 +80,12 @@
 		padding: 60upx 30upx;
 		margin-top: 20upx;
 		color: $font-color-blue;
-		font-size: $font-md;
+		font-size: $font-base;
 	}
 	.btn{
 		margin-top: 60upx;
 		background-color: $uni-color-blue;
 		color: #ffffff;
-		font-size: $font-lg;
+		font-size: $font-md;
 	}
 </style>

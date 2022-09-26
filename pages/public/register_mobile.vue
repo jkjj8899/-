@@ -6,23 +6,23 @@
 			<view class="welcome">
 				<image mode="widthFix" src="../../static/images/public/logo.png" class="logo"></image>
 				<view class="txt">
-					<text class="b">{{i18n.login.welcome}} {{siteName}}</text>
+					<text class="b">{{i18n.login.welcome}} Fexcoin</text>
 					<!--<text>Welcome to fexcoin</text>-->
 				</view>
 			</view>
 			<view class="input-content">
 				<view class="input-item">
 					<image src="../../static/images/public/icon-mobile.png" class="icon"></image>
-					<input placeholder-style="color: #ffffff" type="text" v-model="form.username" :placeholder="i18n.login.inputAccount" maxlength="11" @input="inputChange" />
+					<input placeholder-style="color: #ffffff" type="number" v-model="form.username" :placeholder="i18n.login.inputUserName" maxlength="11" @input="inputChange" />
 				</view>
 				<view class="input-item">
 					<image src="../../static/images/public/icon-pwd.png" class="icon"></image>
-					<input placeholder-style="color: #ffffff" type="text" v-model="form.password" :placeholder="i18n.login.pwdRule" placeholder-class="input-empty"
+					<input placeholder-style="color: #ffffff" type="mobile" v-model="form.password" :placeholder="i18n.login.pwdRule" placeholder-class="input-empty"
 					 maxlength="20" password data-key="password" @input="inputChange" />
 				</view>
 				<view class="input-item">
 					<image src="../../static/images/public/icon-pwd.png" class="icon"></image>
-					<input placeholder-style="color: #ffffff" type="text" v-model="form.confirmPassword" :placeholder="i18n.login.pwdRule" placeholder-class="input-empty"
+					<input placeholder-style="color: #ffffff" type="mobile" v-model="form.confirmPassword" :placeholder="i18n.login.pwdRule" placeholder-class="input-empty"
 					 maxlength="20" password data-key="password" @input="inputChange" />
 				</view>
 				<view class="input-item">
@@ -44,7 +44,7 @@
 		mapState,
 		mapActions
 	} from 'vuex'
-	import {isAccount, isPassword} from '../../utils/validate'
+	import {isMobile, isPassword} from '../../utils/validate'
 	import {commonMixin} from '@/common/mixin/mixin.js'
 	export default {
 		mixins: [commonMixin],
@@ -55,7 +55,7 @@
 					password: '',
 					confirmPassword: '',
 					invitCode: '',
-					authCode: ':'
+					authCode: '1234:abc'
 				},
 				mobile: '',
 				password: '',
@@ -80,8 +80,8 @@
 				})
 			},
 			toRegist() {
-				if (!isAccount(this.form.username)) {
-					this.$api.msg(this.i18n.login.accountError)
+				if (!isMobile(this.form.username)) {
+					this.$api.msg(this.i18n.login.mobileError)
 					return;
 				}
 				if (!isPassword(this.form.password)) {
@@ -131,7 +131,7 @@
 	.wrapper {
 		position: relative;
 		z-index: 90;
-		padding-bottom: 40rpx;
+		padding-bottom: 40upx;
 	}
 
 	.back-btn {
@@ -140,15 +140,15 @@
 		z-index: 9999;
 		padding-top: var(--status-bar-height);
 		top: 40upx;
-		font-size: 40rpx;
+		font-size: 40upx;
 		color: #ffffff;
 	}
 
 	.left-top-sign {
-		font-size: 120rpx;
+		font-size: 120upx;
 		color: $page-color-base;
 		position: relative;
-		left: -16rpx;
+		left: -16upx;
 	}
 
 	.right-top-sign {

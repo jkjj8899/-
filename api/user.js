@@ -24,10 +24,24 @@ export function updatePwd(data) {
     data: data
   })
 }
+export function updatePassword(data) {
+  return request({
+    url: '/v1/user/update/password',
+    method: 'POST',
+    data: data
+  })
+}
 //修改资金密码
 export function updatePayPwd(data) {
   return request({
     url: '/v1/user/update/payPwd',
+    method: 'POST',
+    data: data
+  })
+}
+export function updatePayPassword(data) {
+  return request({
+    url: '/v1/user/update/payPassword',
     method: 'POST',
     data: data
   })
@@ -150,5 +164,12 @@ export function authApply(data) {
     url: '/v1/user/auth',
     method: 'POST',
     data: data
+  })
+}
+//获取用户信息
+export function getUserInfo() {
+  return request({
+    url: `/v1/user/info`,
+    method: 'GET'
   })
 }

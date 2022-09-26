@@ -657,7 +657,8 @@
 		"navigationBarTextStyle": "black",
 		"navigationBarTitleText": "",
 		"navigationBarBackgroundColor": "#FFFFFF",
-		"backgroundColor": "#f8f8f8"
+		"backgroundColor": "#f8f8f8",
+		"maxWidth": 720
 	},
 	"tabBar": {
 		"color": "#C0C4CC",

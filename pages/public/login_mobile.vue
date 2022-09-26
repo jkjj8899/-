@@ -8,7 +8,7 @@
 			<view class="welcome">
 				<image mode="widthFix" src="../../static/images/public/logo.png" class="logo"></image>
 				<view class="txt">
-					<text class="b">{{i18n.login.welcome}} {{siteName}}</text>
+					<text class="b">{{i18n.login.welcome}} FexCoin</text>
 					<!--<text>Welcome to fexcoin</text>-->
 				</view>
 			</view>
@@ -18,7 +18,7 @@
 					<input placeholder-style="color: #ffffff"
 						type="mobile" 
 						v-model="form.username" 
-						:placeholder="i18n.login.inputAccount"
+						:placeholder="i18n.login.inputUserName"
 						maxlength="11"
 						data-key="username"
 						@input="inputChange"
@@ -58,7 +58,6 @@
 				:captchaType="'blockPuzzle'"
 				:imgSize="{ width: '300px', height: '155px' }"
 				ref="verify"></Verify>
-		<uni-valid-popup ref="validPopup" @ok="ok" type="google"></uni-valid-popup>
 	</view>
 </template>
 
@@ -67,14 +66,12 @@
 		mapState,
 		mapActions
 	} from 'vuex'
-	import {isAccount, isPassword} from '../../utils/validate'
+	import {isMobile, isPassword} from '../../utils/validate'
 	import Verify from "../../components/verifition/verify/verify";
-	import uniValidPopup from '../../components/uni-valid-popup.vue';
 	import {commonMixin} from '@/common/mixin/mixin.js'
 	export default{
 		components: {
-			Verify,
-			uniValidPopup
+			Verify
 		},
 		mixins: [commonMixin],
 		data(){
@@ -82,8 +79,7 @@
 				form: {
 					username: '13999999999',
 					password: 'Aa123456',
-					captchaVerify: '',
-					googleCode: ''
+					captchaVerify: ''
 				},
 				logining: false,
 				redirect: undefined,
@@ -107,25 +103,26 @@
 			success(params){
 				this.form.captchaVerify = params.captchaVerification
 				console.log("success: ", params)
-				this.$refs.verify.hiddle()
 				this.toLogin()
 			},
 			useVerify(){
-				if(!this.form.username){
-					this.$api.msg(this.i18n.login.inputAccount)
+				this.logining = true;
+				if(this.form.username == ''){
+					this.$api.msg(this.i18n.login.inputUserName)
+					this.logining = false
 					return;
 				}
-				// if (!isAccount(this.form.username)) {
-				// 	this.$api.msg(this.i18n.login.accountError)
-				// 	this.logining = false
-				// 	return;
-				// }
+				if (!isMobile(this.form.username)) {
+					this.$api.msg(this.i18n.login.mobileError)
+					this.logining = false
+					return;
+				}
 				if(this.form.password == ''){
 					this.$api.msg(this.i18n.login.password)
+					this.logining = false
 					return;
 				}
-				//this.$refs.verify.show()
-				this.toLogin()
+				this.$refs.verify.show()
 			},
 			inputChange(e){
 				const key = e.currentTarget.dataset.key;
@@ -140,14 +137,6 @@
 				uni.navigateTo({
 					url: '/pages/public/register'
 				})
-			},
-			ok(data){
-				if(!data.code){
-					this.$api.msg(this.i18n.toast.inputGoogleCode)
-					return;
-				}
-				this.form.googleCode = data.code
-				this.toLogin()
 			},
 			toLogin(){
 				let $this = this
@@ -174,11 +163,6 @@
 						}, 1000)
 					})
 				}).catch(error => {
-					console.log(error)
-					if(error.code == -100){
-						this.$refs.validPopup.open('google')
-					}
-					this.$refs.validPopup.enable()
 					this.logining = false
 				})
 			}

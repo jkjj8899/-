@@ -6,7 +6,7 @@
 		</view>
 		<view class="row center">
 			<text class="s">{{i18n.accountsafe.googleset.bindTip3}}</text>
-			<tki-qrcode ref="qrcode" :size="300" :onval="true" cid="qrcode" :val="`otpauth://totp/FexCoin?secret=${form.googleKey}`" />
+			<tki-qrcode ref="qrcode" :size="300" :onval="true" cid="qrcode" :val="`otpauth://totp/${siteName}?secret=${form.googleKey}`" />
 		</view>
 		<view class="row center">
 			<text class="m">{{i18n.common.secritKey}}: {{form.googleKey}}</text>
@@ -14,7 +14,7 @@
 			<button class="btn" @click="bind">{{i18n.accountsafe.googleset.bindBtn}}</button>
 		</view>
 		
-		<uni-valid-popup ref="validPopup" @ok="ok"></uni-valid-popup>
+		<uni-valid-popup ref="validPopup" @ok="ok" type="google"></uni-valid-popup>
 	</view>
 </template>
 
@@ -52,28 +52,20 @@
 		methods:{
 			...mapActions('user', ['getGoogleKey', 'bindGoogle']),
 			bind(){
-				this.$refs.validPopup.open('mobile')
+				this.$refs.validPopup.open('google')
 			},
 			ok(data){
-				if(data.type == 'mobile'){
-					if(!data.code){
-						this.$api.msg(this.i18n.toast.inputCode)
-						return;
-					}
-					this.form.authCode = data.token + ":" + data.code
-					this.$refs.validPopup.open('google')
-				} else {
-					if(!data.code){
-						this.$api.msg(this.i18n.toast.inputGoogleCode)
-						return;
-					}
-					this.form.googleCode = data.code
-					this.bindGoogle(this.form).then(res =>{
-						this.$api.msg(this.i18n.toast.bindGoodsSuccess)
-						uni.navigateBack({})
-					}).catch(error =>{
-					})
+				if(!data.code){
+					this.$api.msg(this.i18n.toast.inputGoogleCode)
+					return;
 				}
+				this.form.googleCode = data.code
+				this.bindGoogle(this.form).then(res =>{
+					this.$api.msg(this.i18n.toast.bindGoodsSuccess)
+					uni.navigateBack({})
+				}).catch(error =>{
+					this.$refs.validPopup.enable()
+				})
 			},
 			paste() {
 				let $this = this
@@ -97,10 +89,10 @@
 		padding: 30upx 30upx 0upx 30upx;
 		margin-top: 20upx;
 		.m{
-			font-size: $font-lg;
+			font-size: $font-md;
 		}
 		.s{
-			font-size: $font-md;
+			font-size: $font-base;
 			display: block;
 			padding-top: 20upx;
 			padding-bottom: 30upx;
@@ -117,6 +109,6 @@
 		margin-top: 60upx;
 		background-color: $uni-color-blue;
 		color: #ffffff;
-		font-size: $font-lg;
+		font-size: $font-base;
 	}
 </style>

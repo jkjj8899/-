@@ -9,6 +9,7 @@ module.exports = {
 			market: 'Market'
 		},
 		login: {
+			inputAccount: 'Please enter your account',
 			inputUserName: 'Please enter your login account',
 			inputEmail: 'Please enter your email',
 			password: 'Please enter your login password',
@@ -31,6 +32,7 @@ module.exports = {
 			hasAccount: 'Has Account?',
 			inputInvitCode: 'Please enter Invit Code',
 			logining: 'Log in now',
+			accountError: 'The account number must be 6-18 digits and a combination of letters',
 			mobileError: 'Incorrect mobile phone number',
 			loginSuccess: 'Login succeeded',
 			pwdError: 'The password format is incorrect',
@@ -307,6 +309,7 @@ module.exports = {
 				title: 'Login Password',
 				mobile: 'Mobile',
 				validPlacehold: 'Input Valid Code',
+				oldPlacehold: 'Please enter the original password',
 				pwdPlacehold: 'Input New Password',
 				againPlacehold: 'Input New Password Again',
 				tip: 'The login password consists of 8-18 digits of numbers and letters without special characters'
@@ -787,6 +790,7 @@ module.exports = {
 			inputCode: 'Please input verification code',
 			inputGoogleCode: 'Please input google verification code',
 			inputPwd: 'Please input password',
+			inputLoginPwd: 'Please enter your password',
 			pwdError: 'The login password is incorrect',
 			againPwdError: 'The two passwords are inconsistent',
 			updatePwdSuccess: 'Login password modified successfully',

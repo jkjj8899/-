@@ -1,16 +1,7 @@
 <template>
 	<view class="container">
-		<view class="list-cell b-b m-t"  hover-class="cell-hover" :hover-stay-time="50">
-			<text class="cell-tit">{{i18n.accountsafe.loginpwd.mobile}}</text>
-			<text class="cell-more">{{loginInfo.mobile}}</text>
-		</view>
 		<view class="list-cell b-b" hover-class="cell-hover" :hover-stay-time="50">
-			<input class="cell-input" v-model="authCode.captchaCode" :placeholder="i18n.accountsafe.loginpwd.validPlacehold"/>
-			<view>
-				<u-verification-code :seconds="seconds" @end="end" @start="start" ref="uCode" @change="codeChange" :start-text="i18n.common.getCode" :change-text="i18n.common.retryCode" :end-text="i18n.common.overCode"></u-verification-code>
-				<u-button @tap="getCode" class="code-btn">{{tips}}</u-button>
-			</view>
-			<!-- <button :class="[isDisableCode?'cell-btn btn-disabled':'cell-btn']" :disabled="isDisableCode" @click="toSendSms">{{captchaTxt}}</button> -->
+			<input class="cell-input" type="password" v-model="form.oldPwd" :placeholder="i18n.accountsafe.loginpwd.oldPlacehold"/>
 		</view>
 		<view class="list-cell b-b" hover-class="cell-hover" :hover-stay-time="50">
 			<input class="cell-input" type="password" v-model="form.newPwd" :placeholder="i18n.accountsafe.loginpwd.pwdPlacehold"/>
@@ -44,7 +35,8 @@
 					token: undefined
 				},
 				form: {
-					newPwd: undefined
+					newPwd: undefined,
+					oldPwd: undefined
 				}
 			};
 		},
@@ -58,38 +50,13 @@
 		},
 		methods:{
 			...mapActions('common', ['sendSms']),
-			...mapActions('user', ['updatePwd']),
+			...mapActions('user', ['updatePassword']),
 			codeChange(text) {
 				this.tips = text;
 			},
-			getCode() {
-				if(this.$refs.uCode.canGetCode) {
-					// 模拟向后端请求验证码
-					uni.showLoading({
-						title: this.i18n.toast.coding
-					})
-					let data = {
-						type: this.$g.CAPTCHA_TYPE.COMMON,
-						number: this.loginInfo.mobile,
-						countryCode: this.loginInfo.countryCode
-					}
-					this.sendSms(data).then(res => {
-						this.authCode.token = res.data
-						uni.hideLoading();
-						// 这里此提示会被this.start()方法中的提示覆盖
-						this.$u.toast(this.i18n.toast.codeSend);
-						// 通知验证码组件内部开始倒计时
-						this.$refs.uCode.start();
-					}).catch(error => {
-					})
-				} else {
-				}
-			},
-			end() {},
-			start() {},
 			submit(){
-				if(!this.authCode.captchaCode){
-					this.$api.msg(this.i18n.toast.inputCode)
+				if(!this.form.oldPwd){
+					this.$api.msg(this.i18n.accountsafe.loginpwd.oldPlacehold)
 					return;
 				}
 				if(!this.form.newPwd){
@@ -109,9 +76,7 @@
 					return;
 				}
 				this.loading = true
-				this.form.authCode = this.authCode.token + ":" + this.authCode.captchaCode
-				console.log(this.form)
-				this.updatePwd(this.form).then(res => {
+				this.updatePassword(this.form).then(res => {
 					this.$api.msg(this.i18n.toast.updatePwdSuccess, 1000, false, 'none', function() {
 						setTimeout(function() {
 							this.logining = false

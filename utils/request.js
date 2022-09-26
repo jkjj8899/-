@@ -31,6 +31,8 @@ export default function $http(options) {
 		    });
 	   } else if(response.data.code === 200){
 		    resolve(response.data);
+	   } else if(response.data.code === -100){
+		    reject(response.data);
 	   } else {
 		  uni.showToast({
 		       icon: 'none',

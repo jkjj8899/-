@@ -9,6 +9,7 @@ module.exports = {
 			market: '行情'
 		},
 		login: {
+			inputAccount: '請輸入帳號',
 			inputUserName: '請輸入手機號',
 			inputEmail: '請輸入邮箱',
 			password: '請輸入密碼',
@@ -31,6 +32,7 @@ module.exports = {
 			hasAccount: '已有帳號?',
 			inputInvitCode: '請填寫邀請碼',
 			logining: '立即登入',
+			accountError: '帳號必須6-18位數字、字母組合',
 			mobileError: '手機號不正確',
 			loginSuccess: '登入成功',
 			pwdError: '密碼格式不正確',
@@ -300,6 +302,7 @@ module.exports = {
 				title: '登入密碼',
 				mobile: '手機號',
 				validPlacehold: '請輸入驗證碼',
+				oldPlacehold: '請輸入原密碼',
 				pwdPlacehold: '請輸入新密碼',
 				againPlacehold: '請重新輸入密碼',
 				tip: '登入密碼由8-18比特不含特殊字元的數位、字母組合',
@@ -781,6 +784,7 @@ module.exports = {
 			inputCode: '請輸入驗證碼',
 			inputGoogleCode: '請輸入Google驗證碼',
 			inputPwd: '請輸入密碼',
+			inputLoginPwd: '請輸入登錄密碼',
 			pwdError: '登入密碼不正確',
 			againPwdError: '兩次密碼輸入不一致',
 			updatePwdSuccess: '登入密碼修改成功',

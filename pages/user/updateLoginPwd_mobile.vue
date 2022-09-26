@@ -1,16 +1,25 @@
 <template>
 	<view class="container">
-		<view class="list-cell b-b" hover-class="cell-hover" :hover-stay-time="50">
-			<input class="cell-input" type="password" v-model="form.loginPassword" :placeholder="i18n.toast.inputLoginPwd"/>
+		<view class="list-cell b-b m-t"  hover-class="cell-hover" :hover-stay-time="50">
+			<text class="cell-tit">{{i18n.accountsafe.loginpwd.mobile}}</text>
+			<text class="cell-more">{{loginInfo.mobile}}</text>
 		</view>
 		<view class="list-cell b-b" hover-class="cell-hover" :hover-stay-time="50">
-			<input class="cell-input" type="password" maxlength="6" v-model="form.newPwd" :placeholder="i18n.accountsafe.loginpwd.pwdPlacehold"/>
+			<input class="cell-input" v-model="authCode.captchaCode" :placeholder="i18n.accountsafe.loginpwd.validPlacehold"/>
+			<view>
+				<u-verification-code :seconds="seconds" @end="end" @start="start" ref="uCode" @change="codeChange" :start-text="i18n.common.getCode" :change-text="i18n.common.retryCode" :end-text="i18n.common.overCode"></u-verification-code>
+				<u-button @tap="getCode" class="code-btn">{{tips}}</u-button>
+			</view>
+			<!-- <button :class="[isDisableCode?'cell-btn btn-disabled':'cell-btn']" :disabled="isDisableCode" @click="toSendSms">{{captchaTxt}}</button> -->
 		</view>
 		<view class="list-cell b-b" hover-class="cell-hover" :hover-stay-time="50">
-			<input class="cell-input" type="password" maxlength="6" v-model="form.againPwd" :placeholder="i18n.accountsafe.loginpwd.againPlacehold"/>
+			<input class="cell-input" type="password" v-model="form.newPwd" :placeholder="i18n.accountsafe.loginpwd.pwdPlacehold"/>
+		</view>
+		<view class="list-cell" hover-class="cell-hover" :hover-stay-time="50">
+			<input class="cell-input" type="password" v-model="form.againPwd" :placeholder="i18n.accountsafe.loginpwd.againPlacehold"/>
 		</view>
 		<view class="list-cell tip" hover-class="cell-hover" :hover-stay-time="50">
-			<text>{{i18n.accountsafe.tradepwd.tip}}</text>
+			<text>{{i18n.accountsafe.loginpwd.tip}}</text>
 		</view>
 		<button :disabled="loading" class="submit" @click="submit">{{i18n.common.ok}}</button>
 	</view>
@@ -21,7 +30,7 @@
 		mapState,
 		mapActions
 	} from 'vuex'
-	import {isPayPassword} from '../../utils/validate'
+	import {isPassword} from '../../utils/validate'
 	import {commonMixin} from '@/common/mixin/mixin.js'
 	export default {
 		mixins: [commonMixin],
@@ -35,9 +44,7 @@
 					token: undefined
 				},
 				form: {
-					loginPassword: undefined,
-					newPwd: undefined,
-					againPwd: undefined
+					newPwd: undefined
 				}
 			};
 		},
@@ -46,22 +53,51 @@
 		},
 		onShow() {
 			uni.setNavigationBarTitle({
-				title: this.i18n.common.update + this.i18n.accountsafe.tradepwd.title
+				title: this.i18n.common.update + this.i18n.accountsafe.loginpwd.title
 			})
 		},
 		methods:{
-			...mapActions('user', ['updatePayPassword']),
+			...mapActions('common', ['sendSms']),
+			...mapActions('user', ['updatePwd']),
+			codeChange(text) {
+				this.tips = text;
+			},
+			getCode() {
+				if(this.$refs.uCode.canGetCode) {
+					// 模拟向后端请求验证码
+					uni.showLoading({
+						title: this.i18n.toast.coding
+					})
+					let data = {
+						type: this.$g.CAPTCHA_TYPE.COMMON,
+						number: this.loginInfo.mobile,
+						countryCode: this.loginInfo.countryCode
+					}
+					this.sendSms(data).then(res => {
+						this.authCode.token = res.data
+						uni.hideLoading();
+						// 这里此提示会被this.start()方法中的提示覆盖
+						this.$u.toast(this.i18n.toast.codeSend);
+						// 通知验证码组件内部开始倒计时
+						this.$refs.uCode.start();
+					}).catch(error => {
+					})
+				} else {
+				}
+			},
+			end() {},
+			start() {},
 			submit(){
-				if(!this.form.loginPassword){
-					this.$api.msg(this.i18n.toast.inputLoginPwd)
+				if(!this.authCode.captchaCode){
+					this.$api.msg(this.i18n.toast.inputCode)
 					return;
 				}
 				if(!this.form.newPwd){
 					this.$api.msg(this.i18n.toast.inputPwd)
 					return;
 				}
-				if(!isPayPassword(this.form.newPwd)){
-					this.$api.msg(this.i18n.tradepwd.tip)
+				if(!isPassword(this.form.newPwd)){
+					this.$api.msg(this.i18n.toast.pwdError)
 					return;
 				}
 				if(!this.form.againPwd){
@@ -73,8 +109,10 @@
 					return;
 				}
 				this.loading = true
-				this.updatePayPassword(this.form).then(res => {
-					this.$api.msg(this.i18n.toast.submitSuccess, 1000, false, 'none', function() {
+				this.form.authCode = this.authCode.token + ":" + this.authCode.captchaCode
+				console.log(this.form)
+				this.updatePwd(this.form).then(res => {
+					this.$api.msg(this.i18n.toast.updatePwdSuccess, 1000, false, 'none', function() {
 						setTimeout(function() {
 							this.logining = false
 							uni.navigateBack({})
@@ -92,6 +130,9 @@
 <style lang='scss' scoped>
 	page{
 		background: $page-color-base;
+	}
+	.u-code-wrap{
+		font-size: 20upx;
 	}
 	.list-cell{
 		display:flex;

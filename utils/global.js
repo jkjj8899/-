@@ -1,4 +1,5 @@
 export default {
+	SITE_NAME: 'FexCoin',
 	CAPTCHA_TYPE : {
 		COMMON: 'common'
 	},

@@ -9,6 +9,7 @@ module.exports = {
 			market: '行情'
 		},
 		login: {
+			inputAccount: '请输入帐号',
 			inputUserName: '请输入手机号',
 			inputEmail: '请输入邮箱',
 			password: '请输入密码',
@@ -31,6 +32,7 @@ module.exports = {
 			hasAccount: '已有账号?',
 			inputInvitCode: '请填写邀请码',
 			logining: '立即登录',
+			accountError: '帐号必须6-18位数字、字母组合',
 			mobileError: '手机号不正确',
 			loginSuccess: '登录成功',
 			pwdError: '密码格式不正确',
@@ -301,6 +303,7 @@ module.exports = {
 				title: '登录密码',
 				mobile: '手机号',
 				validPlacehold: '请输入验证码',
+				oldPlacehold: '请输入原密码',
 				pwdPlacehold: '请输入新密码',
 				againPlacehold: '请重新输入密码',
 				tip: '登录密码由8-18位不含特殊字符的数字、字母组合'
@@ -781,6 +784,7 @@ module.exports = {
 			inputCode: '请输入验证码',
 			inputGoogleCode: '请输入Google验证码',
 			inputPwd: '请输入密码',
+			inputLoginPwd: '请输入登录密码',
 			pwdError: '登录密码不正确',
 			againPwdError: '两次密码输入不一致',
 			updatePwdSuccess: '登录密码修改成功',

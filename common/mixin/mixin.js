@@ -2,7 +2,7 @@ import {
 		mapState,
 		mapActions
 	} from 'vuex'
-
+import {SITE_NAME} from '../../utils/global'
 export const commonMixin = {
   computed:{
   	...mapState('user', ['loginInfo']),
@@ -12,6 +12,7 @@ export const commonMixin = {
   },
   data() {
     return {
+		siteName: '',
 		contentText: {
 			contentdown: "上拉显示更多",
 			contentrefresh: "正在加载...",
@@ -36,6 +37,7 @@ export const commonMixin = {
 	  }
   },
   onShow(){
+	  this.siteName = this.$g.SITE_NAME
 	  this.contentText = {
 		  contentdown: this.i18n.common.loadmoreText,
 		  contentrefresh: this.i18n.common.loadingText,

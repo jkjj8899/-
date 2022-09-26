@@ -9,7 +9,7 @@
 				</view>
 				<view class="info-box" @click="toLogin">
 					<text class="username">{{loginInfo.mobile || i18n.my.login}}</text>
-					<view class="tip">{{i18n.my.sentence}} FEXCOIN.COM</view>
+					<view class="tip">{{i18n.my.sentence}} {{siteName}}</view>
 				</view>
 			</view>
 		</view>
