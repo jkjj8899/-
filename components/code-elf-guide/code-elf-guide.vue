@@ -5,19 +5,19 @@
 		:duration="duration">
 			<swiper-item>
 				<view class="swiper-item">
-					<view class="swiper-item-img"><image src="https://fexcoin.oss-cn-shenzhen.aliyuncs.com/images/guide1.jpg" mode="widthFix"></image></view>
+					<view class="swiper-item-img"><image src="https://exspot.oss-cn-hongkong.aliyuncs.com/images/guide1.jpg" mode="widthFix"></image></view>
 				</view>
 				<!-- <view class="jump-over" @tap="launchFlag()">{{jumpover}}</view> -->
 			</swiper-item>
 			<swiper-item>
 				<view class="swiper-item">
-					<view class="swiper-item-img"><image src="https://fexcoin.oss-cn-shenzhen.aliyuncs.com/images/guide2.jpg" mode="widthFix"></image></view>
+					<view class="swiper-item-img"><image src="https://exspot.oss-cn-hongkong.aliyuncs.com/images/guide2.jpg" mode="widthFix"></image></view>
 				</view>
 				<!-- <view class="jump-over" @tap="launchFlag()">{{jumpover}}</view> -->
 			</swiper-item>
 			<swiper-item>
 				<view class="swiper-item">
-					<view class="swiper-item-img"><image src="https://fexcoin.oss-cn-shenzhen.aliyuncs.com/images/guide3.jpg" mode="widthFix"></image></view>
+					<view class="swiper-item-img"><image src="https://exspot.oss-cn-hongkong.aliyuncs.com/images/guide3.jpg" mode="widthFix"></image></view>
 				</view>
 				<view class="experience" @tap="launchFlag()">&nbsp;</view>
 			</swiper-item>
