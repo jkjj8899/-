@@ -111,7 +111,7 @@
 							this.payments.push(p[i])
 						}
 					}
-					if(!this.payments){
+					if(!this.payments || this.payments.length <= 0){
 						this.navTo('/pages/user/payType')
 						return
 					}
