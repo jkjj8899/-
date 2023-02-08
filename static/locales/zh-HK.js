@@ -388,7 +388,7 @@ module.exports = {
 			
 		},
 		about: {
-			protocol: '服務協定',
+			service: '服務協定',
 			privacy: '隱私條款',
 			law: '法律聲明',
 			checkVer: '檢查新版本',

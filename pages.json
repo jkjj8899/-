@@ -390,7 +390,13 @@
 		{
 			"path": "pages/set/about",
 			"style": {
-				"navigationBarTitleText": "关于Fex"
+				"navigationBarTitleText": "关于我们"
+			}
+		},
+		{
+			"path": "pages/set/aboutDetail",
+			"style": {
+				"navigationBarTitleText": ""
 			}
 		},
 		{

@@ -388,7 +388,7 @@ module.exports = {
 			tip10: '如何提币',
 		},
 		about: {
-			protocol: '服务协议',
+			service: '服务协议',
 			privacy: '隐私条款',
 			law: '法律声明',
 			checkVer: '检查新版本',
@@ -397,7 +397,7 @@ module.exports = {
 		set: {
 			push: '消息推送',
 			help: '帮助中心',
-			about: '关于Fex'
+			about: '关于我们'
 		},
 		agent: {
 			status: {

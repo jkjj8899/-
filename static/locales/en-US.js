@@ -394,7 +394,7 @@ module.exports = {
 			tip10: 'How to withdraw',
 		},
 		about: {
-			protocol: 'Service agreement',
+			service: 'Service agreement',
 			privacy: 'Privacy clause',
 			law: 'Legal declaration',
 			checkVer: 'Check for new version',
