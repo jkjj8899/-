@@ -614,7 +614,10 @@ module.exports = {
 				selectOvertime: 'Please select a timeout',
 				onlineSell: 'Online Sell',
 				onlineBuy: 'Online Buy',
-				advertList: 'Advertising list'
+				advertList: 'Advertising list',
+				confirmCannel: 'Confirm to close the advertisement?',
+				cancelSuccess: 'Close advertisement successfully',
+				cancelFail: 'Failed to close advertisement'
 			},
 			merchant: {
 				title: 'Acceptor management',
@@ -814,6 +817,8 @@ module.exports = {
 			inputAccount: 'Please input Username',
 			inputBank: 'Please enter the account bank',
 			inputSubBank: 'Please enter the account opening branch',
+			optSuccess: 'Operation succeeded',
+			optFail: 'Operation failed'
 		},
 		popup: {
 			open: 'Not yet open!',

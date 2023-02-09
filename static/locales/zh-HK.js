@@ -608,7 +608,10 @@ module.exports = {
 				selectOvertime: '請選擇超時時間',
 				onlineSell: '線上出售',
 				onlineBuy: '線上購買',
-				advertList: '廣告清單'
+				advertList: '廣告清單',
+				confirmCannel: '確定關閉廣告?',
+				cancelSuccess: '關閉廣告成功',
+				cancelFail: '關閉廣告失敗'
 			},
 			merchant: {
 				title: '承兌商管理',
@@ -810,6 +813,8 @@ module.exports = {
 			inputAccount: '請輸入賬號',
 			inputBank: '請輸入開戶銀行',
 			inputSubBank: '請輸入開戶支行',
+			optSuccess: '操作成功',
+			optFail: '操作失敗'
 		},
 		popup: {
 			open: '暫未開放！',

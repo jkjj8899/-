@@ -608,7 +608,10 @@ module.exports = {
 				selectOvertime: '请选择超时时间',
 				onlineSell: '在线出售',
 				onlineBuy: '在线购买',
-				advertList: '广告列表'
+				advertList: '广告列表',
+				confirmCannel: '确定关闭广告?',
+				cancelSuccess: '关闭广告成功',
+				cancelFail: '关闭广告失败'
 			},
 			merchant: {
 				title: '承兑商管理',
@@ -810,6 +813,8 @@ module.exports = {
 			inputAccount: '请输入账号',
 			inputBank: '请输入开户银行',
 			inputSubBank: '请输入开户支行',
+			optSuccess: '操作成功',
+			optFail: '操作失败'
 		},
 		popup: {
 			open: '暂未开放!',

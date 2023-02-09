@@ -16,8 +16,8 @@
 				</view>
 				<view class="s-row">
 					<view class="col subtitle row-title">{{i18n.common.time}}</view>
-					<view class="col subtitle row-title">{{i18n.common.vol}}(USDT)</view>
-					<view class="col r subtitle row-title">{{i18n.common.amount}}(CNY)</view>
+					<view class="col subtitle row-title">{{i18n.common.vol}}({{item.coin}})</view>
+					<view class="col r subtitle row-title">{{i18n.common.amount}}({{item.paycoin}})</view>
 				</view>
 				<view class="s-row">
 					<view class="col subtitle row-amount">{{item.ctime | moment('HH:mm MM/DD')}}</view>
