@@ -213,6 +213,12 @@
 			}
 		},
 		{
+			"path": "pages/otc/order/appeal",
+			"style": {
+				"navigationBarTitleText": "订单申诉"
+			}
+		},
+		{
 			"path": "pages/otc/business/business",
 			"style": {
 				"navigationBarTitleText": ""

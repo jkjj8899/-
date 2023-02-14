@@ -119,13 +119,19 @@
 		</view>
 		<view class="footer" v-if="side == 'BUY' && order.status == 1">
 			<view class="btns">
-				<!-- <button class="pay appy">申诉</button> -->
+				<button class="pay appy" @click="navTo('/pages/otc/order/appeal?id='+order.id)">{{i18n.otc.order.status.appeal}}</button>
 			</view>
 		</view>
 		<view class="footer" v-if="side == 'SELL' && order.status == 1">
 			<view class="btns">
-				<!-- <button class="pay appy">申诉</button> -->
+				<button class="pay appy" @click="navTo('/pages/otc/order/appeal?id='+order.id)">{{i18n.otc.order.status.appeal}}</button>
 				<button @click="complete" class="pay">{{i18n.otc.order.tip16}}</button>
+			</view>
+		</view>
+		<view class="footer" v-if="order.status == 4">
+			<view class="btns">
+				<button class="pay appy" @click="cancelAppeal" v-if="appealDetail.isSelf">{{i18n.otc.order.cancelAppeal}}</button>
+				<button class="pay" @click="navTo('/pages/otc/order/appeal?id='+order.id)">{{i18n.otc.order.searchAppeal}}</button>
 			</view>
 		</view>
 	</view>
@@ -157,13 +163,16 @@
 				currencysMap: {},
 				currencys: [],
 				paymentSettingList: [],
-				paymentMethodList: []
+				paymentMethodList: [],
+				appealDetail: {}
 			};
 		},
 		onShow() {
 			this.$fire.$emit('refreshCoin')
+			this.loadData();
 		},
 		onLoad(options){
+			this.id = options.id
 			this.currencyList().then(res => {
 				let currencyList = res.data.currency
 				let map = {}
@@ -173,8 +182,6 @@
 				this.currencysMap = map
 				this.currencys = currencyList
 				
-				this.id = options.id
-				this.loadData();
 			})
 			
 		},
@@ -183,7 +190,7 @@
 		},
 		methods: {
 			...mapActions('common', ['currencyList']),
-			...mapActions('otc', ['getOrder', 'cancelOrder', 'payOrder', 'completeOrder', 'getActivePaymentMethodList', 'getPaymentSetting']),
+			...mapActions('otc', ['appealOrderCancel', 'getAppealDetail', 'getOrder', 'cancelOrder', 'payOrder', 'completeOrder', 'getActivePaymentMethodList', 'getPaymentSetting']),
 			cancel(){
 				let $this = this;
 				uni.showModal({
@@ -262,7 +269,32 @@
 					}
 				}
 			},
+			cancelAppeal(){
+				let $this = this
+				uni.showModal({
+				    title: $this.i18n.common.tip,
+				    content: $this.i18n.otc.order.confirmCannel,
+				    success: function (res) {
+				        if (res.confirm) {
+							uni.showLoading({})
+							$this.appealOrderCancel($this.appealDetail.id).then(res =>{
+								$this.loadData()
+								uni.hideLoading()
+								$this.$api.msg($this.i18n.otc.order.cannelSuccess, 1000, false, 'none', function() {})
+							}).catch(error =>{
+								uni.hideLoading()
+							})
+				        }
+				    }
+				});
+			},
+			loadAppealDetail(){
+				this.getAppealDetail(this.id).then(res => {
+					this.appealDetail = res.data
+				})
+			},
 			async loadData(){
+				
 				this.getPaymentSetting().then(setting => {
 					this.paymentSettingList = setting.data
 					
@@ -272,6 +304,10 @@
 					
 					this.getOrder(this.id).then(res =>{
 						this.order = res.data.order
+						if(this.order.status == 4){
+							this.loadAppealDetail()
+						}
+						
 						this.nickname = res.data.nickname
 						this.side = res.data.side
 						this.merchantPays = res.data.payments

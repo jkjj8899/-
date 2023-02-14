@@ -540,6 +540,17 @@ module.exports = {
 			submit: 'Confirm',
 			confirm: 'Confirm order?',
 			order: {
+				orderAppeal: "Order appeal",
+				submitAppeal: "Submission of complaints",
+				cancelAppeal: "Cancel appeal",
+				searchAppeal: "Details of trial",
+				appealStatus: {
+					"0": "Not processed",
+					"1": "Processed",
+					"2": "Canceled",
+				},
+				inputContent: "Please enter the complaint content",
+				uploadImage: "Please upload pictures",
 				orderRecord: 'Record',
 				statusLabel: 'Status',
 				typeLabel: 'Type',

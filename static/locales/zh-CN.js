@@ -534,6 +534,17 @@ module.exports = {
 			submit: '下单',
 			confirm: '是否确认下单?',
 			order: {
+				orderAppeal: "订单申诉",
+				submitAppeal: "提交申诉",
+				cancelAppeal: "取消申诉",
+				searchAppeal: "查看审诉详情",
+				appealStatus: {
+					"0": "未处理",
+					"1": "已处理",
+					"2": "已取消",
+				},
+				inputContent: "请输入投诉内容",
+				uploadImage: "请上传图片",
 				orderRecord: '订单记录',
 				statusLabel: '订单状态',
 				typeLabel: '交易类型',
