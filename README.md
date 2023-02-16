@@ -19,8 +19,8 @@
 #### 技术交流社区
 
 ##### 微信群 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;QQ群
-![Image text](doc/wechat_qrcode.jpg) 
-![Image text](doc/qq_qrcode.jpg) 
+![Image text](https://miniboxs.oss-cn-shenzhen.aliyuncs.com/common/wechat_qrcode.jpg) 
+![Image text](https://miniboxs.oss-cn-shenzhen.aliyuncs.com/common/qq_qrcode.jpg) 
 
 
 #### 功能规划
