@@ -8,10 +8,10 @@
 ##### ETH: 0x4fA38fD5BA5c1054E48E036EBd5ac5b34D76Cec7
 ##### EOS: fexcoin54321
 
-### Android测试包下载: [点击下载](https://fexcoin.oss-cn-shenzhen.aliyuncs.com/upload/apk/fexcoin.apk)
+### Android测试包下载: [点击下载](https://miniboxs.oss-cn-shenzhen.aliyuncs.com/wallet/fexcoin.apk)
 
 ### 扫一扫下载
-![Image text](https://miniboxs.oss-cn-shenzhen.aliyuncs.com/wallet/fexcoin.apk) 
+![Image text](https://miniboxs.oss-cn-shenzhen.aliyuncs.com/wallet/apk.png) 
 
 ### H5体验
 ![Image text](https://miniboxs.oss-cn-shenzhen.aliyuncs.com/wallet/h5.png) 
