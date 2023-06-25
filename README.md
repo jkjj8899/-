@@ -11,10 +11,10 @@
 ### Android测试包下载: [点击下载](https://fexcoin.oss-cn-shenzhen.aliyuncs.com/upload/apk/fexcoin.apk)
 
 ### 扫一扫下载
-![Image text](https://shkj1994.oss-cn-shenzhen.aliyuncs.com/images/qrcode.png) 
+![Image text](https://miniboxs.oss-cn-shenzhen.aliyuncs.com/wallet/fexcoin.apk) 
 
 ### H5体验
-![Image text](https://globalcoin.oss-cn-hongkong.aliyuncs.com/upload/images/qrcode.png) 
+![Image text](https://miniboxs.oss-cn-shenzhen.aliyuncs.com/wallet/h5.png) 
 
 #### 技术交流社区
 
@@ -34,27 +34,27 @@
 
 #### 版本更新
 
-##### 2021-11-19: 新增多语言需求
+##### 1: 新增多语言需求
 
-##### 2021-10-09: 新增登录滑块验证功能
+##### 2: 新增登录滑块验证功能
 
-##### 2021-09-07: 新增身份认证
+##### 3: 新增身份认证
 
-##### 2021-06-25: 新增币种信息展示
+##### 4: 新增币种信息展示
 
-##### 2021-06-16: 新增云算力需求
+##### 5: 新增云算力需求
 
-##### 2021-06-03: 新增行情预言机需求
+##### 6: 新增行情预言机需求
 
-##### 2021-05-13: 新增APP版本更新
+##### 7: 新增APP版本更新
 
-##### 2021-03-03: 新增抽奖需求
+##### 8: 新增抽奖需求
 
-##### 2021-01-24: 新增签到需求
+##### 9: 新增签到需求
 
-##### 2020-10-24: 新增存币理财需求
+##### 10: 新增存币理财需求
 
-##### 2020-06-14: 接入火币K线行情
+##### 11: 接入火币K线行情
 
 
 #### 安装教程
@@ -74,7 +74,6 @@
 
 
 #### 推荐作者小程序
-![Image text](doc/appbox.jpg) 
 ![Image text](https://shkj1994.oss-cn-shenzhen.aliyuncs.com/gh_1c63fd731ccc_430.jpg) 
 ![Image text](https://shkj1994.oss-cn-shenzhen.aliyuncs.com/gh_a79c05053be4_430.jpg) 
 ![Image text](https://shkj1994.oss-cn-shenzhen.aliyuncs.com/gh_4264e951ad60_430.jpg) 
