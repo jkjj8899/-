@@ -1,5 +1,5 @@
 <template>
-	<view class="container">	
+	<view class="container">
 		<!-- 头部轮播 -->
 		<view class="carousel-section">
 			<!-- 背景色区域 -->
@@ -19,21 +19,20 @@
 			<noticeSwiper :list="notices"></noticeSwiper>
 		</view>
 		<scroll-view class="scroll-view-market" scroll-x="true">
-			<view class="market-item" v-for="(item, i) in topSymbols" :key="item.symbol" @click="navToKline(item)">
+			<view class="market-item" v-for="(item, i) in topMarkets" :key="item.symbol" @click="onClickMarket(item)">
 				<view class="item">
-					<view class="t">{{item.title}}<text :class="topMakretMap[item.symbol].change | formatChangeCls">{{topMakretMap[item.symbol].change | formatChange}}</text></view>
-					<text class="c" :class="topMakretMap[item.symbol].change | formatChangeCls">{{topMakretMap[item.symbol] ? topMakretMap[item.symbol].close : '0.00'}}</text>
-					<text class="b">≈ {{topMakretMap[item.symbol].cny}} CNY</text>
+					<view class="t">{{item.baseCoin}}/{{item.pricingCoin}}<text :class="item | formatChangeCls">{{item | formatChange}}</text></view>
+					<text class="c" :class="item | formatChangeCls">{{item.close}}</text>
 				</view>
 			</view>
 		</scroll-view>
 		<view class="line"></view>
 		<view class="otc">
 			<view class="fiat" @click="navTo('/pages/otc/otc')">
-				<image src="../../static/icon-fiat.png" mode="widthFix"></image>
+				<image src="../../static/otc-trading.png" mode="widthFix"></image>
 				<view class="label">
 					<text>{{ i18n.index.otc.title }}</text>
-					<text class="sub">{{ i18n.index.otc.support }}ETH、USDT</text>
+					<text class="sub">{{ i18n.index.otc.support }}TRX、USDT、ETH</text>
 				</view>
 			</view>
 			<view @click="navTo('/pages/otc/otc')" class="r" style="padding-right: 30rpx;">
@@ -41,11 +40,21 @@
 			</view>
 		</view>
 		<view class="menu">
-			<view class="fiat" @click="navTo('/pages/prediction/prediction')">
-				<image src="../../static/icon-prediction.png" mode="widthFix"></image>
+			<!-- <view class="fiat" @click="navTo('/pages/prediction/prediction')">
+				<image src="../../static/icon-prediction.png" mode="widthFix" style="width: 80rpx;"></image>
 				<view class="label">
 					<text>{{ i18n.index.prediction.title }}</text>
 					<text class="sub">Prediction Market</text>
+				</view>
+			</view> -->
+			<view class="ex">
+				<view class="item exchange" @click="navTo('/pages/news/news')">
+					<image class="miner" src="../../static/images/tabbar/tab-news-active.png"></image>
+					<text>{{ i18n.tabBar.news }}</text>
+				</view>
+				<view class="item shop" @click="navTo('/pages/prediction/prediction', true)">
+					<image src="../../static/icon-prediction.png"></image>
+					<text>{{ i18n.index.prediction.title }}</text>
 				</view>
 			</view>
 			<view class="ex">
@@ -53,13 +62,13 @@
 					<image src="../../static/images/home/home-ex-icon.png"></image>
 					<text>{{ i18n.index.exchange.title }}</text>
 				</view>
-				<view class="item shop" @click="navTo('/pages/finance/deposit')">
+				<view class="item shop" @click="switchTab('/pages/finance/deposit')">
 					<image class="miner" src="../../static/images/home/home-stacking-icon.png"></image>
 					<text>{{ i18n.index.stacking.title }}</text>
 				</view>
 			</view>
 		</view>
-		<view class="advert">
+		<view class="advert" v-if="ads && ads.length > 0">
 			<uni-swiper-dot :current="current" :mode="mode">
 			    <swiper class="swiper-box" autoplay="true">
 			        <swiper-item @click="open(item)" v-for="(item, index) in ads" :key="index" class="swiper-item">
@@ -75,17 +84,19 @@
 				<view class="col r">{{ i18n.index.market.title2 }}</view>
 				<view class="col r">24{{ i18n.index.market.title3 }}</view>
 			</view>
-			<view class="s-row little-line"  @click="navTo(`/pages/market/index?code=${item.symbolCode}`)" v-for="(item, i) in markets" :key="item.symbol">
+			<view class="s-row little-line"  @click="onClickMarket(item)" v-for="(item, i) in markets" :key="item.symbol">
 				<view class="col light">
-					<image :src="item.icon" class="coinLogo"></image>
-					{{item.symbol}}
-					<view class="subtitle">{{item.marketcap | formatMarketcap}}</view>
+					<view class="coin">
+						<!-- <image :src="coinMap[item.baseCoin].icon" class="coinLogo"></image> -->
+						{{item.baseCoin}}/{{item.pricingCoin}}
+					</view>
+					<!-- <view class="subtitle">{{item.vol | formatMarketcap}}</view> -->
 				</view>
 				<view class="col r light">
-					{{item.priceCny}}
-					<view class="subtitle">${{item.priceUsd}}</view>
+					${{item.close}}
+					<!--<view class="subtitle">${{item.priceUsd}}</view>-->
 				</view>
-				<view class="col r"><uni-tag :text="item.changePercent | formatChange" :type="item.changePercent >= 0 ? 'success' : 'error'"></uni-tag></view>
+				<view class="col r"><uni-tag :text="item | formatChange" :type="item.close > item.open ? 'success' : 'error'"></uni-tag></view>
 			</view>
 		</view>
 	</view>
@@ -106,6 +117,7 @@
 		data() {
 			return {
 				markets: [],
+				topMarkets: [],
 				notices: [],
 				titleNViewBackground: '',
 				swiperCurrent: 0,
@@ -114,27 +126,21 @@
 				ads: [],
 				current: 0,
 				mode: 'round' ,
-				marketTimer: null,
-				topSymbols: [
-					{symbol: 'btcusdt', title: 'BTC/USDT'},
-					{symbol: 'ethusdt', title: 'ETH/USDT'},
-					{symbol: 'dotusdt', title: 'DOT/USDT'}
-				],
-				topMakretMap: {
-					'btcusdt': {},
-					'ethusdt': {},
-					'dotusdt': {}
-				}
+				marketTimer: undefined
 			};
+		},
+		computed: {
+			...mapState('common', ['coinMap'])
 		},
 		filters:{
 			formatChange(v){
-				return (v > 0 ? '+' : '') + parseFloat(v).toFixed(2) + '%'
+				return (((v.close - v.open) / v.open) * 100).toFixed(2) + '%'
 			},
 			formatChangeCls(v){
-				if(v == 0){
+				let p = (((v.close - v.open) / v.open) * 100)
+				if(p == 0){
 					return ''
-				} else if(v > 0){
+				} else if(p > 0){
 					return 'upper-text'
 				} else {
 					return 'lower-text'
@@ -145,72 +151,31 @@
 			}
 		},
 		onShow() {
-			this.getMaketList()
-			this.marketTimer =setInterval(() =>{
-				this.getMaketList()
+			this.$fire.$emit('refreshCoin')
+			
+			this.getOptionMarketList()
+			this.getOptionTopMarketList()
+			this.marketTimer = setInterval(() =>{
+				this.getOptionTopMarketList()
+				this.getOptionMarketList()
 			}, 3000)
-			setTimeout(() =>{
-				this.loadTopMarket()
-			}, 500)
-			this.swiperCurrent = 0;
-			this.swiperLength = 0;
-			this.carousels = [];
-			this.ads = [];
-			this.notices = [];
-			this.loadData();
+			
 		},
 		onPullDownRefresh() {
 			this.loadData()
-			this.getMaketList()
 		},
 		onLoad() {
+			this.loadData();
 		},
 		onHide() {
-			if(this.marketTimer){
-				clearInterval(this.marketTimer)
-			}
-			
-			let ch = `market.overviewv2`
-			let data = {
-			  "unsub": ch,
-			  "id": Date.now() + ""
-			}
-			this.$store.dispatch('WEBSOCKET_SEND', JSON.stringify(data))
-			uni.$off(ch, (res) => {})
+			clearInterval(this.marketTimer)
 		},
 		onUnload() {
+			clearInterval(this.marketTimer)
 		},
 		methods: {
 			...mapActions('common', ['marketList', 'adList', 'noticeList']),
-			loadTopMarket(){
-				let $this = this
-				let ch = `market.overviewv2`
-				let params = {
-				  "sub": ch
-				}
-				this.$store.dispatch('WEBSOCKET_SEND', JSON.stringify(params))
-				uni.$on("sub."+ch, (res) => {
-					let map = res.data.data
-					for(let i = 0; i < 3; i++){
-						let symbol = this.topSymbols[i].symbol
-						if(map[symbol]){
-							let item = map[symbol]
-							let tick = {
-								open: item.o,
-								close: item.c,
-								low: item.l,
-								high: item.h,
-								vol: item.v,
-								amount: item.a
-							}
-							tick.change = parseFloat((tick.close - tick.open) / tick.open * 100).toFixed(2);
-							tick.cny = parseFloat(tick.close * 6.4).toFixed(2)
-							$this.topMakretMap[symbol] = tick
-						}
-					}
-					
-				})
-			},
+			...mapActions('option', ['optionMarketList', 'optionTopMarketList']),
 			async loadData() {
 				this.adList().then(res =>{
 					let casrousels = res.data.casrousels
@@ -224,8 +189,23 @@
 					this.notices = res.rows
 				})
 			},
+			switchTab(url){
+				uni.switchTab({
+					url: url
+				})
+			},
 			getMaketList(){
 				this.marketList().then(res =>{
+					this.markets = res.data
+				})
+			},
+			getOptionTopMarketList(){
+				this.optionTopMarketList().then(res => {
+					this.topMarkets = res.data
+				})
+			},
+			getOptionMarketList(){
+				this.optionMarketList().then(res => {
 					this.markets = res.data
 				})
 			},
@@ -237,6 +217,11 @@
 			navToKline(item){
 				uni.navigateTo({
 					url: `/pages/public/kline?symbol=${item.symbol}`
+				})
+			},
+			onClickMarket(item){
+				uni.navigateTo({
+					url: '/pages/option/index?symbol=' + item.symbol.toLowerCase()
 				})
 			},
 			open(item){
@@ -281,15 +266,29 @@
 	}
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 	page {
 		background: #ffffff;
-		padding-top: 50rpx;
+		padding-top: 0rpx;
+		
 	}
 	.container{
 		// #ifdef H5
 		padding-bottom: 100rpx;
 		// #endif
+	}
+	.slot-wrap {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		width: 100%;
+		.logo{
+			width: 320rpx;
+		}
+		.txt{
+			font-size: 40rpx;
+			font-weight: bold;
+		}
 	}
 	.m-t{
 		margin-top: 16rpx;
@@ -405,7 +404,7 @@
 		.ex{
 			display: flex;
 			flex-direction: column;
-			flex: 1;
+			width: 49%;
 			.item{
 				width: 100%;
 				height: 100rpx;
@@ -565,12 +564,93 @@
 			}
 			.light{
 				font-weight: bold;
-				font-size: $font-lg;
+				font-size: $font-base;
 				color: $font-color-dark;
+			}
+			.coin{
+				display: flex;
 			}
 			.r{
 				text-align: right;
 			}
+		}
+	}
+	
+	.f-header{
+		display:flex;
+		align-items:center;
+		height: 140rpx;
+		padding: 6rpx 30rpx 8rpx;
+		background: #fff;
+		image{
+			flex-shrink: 0;
+			width: 80rpx;
+			height: 80rpx;
+			margin-right: 20rpx;
+		}
+		.tit-box{
+			flex: 1;
+			display: flex;
+			flex-direction: column;
+		}
+		.tit{
+			font-size: $font-lg;
+			color: #font-color-dark;
+			line-height: 1.3;
+		}
+		.tit2{
+			font-size: $font-sm;
+			color: $font-color-light;
+		}
+	}
+	/* 猜你喜欢 */
+	.guess-section{
+		display:flex;
+		flex-wrap:wrap;
+		padding: 0 30rpx;
+		background: #fff;
+		.guess-item{
+			display:flex;
+			flex-direction: column;
+			width: 48%;
+			padding-bottom: 40rpx;
+			&:nth-child(2n+1){
+				margin-right: 4%;
+			}
+		}
+		.image-wrapper{
+			width: 100%;
+			height: 330rpx;
+			border-radius: 3px;
+			overflow: hidden;
+			image{
+				width: 100%;
+				height: 100%;
+				opacity: 1;
+			}
+		}
+		.title{
+			font-size: $font-lg;
+			color: $font-color-dark;
+			line-height: 80rpx;
+		}
+		.price{
+			font-size: $font-lg;
+			color: $uni-color-primary;
+			line-height: 1;
+		}
+	}
+	
+	.lottery-icon{
+		position: fixed;
+		bottom: 300rpx;
+		right: 20rpx;
+		z-index: 99999999;
+		width: 100rpx;
+		height: 100rpx;
+		image{
+			width: 100rpx;
+			height: 100rpx;
 		}
 	}
 

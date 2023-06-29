@@ -13,15 +13,22 @@ import finance from './modules/finance'
 import lottery from './modules/lottery'
 import prediction from './modules/prediction'
 import mining from './modules/mining'
+import option from './modules/option'
+import tio from './modules/tio'
 
 Vue.use(Vuex)
 
 const store = new Vuex.Store({
   modules: {
 	websocket: websocket,
+	tio: tio,
 	user: {
 	  namespaced: true,
 	  ...user
+	},
+	option: {
+	  namespaced: true,
+	  ...option
 	},
 	otc: {
 	  namespaced: true,

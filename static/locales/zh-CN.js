@@ -6,7 +6,48 @@ module.exports = {
 			me: '我的',
 			news: '资讯',
 			wallet: '钱包',
-			market: '行情'
+			market: '行情',
+			trade: '交易'
+		},
+		option: {
+			title: "期权",
+			position: "持仓",
+			name: "名称",
+			side: "方向",
+			price: "现价",
+			zt: "状态",
+			xzdqsj: "选择到期时间",
+			second: "秒",
+			mrsl: "买入数量",
+			srmrsl: "请输入买入数量",
+			kyye: "可用余额",
+			sideMap: {
+				'bull': '买涨',
+				'bear': '买跌'
+			},
+			tips: {
+				zxsl: "最小买入数量{0}",
+				zdsl: "最大买入数量{0}",
+				xdcg: "下单成功"
+			},
+			order: {
+				title: "订单记录",
+				status: {
+					0: "交易中",
+					1: "已平仓",
+					2: "异常"
+				},
+				jyd: "交易对",
+				xzfx: "下注方向",
+				xzsl: "下注数量",
+				xzzq: "下注周期",
+				pl: "赔率",
+				kcjg: "开仓价格",
+				pcjg: "平仓价格",
+				sxf: "手续费",
+				sysl: "收益数量",
+				jgsj: "交割时间"
+			}
 		},
 		login: {
 			inputAccount: '请输入帐号',

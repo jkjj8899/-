@@ -6,7 +6,48 @@ module.exports = {
 			me: '我的',
 			news: '資訊',
 			wallet: '錢包',
-			market: '行情'
+			market: '行情',
+			trade: '交易'
+		},
+		option: {
+			title: "期權",
+			position: "持倉",
+			name: "名稱",
+			side: "方向",
+			price: "現價",
+			zt: "狀態",
+			xzdqsj: "選擇到期時間",
+			second: "秒",
+			mrsl: "買入數量",
+			srmrsl: "請輸入買入數量",
+			kyye: "可用餘額",
+			sideMap: {
+				'bull': '買漲',
+				'bear': '買跌'
+			},
+			tips: {
+				zxsl: "最小買入數量{0}",
+				zdsl: "最大買入數量{0}",
+				xdcg: "下單成功"
+			},
+			order: {
+				title: "訂單記錄",
+				status: {
+					0: "交易中",
+					1: "已平倉",
+					2: "異常"
+				},
+				jyd: "交易對",
+				xzfx: "下注方向",
+				xzsl: "下注數量",
+				xzzq: "下注週期",
+				pl: "賠率",
+				kcjg: "開倉價格",
+				pcjg: "平倉價格",
+				sxf: "手續費",
+				sysl: "收益數量",
+				jgsj: "交割時間"
+			}
 		},
 		login: {
 			inputAccount: '請輸入帳號',

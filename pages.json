@@ -19,6 +19,39 @@
 				"enablePullDownRefresh": true
 			}
 		},{
+			"path": "pages/option/index",
+			"style": {
+				"navigationBarTitleText": "",
+				"navigationStyle": "custom"
+				
+			}
+		},{
+			"path": "pages/option/list",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": true,
+				"app-plus": {
+					"bounce": "none"
+				}
+			}
+		},{
+			"path": "pages/option/market",
+			"style": {
+				"navigationBarTitleText": "",
+				"app-plus": {
+					"bounce": "none"
+				}
+			}
+		},{
+			"path": "pages/option/kline",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": true,
+				"app-plus": {
+					"bounce": "none"
+				}
+			}
+		},{
 			"path": "pages/lottery/index",
 			"style": {
 				"navigationBarTitleText": "抽奖",
@@ -144,6 +177,15 @@
 				"app-plus" : {
 					"softinputMode": "adjustResize"
 				}
+			}
+		},
+		{
+			"path": "pages/prediction/kline",
+			"style": {
+				"navigationBarTitleText": "",
+				"navigationBarBackgroundColor": "#101725",
+				"navigationBarTextStyle": "white",
+				"app-plus" : {}
 			}
 		},
 		{
@@ -673,10 +715,10 @@
 				"text": "行情"
 			},
 			{
-				"pagePath": "pages/news/news",
-				"iconPath": "static/images/tabbar/tab-news.png",
-				"selectedIconPath": "static/images/tabbar/tab-news-active.png",
-				"text": "资讯"
+				"pagePath": "pages/option/market",
+				"iconPath": "static/images/tabbar/tab-mining.png",
+				"selectedIconPath": "static/images/tabbar/tab-mining-active.png",
+				"text": "期权"
 			},
 			{
 				"pagePath": "pages/mining/index",

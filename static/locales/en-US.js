@@ -6,7 +6,48 @@ module.exports = {
 			me: 'Me',
 			news: 'News',
 			wallet: 'Wallet',
-			market: 'Market'
+			market: 'Market',
+			trade: 'Trade'
+		},
+		option: {
+			title: "Options",
+			position: "Position",
+			name: "Name",
+			side: "Direction",
+			price: "Price",
+			zt: "Status",
+			xzdqsj: "Choose an expiration time",
+			second: "s",
+			mrsl: "Quantity",
+			srmrsl: "Please enter the purchase quantity",
+			kyye: "Available Balance",
+			sideMap: {
+				'bull': 'Rise',
+				'bear': 'Fall'
+			},
+			tips: {
+				zxsl: "Minimum buy quantity {0}",
+				zdsl: "Maximum Buy Quantity {0}",
+				xdcg: "successfully ordered"
+			},
+			order: {
+				title: "Order record",
+				status: {
+					0: "Ing",
+					1: "Closed",
+					2: "Abnormal"
+				},
+				jyd: "Pair",
+				xzfx: "Direction",
+				xzsl: "Amount",
+				xzzq: "Period",
+				pl: "Odds",
+				kcjg: "Opening price",
+				pcjg: "Closing price",
+				sxf: "Fee",
+				sysl: "Income",
+				jgsj: "Delivery time"
+			}
 		},
 		login: {
 			inputAccount: 'Please enter your account',

@@ -59,6 +59,9 @@ export const commonMixin = {
 		  	return true
 		  }
 	  },
+	  onBack(){
+	  	uni.navigateBack()
+	  },
 	  navTo(url, auth){
 		  if(auth && !this.loginInfo.hasLogin){
 			  uni.navigateTo({
