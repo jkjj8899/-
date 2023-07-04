@@ -62,7 +62,7 @@
 					<image src="../../static/images/home/home-ex-icon.png"></image>
 					<text>{{ i18n.index.exchange.title }}</text>
 				</view>
-				<view class="item shop" @click="switchTab('/pages/finance/deposit')">
+				<view class="item shop" @click="navTo('/pages/finance/deposit')">
 					<image class="miner" src="../../static/images/home/home-stacking-icon.png"></image>
 					<text>{{ i18n.index.stacking.title }}</text>
 				</view>
