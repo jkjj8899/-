@@ -5,13 +5,13 @@
 			<view class="row">
 				<u-row gutter="16">
 					<u-col span="6">
-						<view class="label title">名称</view>
+						<view class="label title">{{i18n.option.name}}</view>
 					</u-col>
 					<u-col span="3">
-						<view class="label title">最新价</view>
+						<view class="label title">{{i18n.option.price}}</view>
 					</u-col>
 					<u-col span="3">
-						<view class="label title r">今日涨跌</view>
+						<view class="label title r">{{i18n.option.zd}}</view>
 					</u-col>
 				</u-row>
 			</view>
@@ -130,7 +130,7 @@
 
 <style lang='scss' scoped>
 	.cell{
-		padding: 20rpx 10rpx;
+		padding: 25rpx 10rpx;
 	}
 	.change-tag{
 		width: 120rpx;
@@ -155,6 +155,7 @@
 		}
 		.b{
 			color: #000000;
+			font-weight: bold;
 		}
 	}
 	

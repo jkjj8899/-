@@ -15,6 +15,7 @@ module.exports = {
 			name: "名称",
 			side: "方向",
 			price: "现价",
+			zd: '今日涨跌',
 			zt: "状态",
 			xzdqsj: "选择到期时间",
 			second: "秒",

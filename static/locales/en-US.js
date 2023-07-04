@@ -15,6 +15,7 @@ module.exports = {
 			name: "Name",
 			side: "Direction",
 			price: "Price",
+			zd: 'Chg',
 			zt: "Status",
 			xzdqsj: "Choose an expiration time",
 			second: "s",
