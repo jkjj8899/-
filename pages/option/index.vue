@@ -501,8 +501,8 @@
 				    success: function (res) {
 				        if (res.confirm) {
 				            that.createOptionOrder(that.form).then(res => {
-				            	that.$api.msg(this.i18n.option.tips.xdcg)
-								this.showTrade = false
+				            	that.$api.msg(that.i18n.option.tips.xdcg)
+								that.showTrade = false
 				            })
 				        }
 				    }
