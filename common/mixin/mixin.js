@@ -59,6 +59,14 @@ export const commonMixin = {
 		  	return true
 		  }
 	  },
+	  i18nParse(v, params){
+		  if(params && params.length > 0){
+			  for(let i = 0; i < params.length; i++){
+				  v = v.replaceAll('{'+i+'}', params[i])
+			  }
+		  }
+		  return v
+	  },
 	  onBack(){
 	  	uni.navigateBack()
 	  },
