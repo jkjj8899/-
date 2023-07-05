@@ -221,26 +221,6 @@
 
 		return data;
 	}
-
-	//周期枚举
-	var PERIOD_ID = {
-		KLINE_DAY_ID: 0,
-		KLINE_WEEK_ID: 1,
-		KLINE_MONTH_ID: 2,
-		KLINE_YEAR_ID: 3,
-
-		KLINE_MINUTE_ID: 4,
-		KLINE_5MINUTE_ID: 5,
-		KLINE_15MINUTE_ID: 6,
-		KLINE_30MINUTE_ID: 7,
-		KLINE_60MINUTE_ID: 8
-	}
-
-	var PERIOD_VALUE = {
-		//1min  5min  15min  30min  1hour  1day  1week  1month
-
-	}
-
 	var g_KLine = {
 		JSChart: null
 	};
@@ -258,14 +238,6 @@
 				showTrade: false,
 				background: {
 					backgroundColor: '#101725',
-					
-					// 导航栏背景图
-					// background: 'url(https://cdn.uviewui.com/uview/swiper/1.jpg) no-repeat',
-					// 还可以设置背景图size属性
-					// backgroundSize: 'cover',
-					
-					// 渐变色
-					// backgroundImage: 'linear-gradient(45deg, rgb(28, 187, 180), rgb(141, 198, 63))'
 				},
 				showSet: false,
 				title: '',
@@ -278,7 +250,6 @@
 					Height: 500,
 				},
 				KlineData: [],
-				PERIOD_ID: PERIOD_ID,
 				list: [{
 						name: '1min'
 					},
@@ -543,7 +514,7 @@
 					uni.getSystemInfo({
 						success: function(res) {
 							that.KLine.Width = res.windowWidth
-							that.ChangeKLinePeriod(PERIOD_ID.KLINE_DAY_ID);
+							that.ChangeKLinePeriod();
 						}
 					});
 				}
@@ -721,7 +692,7 @@
 			ChangeKLinePeriod: function(period) {
 				if (!g_KLine.JSChart) //不存在创建
 				{
-					this.KLine.Option.Period = period;
+					this.KLine.Option.Period = this.chartPeriod[this.defaultPeriod];
 					this.CreateKLineChart();
 				} else {
 					this.syncCancelRealtimeKline()
