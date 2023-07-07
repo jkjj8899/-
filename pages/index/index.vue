@@ -267,7 +267,7 @@
 		padding: 0;
 		.swiper-box{
 			width: 100%;
-			height: 230rpx;
+			height: 160rpx;
 		}
 		.swiper-item{
 			padding: 0;
