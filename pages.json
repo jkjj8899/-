@@ -19,6 +19,55 @@
 				"enablePullDownRefresh": true
 			}
 		},{
+			"path": "pages/earn/simple/index",
+			"style": {
+				"navigationBarTitleText": "简单赚币",
+				"app-plus": {
+					"bounce": "none",
+					"titleNView": {
+						"buttons": [{
+								"fontSrc": "/static/font/fexfont.ttf",
+								"text": "\ue605",
+								"fontSize": "20",
+								"color": "#000000",
+								"width": "30px",
+								"background": "rgba(0,0,0,0)"
+							}
+						]
+					}
+				}
+			}
+		},{
+			"path": "pages/earn/simple/detail",
+			"style": {
+				"navigationBarTitleText": "简单赚币",
+				"app-plus": {
+					"bounce": "none",
+					"titleNView": {
+						"buttons": [{
+								"fontSrc": "/static/font/fexfont.ttf",
+								"text": "\ue605",
+								"fontSize": "20",
+								"color": "#000000",
+								"width": "30px",
+								"background": "rgba(0,0,0,0)"
+							}
+						]
+					}
+				}
+			}
+		},{
+			"path": "pages/earn/simple/order",
+			"style": {
+				"navigationBarTitleText": "我的订单",
+				"enablePullDownRefresh": true
+			}
+		},{
+			"path": "pages/earn/simple/about",
+			"style": {
+				"navigationBarTitleText": "关于简单赚币"
+			}
+		},{
 			"path": "pages/option/index",
 			"style": {
 				"navigationBarTitleText": "",

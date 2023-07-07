@@ -99,3 +99,16 @@ export const authMixin = {
   }
 }
 
+export const coinMixin = {
+  computed: {
+  	...mapState('common', ['coinMap'])
+  },
+  onShow() {
+	  this.$fire.$emit('refreshCoin')
+  },
+  methods: {
+	  parseCoinIcoin(coin){
+		  return this.coinMap[coin] ? this.coinMap[coin].icon : ''
+	  }
+  }
+}

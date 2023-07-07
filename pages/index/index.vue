@@ -40,31 +40,26 @@
 			</view>
 		</view>
 		<view class="menu">
-			<!-- <view class="fiat" @click="navTo('/pages/prediction/prediction')">
-				<image src="../../static/icon-prediction.png" mode="widthFix" style="width: 80rpx;"></image>
-				<view class="label">
-					<text>{{ i18n.index.prediction.title }}</text>
-					<text class="sub">Prediction Market</text>
+			<view class="wrap">
+				<view class="item" @click="navTo('/pages/news/news')">
+					<image class="icon" src="../../static/images/home/icon-menu-news.png"></image>
+					<text class="name">{{ i18n.tabBar.news }}</text>
 				</view>
-			</view> -->
-			<view class="ex">
-				<view class="item exchange" @click="navTo('/pages/news/news')">
-					<image class="miner" src="../../static/images/tabbar/tab-news-active.png"></image>
-					<text>{{ i18n.tabBar.news }}</text>
+				<view class="item" @click="navTo('/pages/prediction/prediction', true)">
+					<image class="icon" src="../../static/images/home/icon-menu-prediction.png"></image>
+					<text class="name">{{ i18n.index.prediction.title }}</text>
 				</view>
-				<view class="item shop" @click="navTo('/pages/prediction/prediction', true)">
-					<image src="../../static/icon-prediction.png"></image>
-					<text>{{ i18n.index.prediction.title }}</text>
+				<view class="item" @click="navTo('/pages/exchange/index', true)">
+					<image class="icon" src="../../static/images/home/icon-menu-exchange.png"></image>
+					<text class="name">{{ i18n.index.exchange.title }}</text>
 				</view>
-			</view>
-			<view class="ex">
-				<view class="item exchange" @click="navTo('/pages/exchange/index', true)">
-					<image src="../../static/images/home/home-ex-icon.png"></image>
-					<text>{{ i18n.index.exchange.title }}</text>
+				<view class="item" @click="navTo('/pages/finance/deposit')">
+					<image class="icon" src="../../static/images/home/icon-menu-finance.png"></image>
+					<text class="name">{{ i18n.index.stacking.title }}</text>
 				</view>
-				<view class="item shop" @click="navTo('/pages/finance/deposit')">
-					<image class="miner" src="../../static/images/home/home-stacking-icon.png"></image>
-					<text>{{ i18n.index.stacking.title }}</text>
+				<view class="item" @click="navTo('/pages/earn/simple/index')">
+					<image class="icon" src="../../static/images/home/icon-menu-simpleearn.png"></image>
+					<text class="name">{{ i18n.simpleearn.dhbt }}</text>
 				</view>
 			</view>
 		</view>
@@ -237,32 +232,7 @@
 					}
 				}
 			}
-		},
-		// #ifndef MP
-		// 标题栏input搜索框点击
-		onNavigationBarSearchInputClicked: async function(e) {
-			this.$api.msg('点击了搜索框');
-		},
-		//点击导航栏 buttons 时触发
-		onNavigationBarButtonTap(e) {
-			const index = e.index;
-			if (index === 0) {
-				this.$api.msg('点击了扫描');
-			} else if (index === 1) {
-				// #ifdef APP-PLUS
-				const pages = getCurrentPages();
-				const page = pages[pages.length - 1];
-				const currentWebview = page.$getAppWebview();
-				currentWebview.hideTitleNViewButtonRedDot({
-					index
-				});
-				// #endif
-				uni.navigateTo({
-					url: '/pages/notice/notice'
-				})
-			}
 		}
-		// #endif
 	}
 </script>
 
@@ -371,61 +341,22 @@
 	}
 	.menu{
 		padding: 20rpx 0rpx;
-		display: flex;
-		flex-direction: row;
-		justify-content: space-between;
-		font-size: $font-base;
-		font-weight: bold;
+		font-size: 24rpx;
 		background: $uni-color-gap;
-		.fiat{
+		.wrap{
 			display: flex;
 			flex-direction: row;
-			flex: 1;
-			align-items: center;
-			background: #ffffff;
-			padding-left: 30rpx;
-			margin-right: 10rpx;
-			.label{
-				display: flex;
-				flex-direction: column;
-				padding-left: 20rpx;
-			}
-			.sub{
-				font-size: $font-sm;
-				font-weight: normal;
-			}
-			image{
-				width: 100rpx;
-			}
-			text{
-				font-size: $font-md;
-			}
+			justify-content: space-between;
+			background-color: #ffffff;
+			padding: 30rpx 20rpx;
 		}
-		.ex{
+		.item{
 			display: flex;
+			align-items: center;
 			flex-direction: column;
-			width: 49%;
-			.item{
-				width: 100%;
-				height: 100rpx;
-				line-height: 100rpx;
-				background: #ffffff;
-				align-items: center;
-				text-align: center;
-				vertical-align: middle;
-			}
-			.shop{
-				margin-top: 10rpx;
-			}
-			image{
-				vertical-align: middle;
-				width: 50rpx;
-				height: 55rpx;
-				margin-right: 20rpx;
-			}
-			.miner{
-				width: 45rpx;
-				height: 45rpx;
+			.icon{
+				width: 80rpx;
+				height: 80rpx;
 			}
 		}
 	}
