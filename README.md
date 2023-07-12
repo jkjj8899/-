@@ -33,6 +33,10 @@
 7. 云算力
 8. 交易
 
+#### 功能展示
+![Image text](https://smilehert.oss-cn-hongkong.aliyuncs.com/upload/images/6c5e021b5a414fdc9c44a3bae73f8408.jpg) 
+
+
 #### 版本更新
 
 ##### 1: 新增多语言需求
