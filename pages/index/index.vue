@@ -103,11 +103,11 @@
 		mapActions
 	} from 'vuex'
 	import {formatUnit} from '../../utils/number'
-	import {uniNoticeBar, uniTag, uniSwiperDot} from '@dcloudio/uni-ui'
+	import {uniTag, uniSwiperDot} from '@dcloudio/uni-ui'
 	import noticeSwiper from '../../components/noticeSwiper.vue'
 	import {commonMixin} from '@/common/mixin/mixin.js'
 	export default {
-		components: {uniNoticeBar, uniTag, noticeSwiper, uniSwiperDot},
+		components: {uniTag, noticeSwiper, uniSwiperDot},
 		mixins: [commonMixin],
 		data() {
 			return {

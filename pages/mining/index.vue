@@ -10,12 +10,10 @@
 					<view class="l">
 						<text class="title">{{i18n.miner.zsy}}</text>
 						<view class="vol">{{profit.totalProfit}} {{query.catelog}}</view>
-						<!--<text>≈￥1000000</text>-->
 					</view>
 					<view class="l">
 						<text class="title">{{i18n.miner.zrsy}}</text>
 						<view class="vol">{{profit.yestodayProfit}} {{query.catelog}}</view>
-						<!--<text>≈￥1000000</text>-->
 					</view>
 				</block>
 			</view>
@@ -235,84 +233,84 @@
 		z-index: 999999;
 	}
 	.list{
-		margin-top: 100upx;
-		padding: 30upx 30upx;
+		margin-top: 100rpx;
+		padding: 30rpx 30rpx;
 		.item{
-			padding: 20upx 20upx ;
+			padding: 20rpx 20rpx ;
 			background-color: #ffffff;
-			border-radius: 20upx;
-			margin-bottom: 30upx;
+			border-radius: 20rpx;
+			margin-bottom: 30rpx;
 		}
 		.buy{
 			display: flex;
 			justify-content: space-between;
-			height: 100upx;
-			line-height: 100upx;
+			height: 100rpx;
+			line-height: 100rpx;
 			.price{
 				color: #1866fe;
 			}
 			.price .value{
-				font-size: 34upx;
+				font-size: 34rpx;
 				font-weight: bold;
 			}
 			.price .unit{
-				font-size: 26upx;
-				padding-left: 10upx;
+				font-size: 26rpx;
+				padding-left: 10rpx;
 			}
 			.btn{
 				background-color: #1866fe;
-				height: 60upx;
-				line-height: 60upx;
-				padding: 0 50upx;
+				height: 60rpx;
+				line-height: 60rpx;
+				padding: 0 50rpx;
 				color: #ffffff;
-				border-radius: 50upx;
-				margin-top: 20upx;
+				border-radius: 50rpx;
+				margin-top: 20rpx;
 			}
 		}
 		.remain{
 			position: relative;
-			height: 100upx;
-			line-height: 100upx;
+			height: 100rpx;
+			line-height: 100rpx;
 			.progress{
-				margin-right: 210upx;
+				margin-right: 210rpx;
 			}
 			.label{
-				width: 200upx;
+				width: 200rpx;
 				text-align: right;
 				position: absolute;
 				top: 0;
 				right: 0;
-				font-size: 26upx;
+				font-size: 26rpx;
 			}
 		}
 		.title{
 			.name{
-				font-size: 34upx;
+				font-size: 34rpx;
 				font-weight: bold;
 			}
 			.tags{
 				.i{
 					background-color: #fedcd2;
-					margin-right: 10upx;
-					font-size: 23upx;
-					padding: 4upx 10upx;
-					border-radius: 8upx;
+					margin-right: 10rpx;
+					font-size: 23rpx;
+					padding: 4rpx 10rpx;
+					border-radius: 8rpx;
 					color: #ff6539;
 				}
 			}
 		}
 		.params .row{
 			display: flex;
-			padding: 20upx 0 0 0;
+			padding: 20rpx 0 0 0;
 			.col{
 				width: 50%;
 			}
 			.col .label{
-				font-size: 26upx;
+				font-size: 26rpx;
 			}
 			.col .val{
 				font-weight: bold;
-				padding-top: 10upx;
+				padding-top: 10rpx;
 			}
 		}
 	}
@@ -320,41 +318,41 @@
 		position: relative;
 		.bg{
 			width: 100%;
-			height: 260upx;
+			height: 260rpx;
 			background-color: #1866fe;
-			border-bottom-left-radius: 40upx;
-			border-bottom-right-radius: 40upx;
+			border-bottom-left-radius: 40rpx;
+			border-bottom-right-radius: 40rpx;
 		}
 		.box{
 			position: absolute;
 			width: 100%;
-			top: 80upx;
+			top: 80rpx;
 			left: 0;
-			padding: 0 30upx;
+			padding: 0 30rpx;
 		}
 		.profit{
 			width: 100%;
-			height: 240upx;
+			height: 240rpx;
 			background-color: #ffffff;
-			margin-top: 30upx;
-			padding-top: 60upx;
-			border-radius: 20upx;
+			margin-top: 30rpx;
+			padding-top: 60rpx;
+			border-radius: 20rpx;
 			display: flex;
 			justify-content: space-between;
 			text-align: center;
 			.login-btn{
-				margin: 20upx auto;
-				width: 200upx;
-				height: 70upx;
-				line-height: 70upx;
+				margin: 20rpx auto;
+				width: 200rpx;
+				height: 70rpx;
+				line-height: 70rpx;
 				background-color: #1866fe;
 				color: #ffffff;
-				border-radius: 10upx;
+				border-radius: 10rpx;
 			}
 			.l{
 				width: 50%;
 				.vol{
-					padding: 30upx 0;
+					padding: 30rpx 0;
 					font-weight: bold;
 				}
 			}

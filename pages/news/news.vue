@@ -103,29 +103,29 @@
 
 <style lang='scss'>
 	.container{
-		padding: 0upx 0upx;
+		padding: 0rpx 0rpx;
 		height: 100%;
 	}
 	.news-section{
 		.block{
 			position: relative;
 			word-wrap: break-word;
-			margin: 0upx 40upx;
+			margin: 0rpx 40rpx;
 			border-left: 1px dashed $font-color-light;
-			padding-left: 40upx;
+			padding-left: 40rpx;
 			.circle{
 				position: absolute;
-				width: 20upx;
-				height: 20upx;
+				width: 20rpx;
+				height: 20rpx;
 				border-radius: 100px;
 				background-color: #1866fe;
-				top: 12upx;
-				left: -11upx;
+				top: 12rpx;
+				left: -11rpx;
 			}
 			.time{
 				font-size: $font-base;
 				.source{
-					margin-left: 10upx;
+					margin-left: 10rpx;
 					color: $font-color-light;
 				}
 			}
@@ -133,11 +133,11 @@
 				display: block;
 				font-size: $font-lg;
 				font-weight: bold;
-				padding: 16upx 0upx;
+				padding: 16rpx 0rpx;
 			}
 			.content{
 				font-size: $font-base;
-				padding-bottom: 40upx;
+				padding-bottom: 40rpx;
 			}
 		}
 		
