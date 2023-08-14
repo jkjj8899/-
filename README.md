@@ -91,6 +91,7 @@
 
 #### 推荐作者小程序
 ![Image text](https://shkj1994.oss-cn-shenzhen.aliyuncs.com/gh_1c63fd731ccc_430.jpg) 
+![Image text](https://smilehert.oss-cn-hongkong.aliyuncs.com/upload/images/0ba2feeb068e4f11af472098c906bcfc.jpg) 
 ![Image text](https://shkj1994.oss-cn-shenzhen.aliyuncs.com/gh_a79c05053be4_430.jpg) 
 ![Image text](https://shkj1994.oss-cn-shenzhen.aliyuncs.com/gh_4264e951ad60_430.jpg) 
 
