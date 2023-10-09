@@ -95,7 +95,7 @@
 ![Image text](https://miniboxs.oss-cn-shenzhen.aliyuncs.com/iq/images/gh_7ea0cd57e928_344.jpg) 
 ![Image text](https://shkj1994.oss-cn-shenzhen.aliyuncs.com/gh_1c63fd731ccc_430.jpg) 
 ![Image text](https://smilehert.oss-cn-hongkong.aliyuncs.com/upload/images/0ba2feeb068e4f11af472098c906bcfc.jpg) 
-![Image text](https://shkj1994.oss-cn-shenzhen.aliyuncs.com/gh_a79c05053be4_430.jpg) 
+![Image text](https://miniboxs.oss-cn-shenzhen.aliyuncs.com/common/gh_a79c05053be4_344.jpg) 
 
 #### 参与贡献
 
