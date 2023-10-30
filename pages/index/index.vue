@@ -73,7 +73,7 @@
 			</uni-swiper-dot>
 		</view>
 		<!-- 市值排行 -->
-		<view class="coin-section m-t">
+		<view class="coin-section">
 			<view class="s-header">
 				<view class="col">{{ i18n.index.market.title1 }}</view>
 				<view class="col r">{{ i18n.index.market.title2 }}</view>
@@ -259,9 +259,6 @@
 			font-size: 40rpx;
 			font-weight: bold;
 		}
-	}
-	.m-t{
-		margin-top: 16rpx;
 	}
 	.advert{
 		padding: 0;
@@ -532,56 +529,6 @@
 		.tit2{
 			font-size: $font-sm;
 			color: $font-color-light;
-		}
-	}
-	/* 猜你喜欢 */
-	.guess-section{
-		display:flex;
-		flex-wrap:wrap;
-		padding: 0 30rpx;
-		background: #fff;
-		.guess-item{
-			display:flex;
-			flex-direction: column;
-			width: 48%;
-			padding-bottom: 40rpx;
-			&:nth-child(2n+1){
-				margin-right: 4%;
-			}
-		}
-		.image-wrapper{
-			width: 100%;
-			height: 330rpx;
-			border-radius: 3px;
-			overflow: hidden;
-			image{
-				width: 100%;
-				height: 100%;
-				opacity: 1;
-			}
-		}
-		.title{
-			font-size: $font-lg;
-			color: $font-color-dark;
-			line-height: 80rpx;
-		}
-		.price{
-			font-size: $font-lg;
-			color: $uni-color-primary;
-			line-height: 1;
-		}
-	}
-	
-	.lottery-icon{
-		position: fixed;
-		bottom: 300rpx;
-		right: 20rpx;
-		z-index: 99999999;
-		width: 100rpx;
-		height: 100rpx;
-		image{
-			width: 100rpx;
-			height: 100rpx;
 		}
 	}
 

@@ -66,31 +66,5 @@
 		color: #303133;
 	}
 
-	.img-wrapper {
-		width: 100%;
-		height: 260upx;
-		position: relative;
-	}
-
-	.pic {
-		display: block;
-		width: 100%;
-		height: 100%;
-		border-radius: 6upx;
-	}
-
-	.cover {
-		display: flex;
-		justify-content: center;
-		align-items: center;
-		position: absolute;
-		left: 0;
-		top: 0;
-		width: 100%;
-		height: 100%;
-		background-color: rgba(0, 0, 0, .5);
-		font-size: 36upx;
-		color: #fff;
-	}
 
 </style>
