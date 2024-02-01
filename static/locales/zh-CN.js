@@ -849,6 +849,66 @@ module.exports = {
 				done: '已完成'
 			}
 		},
+		group: {
+			report: {
+				title: '团队报表',
+				totalReward: '总推广佣金',
+				totalDeposit: '团队总充值',
+				totalWithdraw: '团队总提款',
+				totalPeople: '团队总人数',
+				level: '级',
+				zrs: '总人数',
+				grade: '等级',
+				ljcz: '累计充值',
+				rsy: '日收益',
+				rtk: '日提款',
+				invitReward: '邀请返利',
+				depositReward: '充值返利',
+				dqdj: '当前等级',
+				czl: '充值量',
+				member: '团队成员'
+			},
+			vip: {
+				title: 'VIP等级'
+			}
+		},
+		account: {
+			flows: {
+				title: '资金明细',
+				type: '类型',
+				in: '收入',
+				out: '支出',
+				biz: {
+					system: '系统转账',
+					exchange: '兑换',
+					withdraw: '提现冻结',
+					withdraw_success: '提现',
+					deposit: '充值',
+					inner_tansfer: '内部转账',
+					signin: '签到',
+					buy_lottery: '购买抽奖次数',
+					lottery: '抽奖',
+					otc_merchant: '入驻商家',
+					otc_advert_create: 'OTC创建广告',
+					otc_order_create: 'OTC创建订单',
+					otc_order_cancel: 'OTC取消订单',
+					otc_order_success: 'OTC订单完成',
+					finance_deposit_buy: '存币认购',
+					finance_deposit_profit: '存币收益',
+					finance_deposit_redeem: '存币赎回',
+					prediction_bet: '预言下注',
+					prediction_reward: '预言奖励',
+					prediction_return: '预言退还',
+					machine_buy: '购买矿机',
+					machine_pledge: '购买矿机质押',
+					machine_settle: '矿机收益',
+					deposit_commission: '充值返佣',
+					invit_reward: '邀请奖励',
+					dividend_reward: '持仓派息',
+					other: '其它'
+				}
+			}
+		},
 		payType: {
 			options: {
 				'UnionPay': '银行卡',

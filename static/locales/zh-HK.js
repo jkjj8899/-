@@ -849,6 +849,66 @@ module.exports = {
 				done: '已完成'
 			}
 		},
+		group: {
+			report: {
+				title: '團隊報表',
+				totalReward: '總推廣傭金',
+				totalDeposit: '團隊總充值',
+				totalWithdraw: '團隊總提款',
+				totalPeople: '團隊總人數',
+				level: '級',
+				zrs: '總人數',
+				grade: '等級',
+				ljcz: '累計充值',
+				rsy: '日收益',
+				rtk: '日提款',
+				invitReward: '邀請返利',
+				depositReward: '充值返利',
+				dqdj: '當前等級',
+				czl: '充值量',
+				member: '團隊成員'
+			},
+			vip: {
+				title: 'VIP等級'
+			}
+		},
+		account: {
+			flows: {
+				title: '資金明細',
+				type: '類型',
+				in: '收入',
+				out: '支出',
+				biz: {
+					system: '系統轉賬',
+					exchange: '兌換',
+					withdraw: '提現凍結',
+					withdraw_success: '提現',
+					deposit: '充值',
+					inner_tansfer: '內部轉賬',
+					signin: '簽到',
+					buy_lottery: '購買抽獎次數',
+					lottery: '抽獎',
+					otc_merchant: '入駐商家',
+					otc_advert_create: 'OTC創建廣告',
+					otc_order_create: 'OTC創建訂單',
+					otc_order_cancel: 'OTC取消訂單',
+					otc_order_success: 'OTC訂單完成',
+					finance_deposit_buy: '存幣認購',
+					finance_deposit_profit: '存幣收益',
+					finance_deposit_redeem: '存幣贖回',
+					prediction_bet: '預言下注',
+					prediction_reward: '預言獎勵',
+					prediction_return: '預言退還',
+					machine_buy: '購買礦機',
+					machine_pledge: '購買礦機質押',
+					machine_settle: '礦機收益',
+					deposit_commission: '充值返佣',
+					invit_reward: '邀請獎勵',
+					dividend_reward: '持倉派息',
+					other: '其它'
+				}
+			}
+		},
 		payType: {
 			options: {
 				'UnionPay': '銀行卡',

@@ -381,7 +381,29 @@
 					}
 				}
 			}
-		},{
+		},
+		{
+			"path": "pages/user/flows",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": true,
+				"app-plus": {
+					"bounce": "none",
+					"titleNView": {
+						"buttons": [{
+								"fontSrc": "/static/font/fexfont.ttf",
+								"text": "\ue671",
+								"fontSize": "20",
+								"color": "#000000",
+								"width": "30px",
+								"background": "rgba(0,0,0,0)"
+							}
+						]
+					}
+				}
+			}
+		},
+		{
 			"path": "pages/wallet/detail",
 			"style": {
 				"navigationBarTitleText": "币种明细",

@@ -1,6 +1,7 @@
 import {
 	accountList, 
-	getAccount
+	getAccount,
+	accountFlows
 } from '@/api/account'
 import {} from './../mutations_type'
 
@@ -31,6 +32,17 @@ const account = {
 		}, coin) {
 			return new Promise((resolve, reject) => {
 				getAccount(coin).then(res => {
+					resolve(res)
+				}).catch(error => {
+					reject(error)
+				})
+			})
+		},
+		accountFlows({
+			commit
+		}, data) {
+			return new Promise((resolve, reject) => {
+				accountFlows(data).then(res => {
 					resolve(res)
 				}).catch(error => {
 					reject(error)

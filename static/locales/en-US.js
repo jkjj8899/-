@@ -855,6 +855,66 @@ module.exports = {
 				done: 'Completed'
 			}
 		},
+		group: {
+			report: {
+				title: 'Team report',
+				totalReward: 'Total commission',
+				totalDeposit: 'Recharge',
+				totalWithdraw: 'Withdrawal',
+				totalPeople: 'Size',
+				level: 'L',
+				zrs: ' People',
+				grade: 'Level',
+				ljcz: 'Cumulative',
+				rsy: 'Income',
+				rtk: 'Withdraw',
+				invitReward: 'Invitation to rebate',
+				depositReward: 'Recharge rebate',
+				dqdj: 'Current level',
+				czl: 'Recharge amount',
+				member: 'Team member'
+			},
+			vip: {
+				title: 'VIP Level'
+			}
+		},
+		account: {
+			flows: {
+				title: 'Funding Details',
+				type: 'Type',
+				in: 'In',
+				out: 'Out',
+				biz: {
+					system: 'System',
+					exchange: 'exchange',
+					withdraw: 'Withdrawal freeze',
+					withdraw_success: 'withdraw',
+					deposit: 'recharge',
+					inner_tansfer: 'Internal transfer',
+					signin: 'sign in',
+					buy_lottery: 'Buy raffle',
+					lottery: 'lottery',
+					otc_merchant: 'Merchant settled',
+					otc_advert_create: 'OTC Ad',
+					otc_order_create: 'OTC Create',
+					otc_order_cancel: 'OTC Cancel',
+					otc_order_success: 'OTC Finish',
+					finance_deposit_buy: 'Subscribe',
+					finance_deposit_profit: 'Subscription proceeds',
+					finance_deposit_redeem: 'subscription redemption',
+					prediction_bet: 'Bet',
+					prediction_reward: 'Prophecy Reward',
+					prediction_return: 'Prophecy return',
+					machine_buy: 'Buy machine',
+					machine_pledge: 'Machine pledge',
+					machine_settle: 'Machine income',
+					deposit_commission: 'recharge rebate',
+					invit_reward: 'Invitation reward',
+					dividend_reward: 'Holding dividends',
+					other: 'other'
+				}
+			}
+		},
 		payType: {
 			options: {
 				'UnionPay': 'BankCard',

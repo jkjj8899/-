@@ -14,3 +14,11 @@ export function getAccount(coin) {
     method: 'GET'
   })
 }
+//资金流水
+export function accountFlows(data) {
+  return request({
+    url: '/v1/account/flows',
+    method: 'GET',
+	data: data
+  })
+}
