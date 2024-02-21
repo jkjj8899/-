@@ -15,15 +15,6 @@
 
 #### H5体验
 ![Image text](https://miniboxs.oss-cn-shenzhen.aliyuncs.com/wallet/h5.png) 
-
-
-#### 技术交流社区
-
-##### 微信群 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;QQ群
-![Image text](https://miniboxs.oss-cn-shenzhen.aliyuncs.com/common/wechat_qrcode.jpg) 
-![Image text](https://miniboxs.oss-cn-shenzhen.aliyuncs.com/common/qq_qrcode.jpg) 
-
-
 #### 功能规划
 1. 资产托管
 2. 闪电兑换
