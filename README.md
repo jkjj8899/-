@@ -3,19 +3,12 @@
 #### 特别声明
 本软件属于技术开源软件, 任何使用本源码涉嫌商业违法活动，对别人和自己造成损失的，本人概不负责！
 
-#### 开源不易,请作者喝杯奶茶! ≧◠◡◠≦
-##### TRX: TVhL64bjXRAkrM1qbcZhi8EGCa2pZq8wgM
-##### ETH: 0x4fA38fD5BA5c1054E48E036EBd5ac5b34D76Cec7
-##### EOS: fexcoin54321
+
 
 ### 🔥🔥🔥 
 ### 企业级区块链数字资产管理智能支付系统即将出炉,请关注最新动态 
-### [跳转支付系统](https://gitee.com/koch/fex-aipay-chain)
+
 ### 🔥🔥🔥
-
-#### Fex去中心化钱包下载: [点击下载](https://miniboxs.oss-cn-shenzhen.aliyuncs.com/wallet/dapp/fex-wallet.apk)
-
-#### Android测试包下载: [点击下载](https://miniboxs.oss-cn-shenzhen.aliyuncs.com/wallet/fexcoin.apk)
 
 #### 扫一扫下载
 ![Image text](https://miniboxs.oss-cn-shenzhen.aliyuncs.com/wallet/apk.png) 
@@ -88,14 +81,6 @@
    
 3. [uni-app教程](https://uniapp.dcloud.io) 
 
-
-#### 推荐作者小程序
-![Image text](https://miniboxs.oss-cn-shenzhen.aliyuncs.com/common/gh_4264e951ad60_344.jpg) 
-![Image text](https://miniboxs.oss-cn-shenzhen.aliyuncs.com/common/gh_1fbc78d17b4e_344.png) 
-![Image text](https://miniboxs.oss-cn-shenzhen.aliyuncs.com/iq/images/gh_7ea0cd57e928_344.jpg) 
-![Image text](https://shkj1994.oss-cn-shenzhen.aliyuncs.com/gh_1c63fd731ccc_430.jpg) 
-![Image text](https://smilehert.oss-cn-hongkong.aliyuncs.com/upload/images/0ba2feeb068e4f11af472098c906bcfc.jpg) 
-![Image text](https://miniboxs.oss-cn-shenzhen.aliyuncs.com/common/gh_a79c05053be4_344.jpg) 
 
 #### 参与贡献
 
